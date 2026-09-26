@@ -1,0 +1,53 @@
+name: Static Build
+
+# On push to main, export the site and commit public/ so Vercel deploys it (same model as
+# ecrespo/reflex_resume). On pull requests to main, only check that the export works.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: static-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    if: github.repository == 'ecrespo/silverpoint_web'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          # If main is protected by a ruleset, add a deploy key as its bypass actor and store it
+          # in this secret; without it the default token is used.
+          ssh-key: ${{ secrets.STATIC_BUILD_DEPLOY_KEY }}
+
+      - uses: astral-sh/setup-uv@v10.1.0
+        with:
+          version: "0.12.13"
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Build the static site
+        run: bash build_local.sh
+
+      - name: Add public folder to git
+        if: github.event_name == 'push'
+        run: git add -f public/
+
+      - name: Commit and push the export
+        if: github.event_name == 'push'
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: Update static build [skip ci]
+          file_pattern: public/
+          add_options: -f
+          commit_user_name: Ernesto Crespo [Github Actions]
+          commit_user_email: ecrespo@gmail.com
+          commit_author: Ernesto Crespo <ecrespo@gmail.com>

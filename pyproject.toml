@@ -1,0 +1,26 @@
+[project]
+name = "silverpoint-web"
+version = "0.1.0"
+description = "Documentation, gallery and examples of silverpoint: Renaissance-drawn charts for React, Vue and Angular"
+readme = "README.md"
+requires-python = ">=3.13"
+authors = [{ name = "Ernesto Crespo", email = "ecrespo@gmail.com" }]
+license = { text = "MIT" }
+dependencies = [
+    "reflex>=0.9.12",
+    "reflex-silverpoint-react>=0.2.0",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.16.7",
+]
+
+[tool.ruff]
+target-version = "py313"
+line-length = 110
+extend-exclude = [".web", "public", "node_modules", "assets"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM"]
+ignore = ["E501"]

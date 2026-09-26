@@ -1,0 +1,28 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><meta content="Ernesto Crespo" name="author"/><meta content="#ede7da" name="theme-color"/><link href="/favicon.svg" rel="icon" type="image/svg+xml"/><link as="style" href="/assets/__reflex_global_styles-B0r-F1uj.css" rel="preload"/><link rel="modulepreload" href="/assets/manifest-869f3fd9.js"/><link rel="modulepreload" href="/assets/entry.client-PAjQ1ewH.js"/><link rel="modulepreload" href="/assets/components-DzQT6F3y.js"/><link rel="modulepreload" href="/assets/react-dom-CM0sdMnz.js"/><link rel="modulepreload" href="/assets/errorBoundaries-m9jGFIQ4.js"/><link rel="modulepreload" href="/assets/root-aQS_IVeN.js"/><link rel="modulepreload" href="/assets/state-05ANjcUM.js"/><link rel="modulepreload" href="/assets/emotion-react.browser.esm-alFgrGzY.js"/><link rel="modulepreload" href="/assets/context-BXa-k1p8.js"/><link rel="modulepreload" href="/assets/tabs-DlU6gJ4q.js"/><link rel="modulepreload" href="/assets/jsx-runtime-2x7Hm3Bj.js"/><link rel="modulepreload" href="/assets/reflex-env-BVGF6eGS.js"/><script>
+// Only run in browser environment, not during SSR
+if (typeof document !== 'undefined') {
+    try {
+        const theme = localStorage.getItem("theme") || 'light';
+        const systemPreference = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        const resolvedTheme = theme === "system" ? systemPreference : theme;
+
+        // Apply theme immediately - blocks until complete
+        // Use classList to avoid overwriting other classes
+        document.documentElement.classList.remove("light", "dark");
+        document.documentElement.classList.add(resolvedTheme);
+        document.documentElement.style.colorScheme = resolvedTheme;
+
+    } catch (e) {
+        // Fallback to system preference on any error (resolve "system" to actual theme)
+        const fallbackTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        document.documentElement.classList.remove("light", "dark");
+        document.documentElement.classList.add(fallbackTheme);
+        document.documentElement.style.colorScheme = fallbackTheme;
+    }
+}
+</script><link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/><link href="/assets/__reflex_global_styles-B0r-F1uj.css" rel="stylesheet" type="text/css"/></head><body><section aria-label="Notifications alt+T" tabindex="-1" aria-live="polite" aria-relevant="additions text" aria-atomic="false" data-react-aria-top-layer="true"></section><div data-is-root-theme="true" data-accent-color="gray" data-gray-color="sand" data-has-background="false" data-panel-background="translucent" data-radius="small" data-scaling="100%" class="radix-themes css-0"></div><script>window.__reactRouterContext = {"basename":"/","future":{"unstable_enableNodeReadableStream":false,"unstable_optimizeDeps":true},"routeDiscovery":{"mode":"initial"},"ssr":false,"isSpaMode":true};window.__reactRouterContext.stream = new ReadableStream({start(controller){window.__reactRouterContext.streamController = controller;}}).pipeThrough(new TextEncoderStream());</script><script type="module" async="">import "/assets/manifest-869f3fd9.js";
+import * as route0 from "/assets/root-aQS_IVeN.js";
+  
+  window.__reactRouterRouteModules = {"root":route0};
+
+import("/assets/entry.client-PAjQ1ewH.js");</script><!--$--><script>window.__reactRouterContext.streamController.enqueue("[{\"_1\":2,\"_3\":-5,\"_4\":-5},\"loaderData\",{},\"actionData\",\"errors\"]\n");</script><!--$--><script>window.__reactRouterContext.streamController.close();</script><!--/$--><!--/$--></body></html>

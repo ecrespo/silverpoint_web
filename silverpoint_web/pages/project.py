@@ -3,7 +3,7 @@
 from urllib.parse import quote
 
 import reflex as rx
-from reflex_silverpoint_react import CHARTS
+from reflex_silverpoint_react import CHARTS, UI_COMPONENTS, sp_steps, step_item
 
 from .. import site_data as sd
 from ..components.layout import docs_page
@@ -55,8 +55,8 @@ def packages() -> rx.Component:
             "On PyPI: the Reflex component",
             rx.el.p(
                 ext_link(rx.el.code("reflex-silverpoint-react"), sd.REFLEX_PYPI),
-                f" wraps @silverpoint/react and exposes all {len(CHARTS)} charts, the Dashboard and the provider as Python "
-                "components for ",
+                f" wraps @silverpoint/react and exposes all {len(CHARTS)} charts, the Dashboard, the {len(UI_COMPONENTS)} "
+                "UI components and the provider as Python components for ",
                 ext_link("Reflex", "https://reflex.dev"),
                 ". Source: ",
                 ext_link("ecrespo/reflex-silverpoint-react", sd.REFLEX_REPO),
@@ -134,6 +134,17 @@ def versions() -> rx.Component:
         "/versions",
         "Versions",
         "Every release of silverpoint, newest first. The seven packages share one version, so one entry covers them all.",
+        rx.el.div(
+            sp_steps(
+                items=[step_item(r.version, f"v{r.version}", r.date) for r in reversed(sd.VERSIONS)],
+                current=len(sd.VERSIONS) - 1,
+                label="Releases",
+                size="sm",
+                id="release-steps",
+            ),
+            class_name="spw-ui-sample sp-ground-silverpoint spw-release-steps",
+            data_substrate="cream",
+        ),
         table(
             ["Version", "Date", "Summary", "Reflex component"],
             [
@@ -178,7 +189,7 @@ def versions() -> rx.Component:
 BUG_TEMPLATE = """**Package and version:** @silverpoint/react@{version}
 **Framework and version:** (React 19.x / Vue 3.5.x / Angular 22.x / Reflex 0.9.x)
 **Integration:** (Vite / Next.js / Angular CLI / Reflex)
-**Chart:** (e.g. LineChart)
+**Chart or UI component:** (e.g. LineChart, SpTabs)
 **Ground / substrate / mode:** (silverpoint / cream / ink)
 **Browser and OS:**
 
@@ -220,7 +231,8 @@ def support() -> rx.Component:
     return docs_page(
         "/support",
         "Report a bug",
-        "silverpoint's issues live on GitHub. A good report names the package and version, the framework, the chart and a "
+        "silverpoint's issues live on GitHub. A good report names the package and version, the framework, the chart or "
+        "component and a "
         "minimal reproduction; the links below open a form pre-filled with those questions.",
         section(
             "where",
@@ -229,7 +241,9 @@ def support() -> rx.Component:
                 rx.el.a(
                     rx.icon("bug", size=20),
                     rx.el.strong("A bug in a chart or an adapter"),
-                    rx.el.span("React, Vue or Angular packages, the grounds, the core."),
+                    rx.el.span(
+                        "React, Vue or Angular packages: a chart, a UI component, the grounds, the core."
+                    ),
                     rx.el.span("ecrespo/silverpoint →", class_name="spw-muted"),
                     href=library_bug,
                     target="_blank",
@@ -239,7 +253,9 @@ def support() -> rx.Component:
                 rx.el.a(
                     rx.icon("code", size=20),
                     rx.el.strong("A bug in the Reflex component"),
-                    rx.el.span("reflex-silverpoint-react: Python props, events, the dashboard wrapper."),
+                    rx.el.span(
+                        "reflex-silverpoint-react: Python props, events, the dashboard and UI wrappers."
+                    ),
                     rx.el.span("ecrespo/reflex-silverpoint-react →", class_name="spw-muted"),
                     href=reflex_bug,
                     target="_blank",
@@ -249,7 +265,7 @@ def support() -> rx.Component:
                 rx.el.a(
                     rx.icon("lightbulb", size=20),
                     rx.el.strong("A feature request"),
-                    rx.el.span("A new chart, a new ground, a new prop."),
+                    rx.el.span("A new chart, a new UI component, a new ground, a new prop."),
                     rx.el.span("ecrespo/silverpoint →", class_name="spw-muted"),
                     href=feature,
                     target="_blank",
@@ -289,7 +305,9 @@ def support() -> rx.Component:
                 rx.el.li(
                     "Read the console: silverpoint's development warnings carry a code (SP001…SP016) that says what it did."
                 ),
-                rx.el.li("Reduce it to the smallest code that shows it: one chart, a few rows of data."),
+                rx.el.li(
+                    "Reduce it to the smallest code that shows it: one chart or component, a few rows of data."
+                ),
             ),
         ),
         section(

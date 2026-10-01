@@ -3,7 +3,7 @@
 from typing import Any
 
 import reflex as rx
-from reflex_silverpoint_react import CHARTS, FAMILIES
+from reflex_silverpoint_react import CHARTS, FAMILIES, UI_COMPONENTS, UI_GROUPS
 
 from .. import site_data as sd
 from .ui import ext_link, github_icon
@@ -12,6 +12,7 @@ NAV: tuple[tuple[str, str], ...] = (
     ("/docs", "Docs"),
     ("/gallery", "Gallery"),
     ("/charts", "Charts"),
+    ("/components", "Components"),
     ("/docs/dashboard", "Dashboard"),
     ("/packages", "Packages"),
     ("/versions", "Versions"),
@@ -40,6 +41,7 @@ DOCS_NAV: tuple[tuple[str, tuple[tuple[str, str], ...]], ...] = (
             ("/docs/interaction", "Interaction & readouts"),
             ("/docs/export", "Export & imperative handle"),
             ("/docs/dashboard", "Dashboards"),
+            ("/docs/ui", "UI components"),
             ("/docs/ssr", "Server rendering"),
             ("/docs/accessibility", "Accessibility"),
             ("/docs/tailwind", "Tailwind preset"),
@@ -146,7 +148,8 @@ def footer() -> rx.Component:
             rx.el.div(
                 rx.el.p(mark(22), rx.el.strong(" silverpoint"), class_name="spw-footer-brand"),
                 rx.el.p(
-                    "Charts for React, Vue and Angular whose visual language is historical drawing technique."
+                    "Charts and UI components for React, Vue and Angular whose visual language is historical drawing "
+                    "technique."
                 ),
                 rx.el.p(
                     "Developed by ",
@@ -186,7 +189,7 @@ def footer() -> rx.Component:
         rx.el.p(
             "This site is built with Reflex and ",
             ext_link("reflex-silverpoint-react", sd.REFLEX_REPO),
-            f": every chart on it is live silverpoint {sd.LATEST.version}.",
+            f": every chart and every control on it is live silverpoint {sd.LATEST.version}.",
             class_name="spw-footer-note",
         ),
         class_name="spw-footer",
@@ -231,7 +234,22 @@ def sidebar(current: str) -> rx.Component:
         ],
         class_name="spw-side-group",
     )
-    return rx.el.nav(*groups[:2], charts, groups[2], class_name="spw-sidebar", aria_label="Documentation")
+    components = rx.el.div(
+        rx.el.p(f"UI components · {len(UI_COMPONENTS)}", class_name="spw-side-title"),
+        *[
+            rx.el.details(
+                rx.el.summary(f"{title} · {sum(1 for c in UI_COMPONENTS if c.group == group)}"),
+                *[link(f"/components/{c.slug}", c.name) for c in UI_COMPONENTS if c.group == group],
+                open=any(f"/components/{c.slug}" == current for c in UI_COMPONENTS if c.group == group),
+                class_name="spw-side-family",
+            )
+            for group, title in UI_GROUPS
+        ],
+        class_name="spw-side-group",
+    )
+    return rx.el.nav(
+        *groups[:2], charts, components, groups[2], class_name="spw-sidebar", aria_label="Documentation"
+    )
 
 
 def toc(entries: list[tuple[str, str]]) -> rx.Component:

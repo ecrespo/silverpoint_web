@@ -4,6 +4,7 @@ import reflex as rx
 from reflex_silverpoint_react import (
     CHARTS,
     FAMILIES,
+    UI_COMPONENTS,
     area_chart,
     chart_by_slug,
     donut_chart,
@@ -11,11 +12,22 @@ from reflex_silverpoint_react import (
     kpi_card,
     line_chart,
     radar_chart,
+    sp_alert,
+    sp_button,
+    sp_card,
+    sp_progress,
+    sp_segmented,
+    sp_steps,
+    sp_switch,
+    sp_tag,
+    step_item,
+    ui_item,
     wind_rose,
 )
 
 from .. import datasets as ds
 from .. import site_data as sd
+from .. import ui_examples as ux
 from ..components.layout import shell_page
 from ..components.ui import code_block, ext_link, framework_tabs, github_icon, shell
 from ..examples import live_props
@@ -90,6 +102,52 @@ def hero_panel() -> rx.Component:
     )
 
 
+def ui_showcase(ground: str, substrate: str) -> rx.Component:
+    """A small settings card made of the UI components, on one ground."""
+    props = {"ground": ground}
+    key = ground[:2]
+    return ux.panel(
+        sp_card(
+            sp_segmented(
+                items=[ui_item("day", "Day"), ui_item("week", "Week"), ui_item("month", "Month")],
+                label="Period",
+                name="period",
+                default_value="week",
+                size="sm",
+                id=f"home-{key}-period",
+                **props,
+            ),
+            sp_switch(label="Precision", name="precision", size="sm", id=f"home-{key}-switch", **props),
+            sp_progress(label="Upload", value=64, size="sm", id=f"home-{key}-progress", **props),
+            sp_steps(
+                items=[step_item("draw", "Draw"), step_item("ink", "Ink"), step_item("ship", "Ship")],
+                current=1,
+                label="Release",
+                size="sm",
+                id=f"home-{key}-steps",
+                **props,
+            ),
+            sp_alert(
+                "Every package reached npm.",
+                kind="success",
+                title="Published",
+                size="sm",
+                id=f"home-{key}-alert",
+                **props,
+            ),
+            title=ground,
+            extra=sp_tag(substrate, tone=2, size="sm", id=f"home-{key}-tag", **props),
+            footer=sp_button(
+                "Save", type="submit", variant="primary", size="sm", id=f"home-{key}-save", **props
+            ),
+            id=f"home-{key}-card",
+            **props,
+        ),
+        ground=ground,
+        substrate=substrate,
+    )
+
+
 def stat(value: str, label: str, href: str) -> rx.Component:
     return rx.el.a(rx.el.strong(value), rx.el.span(label), href=href, class_name="spw-stat")
 
@@ -127,12 +185,13 @@ def index() -> rx.Component:
                     "A charting library whose visual language is historical drawing technique. The first ground "
                     "reproduces Renaissance silverpoint: a prepared middle-tone substrate, a fine silver line, tone "
                     "built from hatching, and white heightening reserved for the live value. The second, cyanotype, "
-                    "prints a white line on Prussian blue.",
+                    "prints a white line on Prussian blue. Since 0.3 the same hand draws buttons, inputs, tabs and "
+                    "alerts too.",
                     class_name="spw-hero-lede",
                 ),
                 rx.el.div(
-                    rx.el.a("Get started", href="/docs", class_name="spw-button spw-button-solid"),
-                    rx.el.a("Browse the gallery", href="/gallery", class_name="spw-button"),
+                    sp_button("Get started", href="/docs", variant="primary", id="hero-start"),
+                    sp_button("Browse the gallery", href="/gallery", id="hero-gallery"),
                     ext_link(
                         rx.fragment(github_icon(16), " GitHub"),
                         sd.REPO,
@@ -148,6 +207,7 @@ def index() -> rx.Component:
         rx.el.div(
             stat(str(len(CHARTS)), "charts enabled", "/charts"),
             stat(str(len(FAMILIES)), "families", "/gallery"),
+            stat(str(len(UI_COMPONENTS)), "UI components", "/components"),
             stat("3 + 1", "frameworks + Reflex", "/docs/installation"),
             stat("2", "grounds · 4 substrates", "/docs/grounds"),
             stat(str(len(sd.PACKAGES)), "npm packages", "/packages"),
@@ -178,6 +238,34 @@ def index() -> rx.Component:
                 class_name="spw-grid",
             ),
             rx.el.a(f"See all {len(CHARTS)} charts →", href="/gallery", class_name="spw-more"),
+            class_name="spw-home-section",
+        ),
+        rx.el.section(
+            rx.el.div(
+                rx.el.div(
+                    sp_tag("new in 0.3", tone=4, id="home-ui-new"),
+                    rx.el.h2(f"{len(UI_COMPONENTS)} UI components, drawn by the same hand"),
+                    rx.el.p(
+                        "Buttons, inputs, checkboxes, switches, sliders, tabs, steps, cards, tags, badges, progress, "
+                        "alerts and skeletons, with frames hand-drawn by each ground's own inker. A native control "
+                        "underneath every one: forms submit, the keyboard follows the WAI-ARIA patterns, and precision "
+                        "mode switches the inking off. Every control on this site is one of them.",
+                    ),
+                    rx.el.div(
+                        sp_button("UI components", href="/docs/ui", variant="primary", id="home-ui-docs"),
+                        sp_button("Component reference", href="/components", id="home-ui-ref"),
+                        class_name="spw-row",
+                    ),
+                ),
+                rx.el.div(
+                    *[
+                        ui_showcase(ground, substrate)
+                        for ground, substrate in (("silverpoint", "cream"), ("cyanotype", "prussian"))
+                    ],
+                    class_name="spw-grid spw-grid-2",
+                ),
+                class_name="spw-split spw-split-ui",
+            ),
             class_name="spw-home-section",
         ),
         rx.el.section(
@@ -219,12 +307,12 @@ def index() -> rx.Component:
                 rx.el.div(
                     rx.el.h2("Also in Python, with Reflex"),
                     rx.el.p(
-                        "reflex-silverpoint-react wraps @silverpoint/react as a Reflex custom component: the 33 charts, "
-                        "the Dashboard, the provider, events, custom readouts and SVG export, as Python. This site is "
-                        "built with it.",
+                        f"reflex-silverpoint-react wraps @silverpoint/react as a Reflex custom component: the {len(CHARTS)} "
+                        f"charts, the Dashboard, the {len(UI_COMPONENTS)} UI components, the provider, events, custom "
+                        "readouts and SVG export, as Python. This site is built with it.",
                     ),
                     rx.el.div(
-                        rx.el.a("Reflex guide", href="/docs/reflex", class_name="spw-button"),
+                        sp_button("Reflex guide", href="/docs/reflex", id="home-reflex-guide"),
                         ext_link(
                             "reflex-silverpoint-react on GitHub",
                             sd.REFLEX_REPO,
@@ -294,7 +382,8 @@ def register(app: rx.App) -> None:
         route="/",
         title="silverpoint · Renaissance-drawn charts for React, Vue and Angular",
         description=(
-            f"silverpoint: {len(CHARTS)} charts for React, Vue, Angular and Reflex drawn in the manner of a Renaissance "
-            "silverpoint drawing. Exact geometry, hand-drawn ornament, accessible and server-rendered."
+            f"silverpoint: {len(CHARTS)} charts and {len(UI_COMPONENTS)} UI components for React, Vue, Angular and Reflex "
+            "drawn in the manner of a Renaissance silverpoint drawing. Exact geometry, hand-drawn ornament, accessible "
+            "and server-rendered."
         ),
     )

@@ -8,6 +8,7 @@ from reflex_silverpoint_react import (
     CHARTS,
     COMMON_PROPS,
     FAMILIES,
+    UI_COMPONENTS,
     area_chart,
     bar_chart,
     dashboard,
@@ -21,11 +22,16 @@ from reflex_silverpoint_react import (
     line_chart,
     meter_chart,
     silverpoint_provider,
+    sp_button,
+    sp_input,
+    sp_switch,
     tooltip_template,
+    ui_demo,
 )
 
 from .. import datasets as ds
 from .. import site_data as sd
+from .. import ui_examples as ux
 from ..components.layout import docs_page
 from ..components.ui import (
     c,
@@ -578,9 +584,9 @@ def overview() -> Callable[[], rx.Component]:
     return page(
         "/docs",
         "Overview",
-        "silverpoint draws charts for React, Vue and Angular in the manner of historical drawing technique. "
-        "This documentation covers installing it, the four ways to use it (the three frameworks and Reflex), "
-        "the concepts every chart shares, and a reference page for each chart.",
+        "silverpoint draws charts and UI components for React, Vue and Angular in the manner of historical drawing "
+        "technique. This documentation covers installing it, the four ways to use it (the three frameworks and Reflex), "
+        "the concepts every chart shares, a reference page for each chart and one for each UI component.",
         [
             (
                 "what",
@@ -650,6 +656,13 @@ def overview() -> Callable[[], rx.Component]:
                                 "Dashboard: a responsive, linkable grid laid out from plain data",
                             ],
                             [
+                                "UI components",
+                                rx.el.span(
+                                    f"{len(UI_COMPONENTS)}, new in 0.3: buttons, inputs, tabs, cards, alerts… ",
+                                    rx.el.a("drawn as the charts are", href="/docs/ui"),
+                                ),
+                            ],
+                            [
                                 "Accessibility",
                                 "Accessible names, hidden data tables, keyboard navigation, contrast fallbacks",
                             ],
@@ -715,6 +728,12 @@ def overview() -> Callable[[], rx.Component]:
                         rx.el.li(
                             rx.el.a("Chart reference", href="/charts"), " — props and code for each chart."
                         ),
+                        rx.el.li(
+                            rx.el.a("UI components", href="/docs/ui"),
+                            " and their ",
+                            rx.el.a("reference", href="/components"),
+                            f" — the {len(UI_COMPONENTS)} interface components of 0.3.",
+                        ),
                         rx.el.li(rx.el.a("Report a bug", href="/support"), " — how to open a useful issue."),
                     )
                 ],
@@ -754,7 +773,8 @@ def installation() -> Callable[[], rx.Component]:
                             ],
                             [
                                 c("@silverpoint/grounds"),
-                                "The stylesheet (styles.css) that colours the strokes. Required.",
+                                "The stylesheet (styles.css) that colours the strokes. Required. Its ui.css styles "
+                                "the UI components, opt-in.",
                             ],
                             [
                                 c("@silverpoint/fonts"),
@@ -780,14 +800,16 @@ def installation() -> Callable[[], rx.Component]:
                         " except for .css, so no bundler drops the import.",
                     ),
                     code_block(
-                        "// React / Vue\nimport '@silverpoint/fonts/fonts.css';\nimport '@silverpoint/grounds/styles.css';\n\n"
-                        "/* Angular: src/styles.css */\n@import '@silverpoint/fonts/fonts.css';\n@import '@silverpoint/grounds/styles.css';",
+                        "// React / Vue\nimport '@silverpoint/fonts/fonts.css';\nimport '@silverpoint/grounds/styles.css';\n"
+                        "import '@silverpoint/grounds/ui.css'; // only if you use the UI components\n\n"
+                        "/* Angular: src/styles.css */\n@import '@silverpoint/fonts/fonts.css';\n@import '@silverpoint/grounds/styles.css';\n"
+                        "@import '@silverpoint/grounds/ui.css'; /* only if you use the UI components */",
                         "css",
                     ),
                     callout(
                         "In Reflex there is nothing to import: ",
                         c("reflex-silverpoint-react"),
-                        " installs the npm packages and adds both stylesheets for you.",
+                        " installs the npm packages and adds the stylesheets for you, ui.css included.",
                         kind="tip",
                     ),
                 ],
@@ -907,6 +929,52 @@ def framework_guide(key: str) -> Callable[[], rx.Component]:
         ("export", "Export: the imperative handle", [one(EXPORT[key], lang)]),
         ("ssr", "Server rendering", [one(SSR[key], "shell" if key in ("angular", "reflex") else lang)]),
         (
+            "ui",
+            "UI components",
+            [
+                rx.el.p(
+                    f"New in 0.3: {len(UI_COMPONENTS)} interface components from ",
+                    c(ux.INSTALL_PATHS[key]),
+                    ", drawn as the charts are. ",
+                    rx.el.span("Each one adds its stylesheet for you.")
+                    if key == "reflex"
+                    else rx.el.span("Import ", c("@silverpoint/grounds/ui.css"), " once, beside styles.css."),
+                    " A form with a controlled input, a switch, tabs and a submit button:",
+                ),
+                one(ux.FORM_CODE[key], lang),
+                live(
+                    ux.panel(
+                        rx.el.div(
+                            sp_input(
+                                label="City", name="city", default_value="Caracas", id=f"guide-{key}-city"
+                            ),
+                            sp_switch(label="Precision", name="precision", id=f"guide-{key}-precision"),
+                            sp_button("Save", type="submit", variant="primary", id=f"guide-{key}-save"),
+                            class_name="spw-row spw-row-end",
+                        ),
+                        ui_demo("tabs", "first", *ux.tab_panels("tabs", "first"), id=f"guide-{key}-tabs"),
+                    )
+                ),
+                rx.el.p("Every component has a reference page with each of its states in this framework:"),
+                rx.el.div(
+                    *[
+                        rx.el.a(
+                            {
+                                "react": info.component,
+                                "vue": info.component,
+                                "angular": ux.selector(info),
+                                "reflex": info.factory_name,
+                            }[key],
+                            href=f"/components/{info.slug}",
+                        )
+                        for info in UI_COMPONENTS
+                    ],
+                    class_name="spw-chip-list",
+                ),
+                rx.el.a("UI components: values, forms, keyboard →", href="/docs/ui"),
+            ],
+        ),
+        (
             "charts",
             f"The {len(CHARTS)} charts",
             [
@@ -940,9 +1008,10 @@ def framework_guide(key: str) -> Callable[[], rx.Component]:
                         ext_link("reflex-silverpoint-react", sd.REFLEX_REPO),
                         " is a Reflex custom component that wraps @silverpoint/react ",
                         sd.LATEST.version,
-                        ". It exposes all 33 charts, the Dashboard (with linking), the provider, both grounds, the "
-                        "interaction events, custom readouts (tooltip_template) and the imperative handle (download_svg, "
-                        "get_svg, get_geometry) as Python.",
+                        f". It exposes all {len(CHARTS)} charts, the Dashboard (with linking), the {len(UI_COMPONENTS)} UI "
+                        "components (sp_button, sp_input, sp_tabs…), the provider, both grounds, the interaction events, "
+                        "custom readouts (tooltip_template) and the imperative handle (download_svg, get_svg, get_geometry) "
+                        "as Python.",
                     ),
                     rx.el.p(
                         "Props are the React props in snake_case: ",
@@ -982,7 +1051,7 @@ def framework_guide(key: str) -> Callable[[], rx.Component]:
         f"/docs/{key}",
         f"{fw.label}" if key != "reflex" else "Reflex (Python)",
         f"Everything you need to use silverpoint with {fw.label}: install, quickstart, app-wide configuration, "
-        "precision mode, interaction, export and server rendering.",
+        "precision mode, interaction, export, server rendering and the UI components.",
         sections,
         eyebrow="Getting started · Frameworks",
     )

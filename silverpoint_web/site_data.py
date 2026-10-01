@@ -70,6 +70,27 @@ class Release:
 
 VERSIONS: tuple[Release, ...] = (
     Release(
+        version="0.3.0",
+        date="2026-09-30",
+        summary="17 UI components drawn as the charts are: buttons, inputs, tabs, cards, alerts and more.",
+        highlights=(
+            "17 Sp-prefixed UI components in React, Vue and Angular (ui/<name> subpaths): Button; Input, Checkbox, "
+            "RadioGroup, Switch, Slider, Rate, Segmented; Tabs with TabPanel, Steps; Card, Tag, Badge, Divider; "
+            "Progress, Alert, Skeleton.",
+            "Hand-drawn frames by each ground's own inker: tone as hatching on silverpoint, as the weight of an exact "
+            "white line on cyanotype. precision mode switches the inking off, as on the charts.",
+            "A native control underneath every one (<button>, <input>, a <fieldset> of radios): forms submit natively, "
+            "and the composites follow the WAI-ARIA keyboard patterns, with RTL arrows.",
+            "Controlled or uncontrolled values: value/onChange or defaultValue in React, v-model in Vue, "
+            "ControlValueAccessors in Angular.",
+            "A new opt-in stylesheet, @silverpoint/grounds/ui.css, beside styles.css.",
+            "React Server Component entry points for Card, Divider, Steps, Tag, Badge, Progress, Alert and Skeleton.",
+            "UI_COMPONENTS (17 components, 45 states) on @silverpoint/core/ui and UI_DEMOS on @silverpoint/core/ui-demos.",
+            "No change to the rendered output of any chart.",
+        ),
+        reflex="0.3.0",
+    ),
+    Release(
         version="0.2.0",
         date="2026-09-26",
         summary="The Dashboard composition, linked charts, the cyanotype ground and a Tailwind preset.",
@@ -138,28 +159,28 @@ PACKAGES: tuple[Package, ...] = (
     Package(
         "@silverpoint/react",
         "React adapter",
-        "React 18.2+ and 19 components, one subpath per chart, with server entry points for React Server Components.",
+        "React 18.2+ and 19 components: one subpath per chart, the 17 UI components on /ui, and server entry points for React Server Components.",
         "adapter",
         f"{REPO}/tree/main/packages/react",
     ),
     Package(
         "@silverpoint/vue",
         "Vue adapter",
-        "Vue 3.5 components written with <script setup>, typed props and emits, server rendering with @vue/server-renderer.",
+        "Vue 3.5 charts and UI components (v-model on every value component), typed props and emits, server rendering with @vue/server-renderer.",
         "adapter",
         f"{REPO}/tree/main/packages/vue",
     ),
     Package(
         "@silverpoint/angular",
         "Angular adapter",
-        "Angular 21 and 22 standalone, signal-input, OnPush components in Angular Package Format. Zoneless-ready.",
+        "Angular 21 and 22 standalone, signal-input, OnPush charts and UI components (ControlValueAccessors) in Angular Package Format.",
         "adapter",
         f"{REPO}/tree/main/packages/angular",
     ),
     Package(
         "@silverpoint/grounds",
         "Grounds + stylesheet",
-        "The declarative style grounds (silverpoint, cyanotype), their inkers and the stylesheet every app imports once.",
+        "The declarative style grounds (silverpoint, cyanotype), their inkers, styles.css for the charts and ui.css for the UI components.",
         "required",
         f"{REPO}/tree/main/packages/grounds",
     ),
@@ -199,7 +220,8 @@ class Framework:
     integration: str
     create: str
     run: str
-    prefix: str  # how components are named
+    prefix: str  # how charts are named
+    ui_prefix: str  # how UI components are named
 
 
 FRAMEWORKS: tuple[Framework, ...] = (
@@ -213,6 +235,7 @@ FRAMEWORKS: tuple[Framework, ...] = (
         create="npm create vite@latest my-charts -- --template react-ts",
         run="npm run dev",
         prefix="<LineChart />",
+        ui_prefix="<SpButton />",
     ),
     Framework(
         key="vue",
@@ -224,6 +247,7 @@ FRAMEWORKS: tuple[Framework, ...] = (
         create="npm create vite@latest my-charts -- --template vue-ts",
         run="npm run dev",
         prefix="<SpLineChart />",
+        ui_prefix="<SpButton />",
     ),
     Framework(
         key="angular",
@@ -235,6 +259,7 @@ FRAMEWORKS: tuple[Framework, ...] = (
         create="npx @angular/cli@22 new my-charts --defaults --skip-git",
         run="npm start",
         prefix="<sp-line-chart />",
+        ui_prefix="<button spButton>",
     ),
     Framework(
         key="reflex",
@@ -246,6 +271,7 @@ FRAMEWORKS: tuple[Framework, ...] = (
         create="reflex init",
         run="reflex run",
         prefix="line_chart()",
+        ui_prefix="sp_button()",
     ),
 )
 
@@ -255,6 +281,8 @@ GROUNDS = ("silverpoint", "cyanotype")
 SUBSTRATES = ("cream", "green", "blue", "ochre")
 MODES = ("ink", "precision")
 HATCH_FILLS = ("tile", "per-shape")
+
+UI_SIZES = ("sm", "md", "lg")
 
 FAMILY_BLURBS: dict[str, str] = {
     "Lines": "Series over an ordered axis: splines, steps, sparklines and KPI cards.",

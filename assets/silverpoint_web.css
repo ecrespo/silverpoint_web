@@ -297,18 +297,6 @@ figcaption { font-family: var(--spw-mono); font-size: 0.75rem; color: var(--spw-
   top: calc(var(--spw-header-h) + 8px);
   z-index: 5;
 }
-.spw-control { display: flex; flex-direction: column; gap: 3px; }
-.spw-control label { font-size: 0.85rem; color: var(--spw-muted); }
-.spw-control select {
-  font: inherit;
-  font-size: 1rem;
-  padding: 3px 8px;
-  border: 1px solid var(--spw-rule-strong);
-  border-radius: var(--spw-radius);
-  background: var(--spw-paper);
-  color: var(--spw-ink);
-  min-width: 120px;
-}
 .spw-controls-note { font-size: 0.88rem; color: var(--spw-muted); margin: 0 0 4px !important; }
 
 .spw-family-nav { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 4px 0 8px; }
@@ -384,12 +372,70 @@ a.spw-stat:hover { border-color: var(--spw-ink); }
 .spw-code pre code { background: none; border: 0; padding: 0; font-size: inherit; overflow-wrap: normal; }
 .spw-code-compact pre { padding: 9px 14px; }
 
-/* Radix tabs, in the paper style. */
+/* ── silverpoint UI components on the site ─────────────────────────────────
+ * The site's own controls are @silverpoint/react/ui components (ui.css draws them). These rules
+ * only place them in the page and keep the page's typography from leaking into them.
+ */
+
+.spw-site .sp-ui,
+.spw-site .sp-ui :where(h2, h3, h4, h5, h6, p) { font-family: var(--spw-serif); }
+.spw-site a.sp-ui,
+.spw-site .sp-ui a { text-decoration: none; }
+.spw-site .sp-ui :where(h2, h3, h4, h5, h6) { margin: 0; font-size: 1.05rem; color: inherit; }
+.spw-site .sp-ui a { color: inherit; }
+.spw-site .sp-ui p { margin: 0; }
+
+/* Framework tabs: an SpTabs whose panels hold the code. */
 .spw-tabs { margin: 12px 0 18px; }
-.spw-tabs-list { box-shadow: inset 0 -1px 0 0 var(--spw-rule) !important; gap: 2px; }
-.spw-tab { font-family: var(--spw-serif) !important; font-size: 1rem !important; color: var(--spw-ink-soft) !important; }
-.spw-tab[data-state='active'] { color: var(--spw-ink) !important; font-weight: 500; }
-.spw-tab[data-state='active']::before { background-color: var(--spw-ink) !important; }
+.spw-tabs .sp-ui-tabpanels { padding-top: 8px; }
+.spw-tabs .spw-code { margin-top: 0; }
+
+/* Callouts: an SpAlert in the text. */
+.spw-callout { margin: 16px 0; }
+.spw-callout code { font-size: 0.85em; }
+
+/* Pills: an SpTag beside a heading or in a table. */
+.spw-pill { margin-left: 8px; vertical-align: middle; }
+td > .spw-pill { margin-left: 0; }
+
+/* Gallery controls: SpSegmented. */
+.spw-choice { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.spw-choice-label { font-size: 0.85rem; color: var(--spw-muted); }
+.spw-choice .sp-ui-segment { white-space: nowrap; }
+
+/* A prepared ground behind UI components (sp-ground-<ground> sets the tokens). */
+.spw-ui-sample {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px;
+  min-width: 0;
+  background: var(--sp-substrate, var(--spw-substrate));
+  color: var(--sp-text, var(--spw-ink));
+  border: 1px solid var(--spw-rule);
+  border-radius: var(--spw-radius);
+}
+.spw-ui-sample > .sp-ui { max-width: 100%; }
+.spw-ui-card .spw-ui-sample { min-height: 132px; justify-content: center; }
+.spw-ui-variants .spw-ui-sample { height: 100%; }
+.spw-ui-state { margin: 10px 0 22px; }
+.spw-ui-state h3 { margin-bottom: 6px; }
+.spw-ui-state .spw-grid { margin-bottom: 6px; }
+.spw-row-end { align-items: flex-end; margin-top: 0; }
+.spw-stat-badge { justify-content: center; }
+.spw-release-steps { margin: 14px 0 18px; align-items: stretch; }
+.spw-family-ui { font-style: italic; }
+
+/* /docs/ui "Try it": the controls on the left drive the output on the right. */
+.spw-try { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 22px; align-items: start; margin: 14px 0; }
+.spw-try-controls,
+.spw-try-output { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.spw-try-output .spw-row { margin-top: 0; }
+
+/* Home: the UI showcase beside its text. */
+.spw-split.spw-split-ui { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); }
+.spw-split-ui .spw-ui-sample { align-items: stretch; }
 
 /* ── Tables ─────────────────────────────────────────────────────────────── */
 
@@ -410,38 +456,6 @@ a.spw-stat:hover { border-color: var(--spw-ink); }
 .spw-disclosure summary { cursor: pointer; margin: 6px 0; color: var(--spw-ink-soft); }
 
 /* ── Callouts, pills, chips ─────────────────────────────────────────────── */
-
-.spw-callout {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  margin: 16px 0;
-  padding: 12px 14px;
-  border: 1px solid var(--spw-rule-strong);
-  border-left: 3px solid var(--spw-ink);
-  border-radius: var(--spw-radius);
-  background: var(--spw-substrate);
-}
-.spw-callout-icon { flex: none; margin-top: 4px; }
-.spw-callout-warn { border-left-color: var(--spw-sepia); }
-.spw-callout-bug { background: var(--spw-hatch), var(--spw-substrate); }
-
-.spw-pill {
-  display: inline-block;
-  font-size: 0.75rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  padding: 0 8px;
-  margin-left: 8px;
-  border: 1px solid var(--spw-rule-strong);
-  border-radius: 99px;
-  vertical-align: middle;
-  color: var(--spw-ink-soft);
-  background: var(--spw-paper);
-}
-.spw-pill-latest,
-.spw-pill-adapter { background: var(--spw-ink); color: var(--spw-paper); border-color: var(--spw-ink); }
-.spw-pill-required { background: var(--spw-substrate-deep); }
 
 .spw-chip-list { display: flex; flex-wrap: wrap; gap: 6px 8px; margin: 10px 0; }
 .spw-chip-list a {
@@ -545,7 +559,7 @@ a.spw-stat:hover { border-color: var(--spw-ink); }
   .spw-sidebar-mobile { display: block; margin-top: 16px; border: 1px solid var(--spw-rule); border-radius: var(--spw-radius); background: var(--spw-substrate); }
   .spw-sidebar-mobile summary { cursor: pointer; padding: 8px 12px; }
   .spw-sidebar-mobile .spw-sidebar { position: static; max-height: none; border: 0; padding: 4px 12px 12px; }
-  .spw-hero, .spw-split { grid-template-columns: minmax(0, 1fr); }
+  .spw-hero, .spw-split, .spw-split.spw-split-ui, .spw-try { grid-template-columns: minmax(0, 1fr); }
   .spw-grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .spw-grid-5 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .spw-footer-grid { grid-template-columns: 1fr 1fr; }

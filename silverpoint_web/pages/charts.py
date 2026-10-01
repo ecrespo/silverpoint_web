@@ -4,7 +4,7 @@ from collections.abc import Callable
 from urllib.parse import quote
 
 import reflex as rx
-from reflex_silverpoint_react import CHARTS, COMMON_PROPS, FAMILIES, ChartInfo, download_svg
+from reflex_silverpoint_react import CHARTS, COMMON_PROPS, FAMILIES, ChartInfo, download_svg, sp_button
 
 from .. import site_data as sd
 from ..components.layout import docs_page
@@ -60,12 +60,12 @@ def chart_page(info: ChartInfo) -> Callable[[], rx.Component]:
             paper_card(
                 chart_card(info, height=260, id=chart_id, footer_right="silverpoint"),
                 rx.el.div(
-                    rx.el.button(
-                        rx.icon("download", size=14),
-                        " Download SVG",
+                    sp_button(
+                        "Download SVG",
                         on_click=download_svg(chart_id, f"{info.slug}.svg"),
-                        class_name="spw-button",
-                        type="button",
+                        variant="primary",
+                        size="sm",
+                        id=f"{chart_id}-download",
                     ),
                     rx.el.a(
                         rx.icon("bug", size=14),

@@ -46,7 +46,7 @@ Vercel serves `public/` (`vercel.json`: no build step, `cleanUrls`, SPA fallback
 `reflex_resume`, `.github/workflows/static_build.yml` exports the site on every push to `main` and
 commits `public/` ("Update static build [skip ci]"), which Vercel then deploys. Import the repository in
 Vercel with the framework preset **Other** and no build command. Set `DEPLOY_URL` if the domain is not
-`https://silverpoint-web.vercel.app` (it feeds the sitemap).
+`https://silverpointweb.vercel.app` (it feeds the sitemap).
 
 ## When silverpoint releases a new version
 

@@ -1,0 +1,1 @@
+import{n as e,o as t,r as n,t as r}from"./ui-GkdCDq5g.js";function i({children:i,dashboardCell:a,...o}){return r(t(o,n(o,a),{text:e(i)}),{slots:{content:i}})}export{i as t};

@@ -109,6 +109,60 @@
     <loc>https://silverpoint-web.vercel.app/charts/orbit-chart</loc>
   </url>
   <url>
+    <loc>https://silverpoint-web.vercel.app/components</loc>
+  </url>
+  <url>
+    <loc>https://silverpoint-web.vercel.app/components/button</loc>
+  </url>
+  <url>
+    <loc>https://silverpoint-web.vercel.app/components/input</loc>
+  </url>
+  <url>
+    <loc>https://silverpoint-web.vercel.app/components/checkbox</loc>
+  </url>
+  <url>
+    <loc>https://silverpoint-web.vercel.app/components/radio-group</loc>
+  </url>
+  <url>
+    <loc>https://silverpoint-web.vercel.app/components/switch</loc>
+  </url>
+  <url>
+    <loc>https://silverpoint-web.vercel.app/components/slider</loc>
+  </url>
+  <url>
+    <loc>https://silverpoint-web.vercel.app/components/rate</loc>
+  </url>
+  <url>
+    <loc>https://silverpoint-web.vercel.app/components/segmented</loc>
+  </url>
+  <url>
+    <loc>https://silverpoint-web.vercel.app/components/tabs</loc>
+  </url>
+  <url>
+    <loc>https://silverpoint-web.vercel.app/components/steps</loc>
+  </url>
+  <url>
+    <loc>https://silverpoint-web.vercel.app/components/card</loc>
+  </url>
+  <url>
+    <loc>https://silverpoint-web.vercel.app/components/tag</loc>
+  </url>
+  <url>
+    <loc>https://silverpoint-web.vercel.app/components/badge</loc>
+  </url>
+  <url>
+    <loc>https://silverpoint-web.vercel.app/components/divider</loc>
+  </url>
+  <url>
+    <loc>https://silverpoint-web.vercel.app/components/progress</loc>
+  </url>
+  <url>
+    <loc>https://silverpoint-web.vercel.app/components/alert</loc>
+  </url>
+  <url>
+    <loc>https://silverpoint-web.vercel.app/components/skeleton</loc>
+  </url>
+  <url>
     <loc>https://silverpoint-web.vercel.app/docs</loc>
   </url>
   <url>
@@ -152,6 +206,9 @@
   </url>
   <url>
     <loc>https://silverpoint-web.vercel.app/docs/tailwind</loc>
+  </url>
+  <url>
+    <loc>https://silverpoint-web.vercel.app/docs/ui</loc>
   </url>
   <url>
     <loc>https://silverpoint-web.vercel.app/packages</loc>

@@ -1,0 +1,1 @@
+import{G as e,J as t}from"./components-DzQT6F3y.js";import{n,r,s as i,t as a}from"./ui-GkdCDq5g.js";var o=(0,t(e(),1).forwardRef)(function({children:e,onClick:t,dashboardCell:o,...s},c){let l=i(s,r(s,o),{text:n(e)});return a(l,{root:{ref:c,onClick:t&&(e=>s.disabled?e.preventDefault():t(e))},slots:{content:e}})});export{o as t};

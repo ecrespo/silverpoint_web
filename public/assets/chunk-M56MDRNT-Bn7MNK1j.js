@@ -1,0 +1,1 @@
+import{a as e,r as t,t as n}from"./ui-GkdCDq5g.js";function r({children:r,onClose:i,dashboardCell:a,...o}){let s=e(o,t(o,a),{closable:o.closable===!0});return n(s,{close:{onClick:i},slots:{content:r}})}export{r as t};

@@ -3,7 +3,7 @@ import os
 import reflex as rx
 
 # The public URL, for the sitemap. Override it with DEPLOY_URL when the Vercel domain changes.
-DEPLOY_URL = os.environ.get("DEPLOY_URL", "https://silverpoint-web.vercel.app")
+DEPLOY_URL = os.environ.get("DEPLOY_URL", "https://silverpointweb.vercel.app")
 
 config = rx.Config(
     app_name="silverpoint_web",

@@ -1,225 +1,225 @@
 <?xml version='1.0' encoding='utf-8'?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://silverpoint-web.vercel.app/</loc>
+    <loc>https://silverpointweb.vercel.app/</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/gallery</loc>
+    <loc>https://silverpointweb.vercel.app/gallery</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts</loc>
+    <loc>https://silverpointweb.vercel.app/charts</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts/line-chart</loc>
+    <loc>https://silverpointweb.vercel.app/charts/line-chart</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts/step-chart</loc>
+    <loc>https://silverpointweb.vercel.app/charts/step-chart</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts/sparkline-rows</loc>
+    <loc>https://silverpointweb.vercel.app/charts/sparkline-rows</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts/kpi-card</loc>
+    <loc>https://silverpointweb.vercel.app/charts/kpi-card</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts/bar-chart</loc>
+    <loc>https://silverpointweb.vercel.app/charts/bar-chart</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts/stacked-bar-chart</loc>
+    <loc>https://silverpointweb.vercel.app/charts/stacked-bar-chart</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts/composed-chart</loc>
+    <loc>https://silverpointweb.vercel.app/charts/composed-chart</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts/waterfall-chart</loc>
+    <loc>https://silverpointweb.vercel.app/charts/waterfall-chart</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts/funnel-chart</loc>
+    <loc>https://silverpointweb.vercel.app/charts/funnel-chart</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts/bullet-chart</loc>
+    <loc>https://silverpointweb.vercel.app/charts/bullet-chart</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts/pyramid-chart</loc>
+    <loc>https://silverpointweb.vercel.app/charts/pyramid-chart</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts/candlestick-chart</loc>
+    <loc>https://silverpointweb.vercel.app/charts/candlestick-chart</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts/area-chart</loc>
+    <loc>https://silverpointweb.vercel.app/charts/area-chart</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts/range-band-chart</loc>
+    <loc>https://silverpointweb.vercel.app/charts/range-band-chart</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts/stream-chart</loc>
+    <loc>https://silverpointweb.vercel.app/charts/stream-chart</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts/scatter-chart</loc>
+    <loc>https://silverpointweb.vercel.app/charts/scatter-chart</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts/bubble-chart</loc>
+    <loc>https://silverpointweb.vercel.app/charts/bubble-chart</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts/heatmap-chart</loc>
+    <loc>https://silverpointweb.vercel.app/charts/heatmap-chart</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts/treemap-chart</loc>
+    <loc>https://silverpointweb.vercel.app/charts/treemap-chart</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts/activity-grid</loc>
+    <loc>https://silverpointweb.vercel.app/charts/activity-grid</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts/sankey-chart</loc>
+    <loc>https://silverpointweb.vercel.app/charts/sankey-chart</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts/chord-ring</loc>
+    <loc>https://silverpointweb.vercel.app/charts/chord-ring</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts/donut-chart</loc>
+    <loc>https://silverpointweb.vercel.app/charts/donut-chart</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts/radar-chart</loc>
+    <loc>https://silverpointweb.vercel.app/charts/radar-chart</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts/polar-bar-chart</loc>
+    <loc>https://silverpointweb.vercel.app/charts/polar-bar-chart</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts/radial-arc-group</loc>
+    <loc>https://silverpointweb.vercel.app/charts/radial-arc-group</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts/radial-rings</loc>
+    <loc>https://silverpointweb.vercel.app/charts/radial-rings</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts/gauge-arc</loc>
+    <loc>https://silverpointweb.vercel.app/charts/gauge-arc</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts/meter-chart</loc>
+    <loc>https://silverpointweb.vercel.app/charts/meter-chart</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts/coxcomb-chart</loc>
+    <loc>https://silverpointweb.vercel.app/charts/coxcomb-chart</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts/wind-rose</loc>
+    <loc>https://silverpointweb.vercel.app/charts/wind-rose</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts/volvelle-chart</loc>
+    <loc>https://silverpointweb.vercel.app/charts/volvelle-chart</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/charts/orbit-chart</loc>
+    <loc>https://silverpointweb.vercel.app/charts/orbit-chart</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/components</loc>
+    <loc>https://silverpointweb.vercel.app/components</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/components/button</loc>
+    <loc>https://silverpointweb.vercel.app/components/button</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/components/input</loc>
+    <loc>https://silverpointweb.vercel.app/components/input</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/components/checkbox</loc>
+    <loc>https://silverpointweb.vercel.app/components/checkbox</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/components/radio-group</loc>
+    <loc>https://silverpointweb.vercel.app/components/radio-group</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/components/switch</loc>
+    <loc>https://silverpointweb.vercel.app/components/switch</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/components/slider</loc>
+    <loc>https://silverpointweb.vercel.app/components/slider</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/components/rate</loc>
+    <loc>https://silverpointweb.vercel.app/components/rate</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/components/segmented</loc>
+    <loc>https://silverpointweb.vercel.app/components/segmented</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/components/tabs</loc>
+    <loc>https://silverpointweb.vercel.app/components/tabs</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/components/steps</loc>
+    <loc>https://silverpointweb.vercel.app/components/steps</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/components/card</loc>
+    <loc>https://silverpointweb.vercel.app/components/card</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/components/tag</loc>
+    <loc>https://silverpointweb.vercel.app/components/tag</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/components/badge</loc>
+    <loc>https://silverpointweb.vercel.app/components/badge</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/components/divider</loc>
+    <loc>https://silverpointweb.vercel.app/components/divider</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/components/progress</loc>
+    <loc>https://silverpointweb.vercel.app/components/progress</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/components/alert</loc>
+    <loc>https://silverpointweb.vercel.app/components/alert</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/components/skeleton</loc>
+    <loc>https://silverpointweb.vercel.app/components/skeleton</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/docs</loc>
+    <loc>https://silverpointweb.vercel.app/docs</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/docs/installation</loc>
+    <loc>https://silverpointweb.vercel.app/docs/installation</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/docs/react</loc>
+    <loc>https://silverpointweb.vercel.app/docs/react</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/docs/vue</loc>
+    <loc>https://silverpointweb.vercel.app/docs/vue</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/docs/angular</loc>
+    <loc>https://silverpointweb.vercel.app/docs/angular</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/docs/reflex</loc>
+    <loc>https://silverpointweb.vercel.app/docs/reflex</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/docs/grounds</loc>
+    <loc>https://silverpointweb.vercel.app/docs/grounds</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/docs/precision</loc>
+    <loc>https://silverpointweb.vercel.app/docs/precision</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/docs/props</loc>
+    <loc>https://silverpointweb.vercel.app/docs/props</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/docs/interaction</loc>
+    <loc>https://silverpointweb.vercel.app/docs/interaction</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/docs/export</loc>
+    <loc>https://silverpointweb.vercel.app/docs/export</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/docs/dashboard</loc>
+    <loc>https://silverpointweb.vercel.app/docs/dashboard</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/docs/ssr</loc>
+    <loc>https://silverpointweb.vercel.app/docs/ssr</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/docs/accessibility</loc>
+    <loc>https://silverpointweb.vercel.app/docs/accessibility</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/docs/tailwind</loc>
+    <loc>https://silverpointweb.vercel.app/docs/tailwind</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/docs/ui</loc>
+    <loc>https://silverpointweb.vercel.app/docs/ui</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/packages</loc>
+    <loc>https://silverpointweb.vercel.app/packages</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/versions</loc>
+    <loc>https://silverpointweb.vercel.app/versions</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/support</loc>
+    <loc>https://silverpointweb.vercel.app/support</loc>
   </url>
   <url>
-    <loc>https://silverpoint-web.vercel.app/about</loc>
+    <loc>https://silverpointweb.vercel.app/about</loc>
   </url>
 </urlset>

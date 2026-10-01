@@ -2,12 +2,13 @@
 
 The site is frontend-only: ``enable_state=False`` compiles it without a Reflex backend, so it is
 exported with ``reflex export --frontend-only`` and served as static files by Vercel. Every control
-(framework tabs, the gallery's ground selectors) lives in client-side state.
+(framework tabs, the gallery's ground selectors) is a silverpoint UI component driven by client-side
+state.
 """
 
 import reflex as rx
 
-from .pages import charts, docs, gallery, home, project
+from .pages import charts, components, docs, gallery, home, project, ui_docs
 
 app = rx.App(
     enable_state=False,
@@ -29,5 +30,7 @@ app = rx.App(
 home.register(app)
 gallery.register(app)
 charts.register(app)
+components.register(app)
 docs.register(app)
+ui_docs.register(app)
 project.register(app)

@@ -8,7 +8,7 @@ authors = [{ name = "Ernesto Crespo", email = "ecrespo@gmail.com" }]
 license = { text = "MIT" }
 dependencies = [
     "reflex>=0.9.12",
-    "reflex-silverpoint-react>=0.2.0",
+    "reflex-silverpoint-react>=0.3.0",
 ]
 
 [dependency-groups]

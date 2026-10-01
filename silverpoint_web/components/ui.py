@@ -1,10 +1,15 @@
-"""Small building blocks drawn in the site's paper style."""
+"""Small building blocks drawn in the site's paper style.
+
+The site's own controls are silverpoint's UI components (reflex-silverpoint-react 0.3): the code
+tabs are an ``sp_tabs``, the callouts ``sp_alert``, the gallery's controls ``sp_segmented``, the
+pills ``sp_tag``. They are driven by client-side state (``ClientStateVar``), as the site has no backend.
+"""
 
 from typing import Any
 
 import reflex as rx
 from reflex.experimental.client_state import ClientStateVar
-from reflex_silverpoint_react import PropDoc
+from reflex_silverpoint_react import PropDoc, sp_alert, sp_segmented, sp_tab_panel, sp_tabs, sp_tag, ui_item
 
 #: The framework the reader picked. One value for the whole page, so every code tab follows it.
 FRAMEWORK = ClientStateVar.create("sp_framework", "react")
@@ -73,32 +78,37 @@ def shell(command: str) -> rx.Component:
 def framework_tabs(codes: dict[str, str], installs: dict[str, str] | None = None) -> rx.Component:
     """The same example in each framework, following the page-wide framework choice."""
     available = [(key, label) for key, label in FRAMEWORK_TABS if key in codes]
-    return rx.tabs.root(
-        rx.tabs.list(
-            *[rx.tabs.trigger(label, value=key, class_name="spw-tab") for key, label in available],
-            class_name="spw-tabs-list",
-        ),
+    return sp_tabs(
         *[
-            rx.tabs.content(
+            sp_tab_panel(
                 shell(installs[key]) if installs and key in installs else rx.fragment(),
                 code_block(codes[key], LANG_LABEL.get(key, key)),
                 value=key,
             )
             for key, _ in available
         ],
+        items=[ui_item(key, label) for key, label in available],
+        label="Framework",
         value=FRAMEWORK.value,
         on_change=FRAMEWORK.set_value,
+        size="sm",
         class_name="spw-tabs",
     )
 
 
+#: The site's callout kinds as sp_alert kinds. Every callout is a ``status`` (info / success), not
+#: an ``alert``: they are part of the page, not news, so nothing is announced on load.
+CALLOUT_KINDS = {"note": "info", "tip": "success", "warn": "info", "bug": "info"}
+CALLOUT_TITLES = {"note": "Note", "tip": "Tip", "warn": "Mind this", "bug": "Report it"}
+
+
 def callout(*children: Any, kind: str = "note") -> rx.Component:
-    icon = {"note": "feather", "tip": "lightbulb", "warn": "triangle-alert", "bug": "bug"}.get(
-        kind, "feather"
-    )
-    return rx.el.aside(
-        rx.icon(icon, size=18, class_name="spw-callout-icon"),
-        rx.el.div(*children),
+    """A note in the text, drawn as an ``sp_alert``."""
+    return sp_alert(
+        rx.el.span(*children),
+        kind=CALLOUT_KINDS.get(kind, "info"),
+        title=CALLOUT_TITLES.get(kind, "Note"),
+        size="sm",
         class_name=f"spw-callout spw-callout-{kind}",
     )
 
@@ -156,21 +166,29 @@ def table(head: list[str], rows: list[list[Any]]) -> rx.Component:
     )
 
 
+#: Tone of an ``sp_tag`` per pill kind: the darker the tone, the more it matters.
+PILL_TONES = {"spw-pill-latest": 4, "spw-pill-adapter": 3, "spw-pill-required": 2, "spw-pill-optional": 1}
+
+
 def pill(text: str, kind: str = "") -> rx.Component:
-    return rx.el.span(text, class_name=f"spw-pill {kind}".strip())
+    """A small label, drawn as an ``sp_tag``."""
+    return sp_tag(text, tone=PILL_TONES.get(kind, 1), size="sm", class_name=f"spw-pill {kind}".strip())
 
 
-def select(label: str, var: ClientStateVar, options: tuple[str, ...] | list[str]) -> rx.Component:
-    control_id = "ctl-" + label.lower().replace(" ", "-")
+def choice(label: str, var: ClientStateVar, options: tuple[str, ...] | list[str]) -> rx.Component:
+    """A client-side choice between a few values, drawn as an ``sp_segmented``."""
     return rx.el.div(
-        rx.el.label(label, html_for=control_id),
-        rx.el.select(
-            *[rx.el.option(o, value=o) for o in options],
-            id=control_id,
+        # SpSegmented names itself with a screen-reader legend; this caption is for the eye only.
+        rx.el.span(label, class_name="spw-choice-label", aria_hidden="true"),
+        sp_segmented(
+            items=[ui_item(o, o) for o in options],
+            label=label,
+            name="ctl-" + label.lower().replace(" ", "-"),
             value=var.value,
             on_change=var.set_value,
+            size="sm",
         ),
-        class_name="spw-control",
+        class_name="spw-choice",
     )
 
 

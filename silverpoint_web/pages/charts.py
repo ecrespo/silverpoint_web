@@ -1,9 +1,10 @@
-"""The chart reference: an index of the 33 charts and one page per chart."""
+"""The chart reference: an index of the charts and one page per chart."""
 
 from collections.abc import Callable
 from urllib.parse import quote
 
 import reflex as rx
+from reflex.experimental.client_state import ClientStateVar
 from reflex_silverpoint_react import CHARTS, COMMON_PROPS, FAMILIES, ChartInfo, download_svg, sp_button
 
 from .. import site_data as sd
@@ -18,6 +19,9 @@ from ..components.ui import (
     table,
 )
 from ..examples import EXAMPLES, codes, import_paths, install_line, live_props
+
+#: The charts that drill down under the consumer's control (``root_id`` in, ``on_root_change`` out).
+DRILLABLE = frozenset({"squarified-treemap", "sunburst-chart"})
 
 
 def issue_url(info: ChartInfo) -> str:
@@ -46,6 +50,10 @@ def chart_page(info: ChartInfo) -> Callable[[], rx.Component]:
     chart_id = f"chart-{info.slug}"
     fw_codes = codes(info)
     imports = import_paths(info)
+    drill: dict = {}
+    if info.slug in DRILLABLE:
+        root = ClientStateVar.create(f"root_{info.factory_name}", None)
+        drill = {"root_id": root.value, "on_root_change": root.set_value}
 
     def render() -> rx.Component:
         return docs_page(
@@ -58,7 +66,7 @@ def chart_page(info: ChartInfo) -> Callable[[], rx.Component]:
                 f" · chart {index + 1} of {len(CHARTS)}.",
             ),
             paper_card(
-                chart_card(info, height=260, id=chart_id, footer_right="silverpoint"),
+                chart_card(info, height=260, id=chart_id, footer_right="silverpoint", **drill),
                 rx.el.div(
                     sp_button(
                         "Download SVG",
@@ -192,6 +200,25 @@ def chart_page(info: ChartInfo) -> Callable[[], rx.Component]:
                     ],
                 ),
                 rx.el.a("Interaction and readouts →", href="/docs/interaction"),
+                rx.fragment(
+                    rx.el.p(
+                        f"{info.chart} also drills down under your control: a click, Enter or Space on a node emits "
+                        "its id (its parent's from the drawn root, null at the top), and you pass it back as the root. "
+                        "The chart above does exactly that.",
+                    ),
+                    table(
+                        ["Framework", "Root in", "Root asked for"],
+                        [
+                            ["React", rx.el.code("rootId"), rx.el.code("onRootChange")],
+                            ["Vue", rx.el.code(":root-id"), rx.el.code("@root-change")],
+                            ["Angular", rx.el.code("[rootId]"), rx.el.code("(rootChange)")],
+                            ["Reflex", rx.el.code("root_id"), rx.el.code("on_root_change")],
+                        ],
+                    ),
+                    rx.el.a("Drill-down & hierarchies →", href="/docs/drill-down"),
+                )
+                if info.slug in DRILLABLE
+                else rx.fragment(),
             ),
             callout(
                 "Found something wrong with ",

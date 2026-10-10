@@ -253,6 +253,218 @@ EXAMPLES: dict[str, Example] = {
             ds.ORBIT_CHART,
             {"marker_key": "markers", "period_key": "period", "title": "Seasonal peaks"},
         ),
+        # ── The second catalog (silverpoint 0.6) ──
+        Example(
+            "histogram-chart",
+            ds.OBSERVATIONS,
+            {"value_key": "minutes", "title": "Reading time", "unit": "min"},
+            note="Bins follow the Freedman–Diaconis rule unless you pass `bins`.",
+        ),
+        Example(
+            "ecdf-chart",
+            ds.OBSERVATIONS,
+            {"value_key": "minutes", "group_key": "device", "title": "Reading time by device", "unit": "min"},
+        ),
+        Example(
+            "box-plot-chart",
+            ds.LATENCIES,
+            {"value_key": "ms", "group_key": "service", "title": "Response time by service", "unit": "ms"},
+            note="Type-7 quartiles and Tukey whiskers, computed in the core.",
+        ),
+        Example(
+            "violin-chart",
+            ds.LATENCIES,
+            {"value_key": "ms", "group_key": "service", "title": "Response time by service", "unit": "ms"},
+        ),
+        Example(
+            "ridgeline-chart",
+            ds.LATENCIES,
+            {"value_key": "ms", "group_key": "service", "title": "Response time by service", "unit": "ms"},
+            note="`group_key` is required: one ridge per group.",
+        ),
+        Example(
+            "beeswarm-chart",
+            ds.OBSERVATIONS,
+            {
+                "value_key": "minutes",
+                "label_key": "reader",
+                "title": "Reading time per reader",
+                "unit": "min",
+            },
+        ),
+        Example(
+            "lollipop-chart",
+            ds.LOLLIPOP,
+            {"x_key": "branch", "value_key": "loans", "title": "Loans by branch"},
+        ),
+        Example(
+            "dumbbell-chart",
+            ds.CLINICS,
+            {
+                "label_key": "clinic",
+                "start_key": "y2024",
+                "end_key": "y2025",
+                "names": ["2024", "2025"],
+                "title": "Patients seen, 2024 and 2025",
+            },
+        ),
+        Example(
+            "slope-chart",
+            ds.CLINICS,
+            {
+                "label_key": "clinic",
+                "start_key": "y2024",
+                "end_key": "y2025",
+                "names": ["2024", "2025"],
+                "title": "Patients seen, 2024 to 2025",
+            },
+        ),
+        Example(
+            "bump-chart",
+            ds.BUMP,
+            {
+                "x_key": "season",
+                "series_key": "team",
+                "value_key": "points",
+                "title": "League rank by season",
+            },
+            note="One row per team and season; the ranks are computed from `value_key`.",
+        ),
+        Example(
+            "error-bar-chart",
+            ds.ERROR_BAR,
+            {
+                "label_key": "arm",
+                "estimate_key": "effect",
+                "low_key": "low",
+                "high_key": "high",
+                "title": "Effect by trial arm",
+            },
+        ),
+        Example(
+            "interval-chart",
+            ds.INTERVAL,
+            {
+                "lane_key": "crew",
+                "start_key": "from",
+                "end_key": "to",
+                "label_key": "task",
+                "axis": "date",
+                "title": "Crew schedule",
+            },
+            note='`axis="date"` reads ISO `YYYY-MM-DD` days in UTC.',
+        ),
+        Example(
+            "diverging-bar-chart",
+            ds.LIKERT,
+            {"label_key": "question", "levels": ds.LIKERT_LEVELS, "title": "Customer survey"},
+            note="`levels` is required: the level columns, most negative first.",
+        ),
+        Example(
+            "connected-scatter-chart",
+            ds.CONNECTED_SCATTER,
+            {"x_key": "fare", "y_key": "riders", "label_key": "year", "title": "Fare and ridership"},
+        ),
+        Example(
+            "waffle-chart",
+            ds.WAFFLE,
+            {"name_key": "use", "value_key": "kwh", "title": "Household energy", "unit": "kWh"},
+        ),
+        Example(
+            "marimekko-chart",
+            ds.MARIMEKKO,
+            {
+                "column_key": "region",
+                "segment_key": "channel",
+                "value_key": "sales",
+                "title": "Sales by region",
+            },
+        ),
+        Example(
+            "squarified-treemap",
+            ds.BUDGET,
+            {
+                "id_key": "id",
+                "parent_key": "parent",
+                "label_key": "name",
+                "value_key": "amount",
+                "title": "City budget",
+            },
+            note="One row per node, linked to its parent. Click a node to drill down.",
+        ),
+        Example(
+            "sunburst-chart",
+            ds.BUDGET,
+            {
+                "id_key": "id",
+                "parent_key": "parent",
+                "label_key": "name",
+                "value_key": "amount",
+                "title": "City budget",
+            },
+            note="One row per node, linked to its parent. Click a ring to drill down.",
+        ),
+        Example(
+            "tree-chart",
+            ds.BUDGET,
+            {
+                "id_key": "id",
+                "parent_key": "parent",
+                "label_key": "name",
+                "value_key": "amount",
+                "title": "City budget",
+            },
+        ),
+        Example(
+            "parallel-coordinates-chart",
+            ds.BIKES,
+            {"label_key": "model", "dimensions": ds.BIKE_DIMENSIONS, "title": "Bicycles"},
+            note="`dimensions` is required: the columns, in axis order.",
+        ),
+        Example(
+            "polar-line-chart",
+            ds.POLAR_LINE,
+            {"angle_key": "month", "value_key": "rain", "period": 12, "title": "Rain by month", "unit": "mm"},
+        ),
+        Example(
+            "polar-scatter-chart",
+            ds.POLAR_SCATTER,
+            {"angle_key": "bearing", "radius_key": "distance", "title": "Sightings", "unit": "km"},
+        ),
+        Example(
+            "density-bin-chart",
+            ds.POINT_CLOUD,
+            {"x_key": "x", "y_key": "y", "bin_shape": "hexagon", "title": "Point density"},
+        ),
+        Example(
+            "contour-chart",
+            ds.POINT_CLOUD,
+            {"x_key": "x", "y_key": "y", "source": "points", "title": "Point density"},
+        ),
+        Example(
+            "delaunay-chart",
+            ds.DELAUNAY,
+            {"x_key": "x", "y_key": "y", "label_key": "label", "title": "Stations"},
+            note='`mesh="voronoi"` draws the Voronoi cells instead of the triangulation.',
+        ),
+        Example(
+            "vector-field-chart",
+            ds.VECTOR_FIELD,
+            {"x_key": "x", "y_key": "y", "u_key": "u", "v_key": "v", "title": "Wind field"},
+        ),
+        Example(
+            "network-chart",
+            ds.NETWORK_LINKS,
+            {
+                "source_key": "source",
+                "target_key": "target",
+                "value_key": "weight",
+                "nodes": ds.NETWORK_NODES,
+                "title": "Library network",
+            },
+            note="`data` holds the links; `nodes` names and groups the nodes. The force layout is the same for a "
+            "given `seed`, on the server and in every browser.",
+        ),
     )
 }
 
@@ -327,8 +539,17 @@ def rows_literal(rows: Rows, indent: str, lang: str) -> str:
 # ── The four renderings ──────────────────────────────────────────────────────────────────
 
 
+def _is_rows(value: Any) -> bool:
+    """Whether a prop is rows of data (``nodes``): printed as a constant of its own, like ``data``."""
+    return isinstance(value, list) and bool(value) and isinstance(value[0], dict)
+
+
 def _view_props(example: Example) -> list[tuple[str, Any]]:
     return list(example.props.items())
+
+
+def _row_props(example: Example) -> list[tuple[str, Rows]]:
+    return [(k, v) for k, v in example.props.items() if _is_rows(v)]
 
 
 def react_code(info: ChartInfo, example: Example) -> str:
@@ -341,6 +562,8 @@ def react_code(info: ChartInfo, example: Example) -> str:
     ]
     if example.data is not None:
         lines += [f"const data = {rows_literal(example.data, '', 'js')};", ""]
+    for key, rows in _row_props(example):
+        lines += [f"const {js_name(key)} = {rows_literal(rows, '', 'js')};", ""]
     lines += [
         "export default function App() {",
         "  return (",
@@ -351,9 +574,12 @@ def react_code(info: ChartInfo, example: Example) -> str:
         lines.append("        data={data}")
     for key, value in _view_props(example):
         js = js_name(key)
-        lines.append(
-            f'        {js}="{value}"' if isinstance(value, str) else f"        {js}={{{js_value(value)}}}"
-        )
+        if _is_rows(value):
+            lines.append(f"        {js}={{{js}}}")
+        elif isinstance(value, str):
+            lines.append(f'        {js}="{value}"')
+        else:
+            lines.append(f"        {js}={{{js_value(value)}}}")
     lines += ["      />", "    </div>", "  );", "}"]
     return "\n".join(lines)
 
@@ -368,12 +594,16 @@ def vue_code(info: ChartInfo, example: Example) -> str:
     ]
     if example.data is not None:
         lines += ["", f"const data = {rows_literal(example.data, '', 'js')};"]
+    for key, rows in _row_props(example):
+        lines += ["", f"const {js_name(key)} = {rows_literal(rows, '', 'js')};"]
     lines += ["</script>", "", "<template>", '  <div style="width: 480px">', f"    <{name}"]
     if example.data is not None:
         lines.append('      :data="data"')
     for key, value in _view_props(example):
         attr = kebab(js_name(key))
-        if isinstance(value, str):
+        if _is_rows(value):
+            lines.append(f'      :{attr}="{js_name(key)}"')
+        elif isinstance(value, str):
             lines.append(f'      {attr}="{value}"')
         else:
             lines.append(f'      :{attr}="{js_value(value)}"')
@@ -403,13 +633,17 @@ def angular_code(info: ChartInfo, example: Example) -> str:
         lines.append('        [data]="data"')
     for key, value in _view_props(example):
         js = js_name(key)
-        if isinstance(value, str):
+        if _is_rows(value):
+            lines.append(f'        [{js}]="{js}"')
+        elif isinstance(value, str):
             lines.append(f'        {js}="{value}"')
         else:
             lines.append(f'        [{js}]="{js_value(value)}"')
     lines += ["      />", "    </div>", "  `,", "})", "export class App {"]
     if example.data is not None:
         lines.append(f"  protected readonly data = {rows_literal(example.data, '  ', 'js')};")
+    for key, rows in _row_props(example):
+        lines.append(f"  protected readonly {js_name(key)} = {rows_literal(rows, '  ', 'js')};")
     lines.append("}")
     return "\n".join(lines)
 
@@ -419,11 +653,13 @@ def reflex_code(info: ChartInfo, example: Example) -> str:
     lines = ["import reflex as rx", f"from reflex_silverpoint_react import {fn}", ""]
     if example.data is not None:
         lines += [f"DATA = {rows_literal(example.data, '', 'py')}", ""]
+    for key, rows in _row_props(example):
+        lines += [f"{key.upper()} = {rows_literal(rows, '', 'py')}", ""]
     lines += ["", "def index() -> rx.Component:", "    return rx.box(", f"        {fn}("]
     if example.data is not None:
         lines.append("            data=DATA,")
     for key, value in _view_props(example):
-        lines.append(f"            {key}={py_value(value)},")
+        lines.append(f"            {key}={key.upper() if _is_rows(value) else py_value(value)},")
     lines += [
         "        ),",
         '        width="480px",',

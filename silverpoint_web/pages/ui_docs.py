@@ -407,7 +407,7 @@ def ui_docs():
                 "In Reflex",
                 [
                     rx.el.p(
-                        "reflex-silverpoint-react 0.3 wraps all 17: ",
+                        "reflex-silverpoint-react 0.6 wraps all 17: ",
                         *[
                             item
                             for i, info in enumerate(UI_COMPONENTS)

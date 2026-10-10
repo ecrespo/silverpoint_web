@@ -491,14 +491,14 @@ wheels = [
 
 [[package]]
 name = "reflex-silverpoint-react"
-version = "0.3.0"
+version = "0.6.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "reflex" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/d7/d5/f6652864b6f548e328892ab3feb8e4307e8c3adabc90ea94d882ef676a82/reflex_silverpoint_react-0.3.0.tar.gz", hash = "sha256:a79825b72d32bdec090ec251f8b69374b1d447dd9568b0ee1867d0c2f5319961", size = 53586, upload-time = "2026-10-01T10:38:37.158Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/56/74/b84f07e1b6495e2d59ca3de804ac0b2b4b84d9d56eadf1ed59b384dac330/reflex_silverpoint_react-0.6.0.tar.gz", hash = "sha256:ff85461d4f22c148cec00eb4b0114bcb3a7fc34bb5331c3099f5bb37a142c0bb", size = 71429, upload-time = "2026-10-10T20:24:45.854Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/65/53/fd5ab4e59b149e1326d8844b2c07e677a4d09e79e8a4434752e12c762af6/reflex_silverpoint_react-0.3.0-py3-none-any.whl", hash = "sha256:ce1bb966e2d0e6f9af16f9658a125d378a80c78d5960ff31737bdfc45514b04b", size = 52960, upload-time = "2026-10-01T10:38:35.837Z" },
+    { url = "https://files.pythonhosted.org/packages/ca/57/820fa25bfea29e57108eb0fd6e9900a301e1e0ada040360e829b2bbb6c96/reflex_silverpoint_react-0.6.0-py3-none-any.whl", hash = "sha256:8c0e1d617fd0c9ecb7da708b5d70482682224ef5e2b0800ebf5b58be33263edf", size = 65584, upload-time = "2026-10-10T20:24:44.125Z" },
 ]
 
 [[package]]
@@ -556,7 +556,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "reflex", specifier = ">=0.9.12" },
-    { name = "reflex-silverpoint-react", specifier = ">=0.3.0" },
+    { name = "reflex-silverpoint-react", specifier = ">=0.6.0" },
 ]
 
 [package.metadata.requires-dev]

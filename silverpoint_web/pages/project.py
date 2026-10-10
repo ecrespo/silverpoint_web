@@ -303,7 +303,7 @@ def support() -> rx.Component:
                     " and the default ground: it tells a drawing problem from a data problem.",
                 ),
                 rx.el.li(
-                    "Read the console: silverpoint's development warnings carry a code (SP001…SP016) that says what it did."
+                    "Read the console: silverpoint's development warnings carry a code (SP001…SP022) that says what it did."
                 ),
                 rx.el.li(
                     "Reduce it to the smallest code that shows it: one chart or component, a few rows of data."

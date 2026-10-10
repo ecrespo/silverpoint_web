@@ -70,6 +70,35 @@ class Release:
 
 VERSIONS: tuple[Release, ...] = (
     Release(
+        version="0.6.0",
+        date="2026-10-10",
+        summary="The second catalog: 27 new charts (60 in all) for distributions, comparisons, hierarchies, "
+        "fields and networks, with drill-down.",
+        highlights=(
+            "Distributions & comparisons (14): HistogramChart, EcdfChart, BoxPlotChart, ViolinChart, RidgelineChart, "
+            "BeeswarmChart, LollipopChart, DumbbellChart, SlopeChart, BumpChart, ErrorBarChart, IntervalChart, "
+            "DivergingBarChart and ConnectedScatterChart.",
+            "Hierarchies & dimensions (8): WaffleChart, MarimekkoChart, SquarifiedTreemap, SunburstChart, TreeChart, "
+            "ParallelCoordinatesChart, PolarLineChart and PolarScatterChart.",
+            "Fields & networks (5): DensityBinChart, ContourChart, DelaunayChart, VectorFieldChart and NetworkChart "
+            "(with the NetworkNode type).",
+            "Statistics derived in the core: Freedman–Diaconis bins, type-7 quartiles, Tukey whiskers, Epanechnikov "
+            "densities, a deterministic beeswarm packing, ranks for the bump chart. Each chart has a derived data "
+            "table and one heightened mark.",
+            "Owned layouts and engines: stratify, squarify (Bruls et al.), partition, the Buchheim tidy tree, marching "
+            "squares, Bowyer–Watson with exact predicates and a seeded Fruchterman–Reingold force layout.",
+            "Controlled drill-down on SquarifiedTreemap and SunburstChart: rootId in, onRootChange / @root-change / "
+            "(rootChange) out. The chart keeps no root of its own, so a server render is the client's.",
+            "Hierarchy charts walk as a WAI-ARIA tree by keyboard and announce each node's path, value and share.",
+            "RidgelineChart requires groupKey, DivergingBarChart levels and ParallelCoordinatesChart dimensions.",
+            "Recipes on a new subpath, @silverpoint/core/catalog; diagnostics SP020 (invalid hierarchy), SP021 "
+            "(invalid statistic parameter) and SP022 (group too small).",
+            "No change to the rendered output of the first 33 charts; each one-chart build stays within 0.1 KB.",
+            "There is no 0.4 or 0.5 on npm: the packages went from 0.3.0 straight to 0.6.0.",
+        ),
+        reflex="0.6.0",
+    ),
+    Release(
         version="0.3.0",
         date="2026-09-30",
         summary="17 UI components drawn as the charts are: buttons, inputs, tabs, cards, alerts and more.",
@@ -159,7 +188,7 @@ PACKAGES: tuple[Package, ...] = (
     Package(
         "@silverpoint/react",
         "React adapter",
-        "React 18.2+ and 19 components: one subpath per chart, the 17 UI components on /ui, and server entry points for React Server Components.",
+        "React 18.2+ and 19 components: one subpath per chart (60), the 17 UI components on /ui, and server entry points for React Server Components.",
         "adapter",
         f"{REPO}/tree/main/packages/react",
     ),
@@ -187,7 +216,7 @@ PACKAGES: tuple[Package, ...] = (
     Package(
         "@silverpoint/core",
         "Engine",
-        "Geometry, scales, interaction and the Inker interface. No DOM, no framework. Installed by every adapter.",
+        "Geometry, scales, interaction and the Inker interface; the second catalog's recipes on /catalog. No DOM, no framework. Installed by every adapter.",
         "required",
         f"{REPO}/tree/main/packages/core",
     ),
@@ -291,4 +320,10 @@ FAMILY_BLURBS: dict[str, str] = {
     "Points & grids": "Points on two scales, bubbles, heatmaps, treemaps and a calendar grid.",
     "Flows": "Quantities moving between categories: Sankey bands and a chord ring.",
     "Radial": "Everything drawn around a centre, from donuts and gauges to wind roses, volvelles and orbits.",
+    "Distributions & comparisons": "New in 0.6. Statistics derived in the core (bins, quartiles, densities, ranks) "
+    "and the charts that compare two values, two years or a whole field of them.",
+    "Hierarchies & dimensions": "New in 0.6. Trees as rectangles, rings and tidy branches, drilled down under your "
+    "control; parts of a whole, many dimensions at once, and lines and points around a circle.",
+    "Fields & networks": "New in 0.6. Point clouds counted in bins or drawn as contours, triangulations, vector "
+    "fields and a seeded force-laid network.",
 }

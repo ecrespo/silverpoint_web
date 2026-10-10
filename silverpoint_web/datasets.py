@@ -3,8 +3,14 @@
 Values are the ones in ``packages/core/src/charts/*/demo.ts`` of the silverpoint repository.
 ``WIND_ROSE`` is the real record silverpoint ships: 742 hourly METAR reports of wind at
 Des Moines International Airport, March 2024 (Iowa Environmental Mesonet).
+
+The datasets of the second catalog (silverpoint 0.6) are larger, so they live in
+``datasets_0_6.json``, copied from ``@silverpoint/core@0.6.0`` (as in the reflex-silverpoint-react demo).
+Several charts share one, as upstream.
 """
 
+import json
+from pathlib import Path
 from typing import Any
 
 Rows = list[dict[str, Any]]
@@ -1047,7 +1053,56 @@ ORBIT_CHART: Rows = [
     },
 ]
 
-#: Every dataset (the activity grid excepted: it is generated), by chart slug.
+# ── The second catalog (silverpoint 0.6) ─────────────────────────────────────────────────
+
+_SECOND_CATALOG: dict[str, Rows] = json.loads((Path(__file__).parent / "datasets_0_6.json").read_text())
+
+#: Reading times and devices: the histogram, the ECDF and the beeswarm.
+OBSERVATIONS: Rows = _SECOND_CATALOG["observations"]
+#: Response times per service: the box plot, the violin and the ridgeline.
+LATENCIES: Rows = _SECOND_CATALOG["latencies"]
+#: Loans per library branch: the lollipop.
+LOLLIPOP: Rows = _SECOND_CATALOG["lollipop"]
+#: Two years per clinic: the dumbbell and the slope chart.
+CLINICS: Rows = _SECOND_CATALOG["clinics"]
+#: Points per team and season: the bump chart.
+BUMP: Rows = _SECOND_CATALOG["bump"]
+#: Effect estimates with their intervals: the error bars.
+ERROR_BAR: Rows = _SECOND_CATALOG["error_bar"]
+#: Crew tasks with ISO start and end days: the interval chart.
+INTERVAL: Rows = _SECOND_CATALOG["interval"]
+#: Survey answers per Likert level: the diverging bars.
+LIKERT: Rows = _SECOND_CATALOG["likert"]
+#: Fare and ridership per year: the connected scatter.
+CONNECTED_SCATTER: Rows = _SECOND_CATALOG["connected_scatter"]
+#: A city budget as a hierarchy (``id``, ``parent``): the squarified treemap, the sunburst and the tree.
+BUDGET: Rows = _SECOND_CATALOG["budget"]
+#: Household energy by use: the waffle.
+WAFFLE: Rows = _SECOND_CATALOG["waffle"]
+#: Sales by region and channel: the Marimekko.
+MARIMEKKO: Rows = _SECOND_CATALOG["marimekko"]
+#: Thirty bicycles on five dimensions: the parallel coordinates.
+BIKES: Rows = _SECOND_CATALOG["bikes"]
+#: Rain by month (0-11): the polar line.
+POLAR_LINE: Rows = _SECOND_CATALOG["polar_line"]
+#: Bearings and distances: the polar scatter.
+POLAR_SCATTER: Rows = _SECOND_CATALOG["polar_scatter"]
+#: An x-y point cloud: the density bins and the contours.
+POINT_CLOUD: Rows = _SECOND_CATALOG["point_cloud"]
+#: Labelled x-y points: the Delaunay triangulation and the Voronoi cells.
+DELAUNAY: Rows = _SECOND_CATALOG["delaunay"]
+#: A regular grid of (u, v) vectors: the vector field.
+VECTOR_FIELD: Rows = _SECOND_CATALOG["vector_field"]
+#: The weighted links of the network.
+NETWORK_LINKS: Rows = _SECOND_CATALOG["network_links"]
+#: The nodes of the network, with their groups.
+NETWORK_NODES: Rows = _SECOND_CATALOG["network_nodes"]
+
+#: The Likert levels of the diverging bar chart, most negative first.
+LIKERT_LEVELS = ["Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"]
+#: The dimensions of the parallel coordinates, in axis order.
+BIKE_DIMENSIONS = ["mass", "gears", "price", "range", "rating"]
+
 # One day of a service, every two hours. Every row has an ``hour``: the field the dashboards link on.
 OPS_HOURLY: Rows = [
     {"hour": "00", "hits": 18, "errors": 2, "p50": 110, "p95": 190, "load": 22},
@@ -1064,6 +1119,7 @@ OPS_HOURLY: Rows = [
     {"hour": "22", "hits": 41, "errors": 4, "p50": 127, "p95": 220, "load": 47},
 ]
 
+#: Every dataset (the activity grid excepted: it is generated), by chart slug.
 DATASETS: dict[str, Rows] = {
     "line-chart": LINE_CHART,
     "step-chart": STEP_CHART,
@@ -1095,6 +1151,33 @@ DATASETS: dict[str, Rows] = {
     "wind-rose": WIND_ROSE,
     "volvelle-chart": VOLVELLE_CHART,
     "orbit-chart": ORBIT_CHART,
+    "histogram-chart": OBSERVATIONS,
+    "ecdf-chart": OBSERVATIONS,
+    "box-plot-chart": LATENCIES,
+    "violin-chart": LATENCIES,
+    "ridgeline-chart": LATENCIES,
+    "beeswarm-chart": OBSERVATIONS,
+    "lollipop-chart": LOLLIPOP,
+    "dumbbell-chart": CLINICS,
+    "slope-chart": CLINICS,
+    "bump-chart": BUMP,
+    "error-bar-chart": ERROR_BAR,
+    "interval-chart": INTERVAL,
+    "diverging-bar-chart": LIKERT,
+    "connected-scatter-chart": CONNECTED_SCATTER,
+    "waffle-chart": WAFFLE,
+    "marimekko-chart": MARIMEKKO,
+    "squarified-treemap": BUDGET,
+    "sunburst-chart": BUDGET,
+    "tree-chart": BUDGET,
+    "parallel-coordinates-chart": BIKES,
+    "polar-line-chart": POLAR_LINE,
+    "polar-scatter-chart": POLAR_SCATTER,
+    "density-bin-chart": POINT_CLOUD,
+    "contour-chart": POINT_CLOUD,
+    "delaunay-chart": DELAUNAY,
+    "vector-field-chart": VECTOR_FIELD,
+    "network-chart": NETWORK_LINKS,
 }
 
 #: The field names each dataset uses, as the chart props that name them.

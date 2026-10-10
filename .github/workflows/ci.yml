@@ -48,4 +48,4 @@ jobs:
       - name: Build the static site
         run: bash build_local.sh
       - name: Every chart has a page
-        run: test "$(ls public/charts | grep -c '\.html$')" -ge 33
+        run: test "$(ls public/charts | grep -c '\.html$')" -ge 60

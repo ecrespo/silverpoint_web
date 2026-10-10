@@ -4,6 +4,7 @@ from collections.abc import Callable
 from typing import Any
 
 import reflex as rx
+from reflex.experimental.client_state import ClientStateVar
 from reflex_silverpoint_react import (
     CHARTS,
     COMMON_PROPS,
@@ -25,6 +26,8 @@ from reflex_silverpoint_react import (
     sp_button,
     sp_input,
     sp_switch,
+    squarified_treemap,
+    sunburst_chart,
     tooltip_template,
     ui_demo,
 )
@@ -532,6 +535,89 @@ dashboard(
 # ── Live pieces ──────────────────────────────────────────────────────────────────────────
 
 
+DRILL_CODE = {
+    "react": """import { useState } from 'react';
+import { SquarifiedTreemap } from '@silverpoint/react/squarified-treemap';
+import { SunburstChart } from '@silverpoint/react/sunburst-chart';
+
+// One row per node: { id, parent, name, amount }; the root's parent is null.
+export function Budget({ data }: { data: Node[] }) {
+  const [root, setRoot] = useState<string | null>(null);
+  const keys = { idKey: 'id', parentKey: 'parent', labelKey: 'name', valueKey: 'amount' } as const;
+  return (
+    <>
+      <SquarifiedTreemap data={data} {...keys} rootId={root} onRootChange={setRoot} title="City budget" />
+      <SunburstChart data={data} {...keys} rootId={root} onRootChange={setRoot} title="City budget" />
+    </>
+  );
+}""",
+    "vue": """<script setup lang="ts">
+import { ref } from 'vue';
+import { SpSquarifiedTreemap } from '@silverpoint/vue/squarified-treemap';
+import { SpSunburstChart } from '@silverpoint/vue/sunburst-chart';
+
+defineProps<{ data: Node[] }>();
+const root = ref<string | null>(null);
+</script>
+
+<template>
+  <SpSquarifiedTreemap
+    :data="data" id-key="id" parent-key="parent" label-key="name" value-key="amount"
+    :root-id="root" @root-change="root = $event" title="City budget"
+  />
+  <SpSunburstChart
+    :data="data" id-key="id" parent-key="parent" label-key="name" value-key="amount"
+    :root-id="root" @root-change="root = $event" title="City budget"
+  />
+</template>""",
+    "angular": """import { Component, input, signal } from '@angular/core';
+import { SpSquarifiedTreemap } from '@silverpoint/angular/squarified-treemap';
+import { SpSunburstChart } from '@silverpoint/angular/sunburst-chart';
+
+@Component({
+  selector: 'app-budget',
+  imports: [SpSquarifiedTreemap, SpSunburstChart],
+  template: `
+    <sp-squarified-treemap
+      [data]="data()" idKey="id" parentKey="parent" labelKey="name" valueKey="amount"
+      [rootId]="root()" (rootChange)="root.set($event)" title="City budget"
+    />
+    <sp-sunburst-chart
+      [data]="data()" idKey="id" parentKey="parent" labelKey="name" valueKey="amount"
+      [rootId]="root()" (rootChange)="root.set($event)" title="City budget"
+    />
+  `,
+})
+export class Budget {
+  readonly data = input.required<Node[]>();
+  protected readonly root = signal<string | null>(null);
+}""",
+    "reflex": """import reflex as rx
+from reflex_silverpoint_react import squarified_treemap, sunburst_chart
+
+
+class Budget(rx.State):
+    root: str | None = None
+
+    @rx.event
+    def drill(self, node_id: str | None):
+        self.root = node_id
+
+
+KEYS = {"id_key": "id", "parent_key": "parent", "label_key": "name", "value_key": "amount"}
+
+rx.hstack(
+    squarified_treemap(data=ROWS, **KEYS, root_id=Budget.root, on_root_change=Budget.drill),
+    sunburst_chart(data=ROWS, **KEYS, root_id=Budget.root, on_root_change=Budget.drill),
+)""",
+}
+
+#: The root both drill-down charts of /docs/drill-down draw, held in the browser (no backend).
+DRILL_ROOT = ClientStateVar.create("drill_root", None)
+
+HIERARCHY_KEYS = {"id_key": "id", "parent_key": "parent", "label_key": "name", "value_key": "amount"}
+
+
 def live(*children: Any) -> rx.Component:
     return paper_card(*children, class_name="spw-live")
 
@@ -656,6 +742,13 @@ def overview() -> Callable[[], rx.Component]:
                                 "Dashboard: a responsive, linkable grid laid out from plain data",
                             ],
                             [
+                                "Drill-down",
+                                rx.el.span(
+                                    "New in 0.6: SquarifiedTreemap and SunburstChart, ",
+                                    rx.el.a("under your control", href="/docs/drill-down"),
+                                ),
+                            ],
+                            [
                                 "UI components",
                                 rx.el.span(
                                     f"{len(UI_COMPONENTS)}, new in 0.3: buttons, inputs, tabs, cards, alerts… ",
@@ -725,6 +818,10 @@ def overview() -> Callable[[], rx.Component]:
                             ".",
                         ),
                         rx.el.li(rx.el.a("Gallery", href="/gallery"), f" — the {len(CHARTS)} charts, live."),
+                        rx.el.li(
+                            rx.el.a("Drill-down & hierarchies", href="/docs/drill-down"),
+                            " — the treemap and the sunburst of 0.6, drilled down under your control.",
+                        ),
                         rx.el.li(
                             rx.el.a("Chart reference", href="/charts"), " — props and code for each chart."
                         ),
@@ -1332,6 +1429,13 @@ def interaction() -> Callable[[], rx.Component]:
                                 c("on_select"),
                             ],
                             [
+                                "Drill-down (treemap, sunburst)",
+                                c("onRootChange"),
+                                c("@root-change"),
+                                c("(rootChange)"),
+                                c("on_root_change"),
+                            ],
+                            [
                                 "Custom readout",
                                 c("tooltip={fn}"),
                                 c("#tooltip slot"),
@@ -1449,6 +1553,122 @@ def dashboards() -> Callable[[], rx.Component]:
                     )
                 ],
             ),
+        ],
+        eyebrow="Concepts",
+    )
+
+
+def drill_down() -> Callable[[], rx.Component]:
+    shared = {
+        **HIERARCHY_KEYS,
+        "root_id": DRILL_ROOT.value,
+        "on_root_change": DRILL_ROOT.set_value,
+        "height": 300,
+    }
+    return page(
+        "/docs/drill-down",
+        "Drill-down & hierarchies",
+        "New in 0.6. SquarifiedTreemap and SunburstChart drill down under your control: the chart keeps no root of its "
+        "own, it tells you which node was asked for and draws the one you pass back.",
+        [
+            (
+                "live",
+                "Try it",
+                [
+                    rx.el.p(
+                        "Click a rectangle or a ring, or focus a chart and press Enter or Space. Both charts read the "
+                        "same root, so they drill down together. Click the centre of the sunburst, or the frame of "
+                        "the treemap, to go back up."
+                    ),
+                    live(
+                        rx.el.div(
+                            squarified_treemap(
+                                data=ds.BUDGET, title="City budget", id="drill-treemap", **shared
+                            ),
+                            sunburst_chart(
+                                data=ds.BUDGET, title="City budget", id="drill-sunburst", **shared
+                            ),
+                            class_name="spw-grid spw-grid-2",
+                        ),
+                        rx.el.div(
+                            rx.el.span(
+                                "rootId: ",
+                                c(rx.cond(DRILL_ROOT.value, DRILL_ROOT.value, "null")),
+                                class_name="spw-small",
+                            ),
+                            sp_button(
+                                "Back to the top",
+                                on_click=DRILL_ROOT.set_value(None),
+                                size="sm",
+                                id="drill-reset",
+                            ),
+                            class_name="spw-row",
+                        ),
+                    ),
+                ],
+            ),
+            (
+                "how",
+                "How it works",
+                [
+                    rx.el.ul(
+                        rx.el.li(
+                            "The data is one row per node, linked to its parent: ",
+                            c("idKey"),
+                            ", ",
+                            c("parentKey"),
+                            " (",
+                            c("null"),
+                            " for the root), ",
+                            c("labelKey"),
+                            " and ",
+                            c("valueKey"),
+                            " on the leaves. TreeChart reads the same rows.",
+                        ),
+                        rx.el.li(
+                            "Activating a node emits its id; activating the drawn root emits its parent's id, and ",
+                            c("null"),
+                            " at the top.",
+                        ),
+                        rx.el.li(
+                            "Store it and pass it back as ",
+                            c("rootId"),
+                            ". Without a handler the chart does not drill: there is no hidden state, so a server "
+                            "render with a ",
+                            c("rootId"),
+                            " is exactly the client's.",
+                        ),
+                        rx.el.li(c("depth"), " limits the levels drawn below the root."),
+                        rx.el.li(
+                            "By keyboard the hierarchy walks as a WAI-ARIA tree, and each node is announced with its "
+                            "path, its value and its share of its parent.",
+                        ),
+                        rx.el.li(
+                            "Rows that do not make a valid hierarchy warn SP020 in development.",
+                        ),
+                    )
+                ],
+            ),
+            (
+                "events",
+                "The event",
+                [
+                    table(
+                        ["", "React", "Vue", "Angular", "Reflex"],
+                        [
+                            ["Root in", c("rootId"), c(":root-id"), c("[rootId]"), c("root_id")],
+                            [
+                                "Root asked for",
+                                c("onRootChange"),
+                                c("@root-change"),
+                                c("(rootChange)"),
+                                c("on_root_change"),
+                            ],
+                        ],
+                    ),
+                ],
+            ),
+            ("code", "In your code", [framework_tabs(DRILL_CODE)]),
         ],
         eyebrow="Concepts",
     )
@@ -1637,6 +1857,7 @@ def register(app: rx.App) -> None:
         (interaction(), "/docs/interaction", "Interaction & readouts"),
         (export(), "/docs/export", "Export & imperative handle"),
         (dashboards(), "/docs/dashboard", "Dashboards"),
+        (drill_down(), "/docs/drill-down", "Drill-down & hierarchies"),
         (ssr(), "/docs/ssr", "Server rendering"),
         (accessibility(), "/docs/accessibility", "Accessibility"),
         (tailwind(), "/docs/tailwind", "Tailwind preset"),

@@ -41,6 +41,7 @@ DOCS_NAV: tuple[tuple[str, tuple[tuple[str, str], ...]], ...] = (
             ("/docs/interaction", "Interaction & readouts"),
             ("/docs/export", "Export & imperative handle"),
             ("/docs/dashboard", "Dashboards"),
+            ("/docs/drill-down", "Drill-down & hierarchies"),
             ("/docs/ui", "UI components"),
             ("/docs/ssr", "Server rendering"),
             ("/docs/accessibility", "Accessibility"),

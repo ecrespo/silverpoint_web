@@ -90,6 +90,11 @@ FEATURES: tuple[tuple[str, str, str], ...] = (
 )
 
 
+#: The families of the second catalog (silverpoint 0.6), and its charts.
+NEW_FAMILIES = ("Distributions & comparisons", "Hierarchies & dimensions", "Fields & networks")
+NEW_IN_0_6 = [c for c in CHARTS if c.family in NEW_FAMILIES]
+
+
 def hero_panel() -> rx.Component:
     return rx.el.div(
         rx.el.div(kpi_card(**live_props(chart_by_slug("kpi-card")), height=110), class_name="spw-hero-a"),
@@ -186,7 +191,7 @@ def index() -> rx.Component:
                     "reproduces Renaissance silverpoint: a prepared middle-tone substrate, a fine silver line, tone "
                     "built from hatching, and white heightening reserved for the live value. The second, cyanotype, "
                     "prints a white line on Prussian blue. Since 0.3 the same hand draws buttons, inputs, tabs and "
-                    "alerts too.",
+                    "alerts too, and 0.6 adds a second catalog: distributions, hierarchies, fields and networks.",
                     class_name="spw-hero-lede",
                 ),
                 rx.el.div(
@@ -238,6 +243,40 @@ def index() -> rx.Component:
                 class_name="spw-grid",
             ),
             rx.el.a(f"See all {len(CHARTS)} charts →", href="/gallery", class_name="spw-more"),
+            class_name="spw-home-section",
+        ),
+        rx.el.section(
+            sp_tag("new in 0.6", tone=4, id="home-catalog-new"),
+            rx.el.h2(f"The second catalog: {len(NEW_IN_0_6)} new charts"),
+            rx.el.p(
+                "Histograms, box plots, violins, ridgelines and beeswarms whose statistics the core derives; "
+                "dumbbells, slopes, bumps and diverging bars; squarified treemaps and sunbursts that drill down under "
+                "your control; parallel coordinates, contours, Voronoi cells, vector fields and a seeded force-laid "
+                "network. The same exact geometry, the same hand.",
+                class_name="spw-lede",
+            ),
+            rx.el.div(
+                teaser("box-plot-chart"),
+                teaser("ridgeline-chart", substrate="green"),
+                teaser("sunburst-chart"),
+                teaser("contour-chart", ground="cyanotype"),
+                teaser("parallel-coordinates-chart", substrate="ochre"),
+                teaser("network-chart"),
+                class_name="spw-grid",
+            ),
+            rx.el.div(
+                *[
+                    sp_button(
+                        f"{family} · {sum(1 for c in NEW_IN_0_6 if c.family == family)}",
+                        href=f"/gallery#{family.lower().replace(' & ', '-')}",
+                        size="sm",
+                        id=f"home-family-{family.lower().replace(' & ', '-')}",
+                    )
+                    for family in NEW_FAMILIES
+                ],
+                sp_button("Drill-down", href="/docs/drill-down", size="sm", id="home-drill-down"),
+                class_name="spw-row",
+            ),
             class_name="spw-home-section",
         ),
         rx.el.section(

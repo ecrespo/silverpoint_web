@@ -1,1 +1,0 @@
-import{p as e,r as t,t as n}from"./ui-GkdCDq5g.js";function r({dashboardCell:r,...i}){return n(e(i,t(i,r)),{})}export{r as t};

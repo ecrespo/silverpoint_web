@@ -109,6 +109,87 @@
     <loc>https://silverpointweb.vercel.app/charts/orbit-chart</loc>
   </url>
   <url>
+    <loc>https://silverpointweb.vercel.app/charts/histogram-chart</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/charts/ecdf-chart</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/charts/box-plot-chart</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/charts/violin-chart</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/charts/ridgeline-chart</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/charts/beeswarm-chart</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/charts/lollipop-chart</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/charts/dumbbell-chart</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/charts/slope-chart</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/charts/bump-chart</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/charts/error-bar-chart</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/charts/interval-chart</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/charts/diverging-bar-chart</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/charts/connected-scatter-chart</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/charts/waffle-chart</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/charts/marimekko-chart</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/charts/squarified-treemap</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/charts/sunburst-chart</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/charts/tree-chart</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/charts/parallel-coordinates-chart</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/charts/polar-line-chart</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/charts/polar-scatter-chart</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/charts/density-bin-chart</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/charts/contour-chart</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/charts/delaunay-chart</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/charts/vector-field-chart</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/charts/network-chart</loc>
+  </url>
+  <url>
     <loc>https://silverpointweb.vercel.app/components</loc>
   </url>
   <url>
@@ -197,6 +278,9 @@
   </url>
   <url>
     <loc>https://silverpointweb.vercel.app/docs/dashboard</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/docs/drill-down</loc>
   </url>
   <url>
     <loc>https://silverpointweb.vercel.app/docs/ssr</loc>

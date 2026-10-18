@@ -58,7 +58,13 @@ def packages() -> rx.Component:
                 f" wraps @silverpoint/react and exposes all {len(CHARTS)} charts, the Dashboard, the {len(UI_COMPONENTS)} "
                 "UI components and the provider as Python components for ",
                 ext_link("Reflex", "https://reflex.dev"),
-                ". Source: ",
+                f". Version {sd.REFLEX_LATEST.version} adds, in Reflex only, ",
+                rx.el.a("palettes", href="/docs/palettes"),
+                ", 20 ",
+                rx.el.a("composed components", href="/docs/composed"),
+                " and the Knight Lab ",
+                rx.el.a("timeline", href="/docs/timeline"),
+                "; it requires Reflex 0.10 and Python 3.11+. Source: ",
                 ext_link("ecrespo/reflex-silverpoint-react", sd.REFLEX_REPO),
                 ".",
             ),
@@ -69,7 +75,9 @@ def packages() -> rx.Component:
                 loading="lazy",
             ),
             code_block(
-                "pip install reflex-silverpoint-react\n# or\nuv add reflex-silverpoint-react", "shell"
+                'pip install reflex-silverpoint-react\n# with the timeline\npip install "reflex-silverpoint-react[timeline]"\n'
+                "# or\nuv add reflex-silverpoint-react",
+                "shell",
             ),
         ),
         section(
@@ -165,6 +173,42 @@ def versions() -> rx.Component:
         ),
         *entries,
         section(
+            "reflex",
+            "reflex-silverpoint-react",
+            rx.el.p(
+                "The Reflex component has its own version line. Most of its releases follow the npm release they wrap "
+                "(the Reflex column above); these add something of their own, in Reflex only."
+            ),
+            *[
+                rx.el.div(
+                    rx.el.h3(
+                        ext_link(f"reflex-silverpoint-react {r.version}", r.pypi_url),
+                        pill("latest", "spw-pill-latest") if i == 0 else rx.fragment(),
+                        id=f"reflex-{r.version.replace('.', '-')}",
+                    ),
+                    rx.el.p(
+                        rx.el.time(r.date, date_time=r.date),
+                        f" · wraps @silverpoint/react {r.wraps}",
+                        class_name="spw-muted",
+                    ),
+                    rx.el.p(rx.el.strong(r.summary)),
+                    rx.el.ul(*[rx.el.li(h) for h in r.highlights]),
+                    rx.el.p(
+                        rx.el.a("Palettes", href="/docs/palettes"),
+                        " · ",
+                        rx.el.a("Composed components", href="/docs/composed"),
+                        " · ",
+                        rx.el.a("Timeline", href="/docs/timeline"),
+                        " · ",
+                        ext_link("changelog", f"{sd.REFLEX_REPO}/blob/main/CHANGELOG.md"),
+                        class_name="spw-small",
+                    ),
+                    class_name="spw-release",
+                )
+                for i, r in enumerate(sd.REFLEX_VERSIONS)
+            ],
+        ),
+        section(
             "upgrading",
             "Upgrading",
             rx.el.p(
@@ -181,13 +225,13 @@ def versions() -> rx.Component:
             ),
         ),
         toc_entries=[(f"v{r.version.replace('.', '-')}", f"v{r.version}") for r in sd.VERSIONS]
-        + [("upgrading", "Upgrading")],
+        + [("reflex", "reflex-silverpoint-react"), ("upgrading", "Upgrading")],
         eyebrow="Project",
     )
 
 
 BUG_TEMPLATE = """**Package and version:** @silverpoint/react@{version}
-**Framework and version:** (React 19.x / Vue 3.5.x / Angular 22.x / Reflex 0.9.x)
+**Framework and version:** (React 19.x / Vue 3.5.x / Angular 22.x / Reflex 0.10.x)
 **Integration:** (Vite / Next.js / Angular CLI / Reflex)
 **Chart or UI component:** (e.g. LineChart, SpTabs)
 **Ground / substrate / mode:** (silverpoint / cream / ink)

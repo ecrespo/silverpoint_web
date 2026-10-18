@@ -164,6 +164,50 @@ VERSIONS: tuple[Release, ...] = (
 
 LATEST = VERSIONS[0]
 
+
+@dataclass(frozen=True)
+class ReflexRelease:
+    """One release of reflex-silverpoint-react, which has its own version line."""
+
+    version: str
+    date: str
+    wraps: str  # the @silverpoint/react version it wraps
+    summary: str
+    highlights: tuple[str, ...] = field(default_factory=tuple)
+
+    @property
+    def pypi_url(self) -> str:
+        return f"{REFLEX_PYPI}{self.version}/"
+
+
+#: The Reflex component's releases, newest first. Only those that add something of their own are
+#: described here; the others follow the npm release they wrap (``Release.reflex``).
+REFLEX_VERSIONS: tuple[ReflexRelease, ...] = (
+    ReflexRelease(
+        version="0.7.0",
+        date="2026-10-18",
+        wraps="0.6.0",
+        summary="Reflex-only additions: palettes, 20 composed components and the Knight Lab timeline, on Reflex 0.10.",
+        highlights=(
+            "Reflex 0.10.0, and therefore Python 3.11 or later (Python 3.10 is no longer supported).",
+            "Palettes: palette= on every chart, UI component, dashboard and composed component; silverpoint_palette(...) "
+            "for a whole section; six presets named after drawing media (silverpoint, sanguine, sepia, iron_gall, "
+            "verdigris, indigo) and check_palette() against the contrast thresholds of the data model.",
+            "Composed components, level A (native markup): sp_table (+ sort_rows), sp_pagination, sp_breadcrumb, "
+            "sp_avatar (+ sp_avatar_group), sp_statistic, sp_descriptions, sp_timeline_list, sp_collapse "
+            "(+ sp_collapse_item), sp_empty, sp_result, sp_textarea and sp_input_number.",
+            "Composed components, level B (overlays on Radix primitives): sp_modal, sp_drawer, sp_popover, sp_tooltip, "
+            "sp_select, sp_dropdown_menu and sp_toast (+ sp_toaster), with sp_trigger as their drawn button.",
+            "sp_timeline: Knight Lab TimelineJS drawn in silverpoint, a skin on the ground's colours and type plus the "
+            "ground's own hand-inked frames. Optional extra: reflex-silverpoint-react[timeline].",
+            "sp_surface and sp_glyph: the building blocks, for components of your own.",
+            "Still wraps @silverpoint/react 0.6.0: no change to the 60 charts or the 17 UI components.",
+        ),
+    ),
+)
+
+REFLEX_LATEST = REFLEX_VERSIONS[0]
+
 # ── Packages ─────────────────────────────────────────────────────────────────────────────
 
 
@@ -295,8 +339,9 @@ FRAMEWORKS: tuple[Framework, ...] = (
         label="Reflex (Python)",
         package="reflex-silverpoint-react",
         install="pip install reflex-silverpoint-react",
-        peers="reflex >= 0.9.12 (React 19), Python 3.10+",
-        integration="A Reflex custom component wrapping @silverpoint/react; Reflex installs the npm side for you.",
+        peers="reflex >= 0.10.0 (React 19), Python 3.11+",
+        integration="A Reflex custom component wrapping @silverpoint/react; Reflex installs the npm side for you. "
+        "It adds Reflex-only palettes, composed components and a timeline.",
         create="reflex init",
         run="reflex run",
         prefix="line_chart()",

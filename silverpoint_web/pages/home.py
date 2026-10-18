@@ -348,7 +348,9 @@ def index() -> rx.Component:
                     rx.el.p(
                         f"reflex-silverpoint-react wraps @silverpoint/react as a Reflex custom component: the {len(CHARTS)} "
                         f"charts, the Dashboard, the {len(UI_COMPONENTS)} UI components, the provider, events, custom "
-                        "readouts and SVG export, as Python. This site is built with it.",
+                        "readouts and SVG export, as Python. New in reflex-silverpoint-react "
+                        f"{sd.REFLEX_LATEST.version}: palettes, 20 composed components and the Knight Lab timeline, in "
+                        "Reflex only. This site is built with it.",
                     ),
                     rx.el.div(
                         sp_button("Reflex guide", href="/docs/reflex", id="home-reflex-guide"),

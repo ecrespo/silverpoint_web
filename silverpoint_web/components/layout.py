@@ -49,6 +49,14 @@ DOCS_NAV: tuple[tuple[str, tuple[tuple[str, str], ...]], ...] = (
         ),
     ),
     (
+        "Reflex only",
+        (
+            ("/docs/palettes", "Palettes"),
+            ("/docs/composed", "Composed components"),
+            ("/docs/timeline", "Timeline"),
+        ),
+    ),
+    (
         "Project",
         (
             ("/packages", "Packages on npm & PyPI"),
@@ -249,7 +257,7 @@ def sidebar(current: str) -> rx.Component:
         class_name="spw-side-group",
     )
     return rx.el.nav(
-        *groups[:2], charts, components, groups[2], class_name="spw-sidebar", aria_label="Documentation"
+        *groups[:3], charts, components, groups[3], class_name="spw-sidebar", aria_label="Documentation"
     )
 
 

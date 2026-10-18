@@ -9,6 +9,7 @@ from reflex_silverpoint_react import (
     CHARTS,
     COMMON_PROPS,
     FAMILIES,
+    PALETTES,
     UI_COMPONENTS,
     area_chart,
     bar_chart,
@@ -22,10 +23,12 @@ from reflex_silverpoint_react import (
     kpi_card,
     line_chart,
     meter_chart,
+    silverpoint_palette,
     silverpoint_provider,
     sp_button,
     sp_input,
     sp_switch,
+    sp_table,
     squarified_treemap,
     sunburst_chart,
     tooltip_template,
@@ -33,6 +36,7 @@ from reflex_silverpoint_react import (
 )
 
 from .. import datasets as ds
+from .. import reflex_only as ro
 from .. import site_data as sd
 from .. import ui_examples as ux
 from ..components.layout import docs_page
@@ -1108,7 +1112,12 @@ def framework_guide(key: str) -> Callable[[], rx.Component]:
                         f". It exposes all {len(CHARTS)} charts, the Dashboard (with linking), the {len(UI_COMPONENTS)} UI "
                         "components (sp_button, sp_input, sp_tabs…), the provider, both grounds, the interaction events, "
                         "custom readouts (tooltip_template) and the imperative handle (download_svg, get_svg, get_geometry) "
-                        "as Python.",
+                        "as Python. On top of that it adds, in Reflex only, palettes, "
+                        f"{len(ro.COMPOSED)} composed components and the Knight Lab timeline.",
+                    ),
+                    rx.el.p(
+                        f"reflex-silverpoint-react {sd.REFLEX_LATEST.version} requires Reflex 0.10.0 or later (React 19) "
+                        "and Python 3.11 or later.",
                     ),
                     rx.el.p(
                         "Props are the React props in snake_case: ",
@@ -1124,6 +1133,87 @@ def framework_guide(key: str) -> Callable[[], rx.Component]:
                     callout(
                         "Accessors are field names (strings). The JavaScript API also takes functions; from Python, shape your rows instead.",
                         kind="note",
+                    ),
+                ],
+            ),
+        )
+        sections.insert(
+            2,
+            (
+                "new-0-7",
+                f"New in {sd.REFLEX_LATEST.version}: Reflex only",
+                [
+                    rx.el.p(
+                        "Three things silverpoint's React, Vue and Angular adapters do not have, built in Reflex on "
+                        "silverpoint's own frames, tones and custom properties:"
+                    ),
+                    table(
+                        ["", "What", ""],
+                        [
+                            [
+                                rx.el.strong("Palettes"),
+                                rx.el.span(
+                                    c("palette="),
+                                    " on every chart, UI component, dashboard and composed component, ",
+                                    c("silverpoint_palette"),
+                                    f" for a section, {len(ro.PALETTE_NAMES)} presets and ",
+                                    c("check_palette"),
+                                    ".",
+                                ),
+                                rx.el.a("Palettes →", href="/docs/palettes"),
+                            ],
+                            [
+                                rx.el.strong("Composed components"),
+                                f"{len(ro.COMPOSED)} components: tables, pagination, statistics, collapse… and overlays "
+                                "on Radix primitives (modal, drawer, popover, tooltip, select, menu, toast).",
+                                rx.el.a("Composed components →", href="/docs/composed"),
+                            ],
+                            [
+                                rx.el.strong("Timeline"),
+                                rx.el.span(
+                                    c("sp_timeline"),
+                                    ": Knight Lab TimelineJS drawn in silverpoint (the ",
+                                    c("[timeline]"),
+                                    " extra).",
+                                ),
+                                rx.el.a("Timeline →", href="/docs/timeline"),
+                            ],
+                        ],
+                    ),
+                    shell('pip install "reflex-silverpoint-react[timeline]"'),
+                    code_block(
+                        """from reflex_silverpoint_react import bar_chart, sort_rows, sp_table, silverpoint_palette
+
+silverpoint_palette(
+    bar_chart(data=SALES, x_key="month", value_key="units", title="Units sold"),
+    sp_table(["team", "load"], State.rows, caption="On-call teams", striped=True),
+    palette="sanguine",
+)""",
+                        "python",
+                    ),
+                    live(
+                        silverpoint_palette(
+                            rx.el.div(
+                                bar_chart(
+                                    data=SALES,
+                                    x_key="month",
+                                    value_key="units",
+                                    title="Units sold",
+                                    height=120,
+                                ),
+                                ux.panel(
+                                    sp_table(
+                                        ["team", "load"],
+                                        ro.TEAMS[:4],
+                                        caption="On-call teams",
+                                        striped=True,
+                                    ),
+                                    style={"background": PALETTES["sanguine"].substrate},
+                                ),
+                                class_name="spw-grid spw-grid-2",
+                            ),
+                            palette="sanguine",
+                        )
                     ),
                 ],
             ),

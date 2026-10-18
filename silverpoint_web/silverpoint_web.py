@@ -8,7 +8,7 @@ state.
 
 import reflex as rx
 
-from .pages import charts, components, docs, gallery, home, project, ui_docs
+from .pages import charts, components, docs, gallery, home, project, reflex_docs, ui_docs
 
 app = rx.App(
     enable_state=False,
@@ -32,5 +32,6 @@ gallery.register(app)
 charts.register(app)
 components.register(app)
 docs.register(app)
+reflex_docs.register(app)
 ui_docs.register(app)
 project.register(app)

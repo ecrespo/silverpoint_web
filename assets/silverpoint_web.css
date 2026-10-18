@@ -592,3 +592,59 @@ td > .spw-pill { margin-left: 0; }
 .spw-gh { display: inline-flex; }
 .spw-table td:nth-child(-n+3) code { white-space: nowrap; overflow-wrap: normal; }
 .spw-table .spw-type code { white-space: normal; }
+
+/* ── Reflex only (reflex-silverpoint-react 0.7): palettes, composed components, timeline ── */
+
+.spw-stack { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; min-width: 0; }
+.spw-stack .spw-small { margin: 0; }
+.spw-chip {
+  display: inline-block;
+  margin: 2px 6px 2px 0;
+  font-family: var(--spw-mono);
+  font-size: 0.78rem;
+  padding: 1px 7px;
+  border: 1px solid var(--spw-rule);
+  border-radius: var(--spw-radius);
+  text-decoration: none !important;
+}
+.spw-chip:hover { border-color: var(--spw-ink); }
+.spw-card-wide { grid-column: 1 / -1; }
+.spw-ui-card .spw-ui-sample > .sp-surface { max-width: 100%; }
+.spw-ui-sample .sp-datatable { width: 100%; }
+
+.spw-palette-card { display: flex; flex-direction: column; gap: 10px; }
+.spw-palette-card .spw-row { margin-top: 0; justify-content: space-between; }
+.spw-palette-card .spw-ui-sample { padding: 12px; }
+.spw-palette-card p { margin: 0; }
+.spw-swatches { display: flex; gap: 4px; }
+.spw-swatch {
+  width: 26px;
+  height: 18px;
+  border: 1px solid var(--spw-rule-strong);
+  border-radius: var(--spw-radius);
+}
+
+.spw-color-fields { display: flex; flex-wrap: wrap; gap: 10px 18px; margin: 12px 0; }
+.spw-color-field { display: flex; align-items: center; gap: 8px; font-size: 0.92rem; }
+.spw-color {
+  width: 38px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid var(--spw-rule-strong);
+  border-radius: var(--spw-radius);
+  background: none;
+  cursor: pointer;
+}
+.spw-code-live {
+  font-family: var(--spw-mono);
+  font-size: 0.82rem;
+  padding: 12px 14px;
+  margin: 12px 0;
+  background: var(--spw-substrate);
+  border: 1px solid var(--spw-rule);
+  border-radius: var(--spw-radius);
+  overflow-x: auto;
+}
+.spw-code-live code { background: none; border: 0; padding: 0; }
+
+.spw-timeline-wrap { margin: 12px 0; min-width: 0; }

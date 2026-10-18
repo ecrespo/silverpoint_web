@@ -11,6 +11,8 @@ Documentation site of silverpoint (Reflex, frontend-only, deployed statically on
 - lucide (`rx.icon`) has no brand icons; the GitHub mark is `components.ui.github_icon`.
 - Everything a silverpoint release changes lives in `site_data.py`; chart examples in `examples.py`; UI component
   demos and code in `ui_examples.py` (generated from `UI_DEMOS`).
+- Reflex-only features of reflex-silverpoint-react (palettes, composed components, `sp_timeline`) live in
+  `reflex_only.py` and `pages/reflex_docs.py`; its own releases in `site_data.REFLEX_VERSIONS`.
 - The site's controls are silverpoint UI components (`sp_tabs`, `sp_alert`, `sp_segmented`…) bound to
   `ClientStateVar` (`on_change=VAR.set_value`). Put them on a ground panel (`ui_examples.panel`) for cyanotype.
 - Local build without touching `public/`: `uv run reflex export --frontend-only --zip-dest-dir <dir>`.

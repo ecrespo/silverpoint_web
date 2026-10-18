@@ -1,0 +1,1 @@
+import{r as e,t,x as n}from"./ui-DiPYxMWx.js";function r({dashboardCell:r,...i}){return t(n(i,e(i,r)),{})}export{r as t};

@@ -1,0 +1,1 @@
+import{g as e,i as t,r as n,t as r,v as i}from"./ui-DiPYxMWx.js";function a({value:a,defaultValue:o,onChange:s,dashboardCell:c,...l}){let[u,d]=t(a,o??null,s),f=e(l,n(l,c),{value:u});return r(f,{root:{onKeyDown:e=>i(e,e.currentTarget,`input.sp-ui-native`,`both`,!0)},native:e=>({checked:e.attrs.checked===!0,onChange:e=>d(e.target.value)})})}export{a as t};

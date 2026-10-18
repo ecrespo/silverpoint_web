@@ -1,6 +1,6 @@
 """Small building blocks drawn in the site's paper style.
 
-The site's own controls are silverpoint's UI components (reflex-silverpoint-react 0.6): the code
+The site's own controls are silverpoint's UI components (reflex-silverpoint-react 0.7): the code
 tabs are an ``sp_tabs``, the callouts ``sp_alert``, the gallery's controls ``sp_segmented``, the
 pills ``sp_tag``. They are driven by client-side state (``ClientStateVar``), as the site has no backend.
 """

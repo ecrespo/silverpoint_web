@@ -1,0 +1,489 @@
+import{G as e,J as t,a as n}from"./components-CyVeYEF6.js";import{c as r,v as i}from"./state-DYwSxTbd.js";import{n as a}from"./emotion-react.browser.esm-DfYQqDSh.js";import{t as o}from"./jsx-runtime-DWrbOs0N.js";import{t as s}from"./menu-Cm6T5NeR.js";import{t as c}from"./copy-hAw9aPvT.js";import{en as l}from"./styles-BNm7U_da.js";import{t as u}from"./chunk-JWCVL7VE-DxKGinz8.js";import{t as d}from"./chunk-JPTK2AAT-DPme1cXT.js";import{t as f}from"./chunk-6M4REUJE-B4L_wnS8.js";import{t as p}from"./dist-D_9TApg4.js";import{o as m}from"./ui-DiPYxMWx.js";import{t as h}from"./chunk-M56MDRNT-DCUtI4OJ.js";import{t as g}from"./chunk-QRYI7BEO-CTRCnkI8.js";import{t as _}from"./chunk-43AIURD6-4lL98bP9.js";import{n as v,t as y}from"./chunk-OP2WE7MA-pZsGlPwN.js";import{t as b}from"./chunk-CWFUPKSS-DoZ-joTH.js";import{C as x,Dt as S,Ft as C,G as w,M as T,P as E,R as D,Tt as O,et as k,hn as A,ht as j,in as M,vt as N}from"./docs-C66AJ2WE.js";var P=t(e(),1),F=o(),I=`/*
+ * reflex-silverpoint-react — layout of the Reflex-composed components.
+ *
+ * Only layout and type live here. Every colour is a --sp- custom property and every frame, tone
+ * and heightening comes from @silverpoint/grounds/ui.css through the markup contract
+ * ([part='sp-frame'], [part='sp-tone'], [part~='sp-heighten']), so grounds, substrates, palettes,
+ * precision mode and forced colours apply unchanged.
+ */
+
+.sp-surface { box-sizing: border-box; }
+/* Framed blocks sit on the ground's substrate, so they read on any page (cyanotype included). */
+.sp-surface:is(.sp-datatable, .sp-collapse, .sp-descriptions[data-bordered='true']) { background: var(--sp-substrate); }
+.sp-surface *, .sp-surface *::before, .sp-surface *::after { box-sizing: border-box; }
+
+/* A mark drawn inside any surface (the Sp components' own glyph rule only reaches .sp-ui roots). */
+.sp-surface [part='sp-mark'] {
+  position: relative;
+  flex: none;
+  inline-size: 14px;
+  block-size: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.sp-surface [data-glyph='sortUp'], .sp-surface [data-glyph='sortDown'], .sp-surface [data-glyph='sort'] { fill: currentColor; stroke: none; }
+
+/* A plain drawn button inside a surface: the trigger of overlays, pagination, steppers. */
+.sp-ui-plain-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-block-size: var(--sp-ui-height);
+  padding: 0 14px;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  color: var(--sp-text);
+  font: inherit;
+  font-size: 15px;
+  cursor: pointer;
+}
+.sp-ui-plain-button:disabled { font-style: italic; cursor: not-allowed; }
+.sp-ui-icon-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 28px;
+  block-size: 28px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--sp-text);
+  cursor: pointer;
+}
+
+/* ── Table ─────────────────────────────────────────────────────────────────────────────── */
+.sp-datatable { display: block; padding: 6px 0 8px; font-size: 15px; }
+.sp-ui-table-scroll { position: relative; overflow-x: auto; }
+.sp-ui-table { inline-size: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; color: var(--sp-text); }
+.sp-ui-table caption { padding: 6px 16px 8px; text-align: start; font-size: 17px; font-weight: 500; caption-side: top; }
+.sp-ui-table th {
+  padding: 8px 14px;
+  border-block-end: 1px solid var(--sp-rule);
+  color: var(--sp-text-muted);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-align: start;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.sp-ui-table td { padding: 8px 14px; border-block-end: 1px solid color-mix(in srgb, var(--sp-grid) 45%, transparent); vertical-align: top; }
+.sp-ui-table tbody tr:last-child td { border-block-end: 0; }
+.sp-ui-table [data-align='end'] { text-align: end; }
+.sp-ui-table [data-align='center'] { text-align: center; }
+.sp-datatable[data-size='sm'] .sp-ui-table :is(th, td) { padding: 4px 10px; }
+.sp-datatable[data-size='lg'] .sp-ui-table :is(th, td) { padding: 12px 18px; }
+/* Striping and the row under the pointer are hatched, never filled (Art. 6). */
+.sp-datatable[data-striped='true'] .sp-ui-table tbody tr:nth-child(even),
+.sp-datatable[data-hoverable='true'] .sp-ui-table tbody tr:hover {
+  background-image: repeating-linear-gradient(-45deg, color-mix(in srgb, var(--sp-ink-secondary) 40%, transparent) 0 0.7px, transparent 0.7px 8px);
+  background-attachment: local;
+}
+.sp-datatable[data-mode='precision'] .sp-ui-table tbody tr:is(:nth-child(even), :hover) { background-image: none; }
+.sp-ui-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+}
+.sp-ui-sort [part='sp-mark'] { inline-size: 12px; block-size: 12px; opacity: 0.55; }
+.sp-ui-table th[aria-sort] .sp-ui-sort [part='sp-mark'] { opacity: 1; }
+.sp-ui-table th[aria-sort] { color: var(--sp-text); }
+.sp-ui-table-empty { padding: 18px; color: var(--sp-text-muted); font-style: italic; text-align: center; }
+
+/* ── Pagination ────────────────────────────────────────────────────────────────────────── */
+.sp-pagination { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 15px; }
+.sp-ui-pages { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.sp-ui-page {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: var(--sp-ui-height);
+  min-block-size: var(--sp-ui-height);
+  padding: 0 8px;
+  border: 0;
+  background: transparent;
+  color: var(--sp-text);
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+.sp-ui-page:disabled { color: var(--sp-text-muted); cursor: not-allowed; font-style: italic; }
+span.sp-ui-page { cursor: default; }
+.sp-ui-page-label { position: relative; padding: 0 5px; }
+.sp-ui-page-gap { padding: 0 2px; color: var(--sp-text-muted); }
+.sp-ui-page-total { color: var(--sp-text-muted); font-size: 14px; }
+
+/* ── Breadcrumb ────────────────────────────────────────────────────────────────────────── */
+.sp-breadcrumb { font-size: 15px; }
+.sp-ui-crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 0; margin: 0; padding: 0; list-style: none; }
+.sp-ui-crumb { display: inline-flex; align-items: center; }
+.sp-ui-crumb + .sp-ui-crumb::before { content: '/'; padding: 0 10px; color: var(--sp-rule); }
+.sp-ui-crumb a { color: var(--sp-text-muted); text-decoration: underline; text-decoration-color: var(--sp-rule); text-underline-offset: 3px; }
+.sp-ui-crumb a:hover { color: var(--sp-text); text-decoration-color: currentColor; }
+.sp-ui-crumb [aria-current='page'] { color: var(--sp-text); font-weight: 500; }
+
+/* ── Avatar ────────────────────────────────────────────────────────────────────────────── */
+.sp-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--sp-avatar-size, 40px);
+  block-size: var(--sp-avatar-size, 40px);
+  flex: none;
+  font-size: calc(var(--sp-avatar-size, 40px) * 0.4);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.sp-avatar[data-size='sm'] { --sp-avatar-size: 28px; }
+.sp-avatar[data-size='lg'] { --sp-avatar-size: 56px; }
+.sp-ui-avatar-image { position: absolute; inset: 3px; inline-size: calc(100% - 6px); block-size: calc(100% - 6px); object-fit: cover; border-radius: inherit; }
+.sp-avatar[data-shape='circle'] .sp-ui-avatar-image { border-radius: 50%; }
+.sp-avatar[data-shape='square'] .sp-ui-avatar-image { border-radius: var(--sp-ui-radius); }
+.sp-ui-avatar-initials { position: relative; }
+.sp-ui-avatar-group { display: inline-flex; }
+.sp-ui-avatar-group > .sp-avatar + .sp-avatar { margin-inline-start: -8px; }
+.sp-ui-avatar-group > .sp-avatar { background: var(--sp-substrate); border-radius: 50%; }
+
+/* ── Statistic ─────────────────────────────────────────────────────────────────────────── */
+.sp-statistic { display: inline-flex; flex-direction: column; gap: 4px; }
+.sp-ui-statistic-title { color: var(--sp-text-muted); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+.sp-ui-statistic-value { display: inline-flex; align-items: baseline; gap: 4px; font-size: 32px; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.sp-statistic[data-size='sm'] .sp-ui-statistic-value { font-size: 22px; }
+.sp-statistic[data-size='lg'] .sp-ui-statistic-value { font-size: 44px; }
+.sp-ui-statistic-affix { color: var(--sp-text-muted); font-size: 0.55em; }
+.sp-ui-statistic-trend { display: inline-flex; align-items: center; gap: 4px; color: var(--sp-text-muted); font-size: 14px; font-variant-numeric: tabular-nums; }
+
+/* ── Descriptions ──────────────────────────────────────────────────────────────────────── */
+.sp-descriptions { display: block; }
+.sp-descriptions[data-bordered='true'] { padding: 14px 20px 18px; }
+.sp-ui-descriptions-title { position: relative; margin: 0 0 10px; font-size: 18px; font-weight: 500; }
+.sp-ui-descriptions-list {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--sp-descriptions-columns, 3), minmax(0, 1fr));
+  gap: 12px 24px;
+  margin: 0;
+}
+.sp-ui-descriptions-item { display: flex; flex-direction: column; gap: 2px; min-inline-size: 0; }
+.sp-ui-descriptions-item dt { color: var(--sp-text-muted); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+.sp-ui-descriptions-item dd { margin: 0; font-size: 15px; overflow-wrap: anywhere; }
+@container (max-width: 520px) { .sp-ui-descriptions-list { grid-template-columns: 1fr; } }
+
+/* ── Timeline list ─────────────────────────────────────────────────────────────────────── */
+.sp-timeline-list { display: block; margin: 0; padding: 0; list-style: none; font-size: 15px; }
+.sp-ui-tl-item { position: relative; display: grid; grid-template-columns: 22px 1fr; gap: 0 12px; padding-block-end: 18px; }
+.sp-ui-tl-item:last-child { padding-block-end: 0; }
+.sp-ui-tl-item:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  inset-block: 22px 2px;
+  inset-inline-start: 10.5px;
+  border-inline-start: 1px solid var(--sp-rule);
+}
+.sp-ui-tl-item[data-status='pending']:not(:last-child)::before { border-inline-start-style: dashed; }
+.sp-ui-tl-mark {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 22px;
+  block-size: 22px;
+  border-radius: 50%;
+}
+.sp-ui-tl-mark [part='sp-mark'] { inline-size: 12px; block-size: 12px; }
+.sp-ui-tl-mark [part~='sp-heighten'] { inline-size: 10px; block-size: 10px; border-radius: 50%; }
+.sp-ui-tl-body { display: flex; flex-direction: column; gap: 2px; min-inline-size: 0; }
+.sp-ui-tl-time { color: var(--sp-text-muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+.sp-ui-tl-title { font-weight: 500; }
+.sp-ui-tl-item[data-status='pending'] .sp-ui-tl-title { font-style: italic; font-weight: 400; color: var(--sp-text-muted); }
+.sp-ui-tl-description { color: var(--sp-text-muted); }
+
+/* ── Collapse ──────────────────────────────────────────────────────────────────────────── */
+.sp-collapse { display: block; padding: 4px 0; }
+.sp-ui-collapse-item { position: relative; }
+.sp-ui-collapse-item + .sp-ui-collapse-item { border-block-start: 1px solid var(--sp-rule); }
+.sp-ui-collapse-summary {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  font-size: 16px;
+  font-weight: 500;
+  list-style: none;
+  cursor: pointer;
+}
+.sp-ui-collapse-summary::-webkit-details-marker { display: none; }
+.sp-ui-collapse-summary [part='sp-mark'] { transition: transform 120ms ease-out; }
+.sp-ui-collapse-item[open] > .sp-ui-collapse-summary [part='sp-mark'] { transform: rotate(90deg); }
+.sp-ui-collapse-item[data-disabled='true'] > .sp-ui-collapse-summary { color: var(--sp-text-muted); font-style: italic; cursor: not-allowed; }
+.sp-ui-collapse-body { position: relative; padding: 0 18px 14px 42px; font-size: 15px; }
+@media (prefers-reduced-motion: reduce) { .sp-ui-collapse-summary [part='sp-mark'] { transition: none; } }
+
+/* ── Empty and Result ──────────────────────────────────────────────────────────────────── */
+.sp-empty, .sp-result { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 18px 12px; text-align: center; }
+.sp-ui-empty-figure { position: relative; display: block; inline-size: 64px; block-size: 46px; margin-block-end: 4px; }
+.sp-ui-empty-figure [part='sp-tone'] { inset: 4px; }
+.sp-ui-empty-description { color: var(--sp-text-muted); font-style: italic; }
+.sp-ui-result-mark { position: relative; display: inline-flex; align-items: center; justify-content: center; inline-size: 64px; block-size: 64px; border-radius: 50%; }
+.sp-ui-result-mark [part='sp-mark'] { inline-size: 30px; block-size: 30px; stroke-width: 1.2; }
+.sp-ui-result-title { margin: 6px 0 0; font-size: 22px; font-weight: 500; }
+.sp-ui-result-subtitle { margin: 0; color: var(--sp-text-muted); }
+.sp-ui-result-extra, .sp-ui-empty-extra { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-block-start: 8px; }
+
+/* ── Textarea and InputNumber (on the .sp-input contract) ──────────────────────────────── */
+.sp-textarea .sp-ui-box { align-items: stretch; padding: 8px 10px 8px 12px; }
+.sp-textarea textarea.sp-ui-control { min-block-size: calc(var(--sp-textarea-rows, 3) * 1.5em); line-height: 1.5; resize: vertical; }
+.sp-ui-counter { align-self: flex-end; color: var(--sp-text-muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+.sp-ui-field-label { color: var(--sp-text-muted); font-size: 13px; }
+.sp-input-number .sp-ui-box { padding: 0 2px; }
+.sp-input-number .sp-ui-control { text-align: center; font-variant-numeric: tabular-nums; -moz-appearance: textfield; appearance: textfield; min-inline-size: 4ch; }
+.sp-input-number .sp-ui-control::-webkit-inner-spin-button,
+.sp-input-number .sp-ui-control::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.sp-ui-stepper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: calc(var(--sp-ui-height) - 6px);
+  block-size: calc(var(--sp-ui-height) - 6px);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--sp-text);
+  cursor: pointer;
+}
+.sp-ui-stepper:disabled { color: var(--sp-text-muted); cursor: not-allowed; }
+
+/* ── Overlays ──────────────────────────────────────────────────────────────────────────── */
+.sp-backdrop [part='sp-tone'] { opacity: 0.45; border-radius: 0; }
+.sp-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background-color: color-mix(in srgb, var(--sp-substrate) 72%, transparent);
+}
+.sp-modal, .sp-drawer, .sp-popover, .sp-tooltip, .sp-select-content, .sp-menu, .sp-toast {
+  z-index: 1001;
+  background: var(--sp-substrate);
+  color: var(--sp-text);
+  font-family: var(--sp-font-display);
+}
+.sp-modal {
+  position: fixed;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  transform: translate(-50%, -50%);
+  inline-size: min(var(--sp-modal-width, 520px), calc(100vw - 32px));
+  max-block-size: calc(100vh - 48px);
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px 22px 20px;
+}
+.sp-drawer {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px 22px 20px;
+  overflow: auto;
+}
+.sp-drawer[data-side='right'] { inset-block: 0; inset-inline-end: 0; inline-size: min(var(--sp-drawer-size, 380px), 100vw); }
+.sp-drawer[data-side='left'] { inset-block: 0; inset-inline-start: 0; inline-size: min(var(--sp-drawer-size, 380px), 100vw); }
+.sp-drawer[data-side='top'] { inset-inline: 0; inset-block-start: 0; block-size: min(var(--sp-drawer-size, 320px), 100vh); }
+.sp-drawer[data-side='bottom'] { inset-inline: 0; inset-block-end: 0; block-size: min(var(--sp-drawer-size, 320px), 100vh); }
+.sp-ui-overlay-header { position: relative; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.sp-ui-overlay-title { margin: 0; font-size: 20px; font-weight: 500; }
+.sp-ui-overlay-description { position: relative; margin: 0; color: var(--sp-text-muted); font-size: 15px; }
+.sp-ui-overlay-rule { position: relative; display: block; border-block-start: 1px solid var(--sp-rule); }
+.sp-ui-overlay-body { position: relative; font-size: 15px; }
+.sp-ui-overlay-footer { position: relative; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; margin-block-start: 6px; }
+.sp-popover { position: relative; max-inline-size: min(var(--sp-popover-width, 320px), calc(100vw - 24px)); padding: 12px 16px 14px; display: flex; flex-direction: column; gap: 6px; font-size: 15px; }
+.sp-tooltip { position: relative; max-inline-size: 260px; padding: 4px 10px 5px; font-size: 13px; line-height: 1.35; }
+.sp-select { display: inline-flex; flex-direction: column; gap: 4px; }
+.sp-ui-select-trigger { justify-content: space-between; min-inline-size: var(--sp-select-width, 180px); padding: 0 10px 0 12px; }
+.sp-ui-select-trigger[data-placeholder] .sp-ui-select-value { color: var(--sp-text-muted); font-style: italic; }
+.sp-select-content, .sp-menu { position: relative; min-inline-size: var(--radix-select-trigger-width, 160px); max-block-size: var(--radix-select-content-available-height, 320px); padding: 6px 0; font-size: 15px; overflow: auto; }
+.sp-ui-select-viewport { position: relative; }
+.sp-ui-option, .sp-ui-menu-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px 5px 30px;
+  color: var(--sp-text);
+  outline: none;
+  cursor: pointer;
+  user-select: none;
+}
+.sp-ui-option[data-highlighted], .sp-ui-menu-item[data-highlighted] { outline: 1px solid var(--sp-ink); outline-offset: -3px; background: var(--sp-heighten); }
+.sp-ui-option[data-disabled], .sp-ui-menu-item[data-disabled] { color: var(--sp-text-muted); font-style: italic; cursor: not-allowed; }
+.sp-ui-option-indicator { position: absolute; inset-inline-start: 9px; display: inline-flex; }
+.sp-ui-menu-item[data-danger='true'] { font-style: italic; }
+.sp-ui-menu-label { padding: 6px 14px 2px; color: var(--sp-text-muted); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+.sp-ui-menu-separator { position: relative; block-size: 0; margin: 5px 10px; border-block-start: 1px solid var(--sp-rule); }
+.sp-ui-shortcut { margin-inline-start: auto; padding-inline-start: 16px; color: var(--sp-text-muted); font-size: 13px; }
+.sp-toast-viewport {
+  position: fixed;
+  z-index: 1002;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  inline-size: min(380px, calc(100vw - 32px));
+  max-block-size: 100vh;
+  margin: 0;
+  padding: 16px;
+  list-style: none;
+  outline: none;
+}
+.sp-toast-viewport[data-position='bottom-right'] { inset-block-end: 0; inset-inline-end: 0; }
+.sp-toast-viewport[data-position='bottom-left'] { inset-block-end: 0; inset-inline-start: 0; }
+.sp-toast-viewport[data-position='top-right'] { inset-block-start: 0; inset-inline-end: 0; }
+.sp-toast-viewport[data-position='top-left'] { inset-block-start: 0; inset-inline-start: 0; }
+.sp-toast { position: relative; display: grid; grid-template-columns: auto 1fr auto; align-items: start; gap: 4px 12px; padding: 12px 14px 14px; }
+.sp-toast > [part='sp-mark'] { inline-size: 18px; block-size: 18px; margin-block-start: 2px; }
+.sp-ui-toast-title { position: relative; margin: 0; font-weight: 500; }
+.sp-ui-toast-description { position: relative; grid-column: 2; margin: 0; color: var(--sp-text-muted); font-size: 14px; }
+.sp-ui-toast-action { position: relative; grid-column: 2; justify-self: start; margin-block-start: 4px; }
+@media (prefers-reduced-motion: no-preference) {
+  .sp-modal[data-state='open'], .sp-drawer[data-state='open'], .sp-popover[data-state='open'],
+  .sp-select-content[data-state='open'], .sp-menu[data-state='open'], .sp-toast[data-state='open'] { animation: sp-reflex-in 140ms ease-out; }
+  .sp-modal[data-state='open'] { animation-name: sp-reflex-in-centre; }
+}
+@keyframes sp-reflex-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes sp-reflex-in-centre { from { opacity: 0; } to { opacity: 1; } }
+
+/* ── Knight Lab timeline skin ──────────────────────────────────────────────────────────── */
+/* (filled in by timeline.css, injected only by sp_timeline) */
+`,L=`sp-reflex-surfaces`;function R(e){if(typeof document>`u`||document.getElementById(L))return;let t=document.createElement(`style`);t.id=L,t.textContent=e,document.head.appendChild(t)}function z(){let[e,t]=(0,P.useState)(!1);return(0,P.useEffect)(()=>{if(typeof matchMedia!=`function`)return;let e=matchMedia(l),n=()=>t(e.matches);return n(),e.addEventListener?.(`change`,n),()=>e.removeEventListener?.(`change`,n)},[]),e}function B({element:e=`div`,name:t,ground:n,substrate:r,mode:i,size:a,seed:o,frame:s,tone:c,className:l,children:u,id:d,...f}){(0,P.useEffect)(()=>R(I),[]);let p=z(),h=m({ground:n,substrate:r,mode:i,size:a,seed:o,id:d},{forcedPrecision:p}),g=e,_=[`sp-ui`,`sp-surface`,t?`sp-${t}`:null,`sp-ground-${h.ground}`,l].filter(Boolean).join(` `);return(0,F.jsxs)(g,{id:d,className:_,"data-ground":h.ground,"data-substrate":h.substrate,"data-mode":h.mode,"data-size":h.size,"data-frame":String(h.frame),...f,children:[c?(0,F.jsx)(`span`,{part:`sp-tone`,"data-tone":String(c),"data-kind":s||`box`,"aria-hidden":`true`}):null,s?(0,F.jsx)(`span`,{part:`sp-frame`,"data-kind":s,"aria-hidden":`true`}):null,u]})}function V(){let e=(0,P.useRef)(null);r.ref_install=e;let t=(0,P.useRef)(null);r.ref_about=t;let n=(0,P.useRef)(null);r.ref_new_0_7=n;let o=(0,P.useRef)(null);r.ref_quickstart=o;let l=(0,P.useRef)(null);r.ref_provider=l;let m=(0,P.useRef)(null);r.ref_precision=m;let F=(0,P.useRef)(null);r.ref_interaction=F;let I=(0,P.useRef)(null);r.ref_export=I;let L=(0,P.useRef)(null);r.ref_ssr=L;let R=(0,P.useRef)(null);r.ref_ui=R;let z=(0,P.useRef)(null);r.ref_guide_reflex_city=z;let V=(0,P.useRef)(null);r.ref_guide_reflex_precision=V;let H=(0,P.useRef)(null);r.ref_guide_reflex_save=H;let U=(0,P.useRef)(null);r.ref_guide_reflex_tabs=U;let W=(0,P.useRef)(null);r.ref_charts=W;let G=(0,P.useRef)(null);return r.ref_main=G,a(P.Fragment,{},a(`div`,{className:`spw-site`},a(i,{className:`spw-skip`,to:`#main`},`Skip to content`),a(`header`,{className:`spw-header`},a(i,{className:`spw-brand`,to:`/`},a(`svg`,{"aria-hidden":`true`,className:`spw-mark`,height:`26`,viewBox:`0 0 32 32`,width:`26`},a(`g`,{stroke:`currentColor`},a(`line`,{css:{strokeWidth:`0.8`},x1:`4.75`,x2:`18.25`,y1:`13.75`,y2:`27.25`}),a(`line`,{css:{strokeWidth:`0.8`},x1:`7.00`,x2:`20.50`,y1:`11.50`,y2:`25.00`}),a(`line`,{css:{strokeWidth:`0.8`},x1:`9.25`,x2:`22.75`,y1:`9.25`,y2:`22.75`}),a(`line`,{css:{strokeWidth:`0.8`},x1:`11.50`,x2:`25.00`,y1:`7.00`,y2:`20.50`}),a(`line`,{css:{strokeWidth:`0.8`},x1:`13.75`,x2:`27.25`,y1:`4.75`,y2:`18.25`})),a(`path`,{css:{fill:`none`,stroke:`currentColor`,strokeWidth:`1.1`},d:`M16 2.5 C22 8.4 25.6 12 29.5 16 C23.4 22 20 25.6 16 29.5 C10.1 23.6 6.4 20 2.5 16 C8.6 10 12 6.4 16 2.5Z`}),a(`circle`,{css:{fill:`#fff`,stroke:`currentColor`,strokeWidth:`1.1`},cx:`16`,cy:`16`,r:`3.2`})),a(`span`,{className:`spw-brand-name`},`silverpoint`)),a(`nav`,{"aria-label":`Main`,className:`spw-nav`},a(i,{to:`/docs`},`Docs`),a(i,{to:`/gallery`},`Gallery`),a(i,{to:`/charts`},`Charts`),a(i,{to:`/components`},`Components`),a(i,{to:`/docs/dashboard`},`Dashboard`),a(i,{to:`/packages`},`Packages`),a(i,{to:`/versions`},`Versions`),a(i,{to:`/support`},`Report a bug`)),a(`div`,{className:`spw-header-tools`},a(`details`,{className:`spw-version`},a(`summary`,{className:`spw-version-summary`},`v0.6.0`,a(`small`,{},` latest`)),a(`div`,{className:`spw-version-menu`},a(i,{to:`/versions#v0-6-0`},a(`span`,{},`v0.6.0`),a(`small`,{},`2026-10-10`)),a(i,{to:`/versions#v0-3-0`},a(`span`,{},`v0.3.0`),a(`small`,{},`2026-09-30`)),a(i,{to:`/versions#v0-2-0`},a(`span`,{},`v0.2.0`),a(`small`,{},`2026-09-26`)),a(i,{to:`/versions#v0-1-1`},a(`span`,{},`v0.1.1`),a(`small`,{},`2026-09-25`)),a(i,{to:`/versions#v0-1-0`},a(`span`,{},`v0.1.0`),a(`small`,{},`2026-09-25`)),a(i,{rel:`noopener noreferrer`,target:`_blank`,to:`https://github.com/ecrespo/silverpoint/releases`},`All releases on GitHub ↗`))),a(i,{"aria-label":`silverpoint on GitHub`,className:`spw-icon-link`,rel:`noopener noreferrer`,target:`_blank`,to:`https://github.com/ecrespo/silverpoint`},a(`svg`,{"aria-hidden":`true`,className:`spw-gh`,css:{fill:`currentColor`},height:`20`,viewBox:`0 0 16 16`,width:`20`},a(`path`,{d:`M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z`}))),a(i,{"aria-label":`silverpoint on npm`,className:`spw-icon-link`,rel:`noopener noreferrer`,target:`_blank`,to:`https://www.npmjs.com/search?q=silverpoint`},a(`span`,{className:`spw-npm`},`npm`))),a(`details`,{className:`spw-burger`},a(`summary`,{"aria-label":`Menu`},a(s,{size:22})),a(`nav`,{},a(i,{to:`/docs`},`Docs`),a(i,{to:`/gallery`},`Gallery`),a(i,{to:`/charts`},`Charts`),a(i,{to:`/components`},`Components`),a(i,{to:`/docs/dashboard`},`Dashboard`),a(i,{to:`/packages`},`Packages`),a(i,{to:`/versions`},`Versions`),a(i,{to:`/support`},`Report a bug`)))),a(`div`,{className:`spw-docs`},a(`details`,{className:`spw-sidebar-mobile`},a(`summary`,{},`Documentation menu`),a(`nav`,{"aria-label":`Documentation`,className:`spw-sidebar`},a(`div`,{className:`spw-side-group`},a(`p`,{className:`spw-side-title`},`Getting started`),a(i,{className:`spw-side-link`,to:`/docs`},`Overview`),a(i,{className:`spw-side-link`,to:`/docs/installation`},`Installation`),a(i,{className:`spw-side-link`,to:`/docs/react`},`React`),a(i,{className:`spw-side-link`,to:`/docs/vue`},`Vue`),a(i,{className:`spw-side-link`,to:`/docs/angular`},`Angular`),a(i,{className:`spw-side-link is-current`,to:`/docs/reflex`},`Reflex (Python)`)),a(`div`,{className:`spw-side-group`},a(`p`,{className:`spw-side-title`},`Concepts`),a(i,{className:`spw-side-link`,to:`/docs/grounds`},`Grounds & substrates`),a(i,{className:`spw-side-link`,to:`/docs/precision`},`Ink & precision`),a(i,{className:`spw-side-link`,to:`/docs/props`},`Common props`),a(i,{className:`spw-side-link`,to:`/docs/interaction`},`Interaction & readouts`),a(i,{className:`spw-side-link`,to:`/docs/export`},`Export & imperative handle`),a(i,{className:`spw-side-link`,to:`/docs/dashboard`},`Dashboards`),a(i,{className:`spw-side-link`,to:`/docs/drill-down`},`Drill-down & hierarchies`),a(i,{className:`spw-side-link`,to:`/docs/ui`},`UI components`),a(i,{className:`spw-side-link`,to:`/docs/ssr`},`Server rendering`),a(i,{className:`spw-side-link`,to:`/docs/accessibility`},`Accessibility`),a(i,{className:`spw-side-link`,to:`/docs/tailwind`},`Tailwind preset`)),a(`div`,{className:`spw-side-group`},a(`p`,{className:`spw-side-title`},`Reflex only`),a(i,{className:`spw-side-link`,to:`/docs/palettes`},`Palettes`),a(i,{className:`spw-side-link`,to:`/docs/composed`},`Composed components`),a(i,{className:`spw-side-link`,to:`/docs/timeline`},`Timeline`)),a(`div`,{className:`spw-side-group`},a(`p`,{className:`spw-side-title`},`Charts · 60`),a(`details`,{className:`spw-side-family`,open:!1},a(`summary`,{},`Lines · 4`),a(i,{className:`spw-side-link`,to:`/charts/line-chart`},`LineChart`),a(i,{className:`spw-side-link`,to:`/charts/step-chart`},`StepChart`),a(i,{className:`spw-side-link`,to:`/charts/sparkline-rows`},`SparklineRows`),a(i,{className:`spw-side-link`,to:`/charts/kpi-card`},`KpiCard`)),a(`details`,{className:`spw-side-family`,open:!1},a(`summary`,{},`Bars · 8`),a(i,{className:`spw-side-link`,to:`/charts/bar-chart`},`BarChart`),a(i,{className:`spw-side-link`,to:`/charts/stacked-bar-chart`},`StackedBarChart`),a(i,{className:`spw-side-link`,to:`/charts/composed-chart`},`ComposedChart`),a(i,{className:`spw-side-link`,to:`/charts/waterfall-chart`},`WaterfallChart`),a(i,{className:`spw-side-link`,to:`/charts/funnel-chart`},`FunnelChart`),a(i,{className:`spw-side-link`,to:`/charts/bullet-chart`},`BulletChart`),a(i,{className:`spw-side-link`,to:`/charts/pyramid-chart`},`PyramidChart`),a(i,{className:`spw-side-link`,to:`/charts/candlestick-chart`},`CandlestickChart`)),a(`details`,{className:`spw-side-family`,open:!1},a(`summary`,{},`Areas · 3`),a(i,{className:`spw-side-link`,to:`/charts/area-chart`},`AreaChart`),a(i,{className:`spw-side-link`,to:`/charts/range-band-chart`},`RangeBandChart`),a(i,{className:`spw-side-link`,to:`/charts/stream-chart`},`StreamChart`)),a(`details`,{className:`spw-side-family`,open:!1},a(`summary`,{},`Points & grids · 5`),a(i,{className:`spw-side-link`,to:`/charts/scatter-chart`},`ScatterChart`),a(i,{className:`spw-side-link`,to:`/charts/bubble-chart`},`BubbleChart`),a(i,{className:`spw-side-link`,to:`/charts/heatmap-chart`},`HeatmapChart`),a(i,{className:`spw-side-link`,to:`/charts/treemap-chart`},`TreemapChart`),a(i,{className:`spw-side-link`,to:`/charts/activity-grid`},`ActivityGrid`)),a(`details`,{className:`spw-side-family`,open:!1},a(`summary`,{},`Flows · 2`),a(i,{className:`spw-side-link`,to:`/charts/sankey-chart`},`SankeyChart`),a(i,{className:`spw-side-link`,to:`/charts/chord-ring`},`ChordRing`)),a(`details`,{className:`spw-side-family`,open:!1},a(`summary`,{},`Radial · 11`),a(i,{className:`spw-side-link`,to:`/charts/donut-chart`},`DonutChart`),a(i,{className:`spw-side-link`,to:`/charts/radar-chart`},`RadarChart`),a(i,{className:`spw-side-link`,to:`/charts/polar-bar-chart`},`PolarBarChart`),a(i,{className:`spw-side-link`,to:`/charts/radial-arc-group`},`RadialArcGroup`),a(i,{className:`spw-side-link`,to:`/charts/radial-rings`},`RadialRings`),a(i,{className:`spw-side-link`,to:`/charts/gauge-arc`},`GaugeArc`),a(i,{className:`spw-side-link`,to:`/charts/meter-chart`},`MeterChart`),a(i,{className:`spw-side-link`,to:`/charts/coxcomb-chart`},`CoxcombChart`),a(i,{className:`spw-side-link`,to:`/charts/wind-rose`},`WindRose`),a(i,{className:`spw-side-link`,to:`/charts/volvelle-chart`},`VolvelleChart`),a(i,{className:`spw-side-link`,to:`/charts/orbit-chart`},`OrbitChart`)),a(`details`,{className:`spw-side-family`,open:!1},a(`summary`,{},`Distributions & comparisons · 14`),a(i,{className:`spw-side-link`,to:`/charts/histogram-chart`},`HistogramChart`),a(i,{className:`spw-side-link`,to:`/charts/ecdf-chart`},`EcdfChart`),a(i,{className:`spw-side-link`,to:`/charts/box-plot-chart`},`BoxPlotChart`),a(i,{className:`spw-side-link`,to:`/charts/violin-chart`},`ViolinChart`),a(i,{className:`spw-side-link`,to:`/charts/ridgeline-chart`},`RidgelineChart`),a(i,{className:`spw-side-link`,to:`/charts/beeswarm-chart`},`BeeswarmChart`),a(i,{className:`spw-side-link`,to:`/charts/lollipop-chart`},`LollipopChart`),a(i,{className:`spw-side-link`,to:`/charts/dumbbell-chart`},`DumbbellChart`),a(i,{className:`spw-side-link`,to:`/charts/slope-chart`},`SlopeChart`),a(i,{className:`spw-side-link`,to:`/charts/bump-chart`},`BumpChart`),a(i,{className:`spw-side-link`,to:`/charts/error-bar-chart`},`ErrorBarChart`),a(i,{className:`spw-side-link`,to:`/charts/interval-chart`},`IntervalChart`),a(i,{className:`spw-side-link`,to:`/charts/diverging-bar-chart`},`DivergingBarChart`),a(i,{className:`spw-side-link`,to:`/charts/connected-scatter-chart`},`ConnectedScatterChart`)),a(`details`,{className:`spw-side-family`,open:!1},a(`summary`,{},`Hierarchies & dimensions · 8`),a(i,{className:`spw-side-link`,to:`/charts/waffle-chart`},`WaffleChart`),a(i,{className:`spw-side-link`,to:`/charts/marimekko-chart`},`MarimekkoChart`),a(i,{className:`spw-side-link`,to:`/charts/squarified-treemap`},`SquarifiedTreemap`),a(i,{className:`spw-side-link`,to:`/charts/sunburst-chart`},`SunburstChart`),a(i,{className:`spw-side-link`,to:`/charts/tree-chart`},`TreeChart`),a(i,{className:`spw-side-link`,to:`/charts/parallel-coordinates-chart`},`ParallelCoordinatesChart`),a(i,{className:`spw-side-link`,to:`/charts/polar-line-chart`},`PolarLineChart`),a(i,{className:`spw-side-link`,to:`/charts/polar-scatter-chart`},`PolarScatterChart`)),a(`details`,{className:`spw-side-family`,open:!1},a(`summary`,{},`Fields & networks · 5`),a(i,{className:`spw-side-link`,to:`/charts/density-bin-chart`},`DensityBinChart`),a(i,{className:`spw-side-link`,to:`/charts/contour-chart`},`ContourChart`),a(i,{className:`spw-side-link`,to:`/charts/delaunay-chart`},`DelaunayChart`),a(i,{className:`spw-side-link`,to:`/charts/vector-field-chart`},`VectorFieldChart`),a(i,{className:`spw-side-link`,to:`/charts/network-chart`},`NetworkChart`))),a(`div`,{className:`spw-side-group`},a(`p`,{className:`spw-side-title`},`UI components · 17`),a(`details`,{className:`spw-side-family`,open:!1},a(`summary`,{},`Actions · 1`),a(i,{className:`spw-side-link`,to:`/components/button`},`Button`)),a(`details`,{className:`spw-side-family`,open:!1},a(`summary`,{},`Data entry · 7`),a(i,{className:`spw-side-link`,to:`/components/input`},`Input`),a(i,{className:`spw-side-link`,to:`/components/checkbox`},`Checkbox`),a(i,{className:`spw-side-link`,to:`/components/radio-group`},`RadioGroup`),a(i,{className:`spw-side-link`,to:`/components/switch`},`Switch`),a(i,{className:`spw-side-link`,to:`/components/slider`},`Slider`),a(i,{className:`spw-side-link`,to:`/components/rate`},`Rate`),a(i,{className:`spw-side-link`,to:`/components/segmented`},`Segmented`)),a(`details`,{className:`spw-side-family`,open:!1},a(`summary`,{},`Navigation · 2`),a(i,{className:`spw-side-link`,to:`/components/tabs`},`Tabs`),a(i,{className:`spw-side-link`,to:`/components/steps`},`Steps`)),a(`details`,{className:`spw-side-family`,open:!1},a(`summary`,{},`Data display · 4`),a(i,{className:`spw-side-link`,to:`/components/card`},`Card`),a(i,{className:`spw-side-link`,to:`/components/tag`},`Tag`),a(i,{className:`spw-side-link`,to:`/components/badge`},`Badge`),a(i,{className:`spw-side-link`,to:`/components/divider`},`Divider`)),a(`details`,{className:`spw-side-family`,open:!1},a(`summary`,{},`Feedback · 3`),a(i,{className:`spw-side-link`,to:`/components/progress`},`Progress`),a(i,{className:`spw-side-link`,to:`/components/alert`},`Alert`),a(i,{className:`spw-side-link`,to:`/components/skeleton`},`Skeleton`))),a(`div`,{className:`spw-side-group`},a(`p`,{className:`spw-side-title`},`Project`),a(i,{className:`spw-side-link`,to:`/packages`},`Packages on npm & PyPI`),a(i,{className:`spw-side-link`,to:`/versions`},`Versions & changelog`),a(i,{className:`spw-side-link`,to:`/support`},`Report a bug`),a(i,{className:`spw-side-link`,to:`/about`},`Author & license`)))),a(`aside`,{className:`spw-sidebar-col`},a(`nav`,{"aria-label":`Documentation`,className:`spw-sidebar`},a(`div`,{className:`spw-side-group`},a(`p`,{className:`spw-side-title`},`Getting started`),a(i,{className:`spw-side-link`,to:`/docs`},`Overview`),a(i,{className:`spw-side-link`,to:`/docs/installation`},`Installation`),a(i,{className:`spw-side-link`,to:`/docs/react`},`React`),a(i,{className:`spw-side-link`,to:`/docs/vue`},`Vue`),a(i,{className:`spw-side-link`,to:`/docs/angular`},`Angular`),a(i,{className:`spw-side-link is-current`,to:`/docs/reflex`},`Reflex (Python)`)),a(`div`,{className:`spw-side-group`},a(`p`,{className:`spw-side-title`},`Concepts`),a(i,{className:`spw-side-link`,to:`/docs/grounds`},`Grounds & substrates`),a(i,{className:`spw-side-link`,to:`/docs/precision`},`Ink & precision`),a(i,{className:`spw-side-link`,to:`/docs/props`},`Common props`),a(i,{className:`spw-side-link`,to:`/docs/interaction`},`Interaction & readouts`),a(i,{className:`spw-side-link`,to:`/docs/export`},`Export & imperative handle`),a(i,{className:`spw-side-link`,to:`/docs/dashboard`},`Dashboards`),a(i,{className:`spw-side-link`,to:`/docs/drill-down`},`Drill-down & hierarchies`),a(i,{className:`spw-side-link`,to:`/docs/ui`},`UI components`),a(i,{className:`spw-side-link`,to:`/docs/ssr`},`Server rendering`),a(i,{className:`spw-side-link`,to:`/docs/accessibility`},`Accessibility`),a(i,{className:`spw-side-link`,to:`/docs/tailwind`},`Tailwind preset`)),a(`div`,{className:`spw-side-group`},a(`p`,{className:`spw-side-title`},`Reflex only`),a(i,{className:`spw-side-link`,to:`/docs/palettes`},`Palettes`),a(i,{className:`spw-side-link`,to:`/docs/composed`},`Composed components`),a(i,{className:`spw-side-link`,to:`/docs/timeline`},`Timeline`)),a(`div`,{className:`spw-side-group`},a(`p`,{className:`spw-side-title`},`Charts · 60`),a(`details`,{className:`spw-side-family`,open:!1},a(`summary`,{},`Lines · 4`),a(i,{className:`spw-side-link`,to:`/charts/line-chart`},`LineChart`),a(i,{className:`spw-side-link`,to:`/charts/step-chart`},`StepChart`),a(i,{className:`spw-side-link`,to:`/charts/sparkline-rows`},`SparklineRows`),a(i,{className:`spw-side-link`,to:`/charts/kpi-card`},`KpiCard`)),a(`details`,{className:`spw-side-family`,open:!1},a(`summary`,{},`Bars · 8`),a(i,{className:`spw-side-link`,to:`/charts/bar-chart`},`BarChart`),a(i,{className:`spw-side-link`,to:`/charts/stacked-bar-chart`},`StackedBarChart`),a(i,{className:`spw-side-link`,to:`/charts/composed-chart`},`ComposedChart`),a(i,{className:`spw-side-link`,to:`/charts/waterfall-chart`},`WaterfallChart`),a(i,{className:`spw-side-link`,to:`/charts/funnel-chart`},`FunnelChart`),a(i,{className:`spw-side-link`,to:`/charts/bullet-chart`},`BulletChart`),a(i,{className:`spw-side-link`,to:`/charts/pyramid-chart`},`PyramidChart`),a(i,{className:`spw-side-link`,to:`/charts/candlestick-chart`},`CandlestickChart`)),a(`details`,{className:`spw-side-family`,open:!1},a(`summary`,{},`Areas · 3`),a(i,{className:`spw-side-link`,to:`/charts/area-chart`},`AreaChart`),a(i,{className:`spw-side-link`,to:`/charts/range-band-chart`},`RangeBandChart`),a(i,{className:`spw-side-link`,to:`/charts/stream-chart`},`StreamChart`)),a(`details`,{className:`spw-side-family`,open:!1},a(`summary`,{},`Points & grids · 5`),a(i,{className:`spw-side-link`,to:`/charts/scatter-chart`},`ScatterChart`),a(i,{className:`spw-side-link`,to:`/charts/bubble-chart`},`BubbleChart`),a(i,{className:`spw-side-link`,to:`/charts/heatmap-chart`},`HeatmapChart`),a(i,{className:`spw-side-link`,to:`/charts/treemap-chart`},`TreemapChart`),a(i,{className:`spw-side-link`,to:`/charts/activity-grid`},`ActivityGrid`)),a(`details`,{className:`spw-side-family`,open:!1},a(`summary`,{},`Flows · 2`),a(i,{className:`spw-side-link`,to:`/charts/sankey-chart`},`SankeyChart`),a(i,{className:`spw-side-link`,to:`/charts/chord-ring`},`ChordRing`)),a(`details`,{className:`spw-side-family`,open:!1},a(`summary`,{},`Radial · 11`),a(i,{className:`spw-side-link`,to:`/charts/donut-chart`},`DonutChart`),a(i,{className:`spw-side-link`,to:`/charts/radar-chart`},`RadarChart`),a(i,{className:`spw-side-link`,to:`/charts/polar-bar-chart`},`PolarBarChart`),a(i,{className:`spw-side-link`,to:`/charts/radial-arc-group`},`RadialArcGroup`),a(i,{className:`spw-side-link`,to:`/charts/radial-rings`},`RadialRings`),a(i,{className:`spw-side-link`,to:`/charts/gauge-arc`},`GaugeArc`),a(i,{className:`spw-side-link`,to:`/charts/meter-chart`},`MeterChart`),a(i,{className:`spw-side-link`,to:`/charts/coxcomb-chart`},`CoxcombChart`),a(i,{className:`spw-side-link`,to:`/charts/wind-rose`},`WindRose`),a(i,{className:`spw-side-link`,to:`/charts/volvelle-chart`},`VolvelleChart`),a(i,{className:`spw-side-link`,to:`/charts/orbit-chart`},`OrbitChart`)),a(`details`,{className:`spw-side-family`,open:!1},a(`summary`,{},`Distributions & comparisons · 14`),a(i,{className:`spw-side-link`,to:`/charts/histogram-chart`},`HistogramChart`),a(i,{className:`spw-side-link`,to:`/charts/ecdf-chart`},`EcdfChart`),a(i,{className:`spw-side-link`,to:`/charts/box-plot-chart`},`BoxPlotChart`),a(i,{className:`spw-side-link`,to:`/charts/violin-chart`},`ViolinChart`),a(i,{className:`spw-side-link`,to:`/charts/ridgeline-chart`},`RidgelineChart`),a(i,{className:`spw-side-link`,to:`/charts/beeswarm-chart`},`BeeswarmChart`),a(i,{className:`spw-side-link`,to:`/charts/lollipop-chart`},`LollipopChart`),a(i,{className:`spw-side-link`,to:`/charts/dumbbell-chart`},`DumbbellChart`),a(i,{className:`spw-side-link`,to:`/charts/slope-chart`},`SlopeChart`),a(i,{className:`spw-side-link`,to:`/charts/bump-chart`},`BumpChart`),a(i,{className:`spw-side-link`,to:`/charts/error-bar-chart`},`ErrorBarChart`),a(i,{className:`spw-side-link`,to:`/charts/interval-chart`},`IntervalChart`),a(i,{className:`spw-side-link`,to:`/charts/diverging-bar-chart`},`DivergingBarChart`),a(i,{className:`spw-side-link`,to:`/charts/connected-scatter-chart`},`ConnectedScatterChart`)),a(`details`,{className:`spw-side-family`,open:!1},a(`summary`,{},`Hierarchies & dimensions · 8`),a(i,{className:`spw-side-link`,to:`/charts/waffle-chart`},`WaffleChart`),a(i,{className:`spw-side-link`,to:`/charts/marimekko-chart`},`MarimekkoChart`),a(i,{className:`spw-side-link`,to:`/charts/squarified-treemap`},`SquarifiedTreemap`),a(i,{className:`spw-side-link`,to:`/charts/sunburst-chart`},`SunburstChart`),a(i,{className:`spw-side-link`,to:`/charts/tree-chart`},`TreeChart`),a(i,{className:`spw-side-link`,to:`/charts/parallel-coordinates-chart`},`ParallelCoordinatesChart`),a(i,{className:`spw-side-link`,to:`/charts/polar-line-chart`},`PolarLineChart`),a(i,{className:`spw-side-link`,to:`/charts/polar-scatter-chart`},`PolarScatterChart`)),a(`details`,{className:`spw-side-family`,open:!1},a(`summary`,{},`Fields & networks · 5`),a(i,{className:`spw-side-link`,to:`/charts/density-bin-chart`},`DensityBinChart`),a(i,{className:`spw-side-link`,to:`/charts/contour-chart`},`ContourChart`),a(i,{className:`spw-side-link`,to:`/charts/delaunay-chart`},`DelaunayChart`),a(i,{className:`spw-side-link`,to:`/charts/vector-field-chart`},`VectorFieldChart`),a(i,{className:`spw-side-link`,to:`/charts/network-chart`},`NetworkChart`))),a(`div`,{className:`spw-side-group`},a(`p`,{className:`spw-side-title`},`UI components · 17`),a(`details`,{className:`spw-side-family`,open:!1},a(`summary`,{},`Actions · 1`),a(i,{className:`spw-side-link`,to:`/components/button`},`Button`)),a(`details`,{className:`spw-side-family`,open:!1},a(`summary`,{},`Data entry · 7`),a(i,{className:`spw-side-link`,to:`/components/input`},`Input`),a(i,{className:`spw-side-link`,to:`/components/checkbox`},`Checkbox`),a(i,{className:`spw-side-link`,to:`/components/radio-group`},`RadioGroup`),a(i,{className:`spw-side-link`,to:`/components/switch`},`Switch`),a(i,{className:`spw-side-link`,to:`/components/slider`},`Slider`),a(i,{className:`spw-side-link`,to:`/components/rate`},`Rate`),a(i,{className:`spw-side-link`,to:`/components/segmented`},`Segmented`)),a(`details`,{className:`spw-side-family`,open:!1},a(`summary`,{},`Navigation · 2`),a(i,{className:`spw-side-link`,to:`/components/tabs`},`Tabs`),a(i,{className:`spw-side-link`,to:`/components/steps`},`Steps`)),a(`details`,{className:`spw-side-family`,open:!1},a(`summary`,{},`Data display · 4`),a(i,{className:`spw-side-link`,to:`/components/card`},`Card`),a(i,{className:`spw-side-link`,to:`/components/tag`},`Tag`),a(i,{className:`spw-side-link`,to:`/components/badge`},`Badge`),a(i,{className:`spw-side-link`,to:`/components/divider`},`Divider`)),a(`details`,{className:`spw-side-family`,open:!1},a(`summary`,{},`Feedback · 3`),a(i,{className:`spw-side-link`,to:`/components/progress`},`Progress`),a(i,{className:`spw-side-link`,to:`/components/alert`},`Alert`),a(i,{className:`spw-side-link`,to:`/components/skeleton`},`Skeleton`))),a(`div`,{className:`spw-side-group`},a(`p`,{className:`spw-side-title`},`Project`),a(i,{className:`spw-side-link`,to:`/packages`},`Packages on npm & PyPI`),a(i,{className:`spw-side-link`,to:`/versions`},`Versions & changelog`),a(i,{className:`spw-side-link`,to:`/support`},`Report a bug`),a(i,{className:`spw-side-link`,to:`/about`},`Author & license`)))),a(`main`,{className:`spw-docs-main`,id:`main`,ref:G},a(`article`,{className:`spw-article`},a(`p`,{className:`spw-eyebrow`},`Getting started · Frameworks`),a(`h1`,{},`Reflex (Python)`),a(`div`,{className:`spw-lede`},`Everything you need to use silverpoint with Reflex (Python): install, quickstart, app-wide configuration, precision mode, interaction, export, server rendering and the UI components.`),a(`section`,{className:`spw-section`},a(`h2`,{id:`install`,ref:e},a(i,{className:`spw-anchor`,to:`#install`},`Install`)),a(`div`,{className:`spw-table-wrap`},a(`table`,{className:`spw-table`},a(`thead`,{},a(`tr`,{},a(`th`,{},``),a(`th`,{},``))),a(`tbody`,{},a(`tr`,{},a(`td`,{},`Package`),a(`td`,{},a(i,{rel:`noopener noreferrer`,target:`_blank`,to:`https://pypi.org/project/reflex-silverpoint-react/`},`reflex-silverpoint-react`))),a(`tr`,{},a(`td`,{},`Peers`),a(`td`,{},`reflex >= 0.10.0 (React 19), Python 3.11+`)),a(`tr`,{},a(`td`,{},`Integration`),a(`td`,{},`A Reflex custom component wrapping @silverpoint/react; Reflex installs the npm side for you. It adds Reflex-only palettes, composed components and a timeline.`)),a(`tr`,{},a(`td`,{},`Components`),a(`td`,{},a(`code`,{},`line_chart / LineChart`))),a(`tr`,{},a(`td`,{},`Import from`),a(`td`,{},a(`code`,{},`reflex_silverpoint_react`))),a(`tr`,{},a(`td`,{},`App-wide configuration`),a(`td`,{},a(`code`,{},`silverpoint_provider`)))))),a(`div`,{className:`spw-code spw-code-compact`},a(`div`,{className:`spw-code-bar`},a(`span`,{className:`spw-code-label`},`shell`),a(j,{},a(c,{size:14}),a(`span`,{},`Copy`))),a(`pre`,{},a(`code`,{},`pip install reflex-silverpoint-react`)))),a(`section`,{className:`spw-section`},a(`h2`,{id:`about`,ref:t},a(i,{className:`spw-anchor`,to:`#about`},`About the Reflex component`)),a(`p`,{},a(i,{rel:`noopener noreferrer`,target:`_blank`,to:`https://github.com/ecrespo/reflex-silverpoint-react`},`reflex-silverpoint-react`),` is a Reflex custom component that wraps @silverpoint/react `,`0.6.0`,`. It exposes all 60 charts, the Dashboard (with linking), the 17 UI components (sp_button, sp_input, sp_tabs…), the provider, both grounds, the interaction events, custom readouts (tooltip_template) and the imperative handle (download_svg, get_svg, get_geometry) as Python. On top of that it adds, in Reflex only, palettes, 20 composed components and the Knight Lab timeline.`),a(`p`,{},`reflex-silverpoint-react 0.7.0 requires Reflex 0.10.0 or later (React 19) and Python 3.11 or later.`),a(`p`,{},`Props are the React props in snake_case: `,a(`code`,{},`xKey → x_key`),`, `,a(`code`,{},`hatchFill → hatch_fill`),`, `,a(`code`,{},`centerLabel → center_label`),`. Every prop, data included, can be a state var. `,a(`code`,{},`reflex_silverpoint_react.CHARTS`),` is the whole catalog, with each chart's family and props: this site is built from it.`),a(h,{className:`spw-callout spw-callout-note`,kind:`info`,size:`sm`,title:`Note`},a(`span`,{},`Accessors are field names (strings). The JavaScript API also takes functions; from Python, shape your rows instead.`))),a(`section`,{className:`spw-section`},a(`h2`,{id:`new-0-7`,ref:n},a(i,{className:`spw-anchor`,to:`#new-0-7`},`New in 0.7.0: Reflex only`)),a(`p`,{},`Three things silverpoint's React, Vue and Angular adapters do not have, built in Reflex on silverpoint's own frames, tones and custom properties:`),a(`div`,{className:`spw-table-wrap`},a(`table`,{className:`spw-table`},a(`thead`,{},a(`tr`,{},a(`th`,{},``),a(`th`,{},`What`),a(`th`,{},``))),a(`tbody`,{},a(`tr`,{},a(`td`,{},a(`strong`,{},`Palettes`)),a(`td`,{},a(`span`,{},a(`code`,{},`palette=`),` on every chart, UI component, dashboard and composed component, `,a(`code`,{},`silverpoint_palette`),` for a section, 6 presets and `,a(`code`,{},`check_palette`),`.`)),a(`td`,{},a(i,{to:`/docs/palettes`},`Palettes →`))),a(`tr`,{},a(`td`,{},a(`strong`,{},`Composed components`)),a(`td`,{},`20 components: tables, pagination, statistics, collapse… and overlays on Radix primitives (modal, drawer, popover, tooltip, select, menu, toast).`),a(`td`,{},a(i,{to:`/docs/composed`},`Composed components →`))),a(`tr`,{},a(`td`,{},a(`strong`,{},`Timeline`)),a(`td`,{},a(`span`,{},a(`code`,{},`sp_timeline`),`: Knight Lab TimelineJS drawn in silverpoint (the `,a(`code`,{},`[timeline]`),` extra).`)),a(`td`,{},a(i,{to:`/docs/timeline`},`Timeline →`)))))),a(`div`,{className:`spw-code spw-code-compact`},a(`div`,{className:`spw-code-bar`},a(`span`,{className:`spw-code-label`},`shell`),a(S,{},a(c,{size:14}),a(`span`,{},`Copy`))),a(`pre`,{},a(`code`,{},`pip install "reflex-silverpoint-react[timeline]"`))),a(`div`,{className:`spw-code`},a(`div`,{className:`spw-code-bar`},a(`span`,{className:`spw-code-label`},`python`),a(E,{},a(c,{size:14}),a(`span`,{},`Copy`))),a(`pre`,{},a(`code`,{},`from reflex_silverpoint_react import bar_chart, sort_rows, sp_table, silverpoint_palette
+
+silverpoint_palette(
+    bar_chart(data=SALES, x_key="month", value_key="units", title="Units sold"),
+    sp_table(["team", "load"], State.rows, caption="On-call teams", striped=True),
+    palette="sanguine",
+)`))),a(`div`,{className:`spw-card spw-live`},a(`div`,{css:{display:`contents`,"& :where(.sp-root, .sp-ui, .sp-dashboard, .sp-surface)":{"--sp-substrate":`#F2E8DC`,"--sp-ink":`#8A3A24`,"--sp-ink-secondary":`#6A4A3A`,"--sp-heighten":`#FFFFFF`,"--sp-rule":`#9A6450`,"--sp-grid":`#9A6450`,"--sp-text":`#4A2216`,"--sp-text-muted":`#7A3E2C`}}},a(`div`,{className:`spw-grid spw-grid-2`},a(d,{data:[{month:`Jan`,units:120},{month:`Feb`,units:98},{month:`Mar`,units:143}],height:120,title:`Units sold`,valueKey:`units`,xKey:`month`}),a(A,{},a(B,{"data-hoverable":`true`,"data-striped":`true`,frame:`card`,name:`datatable`},a(`div`,{className:`sp-ui-table-scroll`},a(`table`,{className:`sp-ui-table`},a(`caption`,{},`On-call teams`),a(`thead`,{},a(`tr`,{},a(`th`,{"data-align":`start`,scope:`col`},`team`),a(`th`,{"data-align":`start`,scope:`col`},`load`))),a(`tbody`,{},a(`tr`,{},a(`td`,{"data-align":`start`},`Archive`),a(`td`,{"data-align":`start`},72)),a(`tr`,{},a(`td`,{"data-align":`start`},`Billing`),a(`td`,{"data-align":`start`},58)),a(`tr`,{},a(`td`,{"data-align":`start`},`Catalog`),a(`td`,{"data-align":`start`},91)),a(`tr`,{},a(`td`,{"data-align":`start`},`Delivery`),a(`td`,{"data-align":`start`},44))))))))))),a(`section`,{className:`spw-section`},a(`h2`,{id:`quickstart`,ref:o},a(i,{className:`spw-anchor`,to:`#quickstart`},`Quickstart`)),a(`p`,{},`Create a fresh app and install silverpoint:`),a(`div`,{className:`spw-code spw-code-compact`},a(`div`,{className:`spw-code-bar`},a(`span`,{className:`spw-code-label`},`shell`),a(D,{},a(c,{size:14}),a(`span`,{},`Copy`))),a(`pre`,{},a(`code`,{},`mkdir my_app && cd my_app
+pip install reflex reflex-silverpoint-react
+reflex init
+reflex run`))),a(`p`,{},`Then replace the app's entry with:`),a(`div`,{className:`spw-code`},a(`div`,{className:`spw-code-bar`},a(`span`,{className:`spw-code-label`},`python`),a(w,{},a(c,{size:14}),a(`span`,{},`Copy`))),a(`pre`,{},a(`code`,{},`# my_app/my_app.py
+import reflex as rx
+from reflex_silverpoint_react import line_chart
+
+DATA = [
+    {"hour": "00", "hits": 18},
+    {"hour": "04", "hits": 11},
+    {"hour": "08", "hits": 42},
+    {"hour": "12", "hits": 64},
+    {"hour": "16", "hits": 57},
+    {"hour": "20", "hits": 30},
+]
+
+
+def index() -> rx.Component:
+    return rx.box(
+        line_chart(data=DATA, x_key="hour", value_key="hits", title="Hits per hour"),
+        width="480px",
+    )
+
+
+app = rx.App()
+app.add_page(index)`))),a(`div`,{className:`spw-card spw-live`},a(f,{data:[{hour:`00`,hits:18},{hour:`04`,hits:11},{hour:`08`,hits:42},{hour:`12`,hits:64},{hour:`16`,hits:57},{hour:`20`,hits:30}],title:`Hits per hour`,valueKey:`hits`,xKey:`hour`})),a(`p`,{},`The chart takes the width of its container. `,a(`code`,{},`height`),` is the height of the drawing area and defaults to 160 px. Omit `,a(`code`,{},`data`),` and a chart draws its own demo dataset.`)),a(`section`,{className:`spw-section`},a(`h2`,{id:`provider`,ref:l},a(i,{className:`spw-anchor`,to:`#provider`},`One ground for the whole app`)),a(`p`,{},`Set the ground, the substrate, the mode and the locale once for every chart. A prop on a chart always wins.`),a(`div`,{className:`spw-code`},a(`div`,{className:`spw-code-bar`},a(`span`,{className:`spw-code-label`},`python`),a(C,{},a(c,{size:14}),a(`span`,{},`Copy`))),a(`pre`,{},a(`code`,{},`from reflex_silverpoint_react import bar_chart, donut_chart, silverpoint_provider
+
+silverpoint_provider(
+    bar_chart(data=sales, x_key="month", value_key="units", title="Units sold", unit="units"),
+    donut_chart(data=channels, name_key="channel", value_key="share",
+                title="Sales by channel", center_label="%"),
+    ground="silverpoint",
+    substrate="green",
+    locale="en-GB",
+)`))),a(`div`,{className:`spw-card spw-live`},a(p,{ground:`silverpoint`,locale:`en-GB`,substrate:`green`},a(`div`,{className:`spw-grid spw-grid-2`},a(d,{data:[{month:`Jan`,units:120},{month:`Feb`,units:98},{month:`Mar`,units:143}],title:`Units sold`,unit:`units`,valueKey:`units`,xKey:`month`}),a(u,{centerLabel:`%`,data:[{channel:`Web`,share:54},{channel:`Stores`,share:31},{channel:`Partners`,share:15}],nameKey:`channel`,title:`Sales by channel`,valueKey:`share`}))))),a(`section`,{className:`spw-section`},a(`h2`,{id:`precision`,ref:m},a(i,{className:`spw-anchor`,to:`#precision`},`Precision mode`)),a(`div`,{className:`spw-code`},a(`div`,{className:`spw-code-bar`},a(`span`,{className:`spw-code-label`},`python`),a(x,{},a(c,{size:14}),a(`span`,{},`Copy`))),a(`pre`,{},a(`code`,{},`line_chart(data=DATA, x_key="hour", value_key="hits", title="Hits per hour", mode="precision")`)))),a(`section`,{className:`spw-section`},a(`h2`,{id:`interaction`,ref:F},a(i,{className:`spw-anchor`,to:`#interaction`},`Interaction and a custom readout`)),a(`div`,{className:`spw-code`},a(`div`,{className:`spw-code-bar`},a(`span`,{className:`spw-code-label`},`python`),a(k,{},a(c,{size:14}),a(`span`,{},`Copy`))),a(`pre`,{},a(`code`,{},`import reflex as rx
+from reflex_silverpoint_react import line_chart, tooltip_template
+
+
+class State(rx.State):
+    active: str = "—"
+
+    @rx.event
+    def on_active(self, item: dict | None):
+        self.active = "—" if item is None else f"{item['datum']['hour']}: {item['value']}"
+
+    @rx.event
+    def on_select(self, item: dict):
+        print("selected", item["datum"])
+
+
+line_chart(
+    data=DATA,
+    x_key="hour",
+    value_key="hits",
+    on_active_change=State.on_active,
+    on_select=State.on_select,
+    tooltip=tooltip_template("{datum.hour} h · {value} hits"),
+)`)))),a(`section`,{className:`spw-section`},a(`h2`,{id:`export`,ref:I},a(i,{className:`spw-anchor`,to:`#export`},`Export: the imperative handle`)),a(`div`,{className:`spw-code`},a(`div`,{className:`spw-code-bar`},a(`span`,{className:`spw-code-label`},`python`),a(T,{},a(c,{size:14}),a(`span`,{},`Copy`))),a(`pre`,{},a(`code`,{},`from reflex_silverpoint_react import download_svg, get_geometry, get_svg, line_chart
+
+line_chart(id="hits", data=DATA, x_key="hour", value_key="hits")
+
+rx.button("Download SVG", on_click=download_svg("hits", "hits.svg"))           # in the browser
+rx.button("SVG to Python", on_click=get_svg("hits", State.receive_svg))         # handler gets a str
+rx.button("Geometry", on_click=get_geometry("hits", State.receive_geometry))    # handler gets a dict`)))),a(`section`,{className:`spw-section`},a(`h2`,{id:`ssr`,ref:L},a(i,{className:`spw-anchor`,to:`#ssr`},`Server rendering`)),a(`div`,{className:`spw-code`},a(`div`,{className:`spw-code-bar`},a(`span`,{className:`spw-code-label`},`shell`),a(N,{},a(c,{size:14}),a(`span`,{},`Copy`))),a(`pre`,{},a(`code`,{},`# Reflex compiles your pages to a React app; the charts render on the client.
+reflex export --frontend-only     # a static build, as this site is deployed on Vercel`)))),a(`section`,{className:`spw-section`},a(`h2`,{id:`ui`,ref:R},a(i,{className:`spw-anchor`,to:`#ui`},`UI components`)),a(`p`,{},`New in 0.3: 17 interface components from `,a(`code`,{},`reflex_silverpoint_react`),`, drawn as the charts are. `,a(`span`,{},`Each one adds its stylesheet for you.`),` A form with a controlled input, a switch, tabs and a submit button:`),a(`div`,{className:`spw-code`},a(`div`,{className:`spw-code-bar`},a(`span`,{className:`spw-code-label`},`python`),a(O,{},a(c,{size:14}),a(`span`,{},`Copy`))),a(`pre`,{},a(`code`,{},`import reflex as rx
+from reflex_silverpoint_react import (
+    bar_chart, line_chart, sp_button, sp_input, sp_switch, sp_tab_panel, sp_tabs, ui_item,
+)
+
+
+class State(rx.State):
+    city: str = "Caracas"
+    precision: bool = False
+    view: str = "traffic"
+
+    @rx.event
+    def set_city(self, value: str):  # on_change gets the value, not an event
+        self.city = value
+
+    @rx.event
+    def set_precision(self, value: bool):
+        self.precision = value
+
+    @rx.event
+    def set_view(self, value: str):
+        self.view = value
+
+    @rx.event
+    def save(self, form: dict):
+        print(form)  # {"city": "Caracas", ...}: the native inputs submit under their name
+
+
+def settings() -> rx.Component:
+    mode = rx.cond(State.precision, "precision", "ink")
+    return rx.el.form(
+        sp_input(label="City", name="city", value=State.city, on_change=State.set_city,
+                 invalid=State.city == "", message="Required: pick a city"),
+        sp_switch(label="Precision", name="precision", checked=State.precision,
+                  on_change=State.set_precision),
+        sp_tabs(
+            sp_tab_panel(line_chart(title="Traffic", mode=mode), value="traffic"),
+            sp_tab_panel(bar_chart(title="Errors", mode=mode), value="errors"),
+            items=[ui_item("traffic", "Traffic"), ui_item("errors", "Errors")],
+            label="Views", value=State.view, on_change=State.set_view,
+        ),
+        sp_button("Save", type="submit", variant="primary"),
+        on_submit=State.save,
+    )`))),a(`div`,{className:`spw-card spw-live`},a(M,{},a(`div`,{className:`spw-row spw-row-end`},a(g,{defaultValue:`Caracas`,id:`guide-reflex-city`,label:`City`,name:`city`,ref:z}),a(_,{id:`guide-reflex-precision`,label:`Precision`,name:`precision`,ref:V}),a(b,{id:`guide-reflex-save`,ref:H,type:`submit`,variant:`primary`},`Save`)),a(v,{defaultValue:`overview`,id:`guide-reflex-tabs`,items:[{key:`overview`,label:`Overview`},{key:`traffic`,label:`Traffic`},{key:`errors`,label:`Errors`},{key:`settings`,label:`Settings`}],label:`Views`,ref:U},a(y,{value:`overview`},`Overview: the charts of this view.`),a(y,{value:`traffic`},`Traffic: the charts of this view.`),a(y,{value:`errors`},`Errors: the charts of this view.`),a(y,{value:`settings`},`Settings: the charts of this view.`)))),a(`p`,{},`Every component has a reference page with each of its states in this framework:`),a(`div`,{className:`spw-chip-list`},a(i,{to:`/components/button`},`sp_button`),a(i,{to:`/components/input`},`sp_input`),a(i,{to:`/components/checkbox`},`sp_checkbox`),a(i,{to:`/components/radio-group`},`sp_radio_group`),a(i,{to:`/components/switch`},`sp_switch`),a(i,{to:`/components/slider`},`sp_slider`),a(i,{to:`/components/rate`},`sp_rate`),a(i,{to:`/components/segmented`},`sp_segmented`),a(i,{to:`/components/tabs`},`sp_tabs`),a(i,{to:`/components/steps`},`sp_steps`),a(i,{to:`/components/card`},`sp_card`),a(i,{to:`/components/tag`},`sp_tag`),a(i,{to:`/components/badge`},`sp_badge`),a(i,{to:`/components/divider`},`sp_divider`),a(i,{to:`/components/progress`},`sp_progress`),a(i,{to:`/components/alert`},`sp_alert`),a(i,{to:`/components/skeleton`},`sp_skeleton`)),a(i,{to:`/docs/ui`},`UI components: values, forms, keyboard →`)),a(`section`,{className:`spw-section`},a(`h2`,{id:`charts`,ref:W},a(i,{className:`spw-anchor`,to:`#charts`},`The 60 charts`)),a(`p`,{},`Every chart has a reference page with its example in this framework:`),a(`div`,{className:`spw-chip-list`},a(i,{to:`/charts/line-chart`},`line_chart`),a(i,{to:`/charts/step-chart`},`step_chart`),a(i,{to:`/charts/sparkline-rows`},`sparkline_rows`),a(i,{to:`/charts/kpi-card`},`kpi_card`),a(i,{to:`/charts/bar-chart`},`bar_chart`),a(i,{to:`/charts/stacked-bar-chart`},`stacked_bar_chart`),a(i,{to:`/charts/composed-chart`},`composed_chart`),a(i,{to:`/charts/waterfall-chart`},`waterfall_chart`),a(i,{to:`/charts/funnel-chart`},`funnel_chart`),a(i,{to:`/charts/bullet-chart`},`bullet_chart`),a(i,{to:`/charts/pyramid-chart`},`pyramid_chart`),a(i,{to:`/charts/candlestick-chart`},`candlestick_chart`),a(i,{to:`/charts/area-chart`},`area_chart`),a(i,{to:`/charts/range-band-chart`},`range_band_chart`),a(i,{to:`/charts/stream-chart`},`stream_chart`),a(i,{to:`/charts/scatter-chart`},`scatter_chart`),a(i,{to:`/charts/bubble-chart`},`bubble_chart`),a(i,{to:`/charts/heatmap-chart`},`heatmap_chart`),a(i,{to:`/charts/treemap-chart`},`treemap_chart`),a(i,{to:`/charts/activity-grid`},`activity_grid`),a(i,{to:`/charts/sankey-chart`},`sankey_chart`),a(i,{to:`/charts/chord-ring`},`chord_ring`),a(i,{to:`/charts/donut-chart`},`donut_chart`),a(i,{to:`/charts/radar-chart`},`radar_chart`),a(i,{to:`/charts/polar-bar-chart`},`polar_bar_chart`),a(i,{to:`/charts/radial-arc-group`},`radial_arc_group`),a(i,{to:`/charts/radial-rings`},`radial_rings`),a(i,{to:`/charts/gauge-arc`},`gauge_arc`),a(i,{to:`/charts/meter-chart`},`meter_chart`),a(i,{to:`/charts/coxcomb-chart`},`coxcomb_chart`),a(i,{to:`/charts/wind-rose`},`wind_rose`),a(i,{to:`/charts/volvelle-chart`},`volvelle_chart`),a(i,{to:`/charts/orbit-chart`},`orbit_chart`),a(i,{to:`/charts/histogram-chart`},`histogram_chart`),a(i,{to:`/charts/ecdf-chart`},`ecdf_chart`),a(i,{to:`/charts/box-plot-chart`},`box_plot_chart`),a(i,{to:`/charts/violin-chart`},`violin_chart`),a(i,{to:`/charts/ridgeline-chart`},`ridgeline_chart`),a(i,{to:`/charts/beeswarm-chart`},`beeswarm_chart`),a(i,{to:`/charts/lollipop-chart`},`lollipop_chart`),a(i,{to:`/charts/dumbbell-chart`},`dumbbell_chart`),a(i,{to:`/charts/slope-chart`},`slope_chart`),a(i,{to:`/charts/bump-chart`},`bump_chart`),a(i,{to:`/charts/error-bar-chart`},`error_bar_chart`),a(i,{to:`/charts/interval-chart`},`interval_chart`),a(i,{to:`/charts/diverging-bar-chart`},`diverging_bar_chart`),a(i,{to:`/charts/connected-scatter-chart`},`connected_scatter_chart`),a(i,{to:`/charts/waffle-chart`},`waffle_chart`),a(i,{to:`/charts/marimekko-chart`},`marimekko_chart`),a(i,{to:`/charts/squarified-treemap`},`squarified_treemap`),a(i,{to:`/charts/sunburst-chart`},`sunburst_chart`),a(i,{to:`/charts/tree-chart`},`tree_chart`),a(i,{to:`/charts/parallel-coordinates-chart`},`parallel_coordinates_chart`),a(i,{to:`/charts/polar-line-chart`},`polar_line_chart`),a(i,{to:`/charts/polar-scatter-chart`},`polar_scatter_chart`),a(i,{to:`/charts/density-bin-chart`},`density_bin_chart`),a(i,{to:`/charts/contour-chart`},`contour_chart`),a(i,{to:`/charts/delaunay-chart`},`delaunay_chart`),a(i,{to:`/charts/vector-field-chart`},`vector_field_chart`),a(i,{to:`/charts/network-chart`},`network_chart`))))),a(`aside`,{className:`spw-toc-col`},a(`nav`,{"aria-label":`On this page`,className:`spw-toc`},a(`p`,{className:`spw-toc-title`},`On this page`),a(i,{to:`#install`},`Install`),a(i,{to:`#about`},`About the Reflex component`),a(i,{to:`#new-0-7`},`New in 0.7.0: Reflex only`),a(i,{to:`#quickstart`},`Quickstart`),a(i,{to:`#provider`},`One ground for the whole app`),a(i,{to:`#precision`},`Precision mode`),a(i,{to:`#interaction`},`Interaction and a custom readout`),a(i,{to:`#export`},`Export: the imperative handle`),a(i,{to:`#ssr`},`Server rendering`),a(i,{to:`#ui`},`UI components`),a(i,{to:`#charts`},`The 60 charts`)))),a(`footer`,{className:`spw-footer`},a(`div`,{className:`spw-footer-grid`},a(`div`,{},a(`p`,{className:`spw-footer-brand`},a(`svg`,{"aria-hidden":`true`,className:`spw-mark`,height:`22`,viewBox:`0 0 32 32`,width:`22`},a(`g`,{stroke:`currentColor`},a(`line`,{css:{strokeWidth:`0.8`},x1:`4.75`,x2:`18.25`,y1:`13.75`,y2:`27.25`}),a(`line`,{css:{strokeWidth:`0.8`},x1:`7.00`,x2:`20.50`,y1:`11.50`,y2:`25.00`}),a(`line`,{css:{strokeWidth:`0.8`},x1:`9.25`,x2:`22.75`,y1:`9.25`,y2:`22.75`}),a(`line`,{css:{strokeWidth:`0.8`},x1:`11.50`,x2:`25.00`,y1:`7.00`,y2:`20.50`}),a(`line`,{css:{strokeWidth:`0.8`},x1:`13.75`,x2:`27.25`,y1:`4.75`,y2:`18.25`})),a(`path`,{css:{fill:`none`,stroke:`currentColor`,strokeWidth:`1.1`},d:`M16 2.5 C22 8.4 25.6 12 29.5 16 C23.4 22 20 25.6 16 29.5 C10.1 23.6 6.4 20 2.5 16 C8.6 10 12 6.4 16 2.5Z`}),a(`circle`,{css:{fill:`#fff`,stroke:`currentColor`,strokeWidth:`1.1`},cx:`16`,cy:`16`,r:`3.2`})),a(`strong`,{},` silverpoint`)),a(`p`,{},`Charts and UI components for React, Vue and Angular whose visual language is historical drawing technique.`),a(`p`,{},`Developed by `,a(i,{rel:`noopener noreferrer`,target:`_blank`,to:`https://www.seraph.to/`},`Ernesto Crespo`),` · `,a(i,{rel:`noopener noreferrer`,target:`_blank`,to:`https://www.seraph.to/`},`seraph.to`),` · `,a(i,{rel:`noopener noreferrer`,target:`_blank`,to:`https://github.com/ecrespo`},`@ecrespo`)),a(`p`,{},a(i,{rel:`noopener noreferrer`,target:`_blank`,to:`https://github.com/ecrespo/silverpoint/blob/main/LICENSE`},`MIT License`),` · Typeface: EB Garamond, SIL Open Font License`)),a(`div`,{},a(`h4`,{},`Library`),a(i,{rel:`noopener noreferrer`,target:`_blank`,to:`https://github.com/ecrespo/silverpoint`},`GitHub repository`),a(i,{rel:`noopener noreferrer`,target:`_blank`,to:`https://www.npmjs.com/search?q=silverpoint`},`npm packages`),a(i,{rel:`noopener noreferrer`,target:`_blank`,to:`https://github.com/ecrespo/silverpoint/releases`},`Releases`),a(i,{rel:`noopener noreferrer`,target:`_blank`,to:`https://github.com/ecrespo/silverpoint/tree/main/specs`},`Specifications`)),a(`div`,{},a(`h4`,{},`Reflex`),a(i,{rel:`noopener noreferrer`,target:`_blank`,to:`https://github.com/ecrespo/reflex-silverpoint-react`},`reflex-silverpoint-react`),a(i,{rel:`noopener noreferrer`,target:`_blank`,to:`https://pypi.org/project/reflex-silverpoint-react/`},`on PyPI`),a(i,{to:`/docs/reflex`},`Reflex quickstart`)),a(`div`,{},a(`h4`,{},`Help`),a(i,{to:`/support`},`Report a bug`),a(i,{rel:`noopener noreferrer`,target:`_blank`,to:`https://github.com/ecrespo/silverpoint/issues`},`Open issues`),a(i,{to:`/versions`},`Versions`),a(i,{rel:`noopener noreferrer`,target:`_blank`,to:`https://github.com/ecrespo/silverpoint_web`},`Source of this site`))),a(`p`,{className:`spw-footer-note`},`This site is built with Reflex and `,a(i,{rel:`noopener noreferrer`,target:`_blank`,to:`https://github.com/ecrespo/reflex-silverpoint-react`},`reflex-silverpoint-react`),`: every chart and every control on it is live silverpoint 0.6.0.`))),a(`title`,{},`Reflex (Python) · silverpoint docs`),a(`meta`,{content:`favicon.ico`,property:`og:image`}))}V.displayName=`Component(docs/reflex)`;var H=n(V);export{H as default};

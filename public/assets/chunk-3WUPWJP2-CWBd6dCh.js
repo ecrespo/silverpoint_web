@@ -1,0 +1,1 @@
+import{r as e,t,u as n}from"./ui-DiPYxMWx.js";function r({children:r,extra:i,footer:a,dashboardCell:o,...s}){let c=n(s,e(s,o),{extra:i!=null,footer:a!=null});return t(c,{slots:{content:r,extra:i,footer:a}})}export{r as t};

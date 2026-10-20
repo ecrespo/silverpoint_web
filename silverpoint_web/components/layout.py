@@ -5,6 +5,7 @@ from typing import Any
 import reflex as rx
 from reflex_silverpoint_react import CHARTS, FAMILIES, UI_COMPONENTS, UI_GROUPS
 
+from .. import composed_code as cc
 from .. import site_data as sd
 from .ui import ext_link, github_icon
 
@@ -49,7 +50,7 @@ DOCS_NAV: tuple[tuple[str, tuple[tuple[str, str], ...]], ...] = (
         ),
     ),
     (
-        "Reflex only",
+        "New in 0.7",
         (
             ("/docs/palettes", "Palettes"),
             ("/docs/composed", "Composed components"),
@@ -198,7 +199,8 @@ def footer() -> rx.Component:
         rx.el.p(
             "This site is built with Reflex and ",
             ext_link("reflex-silverpoint-react", sd.REFLEX_REPO),
-            f": every chart and every control on it is live silverpoint {sd.LATEST.version}.",
+            f" {sd.REFLEX_LATEST.version}: every chart and every control on it is live silverpoint, drawn by "
+            f"@silverpoint/react {sd.REFLEX_LATEST.wraps} (the 60 charts are unchanged in {sd.LATEST.version}).",
             class_name="spw-footer-note",
         ),
         class_name="spw-footer",
@@ -244,7 +246,7 @@ def sidebar(current: str) -> rx.Component:
         class_name="spw-side-group",
     )
     components = rx.el.div(
-        rx.el.p(f"UI components · {len(UI_COMPONENTS)}", class_name="spw-side-title"),
+        rx.el.p(f"UI components · {len(UI_COMPONENTS) + len(cc.REFERENCE)}", class_name="spw-side-title"),
         *[
             rx.el.details(
                 rx.el.summary(f"{title} · {sum(1 for c in UI_COMPONENTS if c.group == group)}"),
@@ -253,6 +255,15 @@ def sidebar(current: str) -> rx.Component:
                 class_name="spw-side-family",
             )
             for group, title in UI_GROUPS
+        ],
+        *[
+            rx.el.details(
+                rx.el.summary(f"{title} · {len(items)}"),
+                *[link(f"/components/{i.slug}", cc.component_name(i.slug)) for i in items],
+                open=any(f"/components/{i.slug}" == current for i in items),
+                class_name="spw-side-family",
+            )
+            for _, title, items in cc.REFERENCE_GROUPS
         ],
         class_name="spw-side-group",
     )

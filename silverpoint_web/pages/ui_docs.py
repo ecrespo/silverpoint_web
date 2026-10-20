@@ -177,9 +177,10 @@ def ui_docs():
     return page(
         "/docs/ui",
         "UI components",
-        f"New in 0.3. {len(UI_COMPONENTS)} interface components drawn as the charts are: frames hand-drawn by each "
+        f"Since 0.3. {len(UI_COMPONENTS)} interface components drawn as the charts are: frames hand-drawn by each "
         "ground's own inker, tone laid as hatching (silverpoint) or as the weight of an exact white line (cyanotype), "
-        "and a native control underneath every one. The controls on this site are these components.",
+        "and a native control underneath every one. The controls on this site are these components. 0.7 adds 21 "
+        "more — composed components and overlays — documented on Composed components.",
         [
             (
                 "try",
@@ -407,7 +408,7 @@ def ui_docs():
                 "In Reflex",
                 [
                     rx.el.p(
-                        "reflex-silverpoint-react 0.6 wraps all 17: ",
+                        f"reflex-silverpoint-react wraps all {len(UI_COMPONENTS)}: ",
                         *[
                             item
                             for i, info in enumerate(UI_COMPONENTS)

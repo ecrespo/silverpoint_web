@@ -593,7 +593,7 @@ td > .spw-pill { margin-left: 0; }
 .spw-table td:nth-child(-n+3) code { white-space: nowrap; overflow-wrap: normal; }
 .spw-table .spw-type code { white-space: normal; }
 
-/* ── Reflex only (reflex-silverpoint-react 0.7): palettes, composed components, timeline ── */
+/* ── New in 0.7 (drawn by reflex-silverpoint-react 0.7): palettes, composed components, timeline ── */
 
 .spw-stack { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; min-width: 0; }
 .spw-stack .spw-small { margin: 0; }
@@ -611,6 +611,16 @@ td > .spw-pill { margin-left: 0; }
 .spw-card-wide { grid-column: 1 / -1; }
 .spw-ui-card .spw-ui-sample > .sp-surface { max-width: 100%; }
 .spw-ui-sample .sp-datatable { width: 100%; }
+.spw-surface-demo > * { padding: 8px 14px; }
+.spw-glyph-sample {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 72px;
+  font-size: 0.75rem;
+}
+.spw-glyph-sample svg { width: 20px; height: 20px; }
 
 .spw-palette-card { display: flex; flex-direction: column; gap: 10px; }
 .spw-palette-card .spw-row { margin-top: 0; justify-content: space-between; }

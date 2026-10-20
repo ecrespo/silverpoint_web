@@ -1,5 +1,7 @@
 """The 17 UI components of silverpoint 0.3: their live demos and their code in four frameworks.
 
+The 21 that 0.7 adds (composed components and overlays) are in ``reflex_only`` and ``composed_code``.
+
 Each reference state comes from ``reflex_silverpoint_react.UI_DEMOS`` (a mirror of upstream's
 ``@silverpoint/core/ui-demos``). The site draws it with ``ui_demo`` and prints the same state in
 React, Vue, Angular and Reflex, so what a reader copies is what they see drawn. As upstream's own

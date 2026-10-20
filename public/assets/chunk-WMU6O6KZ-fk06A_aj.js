@@ -1,0 +1,1 @@
+import{G as e,J as t}from"./components-CyVeYEF6.js";import{S as n,a as r,i,n as a}from"./ui-B5chUujo.js";var o=(0,t(e(),1).forwardRef)(function({value:e,defaultValue:t,onChange:o,dashboardCell:s,...c},l){let[u,d]=r(e,t??c.min??0,o),f=n(c,i(c,s),{value:u});return a(f,{native:{ref:l,onChange:e=>d(e.target.valueAsNumber)}})});export{o as t};

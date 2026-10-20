@@ -1,0 +1,1 @@
+import{a as e,i as t,n,v as r,y as i}from"./ui-B5chUujo.js";function a({value:a,defaultValue:o,onChange:s,dashboardCell:c,...l}){let[u,d]=e(a,o,s),f=i(l,t(l,c),{value:u??null});return n(f,{root:{onKeyDown:e=>r(e,e.currentTarget,`input.sp-ui-native`,`both`,!0)},native:e=>({checked:e.attrs.checked===!0,onChange:e=>d(e.target.value)})})}export{a as t};

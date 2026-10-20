@@ -193,6 +193,69 @@
     <loc>https://silverpointweb.vercel.app/components</loc>
   </url>
   <url>
+    <loc>https://silverpointweb.vercel.app/components/surface</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/components/glyph</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/components/table</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/components/pagination</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/components/breadcrumb</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/components/avatar</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/components/statistic</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/components/descriptions</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/components/timeline-list</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/components/collapse</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/components/empty</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/components/result</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/components/textarea</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/components/input-number</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/components/modal</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/components/drawer</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/components/popover</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/components/tooltip</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/components/select</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/components/dropdown-menu</loc>
+  </url>
+  <url>
+    <loc>https://silverpointweb.vercel.app/components/toast</loc>
+  </url>
+  <url>
     <loc>https://silverpointweb.vercel.app/components/button</loc>
   </url>
   <url>

@@ -11,6 +11,7 @@ from reflex_silverpoint_react import (
     sp_timeline,
 )
 
+from .. import composed_code as cc
 from .. import reflex_only as ro
 from .. import site_data as sd
 from .. import ui_examples as ux
@@ -99,7 +100,10 @@ def composed_card(item: ro.Composed) -> rx.Component:
     }
     return rx.el.div(
         rx.el.div(
-            rx.el.a(item.name, href=f"/docs/composed#{item.slug}"),
+            rx.el.a(
+                item.name if item.slug == "trigger" else cc.ADAPTER_NAMES[item.slug][0],
+                href=f"/docs/composed#{item.slug}" if item.slug == "trigger" else f"/components/{item.slug}",
+            ),
             rx.el.a("code →", href=f"/docs/composed#{item.slug}", class_name="spw-card-code"),
             class_name="spw-card-title",
         ),
@@ -121,10 +125,10 @@ def gallery() -> rx.Component:
             rx.el.p("Gallery", class_name="spw-eyebrow"),
             rx.el.h1("Every chart and component, drawn live"),
             rx.el.p(
-                f"The {len(CHARTS)} charts enabled in silverpoint {sd.LATEST.version}, in {len(FAMILIES)} families, "
-                f"the {len(UI_COMPONENTS)} UI components, and, in Reflex, the {len(ro.COMPOSED)} composed components and "
-                "the timeline of reflex-silverpoint-react "
-                f"{ro.REFLEX_VERSION}, each drawn from the same props as its example code. Change the ground, the "
+                f"The {len(CHARTS)} charts of silverpoint {sd.LATEST.version}, in {len(FAMILIES)} families, the "
+                f"{len(UI_COMPONENTS)} UI components of 0.3, and the composed components, overlays and timeline new in "
+                f"0.7 (drawn here by reflex-silverpoint-react {ro.REFLEX_VERSION}), each from the same props as its "
+                "example code. Change the ground, the "
                 "substrate, the mode, the hatch fill or the palette: the geometry of the data never moves, only the "
                 "drawing does. The controls themselves are silverpoint's SpSegmented.",
                 class_name="spw-lede",
@@ -140,8 +144,8 @@ def gallery() -> rx.Component:
             choice("Palette", PALETTE, ro.PALETTE_CHOICES),
             rx.el.p(
                 "cyanotype has one substrate, prussian, whatever you pick here. Hatch fill applies to charts, "
-                "size to UI components. Palettes (Reflex only, new in reflex-silverpoint-react "
-                f"{ro.REFLEX_VERSION}) re-colour everything; none keeps the ground's own inks.",
+                "size to UI components. Palettes (new in 0.7) re-colour everything; none keeps the ground's own "
+                "inks.",
                 class_name="spw-controls-note",
             ),
             class_name="spw-controls",
@@ -158,7 +162,7 @@ def gallery() -> rx.Component:
                 f"UI components · {len(UI_COMPONENTS)}", href="#ui-components", class_name="spw-family-ui"
             ),
             rx.el.a(
-                f"Composed · {len(ro.COMPOSED)}", href="#composed-components", class_name="spw-family-ui"
+                f"Composed · {len(cc.REFERENCE)}", href="#composed-components", class_name="spw-family-ui"
             ),
             rx.el.a("Timeline", href="#timeline", class_name="spw-family-ui"),
             class_name="spw-family-nav",
@@ -191,7 +195,7 @@ def sections() -> list[rx.Component]:
                 id="ui-components",
             ),
             rx.el.p(
-                "New in 0.3: interface components with frames hand-drawn by each ground's own inker. Each is a native "
+                "Since 0.3: interface components with frames hand-drawn by each ground's own inker. Each is a native "
                 "control underneath: try them, they work. ",
                 rx.el.a("All their states and props →", href="/components"),
                 class_name="spw-family-blurb",
@@ -209,14 +213,14 @@ def sections() -> list[rx.Component]:
         rx.el.section(
             rx.el.h2(
                 "Composed components",
-                rx.el.span(f" · {len(ro.COMPOSED)}", class_name="spw-count"),
+                rx.el.span(f" · {len(cc.REFERENCE)}", class_name="spw-count"),
                 id="composed-components",
             ),
             rx.el.p(
-                f"New in reflex-silverpoint-react {ro.REFLEX_VERSION}, Reflex only: components built on silverpoint's "
-                "own frames, tones and heightening. Level A is native markup; level B are overlays on Radix "
-                "primitives. ",
-                rx.el.a("Their props and code →", href="/docs/composed"),
+                f"New in {sd.LATEST.version}: components built on silverpoint's own frames, tones and heightening, in "
+                "React, Vue, Angular and Reflex. The composed ones are native markup; the overlays open from a "
+                "trigger you write. ",
+                rx.el.a("Their code in four frameworks →", href="/docs/composed"),
                 class_name="spw-family-blurb",
             ),
             *[
@@ -224,7 +228,7 @@ def sections() -> list[rx.Component]:
                     rx.el.h3(ro.LEVEL_TITLES[level], id=f"composed-{level.lower()}"),
                     rx.el.p(ro.LEVEL_BLURBS[level], class_name="spw-family-blurb"),
                     rx.el.div(
-                        *[composed_card(i) for i in ro.COMPOSED if i.level == level], class_name="spw-grid"
+                        *[composed_card(i) for i in cc.REFERENCE if i.level == level], class_name="spw-grid"
                     ),
                 )
                 for level in ("A", "B")
@@ -234,9 +238,9 @@ def sections() -> list[rx.Component]:
         rx.el.section(
             rx.el.h2("Timeline", id="timeline"),
             rx.el.p(
-                f"New in reflex-silverpoint-react {ro.REFLEX_VERSION}, Reflex only: Knight Lab's TimelineJS drawn in "
-                "silverpoint, on the gallery's ground, mode and palette. ",
-                rx.el.a("sp_timeline →", href="/docs/timeline"),
+                f"New in {sd.LATEST.version}: Knight Lab's TimelineJS drawn in silverpoint, on the gallery's ground, "
+                "mode and palette. ",
+                rx.el.a("SpTimeline →", href="/docs/timeline"),
                 class_name="spw-family-blurb",
             ),
             rx.el.div(
@@ -262,7 +266,7 @@ def register(app: rx.App) -> None:
         route="/gallery",
         title="Gallery · silverpoint",
         description=(
-            f"All {len(CHARTS)} silverpoint charts, {len(UI_COMPONENTS)} UI components and {len(ro.COMPOSED)} "
-            "Reflex composed components, live, with ground, substrate, mode and palette controls."
+            f"All {len(CHARTS)} silverpoint charts, its UI, composed and overlay components and the timeline, "
+            "live, with ground, substrate, mode and palette controls."
         ),
     )

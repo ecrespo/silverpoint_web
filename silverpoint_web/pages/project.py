@@ -5,6 +5,7 @@ from urllib.parse import quote
 import reflex as rx
 from reflex_silverpoint_react import CHARTS, UI_COMPONENTS, sp_steps, step_item
 
+from .. import composed_code as cc
 from .. import site_data as sd
 from ..components.layout import docs_page
 from ..components.ui import c, callout, code_block, ext_link, pill, section, table
@@ -49,22 +50,35 @@ def packages() -> rx.Component:
                 ["You use", "Install"],
                 [[fw.label, rx.el.code(fw.install)] for fw in sd.FRAMEWORKS],
             ),
+            callout(
+                "Two optional extras since 0.7: name ",
+                c("@silverpoint/core"),
+                " in your own dependencies to import the palette presets from ",
+                c("@silverpoint/core/palettes"),
+                " (a strict package manager such as pnpm requires it), and install ",
+                c("@knight-lab/timelinejs"),
+                " (an optional peer, ^3.9.13) only if you use ",
+                rx.el.a("SpTimeline", href="/docs/timeline"),
+                ".",
+                kind="note",
+            ),
         ),
         section(
             "pypi",
             "On PyPI: the Reflex component",
             rx.el.p(
                 ext_link(rx.el.code("reflex-silverpoint-react"), sd.REFLEX_PYPI),
-                f" wraps @silverpoint/react and exposes all {len(CHARTS)} charts, the Dashboard, the {len(UI_COMPONENTS)} "
-                "UI components and the provider as Python components for ",
+                f" wraps @silverpoint/react {sd.REFLEX_LATEST.wraps} and exposes all {len(CHARTS)} charts, the Dashboard, "
+                f"the {len(UI_COMPONENTS)} UI components and the provider as Python components for ",
                 ext_link("Reflex", "https://reflex.dev"),
-                f". Version {sd.REFLEX_LATEST.version} adds, in Reflex only, ",
+                f". Version {sd.REFLEX_LATEST.version} builds, in Reflex, ",
                 rx.el.a("palettes", href="/docs/palettes"),
-                ", 20 ",
-                rx.el.a("composed components", href="/docs/composed"),
+                f", {len(cc.REFERENCE)} ",
+                rx.el.a("composed components and overlays", href="/docs/composed"),
                 " and the Knight Lab ",
                 rx.el.a("timeline", href="/docs/timeline"),
-                "; it requires Reflex 0.10 and Python 3.11+. Source: ",
+                f" — what silverpoint {sd.LATEST.version} ships in React, Vue and Angular — with a Python API of its "
+                "own; it requires Reflex 0.10 and Python 3.11+. Source: ",
                 ext_link("ecrespo/reflex-silverpoint-react", sd.REFLEX_REPO),
                 ".",
             ),
@@ -177,7 +191,7 @@ def versions() -> rx.Component:
             "reflex-silverpoint-react",
             rx.el.p(
                 "The Reflex component has its own version line. Most of its releases follow the npm release they wrap "
-                "(the Reflex column above); these add something of their own, in Reflex only."
+                "(the Reflex column above); these add something of their own, built in Reflex."
             ),
             *[
                 rx.el.div(

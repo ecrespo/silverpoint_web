@@ -1,8 +1,10 @@
-"""What reflex-silverpoint-react 0.7 adds in Reflex only: palettes, 20 composed components, the timeline.
+"""The live demos of silverpoint 0.7's additions: palettes, the composed components, the timeline.
 
-None of it is in silverpoint's React, Vue or Angular adapters, so it has no framework tabs: each
-demo is Python. The demos are driven by client-side state (``ClientStateVar``), as the site has no
-backend; the code printed beside them is the usual ``rx.State`` version a Reflex app writes.
+silverpoint 0.7.0 ships them in React, Vue and Angular; the site draws them with the Reflex versions
+of reflex-silverpoint-react 0.7.0, which builds the same three in Reflex. The demos are driven by
+client-side state (``ClientStateVar``), as the site has no backend; the Python printed beside them is
+the usual ``rx.State`` version a Reflex app writes, and ``composed_code`` holds the React, Vue and
+Angular code of each.
 
 ``demo(slug, surface)`` draws one composed component with the surface props of the page it is on
 (ground, substrate, mode, palette), so the gallery and ``/docs/composed`` share every demo.
@@ -27,6 +29,7 @@ from reflex_silverpoint_react import (
     sp_drawer,
     sp_dropdown_menu,
     sp_empty,
+    sp_glyph,
     sp_input_number,
     sp_modal,
     sp_pagination,
@@ -34,6 +37,7 @@ from reflex_silverpoint_react import (
     sp_result,
     sp_select,
     sp_statistic,
+    sp_surface,
     sp_table,
     sp_textarea,
     sp_timeline_list,
@@ -117,8 +121,8 @@ DESCRIPTIONS: list[dict[str, Any]] = [
     {"label": "Ground", "value": "silverpoint"},
     {"label": "Substrate", "value": "cream"},
     {"label": "Charts", "value": "60"},
-    {"label": "UI components", "value": "17"},
-    {"label": "Composed", "value": "20"},
+    {"label": "UI components", "value": "38"},
+    {"label": "Palettes", "value": "6"},
     {"label": "License", "value": "MIT"},
 ]
 
@@ -155,7 +159,7 @@ def _sorted_rows() -> rx.Var:
     )
 
 
-# ── The 20 components ────────────────────────────────────────────────────────────────────
+# ── The composed components and overlays ────────────────────────────────────────────────────────────────────
 
 
 @dataclass(frozen=True)
@@ -168,6 +172,26 @@ class Composed:
     summary: str
     render: Callable[[dict[str, Any]], rx.Component]
     code: str
+
+
+GLYPHS = ("tick", "cross", "warning", "info", "plus", "chevronDown", "arrowUp", "sort", "ellipsis")
+
+
+def _surface(s: dict[str, Any]) -> rx.Component:
+    return rx.el.div(
+        sp_surface(rx.el.span("A card frame"), frame="card", **s),
+        sp_surface(rx.el.span("A pill, toned 2"), frame="pill", tone=2, **s),
+        sp_surface(rx.el.span("Selected"), frame="control", tone="selected", **s),
+        sp_surface(rx.el.span("4"), frame="round", tone=4, **s),
+        class_name="spw-row spw-surface-demo",
+    )
+
+
+def _glyph(_s: dict[str, Any]) -> rx.Component:
+    return rx.el.div(
+        *[rx.el.span(sp_glyph(glyph=g), rx.el.code(g), class_name="spw-glyph-sample") for g in GLYPHS],
+        class_name="spw-row",
+    )
 
 
 def _table(s: dict[str, Any]) -> rx.Component:
@@ -367,7 +391,30 @@ def _toast(s: dict[str, Any]) -> rx.Component:
 
 
 COMPOSED: tuple[Composed, ...] = (
-    # Level A: native markup.
+    # Level A: native markup. The building blocks first.
+    Composed(
+        "surface",
+        "sp_surface",
+        "A",
+        "The root contract on any element: the ground's class, a hand-drawn frame (control, pill, box, card or "
+        "round) and a hatched tone (1–4, or a state such as selected or primary).",
+        _surface,
+        """sp_surface(rx.el.span("A card frame"), frame="card")
+sp_surface(rx.el.span("A pill, toned 2"), frame="pill", tone=2)
+sp_surface(rx.el.span("Selected"), frame="control", tone="selected")
+sp_surface("4", frame="round", tone=4, element="span")  # element: the HTML tag (div by default)""",
+    ),
+    Composed(
+        "glyph",
+        "sp_glyph",
+        "A",
+        "One exact 16×16 mark of UI_GLYPHS — tick, cross, chevrons, arrows, sort marks… — stroked with the text "
+        "colour, never inked.",
+        _glyph,
+        """sp_glyph(glyph="tick")
+sp_glyph(glyph="chevronDown")
+sp_glyph(glyph="sort")  # tick, dash, cross, warning, dot, lozenge, info, plus, chevron…, arrow…, sort…, ellipsis""",
+    ),
     Composed(
         "table",
         "sp_table · sort_rows",
@@ -423,7 +470,7 @@ sp_table(
         """sp_breadcrumb(
     [
         {"label": "Docs", "href": "/docs"},
-        {"label": "Reflex", "href": "/docs/reflex"},
+        {"label": "Components", "href": "/components"},
         {"label": "Composed components", "href": "/docs/composed"},
     ]
 )""",
@@ -651,12 +698,13 @@ sp_trigger("Menu", chevron=True)  # a down chevron after the text
 sp_popover(rx.el.p("…"), trigger=sp_trigger("Details", chevron=True))""",
     ),
 )
-LEVEL_TITLES = {"A": "Level A · native markup", "B": "Level B · overlays on Radix primitives"}
+LEVEL_TITLES = {"A": "Composed components · native markup", "B": "Overlays"}
 LEVEL_BLURBS = {
     "A": "Native HTML underneath (a <table>, <details>, <textarea>…) or a few lines of JS; drawn with the ground's "
     "own hand-inked frames, hatched tones and heightening.",
-    "B": "Behaviour — focus trapping, keyboard, dismissal, positioning, ARIA — is Radix's, at the versions Reflex "
-    "already installs. They render in a portal at the end of <body>: give them ground and palette directly.",
+    "B": "Opened by a trigger you write. In React, Vue and Angular they are the platform's <dialog> and Popover API; "
+    "in Reflex, Radix primitives at the versions Reflex already installs, rendered in a portal at the end of <body>: "
+    "give those ground and palette directly.",
 }
 
 
@@ -729,6 +777,14 @@ TIMELINE_DATA: dict[str, Any] = {
             "text": {
                 "headline": "silverpoint 0.6",
                 "text": "The second catalog: 60 charts, with drill-down.",
+            },
+        },
+        {
+            "unique_id": "sp-0-7",
+            "start_date": {"year": 2026, "month": 10, "day": 20},
+            "text": {
+                "headline": "silverpoint 0.7",
+                "text": "Palettes, 38 UI components with overlays, and this timeline, in React, Vue and Angular.",
             },
         },
     ],

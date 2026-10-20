@@ -1,7 +1,9 @@
-"""The Reflex-only documentation of reflex-silverpoint-react 0.7: palettes, composed components, timeline.
+"""The docs of what silverpoint 0.7 adds: palettes, composed and overlay components, the timeline.
 
-silverpoint's React, Vue and Angular adapters do not have these, so the pages print Python only.
-Their live examples run on client-side state (``ClientStateVar``): the site has no backend.
+silverpoint 0.7.0 ships them in React, Vue and Angular; reflex-silverpoint-react 0.7.0 builds the same
+three in Reflex (on @silverpoint/react 0.6), with a Python API of its own. The pages print the code in
+all four behind the page-wide framework switch, and draw the live examples with the Reflex versions,
+on client-side state (``ClientStateVar``): the site has no backend.
 """
 
 from collections.abc import Callable
@@ -27,14 +29,15 @@ from reflex_silverpoint_react import (
 )
 from reflex_silverpoint_react.palette import CONTRAST_THRESHOLDS, DEFAULT_SUBSTRATE
 
+from .. import composed_code as cc
 from .. import datasets as ds
 from .. import reflex_only as ro
 from .. import site_data as sd
 from .. import ui_examples as ux
-from ..components.ui import c, callout, choice, code_block, ext_link, paper_card, shell, table
+from ..components.ui import c, callout, choice, code_block, ext_link, framework_tabs, paper_card, table
 from .docs import QUICK_DATA, SALES, Section, live, page
 
-EYEBROW = "Reflex (Python) only"
+EYEBROW = f"New in {sd.LATEST.version}"
 
 # ── Palettes ─────────────────────────────────────────────────────────────────────────────
 
@@ -57,6 +60,50 @@ MINE = Palette(substrate="#F2E8DC", ink="#8A3A24", ink_secondary="#6A4A3A", text
 assert not check_palette(MINE)  # [] when every field meets its contrast threshold
 
 silverpoint_palette(dashboard(...), sp_card(...), palette="indigo")  # a whole section"""
+
+PALETTE_CODES = {
+    "react": """import { sanguine } from '@silverpoint/core/palettes'; // npm install @silverpoint/core
+import { SilverpointProvider } from '@silverpoint/react';
+import { BarChart } from '@silverpoint/react/bar-chart';
+import { SpButton } from '@silverpoint/react/ui/button';
+
+<SilverpointProvider palette={sanguine}> {/* a whole section */}
+  <BarChart title="Orders" />
+  <SpButton variant="primary" palette={{ ink: '#2C6355' }}>Save</SpButton> {/* one field changed */}
+</SilverpointProvider>""",
+    "vue": """<script setup lang="ts">
+import { sanguine } from '@silverpoint/core/palettes';
+import { SilverpointProvider } from '@silverpoint/vue';
+import { SpBarChart } from '@silverpoint/vue/bar-chart';
+import { SpButton } from '@silverpoint/vue/ui/button';
+</script>
+
+<template>
+  <!-- or provideSilverpoint({ palette: sanguine }) for the whole app -->
+  <SilverpointProvider :palette="sanguine">
+    <SpBarChart title="Orders" />
+    <SpButton variant="primary" :palette="{ ink: '#2C6355' }">Save</SpButton>
+  </SilverpointProvider>
+</template>""",
+    "angular": """// app.config.ts: the whole app (or a component's providers: one section of it)
+import { type ApplicationConfig, provideZonelessChangeDetection } from '@angular/core';
+import { sanguine } from '@silverpoint/core/palettes';
+import { provideSilverpoint } from '@silverpoint/angular';
+
+export const appConfig: ApplicationConfig = {
+  providers: [provideZonelessChangeDetection(), provideSilverpoint({ palette: sanguine })],
+};
+
+// a template: one field changed
+// <button spButton variant="primary" [palette]="{ ink: '#2C6355' }">Save</button>""",
+    "reflex": PALETTE_CODE,
+}
+
+CHECK_PALETTE_JS = """import { checkPalette, contrastRatio, sanguine } from '@silverpoint/core/palettes';
+
+const mine = { ...sanguine, ink: '#5A1F14' }; // fields are camelCase: inkSecondary, textMuted
+checkPalette(mine); // [] when every pair meets its threshold, else { pair, ratio, threshold, … }
+contrastRatio('#5A1F14', '#F2E8DC'); // the WCAG ratio, 1 to 21"""
 
 STATE_PALETTE_CODE = """class Theme(rx.State):
     preset: str = "sanguine"
@@ -204,7 +251,7 @@ def palettes() -> Callable[[], rx.Component]:
                     c("Palette"),
                     ", a dict of fields or a state var holding one.",
                 ),
-                code_block(PALETTE_CODE, "python"),
+                framework_tabs(PALETTE_CODES),
             ],
         ),
         (
@@ -273,9 +320,16 @@ def palettes() -> Callable[[], rx.Component]:
                     c("[]"),
                     " when the palette passes (only hex colours can be measured; a palette without ",
                     c("substrate"),
-                    f" is measured against cream, {DEFAULT_SUBSTRATE}).",
+                    f" is measured against cream, {DEFAULT_SUBSTRATE}). In JavaScript, ",
+                    c("checkPalette"),
+                    " and ",
+                    c("contrastRatio"),
+                    " on ",
+                    c("@silverpoint/core/palettes"),
+                    " do the same:",
                 ),
                 builder(),
+                code_block(CHECK_PALETTE_JS, "ts"),
             ],
         ),
         (
@@ -317,21 +371,41 @@ def palettes() -> Callable[[], rx.Component]:
                         " mode and the system's high-contrast modes still apply on top of any palette.",
                     ),
                     rx.el.li(
+                        "React, Vue and Angular: ",
+                        c("SilverpointProvider"),
+                        " / ",
+                        c("provideSilverpoint"),
+                        " take a ",
+                        c("palette"),
+                        "; a nested provider, a dashboard cell or a ",
+                        c("palette"),
+                        " prop overrides it field by field. A value is accepted only if it is a CSS colour.",
+                    ),
+                    rx.el.li(
+                        "Reflex: ",
                         c("silverpoint_provider"),
                         " takes no palette (it renders no element): use ",
                         c("silverpoint_palette"),
-                        ".",
-                    ),
-                    rx.el.li(
-                        "Overlays (modal, drawer, popover, tooltip, select, menu, toast) render in a portal outside "
-                        "any section: give them ",
+                        ". Its overlays render in a Radix portal outside any section: give them ",
                         c("palette"),
                         " directly.",
                     ),
                 ),
                 callout(
-                    "Palettes are a Reflex feature of reflex-silverpoint-react 0.7. In React, Vue and Angular, set the "
-                    "same --sp- custom properties in CSS (the Tailwind preset names them as tokens).",
+                    "The names differ by language: ",
+                    c("ironGall"),
+                    ", ",
+                    c("inkSecondary"),
+                    " and ",
+                    c("textMuted"),
+                    " in JavaScript are ",
+                    c("iron_gall"),
+                    ", ",
+                    c("ink_secondary"),
+                    " and ",
+                    c("text_muted"),
+                    " in Python. Both set the same --sp- custom properties, which you can also set in CSS (the "
+                    "Tailwind preset names them as tokens).",
                     kind="note",
                 ),
             ],
@@ -340,9 +414,10 @@ def palettes() -> Callable[[], rx.Component]:
     return page(
         "/docs/palettes",
         "Palettes",
-        f"New in reflex-silverpoint-react {ro.REFLEX_VERSION}. Re-colour every chart, UI component, dashboard and "
-        "composed component with six presets named after drawing media, or a palette of your own, checked against "
-        "silverpoint's contrast thresholds.",
+        f"New in silverpoint {sd.LATEST.version} (React, Vue, Angular) and reflex-silverpoint-react "
+        f"{ro.REFLEX_VERSION}. Re-colour every chart, UI component, dashboard and composed component with six "
+        "presets named after drawing media, or a palette of your own, checked against silverpoint's contrast "
+        "thresholds.",
         sections,
         eyebrow=EYEBROW,
     )
@@ -370,7 +445,19 @@ def composed_entry(item: ro.Composed) -> Section:
         item.slug,
         item.name,
         [
-            rx.el.p(item.summary),
+            rx.el.p(
+                item.summary,
+                *(
+                    []
+                    if item.slug == "trigger"
+                    else [
+                        " ",
+                        rx.el.a(
+                            f"{cc.component_name(item.slug)} reference →", href=f"/components/{item.slug}"
+                        ),
+                    ]
+                ),
+            ),
             paper_card(
                 ux.panel(
                     ro.demo(item.slug, composed_surface()),
@@ -379,7 +466,7 @@ def composed_entry(item: ro.Composed) -> Section:
                 ),
                 class_name="spw-live",
             ),
-            code_block(item.code, "python"),
+            framework_tabs({**cc.FRAMEWORK_CODE[item.slug], "reflex": item.code}),
         ],
     )
 
@@ -394,17 +481,29 @@ def composed() -> Callable[[], rx.Component]:
             rx.el.p(
                 c("@silverpoint/grounds/ui.css"),
                 " draws its hand-inked frames, hatched tones and heightening on any element that follows its markup "
-                "contract. These components are built in Reflex on that contract, so they are drawn with exactly the "
-                "same pieces as the Sp components. ",
-                c("sp_surface"),
+                "contract, so these components are drawn with exactly the same pieces as the first 17. silverpoint ",
+                f"{sd.LATEST.version} ships them in React, Vue and Angular, on ",
+                c("@silverpoint/<framework>/ui/<name>"),
+                " beside the others (38 UI components in all); ",
+                c("SpSurface"),
                 " and ",
+                c("SpGlyph"),
+                " (",
+                c("sp_surface"),
+                ", ",
                 c("sp_glyph"),
-                " are the building blocks, for components of your own.",
+                ") are the building blocks, for components of your own.",
             ),
             callout(
-                "They are Reflex-only (silverpoint's React, Vue and Angular adapters do not have them) and, unlike the "
-                "Sp components, they do not read silverpoint_provider: pass ground, substrate, mode and palette "
-                "explicitly.",
+                "The live demos are the Reflex versions of reflex-silverpoint-react ",
+                ro.REFLEX_VERSION,
+                ". Their API differs in places: snake_case, an ",
+                c("sp_trigger"),
+                " button, overlays on Radix primitives (the adapters use the native <dialog> and the Popover API), ",
+                c('side="right"'),
+                " where the adapters say ",
+                c('"end"'),
+                ", and they do not read silverpoint_provider: pass ground, substrate, mode and palette explicitly.",
                 kind="warn",
             ),
             table(
@@ -439,7 +538,40 @@ def composed() -> Callable[[], rx.Component]:
         "Surface props",
         [
             rx.el.p(
-                "Every builder takes ",
+                "In React, Vue and Angular every component takes ",
+                c("ground"),
+                ", ",
+                c("substrate"),
+                ", ",
+                c("mode"),
+                ", ",
+                c("size"),
+                ", ",
+                c("palette"),
+                " and ",
+                c("id"),
+                ", and reads them from the provider. A value binds as each framework does it (",
+                c("value"),
+                " + ",
+                c("onChange"),
+                ", ",
+                c("v-model"),
+                ", ",
+                c("[(value)]"),
+                " or a forms directive), and an overlay's open state with ",
+                c("open"),
+                " + ",
+                c("onOpenChange"),
+                ", ",
+                c("v-model:open"),
+                " or ",
+                c("[(open)]"),
+                " (or ",
+                c("defaultOpen"),
+                ").",
+            ),
+            rx.el.p(
+                "In Reflex every builder takes ",
                 c("ground"),
                 ", ",
                 c("substrate"),
@@ -484,9 +616,9 @@ def composed() -> Callable[[], rx.Component]:
     return page(
         "/docs/composed",
         "Composed components",
-        f"New in reflex-silverpoint-react {ro.REFLEX_VERSION}. {len(ro.COMPOSED)} components built in Reflex on "
-        "silverpoint's frames and tones: tables, pagination, statistics, collapse panels, and overlays — modal, "
-        "drawer, popover, tooltip, select, menu and toast — on Radix primitives.",
+        f"New in silverpoint {sd.LATEST.version} and reflex-silverpoint-react {ro.REFLEX_VERSION}. Components drawn "
+        "on silverpoint's frames and tones: tables, pagination, statistics, collapse panels, and overlays — modal, "
+        "drawer, popover, tooltip, select, menu and toast — in React, Vue, Angular and Reflex.",
         sections,
         eyebrow=EYEBROW,
     )
@@ -500,6 +632,77 @@ TIMELINE_MODE = ClientStateVar.create("timeline_mode", "ink")
 TIMELINE_PALETTE = ClientStateVar.create("timeline_palette", "none")
 TIMELINE_FRAMES = ClientStateVar.create("timeline_frames", "inked")
 TIMELINE_SLIDE = ClientStateVar.create("timeline_slide", "")
+
+
+TIMELINE_INSTALL = {
+    "react": "npm install @knight-lab/timelinejs",
+    "vue": "npm install @knight-lab/timelinejs",
+    "angular": "npm install @knight-lab/timelinejs",
+    "reflex": 'pip install "reflex-silverpoint-react[timeline]"',
+}
+
+TIMELINE_STORY_JS = """const story = {
+  title: { text: { headline: 'From silverpoint to silverpoint' } },
+  events: [
+    { start_date: { year: 1484 }, text: { headline: 'Dürer at thirteen', text: '…' } },
+    { start_date: { year: 1842 }, text: { headline: 'The cyanotype', text: '…' } },
+  ],
+  eras: [{ start_date: { year: 1400 }, end_date: { year: 1600 }, text: { headline: 'Metalpoint' } }],
+};"""
+
+TIMELINE_CODES = {
+    "react": f"""import '@knight-lab/timelinejs/dist/css/timeline.css'; // TimelineJS's stylesheet first
+import '@silverpoint/grounds/timeline.css';
+import {{ SpTimeline }} from '@silverpoint/react/timeline';
+
+{TIMELINE_STORY_JS}
+
+<SpTimeline
+  data={{story}}
+  height="560px"
+  palette={{sepia}} // from '@silverpoint/core/palettes'
+  inkedFrames // the ground's hand-drawn frames and tone tiles
+  onChange={{(uniqueId) => console.log(uniqueId)}} // the slide shown
+  fallback={{<p>The timeline could not be loaded.</p>}}
+/>""",
+    "vue": f"""<script setup lang="ts">
+import '@knight-lab/timelinejs/dist/css/timeline.css';
+import '@silverpoint/grounds/timeline.css';
+import {{ SpTimeline }} from '@silverpoint/vue/timeline';
+
+{TIMELINE_STORY_JS}
+</script>
+
+<template>
+  <SpTimeline :data="story" height="560px" @change="(id) => console.log(id)">
+    <template #fallback><p>The timeline could not be loaded.</p></template>
+  </SpTimeline>
+</template>""",
+    "angular": f"""/* src/styles.css */
+@import '@knight-lab/timelinejs/dist/css/timeline.css';
+@import '@silverpoint/grounds/timeline.css';
+
+// history.ts
+import {{ Component }} from '@angular/core';
+import {{ SpTimeline, SpTimelineFallback }} from '@silverpoint/angular/timeline';
+
+{TIMELINE_STORY_JS}
+
+@Component({{
+  selector: 'app-history',
+  imports: [SpTimeline, SpTimelineFallback],
+  template: `
+    <sp-timeline [data]="story" height="560px" (change)="slide = $event">
+      <ng-template spFallback><p>The timeline could not be loaded.</p></ng-template>
+    </sp-timeline>
+  `,
+}})
+export class History {{
+  protected slide: string | undefined;
+  protected readonly story = story;
+}}""",
+    "reflex": ro.TIMELINE_CODE,
+}
 
 
 def live_timeline(**props) -> rx.Component:
@@ -547,23 +750,34 @@ def timeline() -> Callable[[], rx.Component]:
             "Install",
             [
                 rx.el.p(
+                    "In React, Vue and Angular, ",
+                    c("SpTimeline"),
+                    " is on its own subpath, ",
+                    c("@silverpoint/<framework>/timeline"),
+                    ", and ",
+                    c("@knight-lab/timelinejs"),
+                    " (^3.9.13) is an optional peer: install it only if you use the timeline, import the subpath only "
+                    "with it installed, and import its stylesheet before ",
+                    c("@silverpoint/grounds/timeline.css"),
+                    ". The server renders the surface and an empty mount; TimelineJS builds in the browser, and if "
+                    "it cannot be loaded the mount shows your fallback and warns SP025.",
+                ),
+                rx.el.p(
+                    "In Reflex, ",
                     c("sp_timeline"),
                     " wraps ",
                     ext_link(
                         "reflex-knightlab-timeline", "https://github.com/ecrespo/reflex-knightlab-timeline"
                     ),
-                    ", an optional extra:",
-                ),
-                shell('pip install "reflex-silverpoint-react[timeline]"'),
-                rx.el.p(
+                    ", an optional extra; ",
                     c("timeline_available()"),
-                    " tells you whether it is installed; without it, ",
+                    " tells you whether it is installed, and without it ",
                     c("sp_timeline"),
                     " raises an ImportError that says how to add it.",
                 ),
             ],
         ),
-        ("code", "In your code", [code_block(ro.TIMELINE_CODE, "python")]),
+        ("code", "In your code", [framework_tabs(TIMELINE_CODES, TIMELINE_INSTALL)]),
         (
             "layers",
             "Two layers: the skin and the hand",
@@ -594,6 +808,23 @@ def timeline() -> Callable[[], rx.Component]:
             "props",
             "Props and events",
             [
+                rx.el.p(
+                    "The names below are Reflex's; in JavaScript they are camelCase (",
+                    c("inkedFrames"),
+                    ", ",
+                    c("onNavNext"),
+                    " in React, ",
+                    c("@nav-next"),
+                    " in Vue, ",
+                    c("(navNext)"),
+                    " in Angular), ",
+                    c("height"),
+                    " is a CSS length (default ",
+                    c("'600px'"),
+                    "), and ",
+                    c("label"),
+                    " names the region (the title's headline when omitted).",
+                ),
                 table(
                     ["Prop", "Default", ""],
                     [
@@ -635,9 +866,9 @@ def timeline() -> Callable[[], rx.Component]:
     return page(
         "/docs/timeline",
         "Timeline",
-        f"New in reflex-silverpoint-react {ro.REFLEX_VERSION}. sp_timeline draws Knight Lab's TimelineJS in "
-        "silverpoint: a skin on the ground's colours and type, and the ground's own hand-inked frames and tone tiles "
-        "on its markers, eras and buttons.",
+        f"New in silverpoint {sd.LATEST.version} and reflex-silverpoint-react {ro.REFLEX_VERSION}. SpTimeline "
+        "draws Knight Lab's TimelineJS in silverpoint: a skin on the ground's colours and type, and the ground's own "
+        "hand-inked frames and tone tiles on its markers, eras and buttons.",
         sections,
         eyebrow=EYEBROW,
     )

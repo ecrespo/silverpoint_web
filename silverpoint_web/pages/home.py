@@ -25,7 +25,9 @@ from reflex_silverpoint_react import (
     wind_rose,
 )
 
+from .. import composed_code as cc
 from .. import datasets as ds
+from .. import reflex_only as ro
 from .. import site_data as sd
 from .. import ui_examples as ux
 from ..components.layout import shell_page
@@ -191,7 +193,8 @@ def index() -> rx.Component:
                     "reproduces Renaissance silverpoint: a prepared middle-tone substrate, a fine silver line, tone "
                     "built from hatching, and white heightening reserved for the live value. The second, cyanotype, "
                     "prints a white line on Prussian blue. Since 0.3 the same hand draws buttons, inputs, tabs and "
-                    "alerts too, and 0.6 adds a second catalog: distributions, hierarchies, fields and networks.",
+                    "alerts too, 0.6 adds a second catalog — distributions, hierarchies, fields and networks — and "
+                    "0.7 palettes, overlays and a timeline.",
                     class_name="spw-hero-lede",
                 ),
                 rx.el.div(
@@ -246,6 +249,36 @@ def index() -> rx.Component:
             class_name="spw-home-section",
         ),
         rx.el.section(
+            sp_tag("new in 0.7", tone=4, id="home-composed-new"),
+            rx.el.h2("Palettes, overlays and a timeline"),
+            rx.el.p(
+                "Twenty-one more components in the same hand — tables, pagination, statistics, collapse panels, and "
+                "overlays on the platform's own <dialog> and Popover API: modal, drawer, popover, tooltip, select, "
+                "menu and toast — for 38 UI components in all. Six palettes named after drawing media re-colour "
+                "everything without re-rendering it, and Knight Lab's TimelineJS is drawn in silverpoint. In React, "
+                "Vue and Angular, and in Python with reflex-silverpoint-react.",
+                class_name="spw-lede",
+            ),
+            rx.el.div(
+                *[
+                    ux.panel(ro.demo(slug, {"palette": palette}))
+                    for slug, palette in (
+                        ("statistic", "sanguine"),
+                        ("timeline-list", "iron_gall"),
+                        ("collapse", "verdigris"),
+                    )
+                ],
+                class_name="spw-grid",
+            ),
+            rx.el.div(
+                sp_button("Palettes", href="/docs/palettes", size="sm", id="home-palettes"),
+                sp_button("Composed components", href="/docs/composed", size="sm", id="home-composed"),
+                sp_button("Timeline", href="/docs/timeline", size="sm", id="home-timeline"),
+                class_name="spw-row",
+            ),
+            class_name="spw-home-section",
+        ),
+        rx.el.section(
             sp_tag("new in 0.6", tone=4, id="home-catalog-new"),
             rx.el.h2(f"The second catalog: {len(NEW_IN_0_6)} new charts"),
             rx.el.p(
@@ -282,8 +315,8 @@ def index() -> rx.Component:
         rx.el.section(
             rx.el.div(
                 rx.el.div(
-                    sp_tag("new in 0.3", tone=4, id="home-ui-new"),
-                    rx.el.h2(f"{len(UI_COMPONENTS)} UI components, drawn by the same hand"),
+                    sp_tag("since 0.3", tone=4, id="home-ui-new"),
+                    rx.el.h2(f"{len(UI_COMPONENTS)} form and display components, drawn by the same hand"),
                     rx.el.p(
                         "Buttons, inputs, checkboxes, switches, sliders, tabs, steps, cards, tags, badges, progress, "
                         "alerts and skeletons, with frames hand-drawn by each ground's own inker. A native control "
@@ -348,9 +381,9 @@ def index() -> rx.Component:
                     rx.el.p(
                         f"reflex-silverpoint-react wraps @silverpoint/react as a Reflex custom component: the {len(CHARTS)} "
                         f"charts, the Dashboard, the {len(UI_COMPONENTS)} UI components, the provider, events, custom "
-                        "readouts and SVG export, as Python. New in reflex-silverpoint-react "
-                        f"{sd.REFLEX_LATEST.version}: palettes, 20 composed components and the Knight Lab timeline, in "
-                        "Reflex only. This site is built with it.",
+                        f"readouts and SVG export, as Python. Version {sd.REFLEX_LATEST.version} builds the palettes, "
+                        f"{len(cc.REFERENCE)} composed components and overlays and the Knight Lab timeline in Reflex, with a Python "
+                        "API of their own. This site is built with it.",
                     ),
                     rx.el.div(
                         sp_button("Reflex guide", href="/docs/reflex", id="home-reflex-guide"),

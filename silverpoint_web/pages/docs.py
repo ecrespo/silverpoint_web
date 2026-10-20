@@ -35,6 +35,7 @@ from reflex_silverpoint_react import (
     ui_demo,
 )
 
+from .. import composed_code as cc
 from .. import datasets as ds
 from .. import reflex_only as ro
 from .. import site_data as sd
@@ -755,8 +756,25 @@ def overview() -> Callable[[], rx.Component]:
                             [
                                 "UI components",
                                 rx.el.span(
-                                    f"{len(UI_COMPONENTS)}, new in 0.3: buttons, inputs, tabs, cards, alerts… ",
+                                    f"38: {len(UI_COMPONENTS)} since 0.3 (buttons, inputs, tabs, cards, alerts…), ",
                                     rx.el.a("drawn as the charts are", href="/docs/ui"),
+                                    ", and 21 new in 0.7: ",
+                                    rx.el.a("composed components and overlays", href="/docs/composed"),
+                                ),
+                            ],
+                            [
+                                "Palettes",
+                                rx.el.span(
+                                    "New in 0.7: six presets named after drawing media, ",
+                                    rx.el.a("checked for contrast", href="/docs/palettes"),
+                                ),
+                            ],
+                            [
+                                "Timeline",
+                                rx.el.span(
+                                    "New in 0.7: ",
+                                    rx.el.a("Knight Lab TimelineJS", href="/docs/timeline"),
+                                    " drawn in silverpoint",
                                 ),
                             ],
                             [
@@ -902,9 +920,13 @@ def installation() -> Callable[[], rx.Component]:
                     ),
                     code_block(
                         "// React / Vue\nimport '@silverpoint/fonts/fonts.css';\nimport '@silverpoint/grounds/styles.css';\n"
-                        "import '@silverpoint/grounds/ui.css'; // only if you use the UI components\n\n"
+                        "import '@silverpoint/grounds/ui.css'; // only if you use the UI components\n"
+                        "import '@knight-lab/timelinejs/dist/css/timeline.css'; // only with SpTimeline (0.7)…\n"
+                        "import '@silverpoint/grounds/timeline.css'; // …and after TimelineJS's own\n\n"
                         "/* Angular: src/styles.css */\n@import '@silverpoint/fonts/fonts.css';\n@import '@silverpoint/grounds/styles.css';\n"
-                        "@import '@silverpoint/grounds/ui.css'; /* only if you use the UI components */",
+                        "@import '@silverpoint/grounds/ui.css'; /* only if you use the UI components */\n"
+                        "@import '@knight-lab/timelinejs/dist/css/timeline.css'; /* only with SpTimeline */\n"
+                        "@import '@silverpoint/grounds/timeline.css';",
                         "css",
                     ),
                     callout(
@@ -1034,7 +1056,7 @@ def framework_guide(key: str) -> Callable[[], rx.Component]:
             "UI components",
             [
                 rx.el.p(
-                    f"New in 0.3: {len(UI_COMPONENTS)} interface components from ",
+                    f"Since 0.3: {len(UI_COMPONENTS)} interface components from ",
                     c(ux.INSTALL_PATHS[key]),
                     ", drawn as the charts are. ",
                     rx.el.span("Each one adds its stylesheet for you.")
@@ -1108,12 +1130,13 @@ def framework_guide(key: str) -> Callable[[], rx.Component]:
                     rx.el.p(
                         ext_link("reflex-silverpoint-react", sd.REFLEX_REPO),
                         " is a Reflex custom component that wraps @silverpoint/react ",
-                        sd.LATEST.version,
+                        sd.REFLEX_LATEST.wraps,
                         f". It exposes all {len(CHARTS)} charts, the Dashboard (with linking), the {len(UI_COMPONENTS)} UI "
                         "components (sp_button, sp_input, sp_tabs…), the provider, both grounds, the interaction events, "
                         "custom readouts (tooltip_template) and the imperative handle (download_svg, get_svg, get_geometry) "
-                        "as Python. On top of that it adds, in Reflex only, palettes, "
-                        f"{len(ro.COMPOSED)} composed components and the Knight Lab timeline.",
+                        "as Python. On top of that it builds in Reflex what silverpoint "
+                        f"{sd.LATEST.version} added to React, Vue and Angular: palettes, {len(cc.REFERENCE)} composed "
+                        "components and overlays, and the Knight Lab timeline.",
                     ),
                     rx.el.p(
                         f"reflex-silverpoint-react {sd.REFLEX_LATEST.version} requires Reflex 0.10.0 or later (React 19) "
@@ -1141,11 +1164,12 @@ def framework_guide(key: str) -> Callable[[], rx.Component]:
             2,
             (
                 "new-0-7",
-                f"New in {sd.REFLEX_LATEST.version}: Reflex only",
+                f"New in {sd.REFLEX_LATEST.version}: palettes, composed components, timeline",
                 [
                     rx.el.p(
-                        "Three things silverpoint's React, Vue and Angular adapters do not have, built in Reflex on "
-                        "silverpoint's own frames, tones and custom properties:"
+                        f"The three additions of silverpoint {sd.LATEST.version}, built in Reflex on silverpoint's own "
+                        "frames, tones and custom properties, with a Python API of their own (the adapters' versions "
+                        "are on the same pages, in React, Vue and Angular):"
                     ),
                     table(
                         ["", "What", ""],
@@ -1164,8 +1188,8 @@ def framework_guide(key: str) -> Callable[[], rx.Component]:
                             ],
                             [
                                 rx.el.strong("Composed components"),
-                                f"{len(ro.COMPOSED)} components: tables, pagination, statistics, collapse… and overlays "
-                                "on Radix primitives (modal, drawer, popover, tooltip, select, menu, toast).",
+                                f"{len(cc.REFERENCE)} components: tables, pagination, statistics, collapse… and overlays "
+                                "(modal, drawer, popover, tooltip, select, menu, toast), in Reflex on Radix primitives.",
                                 rx.el.a("Composed components →", href="/docs/composed"),
                             ],
                             [
@@ -1218,6 +1242,36 @@ silverpoint_palette(
                 ],
             ),
         )
+    if key != "reflex":
+        sections.insert(
+            -1,
+            (
+                "new-0-7",
+                f"New in {sd.LATEST.version}: palettes, overlays, timeline",
+                [
+                    rx.el.p(
+                        "21 more UI components from the same ",
+                        c(ux.INSTALL_PATHS[key]),
+                        " subpaths — composed ones (table, pagination, statistic, collapse…) and overlays on the "
+                        "platform's <dialog> and Popover API (modal, drawer, popover, tooltip, select, menu, toast) —, "
+                        "a ",
+                        c("palette"),
+                        " on every chart, component and provider, and ",
+                        c("SpTimeline"),
+                        " on ",
+                        c(f"{fw.package}/timeline"),
+                        ". An overlay opens from a trigger you write:",
+                    ),
+                    one(cc.FRAMEWORK_CODE["modal"][key], lang),
+                    rx.el.div(
+                        rx.el.a("Palettes →", href="/docs/palettes"),
+                        rx.el.a("Composed components & overlays →", href="/docs/composed"),
+                        rx.el.a("Timeline →", href="/docs/timeline"),
+                        class_name="spw-chip-list",
+                    ),
+                ],
+            ),
+        )
     if key == "react":
         sections.insert(
             -1,
@@ -1238,7 +1292,7 @@ silverpoint_palette(
         f"/docs/{key}",
         f"{fw.label}" if key != "reflex" else "Reflex (Python)",
         f"Everything you need to use silverpoint with {fw.label}: install, quickstart, app-wide configuration, "
-        "precision mode, interaction, export, server rendering and the UI components.",
+        "precision mode, interaction, export, server rendering, the UI components and what 0.7 adds.",
         sections,
         eyebrow="Getting started · Frameworks",
     )

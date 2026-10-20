@@ -70,6 +70,33 @@ class Release:
 
 VERSIONS: tuple[Release, ...] = (
     Release(
+        version="0.7.0",
+        date="2026-10-20",
+        summary="Palettes, 21 composed and overlay components (38 UI components in all) and the Knight Lab "
+        "timeline, in React, Vue and Angular.",
+        highlights=(
+            "Palettes on a new subpath, @silverpoint/core/palettes: six presets verified for WCAG contrast "
+            "(silverpoint, sanguine, sepia, ironGall, verdigris, indigo), checkPalette, contrastRatio, "
+            "PALETTE_PROPERTIES and nestProvider. palette on every chart, UI component, dashboard and provider; "
+            "a nested provider or a prop overrides it field by field.",
+            "Composed components (14): SpSurface and SpGlyph, the building blocks, and SpTable, SpPagination, "
+            "SpBreadcrumb, SpAvatar (+ SpAvatarGroup), SpStatistic, SpDescriptions, SpTimelineList, SpCollapse "
+            "(+ SpCollapseItem), SpEmpty, SpResult, SpTextarea and SpInputNumber.",
+            "Overlays (7) on the platform's <dialog> and Popover API: SpModal, SpDrawer, SpPopover, SpTooltip, "
+            "SpSelect, SpDropdownMenu and SpToast (in an SpToaster), each opened by a trigger you write; "
+            "open + onOpenChange, v-model:open or [(open)].",
+            "SpTimeline on @silverpoint/<react|vue|angular>/timeline: Knight Lab TimelineJS in the ground's hand, "
+            "with @knight-lab/timelinejs ^3.9.13 an optional peer and a fallback when it cannot load.",
+            "Two stylesheets beside styles.css: ui.css now draws all 38 UI components, and timeline.css skins "
+            "TimelineJS (eras get a strip of their own below the axis labels).",
+            "UI_COMPONENTS gains 21 rows with a family (ui, composed, overlay); UI_DEMOS gains 35 states; "
+            "@silverpoint/core/timeline and TIMELINE_DEMO. Diagnostics SP023, SP024 and SP025.",
+            "A link's href (SpButton, SpBreadcrumb) keeps only relative URLs and http, https, mailto and tel; "
+            "a headingLevel outside 2..6 draws h3. Both warn SP017.",
+            "No change to the rendered output of the 60 charts.",
+        ),
+    ),
+    Release(
         version="0.6.0",
         date="2026-10-10",
         summary="The second catalog: 27 new charts (60 in all) for distributions, comparisons, hierarchies, "
@@ -202,6 +229,8 @@ REFLEX_VERSIONS: tuple[ReflexRelease, ...] = (
             "ground's own hand-inked frames. Optional extra: reflex-silverpoint-react[timeline].",
             "sp_surface and sp_glyph: the building blocks, for components of your own.",
             "Still wraps @silverpoint/react 0.6.0: no change to the 60 charts or the 17 UI components.",
+            "silverpoint 0.7.0 then shipped the same three additions in React, Vue and Angular; the Reflex "
+            "versions keep their own API (snake_case, overlays on Radix).",
         ),
     ),
 )
@@ -232,35 +261,35 @@ PACKAGES: tuple[Package, ...] = (
     Package(
         "@silverpoint/react",
         "React adapter",
-        "React 18.2+ and 19 components: one subpath per chart (60), the 17 UI components on /ui, and server entry points for React Server Components.",
+        "React 18.2+ and 19 components: one subpath per chart (60), the 38 UI components on /ui, SpTimeline on /timeline, and server entry points for React Server Components.",
         "adapter",
         f"{REPO}/tree/main/packages/react",
     ),
     Package(
         "@silverpoint/vue",
         "Vue adapter",
-        "Vue 3.5 charts and UI components (v-model on every value component), typed props and emits, server rendering with @vue/server-renderer.",
+        "Vue 3.5 charts, the 38 UI components (v-model on every value, v-model:open on every overlay) and SpTimeline; typed props and emits, server rendering with @vue/server-renderer.",
         "adapter",
         f"{REPO}/tree/main/packages/vue",
     ),
     Package(
         "@silverpoint/angular",
         "Angular adapter",
-        "Angular 21 and 22 standalone, signal-input, OnPush charts and UI components (ControlValueAccessors) in Angular Package Format.",
+        "Angular 21 and 22 standalone, signal-input, OnPush charts, the 38 UI components (ControlValueAccessors, [(open)] on overlays) and SpTimeline, in Angular Package Format.",
         "adapter",
         f"{REPO}/tree/main/packages/angular",
     ),
     Package(
         "@silverpoint/grounds",
         "Grounds + stylesheet",
-        "The declarative style grounds (silverpoint, cyanotype), their inkers, styles.css for the charts and ui.css for the UI components.",
+        "The declarative style grounds (silverpoint, cyanotype), their inkers, styles.css for the charts, ui.css for the UI components and timeline.css for SpTimeline.",
         "required",
         f"{REPO}/tree/main/packages/grounds",
     ),
     Package(
         "@silverpoint/core",
         "Engine",
-        "Geometry, scales, interaction and the Inker interface; the second catalog's recipes on /catalog. No DOM, no framework. Installed by every adapter.",
+        "Geometry, scales, interaction and the Inker interface; the second catalog's recipes on /catalog, the UI views on /ui, the palettes on /palettes and the timeline on /timeline. No DOM, no framework. Installed by every adapter.",
         "required",
         f"{REPO}/tree/main/packages/core",
     ),
@@ -303,7 +332,7 @@ FRAMEWORKS: tuple[Framework, ...] = (
         label="React",
         package="@silverpoint/react",
         install="npm install @silverpoint/react @silverpoint/grounds @silverpoint/fonts",
-        peers="react and react-dom 18.2+ or 19",
+        peers="react and react-dom 18.2+ or 19; @knight-lab/timelinejs ^3.9.13 (optional, for SpTimeline)",
         integration="Vite and Next.js (App Router, React Server Components) are validated.",
         create="npm create vite@latest my-charts -- --template react-ts",
         run="npm run dev",
@@ -315,7 +344,7 @@ FRAMEWORKS: tuple[Framework, ...] = (
         label="Vue",
         package="@silverpoint/vue",
         install="npm install @silverpoint/vue @silverpoint/grounds @silverpoint/fonts",
-        peers="vue ^3.5.0",
+        peers="vue ^3.5.0; @knight-lab/timelinejs ^3.9.13 (optional, for SpTimeline)",
         integration="Vite is validated; SSR is verified with @vue/server-renderer. Nuxt works but is not a validated integration.",
         create="npm create vite@latest my-charts -- --template vue-ts",
         run="npm run dev",
@@ -327,7 +356,7 @@ FRAMEWORKS: tuple[Framework, ...] = (
         label="Angular",
         package="@silverpoint/angular",
         install="npm install @silverpoint/angular @silverpoint/grounds @silverpoint/fonts",
-        peers="@angular/core and @angular/common >=21 <23",
+        peers="@angular/core, @angular/common and @angular/forms >=21 <23; @knight-lab/timelinejs ^3.9.13 (optional)",
         integration="The Angular CLI (@angular/build, on Vite) is validated, including @angular/ssr.",
         create="npx @angular/cli@22 new my-charts --defaults --skip-git",
         run="npm start",
@@ -340,8 +369,8 @@ FRAMEWORKS: tuple[Framework, ...] = (
         package="reflex-silverpoint-react",
         install="pip install reflex-silverpoint-react",
         peers="reflex >= 0.10.0 (React 19), Python 3.11+",
-        integration="A Reflex custom component wrapping @silverpoint/react; Reflex installs the npm side for you. "
-        "It adds Reflex-only palettes, composed components and a timeline.",
+        integration="A Reflex custom component wrapping @silverpoint/react 0.6; Reflex installs the npm side for "
+        "you. Its palettes, composed components and timeline are built in Reflex, with a Python API of their own.",
         create="reflex init",
         run="reflex run",
         prefix="line_chart()",

@@ -1,0 +1,1246 @@
+{
+ "surface": {
+  "SpSurface": [
+   {
+    "js": "as",
+    "type": "string",
+    "doc": "The element, a lowercase HTML tag name. Default `'div'`.",
+    "required": false
+   },
+   {
+    "js": "name",
+    "type": "string",
+    "doc": "Adds the class `sp-<name>`, a lowercase ident.",
+    "required": false
+   },
+   {
+    "js": "frame",
+    "type": "UiFrameKind",
+    "doc": "Draws a frame of that kind.",
+    "required": false
+   },
+   {
+    "js": "tone",
+    "type": "UiToneLevel | string",
+    "doc": "Lays a tone: a level 1-4 of the ramp, or a state (`selected`, `primary`…).",
+    "required": false
+   },
+   {
+    "js": "children",
+    "type": "ReactNode",
+    "doc": "",
+    "required": false,
+    "react": true
+   }
+  ]
+ },
+ "glyph": {
+  "SpGlyph": [
+   {
+    "js": "glyph",
+    "type": "string",
+    "doc": "A key of `UI_GLYPHS`.",
+    "required": true
+   }
+  ]
+ },
+ "table": {
+  "SpTable": [
+   {
+    "js": "columns",
+    "type": "readonly TableColumn[]",
+    "doc": "The columns, in order; each names the key it reads from a row.",
+    "required": true
+   },
+   {
+    "js": "data",
+    "type": "readonly Readonly<Record<string, unknown>>[]",
+    "doc": "The rows, drawn as given: the consumer sorts them.",
+    "required": true
+   },
+   {
+    "js": "caption",
+    "type": "string",
+    "doc": "The table's `<caption>`, its accessible name.",
+    "required": false
+   },
+   {
+    "js": "sortKey",
+    "type": "string",
+    "doc": "A sortable column's key; another key sorts nothing, silently.",
+    "required": false
+   },
+   {
+    "js": "sortOrder",
+    "type": "'asc' | 'desc'",
+    "doc": "Default `'asc'`.",
+    "required": false
+   },
+   {
+    "js": "striped",
+    "type": "boolean",
+    "doc": "Default `false`.",
+    "required": false
+   },
+   {
+    "js": "hoverable",
+    "type": "boolean",
+    "doc": "Default `true`.",
+    "required": false
+   },
+   {
+    "js": "bordered",
+    "type": "boolean",
+    "doc": "Default `true`.",
+    "required": false
+   },
+   {
+    "js": "emptyText",
+    "type": "string",
+    "doc": "Default `'No data'`.",
+    "required": false
+   },
+   {
+    "js": "rowKey",
+    "type": "string",
+    "doc": "The column whose value keys each row.",
+    "required": false
+   },
+   {
+    "js": "onSort",
+    "type": "(key: string) => void",
+    "doc": "A sortable header was activated: its column's key. The consumer sorts (`uiSortRows`) and sets `sortKey` / `sortOrder`.",
+    "required": false,
+    "react": true
+   }
+  ]
+ },
+ "pagination": {
+  "SpPagination": [
+   {
+    "js": "total",
+    "type": "number",
+    "doc": "The number of items paged over.",
+    "required": true
+   },
+   {
+    "js": "pageSize",
+    "type": "number",
+    "doc": "Default `10`.",
+    "required": false
+   },
+   {
+    "js": "siblings",
+    "type": "number",
+    "doc": "Pages shown on each side of the current one. Default `1`.",
+    "required": false
+   },
+   {
+    "js": "showTotal",
+    "type": "boolean",
+    "doc": "Default `false`.",
+    "required": false
+   },
+   {
+    "js": "totalTemplate",
+    "type": "string",
+    "doc": "Default `'{start}–{end} of {total}'`.",
+    "required": false
+   },
+   {
+    "js": "label",
+    "type": "string",
+    "doc": "Default `'Pagination'`.",
+    "required": false
+   },
+   {
+    "js": "previousLabel",
+    "type": "string",
+    "doc": "Default `'Previous page'`.",
+    "required": false
+   },
+   {
+    "js": "nextLabel",
+    "type": "string",
+    "doc": "Default `'Next page'`.",
+    "required": false
+   },
+   {
+    "js": "pageLabel",
+    "type": "string",
+    "doc": "Default `'Page'`.",
+    "required": false
+   },
+   {
+    "js": "disabled",
+    "type": "boolean",
+    "doc": "Every page button disabled.",
+    "required": false
+   },
+   {
+    "js": "current",
+    "type": "number",
+    "doc": "The controlled page, 1-based.",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "defaultCurrent",
+    "type": "number",
+    "doc": "Default `1`.",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "onChange",
+    "type": "(current: number) => void",
+    "doc": "The page the user chose, not the event.",
+    "required": false,
+    "react": true
+   }
+  ]
+ },
+ "breadcrumb": {
+  "SpBreadcrumb": [
+   {
+    "js": "items",
+    "type": "readonly BreadcrumbItem[]",
+    "doc": "The last item is the current page.",
+    "required": true
+   },
+   {
+    "js": "label",
+    "type": "string",
+    "doc": "Default `'Breadcrumb'`.",
+    "required": false
+   }
+  ]
+ },
+ "avatar": {
+  "SpAvatar": [
+   {
+    "js": "src",
+    "type": "string",
+    "doc": "An image; the initials are drawn without one.",
+    "required": false
+   },
+   {
+    "js": "name",
+    "type": "string",
+    "doc": "The person's name: the accessible name and the source of the initials.",
+    "required": false
+   },
+   {
+    "js": "initials",
+    "type": "string",
+    "doc": "Overrides the initials derived from `name`.",
+    "required": false
+   },
+   {
+    "js": "alt",
+    "type": "string",
+    "doc": "Overrides `name` as the accessible name.",
+    "required": false
+   },
+   {
+    "js": "shape",
+    "type": "'circle' | 'square'",
+    "doc": "Default `'circle'`.",
+    "required": false
+   },
+   {
+    "js": "pixelSize",
+    "type": "number",
+    "doc": "Side length in px; the ground's control height when omitted.",
+    "required": false
+   }
+  ],
+  "SpAvatarGroup": [
+   {
+    "js": "label",
+    "type": "string",
+    "doc": "",
+    "required": false
+   },
+   {
+    "js": "children",
+    "type": "ReactNode",
+    "doc": "The avatars.",
+    "required": false,
+    "react": true
+   }
+  ]
+ },
+ "statistic": {
+  "SpStatistic": [
+   {
+    "js": "title",
+    "type": "string",
+    "doc": "The label above the value.",
+    "required": true
+   },
+   {
+    "js": "value",
+    "type": "string | number",
+    "doc": "Printed as given.",
+    "required": true
+   },
+   {
+    "js": "prefix",
+    "type": "string",
+    "doc": "Printed before the value (`$`).",
+    "required": false
+   },
+   {
+    "js": "suffix",
+    "type": "string",
+    "doc": "Printed after the value (`%`).",
+    "required": false
+   },
+   {
+    "js": "trend",
+    "type": "'up' | 'down'",
+    "doc": "Draws the exact ↑ or ↓ glyph beside the delta.",
+    "required": false
+   },
+   {
+    "js": "delta",
+    "type": "string",
+    "doc": "The change, as text (`+4.2%`).",
+    "required": false
+   }
+  ]
+ },
+ "descriptions": {
+  "SpDescriptions": [
+   {
+    "js": "items",
+    "type": "readonly DescriptionItem[]",
+    "doc": "The label–value pairs, a `<dl>`. Keys, when given, are unique.",
+    "required": true
+   },
+   {
+    "js": "title",
+    "type": "string",
+    "doc": "A heading above the list, at `headingLevel`.",
+    "required": false
+   },
+   {
+    "js": "columns",
+    "type": "number",
+    "doc": "Default `3`, in 1..6.",
+    "required": false
+   },
+   {
+    "js": "bordered",
+    "type": "boolean",
+    "doc": "Default `true`.",
+    "required": false
+   },
+   {
+    "js": "headingLevel",
+    "type": "2 | 3 | 4 | 5 | 6",
+    "doc": "Default `3`.",
+    "required": false
+   }
+  ]
+ },
+ "timeline-list": {
+  "SpTimelineList": [
+   {
+    "js": "items",
+    "type": "readonly TimelineListItem[]",
+    "doc": "The events, in reading order.",
+    "required": true
+   },
+   {
+    "js": "label",
+    "type": "string",
+    "doc": "Accessible name of the list.",
+    "required": false
+   }
+  ]
+ },
+ "collapse": {
+  "SpCollapse": [
+   {
+    "js": "accordion",
+    "type": "boolean",
+    "doc": "One item open at a time, natively (`<details name>`). Default `false`.",
+    "required": false
+   },
+   {
+    "js": "bordered",
+    "type": "boolean",
+    "doc": "Default `true`.",
+    "required": false
+   },
+   {
+    "js": "children",
+    "type": "ReactNode",
+    "doc": "`SpCollapseItem`s.",
+    "required": false,
+    "react": true
+   }
+  ],
+  "SpCollapseItem": [
+   {
+    "js": "title",
+    "type": "string",
+    "doc": "",
+    "required": true
+   },
+   {
+    "js": "disabled",
+    "type": "boolean",
+    "doc": "",
+    "required": false
+   },
+   {
+    "js": "open",
+    "type": "boolean",
+    "doc": "Controlled.",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "defaultOpen",
+    "type": "boolean",
+    "doc": "",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "onToggle",
+    "type": "(open: boolean) => void",
+    "doc": "The item opened or closed, by the user or by its accordion.",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "children",
+    "type": "ReactNode",
+    "doc": "",
+    "required": false,
+    "react": true
+   }
+  ]
+ },
+ "empty": {
+  "SpEmpty": [
+   {
+    "js": "description",
+    "type": "string",
+    "doc": "Default `'No data'`.",
+    "required": false
+   },
+   {
+    "js": "extra",
+    "type": "ReactNode",
+    "doc": "Actions under the description.",
+    "required": false,
+    "react": true
+   }
+  ]
+ },
+ "result": {
+  "SpResult": [
+   {
+    "js": "status",
+    "type": "AlertKind",
+    "doc": "Default `'info'`.",
+    "required": false
+   },
+   {
+    "js": "title",
+    "type": "string",
+    "doc": "The heading, at `headingLevel`.",
+    "required": true
+   },
+   {
+    "js": "subtitle",
+    "type": "string",
+    "doc": "A paragraph under the title.",
+    "required": false
+   },
+   {
+    "js": "headingLevel",
+    "type": "2 | 3 | 4 | 5 | 6",
+    "doc": "Default `3`.",
+    "required": false
+   },
+   {
+    "js": "extra",
+    "type": "ReactNode",
+    "doc": "Actions under the description.",
+    "required": false,
+    "react": true
+   }
+  ]
+ },
+ "textarea": {
+  "SpTextarea": [
+   {
+    "js": "rows",
+    "type": "number",
+    "doc": "Default `3`.",
+    "required": false
+   },
+   {
+    "js": "placeholder",
+    "type": "string",
+    "doc": "Hint shown while empty; not a substitute for the accessible name.",
+    "required": false
+   },
+   {
+    "js": "label",
+    "type": "string",
+    "doc": "Accessible name, when no `<label for>` names the control.",
+    "required": false
+   },
+   {
+    "js": "message",
+    "type": "string",
+    "doc": "Help or error text under the control, referenced by `aria-describedby`.",
+    "required": false
+   },
+   {
+    "js": "invalid",
+    "type": "boolean",
+    "doc": "Sets `aria-invalid` and draws the exact ⚠ glyph.",
+    "required": false
+   },
+   {
+    "js": "disabled",
+    "type": "boolean",
+    "doc": "Not focusable and not submitted.",
+    "required": false
+   },
+   {
+    "js": "readOnly",
+    "type": "boolean",
+    "doc": "Focusable and submitted, but not editable.",
+    "required": false
+   },
+   {
+    "js": "maxLength",
+    "type": "number",
+    "doc": "The native limit; the counter shows it with `showCount`.",
+    "required": false
+   },
+   {
+    "js": "showCount",
+    "type": "boolean",
+    "doc": "Default `false`.",
+    "required": false
+   },
+   {
+    "js": "name",
+    "type": "string",
+    "doc": "Form field name; the native textarea submits under it.",
+    "required": false
+   },
+   {
+    "js": "value",
+    "type": "string",
+    "doc": "Controlled value.",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "defaultValue",
+    "type": "string",
+    "doc": "",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "onChange",
+    "type": "(value: string) => void",
+    "doc": "The new value, not the DOM event.",
+    "required": false,
+    "react": true
+   }
+  ]
+ },
+ "input-number": {
+  "SpInputNumber": [
+   {
+    "js": "min",
+    "type": "number",
+    "doc": "The lowest value; the value is clamped to it.",
+    "required": false
+   },
+   {
+    "js": "max",
+    "type": "number",
+    "doc": "The highest value; the value is clamped to it.",
+    "required": false
+   },
+   {
+    "js": "step",
+    "type": "number",
+    "doc": "Default `1`.",
+    "required": false
+   },
+   {
+    "js": "precision",
+    "type": "number",
+    "doc": "Decimals.",
+    "required": false
+   },
+   {
+    "js": "placeholder",
+    "type": "string",
+    "doc": "Hint shown while empty; not a substitute for the accessible name.",
+    "required": false
+   },
+   {
+    "js": "label",
+    "type": "string",
+    "doc": "Accessible name, when no `<label for>` names the control.",
+    "required": false
+   },
+   {
+    "js": "message",
+    "type": "string",
+    "doc": "Help or error text under the control, referenced by `aria-describedby`.",
+    "required": false
+   },
+   {
+    "js": "invalid",
+    "type": "boolean",
+    "doc": "Sets `aria-invalid` and draws the exact ⚠ glyph.",
+    "required": false
+   },
+   {
+    "js": "disabled",
+    "type": "boolean",
+    "doc": "Not focusable and not submitted; the steppers are disabled too.",
+    "required": false
+   },
+   {
+    "js": "readOnly",
+    "type": "boolean",
+    "doc": "Focusable and submitted, but not editable.",
+    "required": false
+   },
+   {
+    "js": "name",
+    "type": "string",
+    "doc": "Form field name; the native input submits under it.",
+    "required": false
+   },
+   {
+    "js": "decrementLabel",
+    "type": "string",
+    "doc": "Default `'Decrease'`.",
+    "required": false
+   },
+   {
+    "js": "incrementLabel",
+    "type": "string",
+    "doc": "Default `'Increase'`.",
+    "required": false
+   },
+   {
+    "js": "value",
+    "type": "number | null",
+    "doc": "Controlled value; `null` is an empty field.",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "defaultValue",
+    "type": "number | null",
+    "doc": "",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "onChange",
+    "type": "(value: number | null) => void",
+    "doc": "The committed value, clamped and rounded by the core; `null` when emptied.",
+    "required": false,
+    "react": true
+   }
+  ]
+ },
+ "modal": {
+  "SpModal": [
+   {
+    "js": "title",
+    "type": "string",
+    "doc": "The heading, `${id}--title`, that names the dialog.",
+    "required": false
+   },
+   {
+    "js": "description",
+    "type": "string",
+    "doc": "A paragraph, `${id}--description`, that describes the dialog.",
+    "required": false
+   },
+   {
+    "js": "label",
+    "type": "string",
+    "doc": "Accessible name without a title.",
+    "required": false
+   },
+   {
+    "js": "closable",
+    "type": "boolean",
+    "doc": "Default `true`.",
+    "required": false
+   },
+   {
+    "js": "closeLabel",
+    "type": "string",
+    "doc": "Default `'Close'`.",
+    "required": false
+   },
+   {
+    "js": "width",
+    "type": "string",
+    "doc": "CSS length. Default `'520px'` (from `ui.css`).",
+    "required": false
+   },
+   {
+    "js": "dismissible",
+    "type": "boolean",
+    "doc": "Escape and a backdrop click close it. Default `true`.",
+    "required": false
+   },
+   {
+    "js": "trigger",
+    "type": "ReactElement",
+    "doc": "The element that opens it, cloned with `aria-haspopup`, `aria-expanded` and `aria-controls`.",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "children",
+    "type": "ReactNode",
+    "doc": "",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "footer",
+    "type": "ReactNode",
+    "doc": "",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "open",
+    "type": "boolean",
+    "doc": "Controlled.",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "defaultOpen",
+    "type": "boolean",
+    "doc": "",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "onOpenChange",
+    "type": "(open: boolean) => void",
+    "doc": "The user opened or closed it, or the platform did (Escape, a click outside).",
+    "required": false,
+    "react": true
+   }
+  ]
+ },
+ "drawer": {
+  "SpDrawer": [
+   {
+    "js": "title",
+    "type": "string",
+    "doc": "The heading, `${id}--title`, that names the dialog.",
+    "required": false
+   },
+   {
+    "js": "description",
+    "type": "string",
+    "doc": "A paragraph, `${id}--description`, that describes the dialog.",
+    "required": false
+   },
+   {
+    "js": "label",
+    "type": "string",
+    "doc": "Accessible name without a title.",
+    "required": false
+   },
+   {
+    "js": "closable",
+    "type": "boolean",
+    "doc": "Default `true`.",
+    "required": false
+   },
+   {
+    "js": "closeLabel",
+    "type": "string",
+    "doc": "Default `'Close'`.",
+    "required": false
+   },
+   {
+    "js": "dismissible",
+    "type": "boolean",
+    "doc": "Escape and a backdrop click close it. Default `true`.",
+    "required": false
+   },
+   {
+    "js": "side",
+    "type": "'start' | 'end' | 'top' | 'bottom'",
+    "doc": "Default `'end'`.",
+    "required": false
+   },
+   {
+    "js": "extent",
+    "type": "string",
+    "doc": "CSS length across the side. Default `'380px'` (start/end) or `'320px'` (top/bottom).",
+    "required": false
+   },
+   {
+    "js": "modal",
+    "type": "boolean",
+    "doc": "`false` opens with `show()`. Default `true`.",
+    "required": false
+   },
+   {
+    "js": "trigger",
+    "type": "ReactElement",
+    "doc": "The element that opens it, cloned with `aria-haspopup`, `aria-expanded` and `aria-controls`.",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "children",
+    "type": "ReactNode",
+    "doc": "",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "footer",
+    "type": "ReactNode",
+    "doc": "",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "open",
+    "type": "boolean",
+    "doc": "Controlled.",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "defaultOpen",
+    "type": "boolean",
+    "doc": "",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "onOpenChange",
+    "type": "(open: boolean) => void",
+    "doc": "The user opened or closed it, or the platform did (Escape, a click outside).",
+    "required": false,
+    "react": true
+   }
+  ]
+ },
+ "popover": {
+  "SpPopover": [
+   {
+    "js": "title",
+    "type": "string",
+    "doc": "A heading that names the popover.",
+    "required": false
+   },
+   {
+    "js": "label",
+    "type": "string",
+    "doc": "Accessible name without a title.",
+    "required": false
+   },
+   {
+    "js": "side",
+    "type": "'top' | 'end' | 'bottom' | 'start'",
+    "doc": "Default `'bottom'`.",
+    "required": false
+   },
+   {
+    "js": "align",
+    "type": "'start' | 'center' | 'end'",
+    "doc": "Default `'center'`.",
+    "required": false
+   },
+   {
+    "js": "offset",
+    "type": "number",
+    "doc": "Default `6`.",
+    "required": false
+   },
+   {
+    "js": "closable",
+    "type": "boolean",
+    "doc": "Default `false`.",
+    "required": false
+   },
+   {
+    "js": "closeLabel",
+    "type": "string",
+    "doc": "Default `'Close'`.",
+    "required": false
+   },
+   {
+    "js": "width",
+    "type": "string",
+    "doc": "CSS length. Default `'320px'` (from `ui.css`).",
+    "required": false
+   },
+   {
+    "js": "trigger",
+    "type": "ReactElement",
+    "doc": "The element that opens it, cloned with `aria-haspopup`, `aria-expanded` and `aria-controls`; the popover hangs from it.",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "children",
+    "type": "ReactNode",
+    "doc": "",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "open",
+    "type": "boolean",
+    "doc": "Controlled.",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "defaultOpen",
+    "type": "boolean",
+    "doc": "",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "onOpenChange",
+    "type": "(open: boolean) => void",
+    "doc": "The user opened or closed it, or the platform did (Escape, a click outside).",
+    "required": false,
+    "react": true
+   }
+  ]
+ },
+ "tooltip": {
+  "SpTooltip": [
+   {
+    "js": "text",
+    "type": "string",
+    "doc": "The tooltip, the trigger's accessible description.",
+    "required": true
+   },
+   {
+    "js": "side",
+    "type": "'top' | 'end' | 'bottom' | 'start'",
+    "doc": "Default `'top'`.",
+    "required": false
+   },
+   {
+    "js": "align",
+    "type": "'start' | 'center' | 'end'",
+    "doc": "Default `'center'`.",
+    "required": false
+   },
+   {
+    "js": "offset",
+    "type": "number",
+    "doc": "Default `6`.",
+    "required": false
+   },
+   {
+    "js": "delay",
+    "type": "number",
+    "doc": "Default `300` ms.",
+    "required": false
+   },
+   {
+    "js": "trigger",
+    "type": "ReactElement",
+    "doc": "The element it describes, cloned with `aria-describedby`.",
+    "required": true,
+    "react": true
+   },
+   {
+    "js": "open",
+    "type": "boolean",
+    "doc": "Controlled.",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "defaultOpen",
+    "type": "boolean",
+    "doc": "",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "onOpenChange",
+    "type": "(open: boolean) => void",
+    "doc": "The user opened or closed it, or the platform did (Escape, a click outside).",
+    "required": false,
+    "react": true
+   }
+  ]
+ },
+ "select": {
+  "SpSelect": [
+   {
+    "js": "items",
+    "type": "readonly (string | UiItem)[]",
+    "doc": "A string is its own key and label.",
+    "required": true
+   },
+   {
+    "js": "placeholder",
+    "type": "string",
+    "doc": "Default `'Select…'`.",
+    "required": false
+   },
+   {
+    "js": "label",
+    "type": "string",
+    "doc": "Accessible name of the combobox.",
+    "required": true
+   },
+   {
+    "js": "disabled",
+    "type": "boolean",
+    "doc": "Not focusable and not submitted.",
+    "required": false
+   },
+   {
+    "js": "required",
+    "type": "boolean",
+    "doc": "Sets `aria-required` on the combobox.",
+    "required": false
+   },
+   {
+    "js": "name",
+    "type": "string",
+    "doc": "Submits the key under this name, from a hidden input.",
+    "required": false
+   },
+   {
+    "js": "width",
+    "type": "string",
+    "doc": "CSS length. Default `'180px'` (from `ui.css`).",
+    "required": false
+   },
+   {
+    "js": "value",
+    "type": "string | null",
+    "doc": "Controlled key; `null` is none chosen.",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "defaultValue",
+    "type": "string | null",
+    "doc": "",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "onChange",
+    "type": "(value: string) => void",
+    "doc": "The key chosen, not the DOM event.",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "open",
+    "type": "boolean",
+    "doc": "Controlled.",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "defaultOpen",
+    "type": "boolean",
+    "doc": "",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "onOpenChange",
+    "type": "(open: boolean) => void",
+    "doc": "The user opened or closed it, or the platform did (Escape, a click outside).",
+    "required": false,
+    "react": true
+   }
+  ]
+ },
+ "dropdown-menu": {
+  "SpDropdownMenu": [
+   {
+    "js": "items",
+    "type": "readonly MenuEntry[]",
+    "doc": "Items, separators and labels, in order. Keys are unique.",
+    "required": true
+   },
+   {
+    "js": "label",
+    "type": "string",
+    "doc": "The menu's accessible name and the trigger's text when no trigger slot.",
+    "required": true
+   },
+   {
+    "js": "side",
+    "type": "'top' | 'end' | 'bottom' | 'start'",
+    "doc": "Default `'bottom'`.",
+    "required": false
+   },
+   {
+    "js": "align",
+    "type": "'start' | 'center' | 'end'",
+    "doc": "Default `'start'`.",
+    "required": false
+   },
+   {
+    "js": "onSelect",
+    "type": "(key: string) => void",
+    "doc": "An item was activated: its key. The menu closes.",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "trigger",
+    "type": "ReactElement",
+    "doc": "The element that opens it, in place of the built-in button; cloned with the menu button's ARIA.",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "open",
+    "type": "boolean",
+    "doc": "Controlled.",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "defaultOpen",
+    "type": "boolean",
+    "doc": "",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "onOpenChange",
+    "type": "(open: boolean) => void",
+    "doc": "The user opened or closed it, or the platform did (Escape, a click outside).",
+    "required": false,
+    "react": true
+   }
+  ]
+ },
+ "toast": {
+  "SpToast": [
+   {
+    "js": "title",
+    "type": "string",
+    "doc": "The toast's first line.",
+    "required": true
+   },
+   {
+    "js": "description",
+    "type": "string",
+    "doc": "A line under the title.",
+    "required": false
+   },
+   {
+    "js": "kind",
+    "type": "AlertKind",
+    "doc": "Default `'info'`.",
+    "required": false
+   },
+   {
+    "js": "duration",
+    "type": "number",
+    "doc": "ms, at least 1000, or `Infinity`; the toaster's when omitted.",
+    "required": false
+   },
+   {
+    "js": "closeLabel",
+    "type": "string",
+    "doc": "Default `'Dismiss'`.",
+    "required": false
+   },
+   {
+    "js": "action",
+    "type": "ReactNode",
+    "doc": "An action beside the text, as a button.",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "open",
+    "type": "boolean",
+    "doc": "Controlled.",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "defaultOpen",
+    "type": "boolean",
+    "doc": "",
+    "required": false,
+    "react": true
+   },
+   {
+    "js": "onOpenChange",
+    "type": "(open: boolean) => void",
+    "doc": "The user opened or closed it, or the platform did (Escape, a click outside).",
+    "required": false,
+    "react": true
+   }
+  ],
+  "SpToaster": [
+   {
+    "js": "position",
+    "type": "'bottom-end' | 'bottom-start' | 'top-end' | 'top-start'",
+    "doc": "Default `'bottom-end'`.",
+    "required": false
+   },
+   {
+    "js": "duration",
+    "type": "number",
+    "doc": "Default `5000` ms.",
+    "required": false
+   },
+   {
+    "js": "label",
+    "type": "string",
+    "doc": "Default `'Notifications'`.",
+    "required": false
+   },
+   {
+    "js": "children",
+    "type": "ReactNode",
+    "doc": "`SpToast`s.",
+    "required": false,
+    "react": true
+   }
+  ]
+ }
+}

@@ -7,6 +7,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
+    { "source": "/mcp", "destination": "https://silverpoint-mcp.vercel.app/mcp" },
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "headers": [

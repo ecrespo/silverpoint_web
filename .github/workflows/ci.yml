@@ -34,6 +34,8 @@ jobs:
         run: uv run ruff check --output-format=github .
       - name: Ruff format
         run: uv run ruff format --check .
+      - name: Tests
+        run: uv run pytest -q
 
   export:
     name: Static export
@@ -49,3 +51,5 @@ jobs:
         run: bash build_local.sh
       - name: Every chart has a page
         run: test "$(ls public/charts | grep -c '\.html$')" -ge 60
+      - name: The agent files are published
+        run: test -s public/agent-catalog.json && test -s public/llms.txt && test -s public/llms-full.txt && test -f public/docs/ai.html

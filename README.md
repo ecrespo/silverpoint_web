@@ -3,11 +3,11 @@
 The documentation site of **[silverpoint](https://github.com/ecrespo/silverpoint)**: charts and UI components
 for React, Vue and Angular whose visual language is historical drawing technique (Renaissance silverpoint and cyanotype).
 
-The site documents silverpoint **0.7** (60 charts, 38 UI components, palettes and the Knight Lab timeline). It is
+The site documents silverpoint **0.8** (60 charts, 38 UI components, palettes and the Knight Lab timeline). It is
 written in Python with [Reflex](https://reflex.dev) and draws every chart and component live with
-[reflex-silverpoint-react](https://github.com/ecrespo/reflex-silverpoint-react) 0.7 (on Reflex 0.10), the Reflex component of
-`@silverpoint/react` (it wraps 0.6, whose 60 charts 0.7 leaves unchanged, and builds 0.7's palettes, composed components
-and timeline in Reflex). The site's own controls (code tabs, callouts, the gallery's controls, buttons, tags,
+[reflex-silverpoint-react](https://github.com/ecrespo/reflex-silverpoint-react) 0.8 (on Reflex 0.10), the Reflex component of
+`@silverpoint/react` (it wraps 0.8: the palettes, composed components, overlays and timeline are the
+npm components behind Python builders). The site's own controls (code tabs, callouts, the gallery's controls, buttons, tags,
 the release timeline) are silverpoint's UI components, bound to client-side state. It is **frontend-only**: `rx.App(enable_state=False)` compiles it without a backend,
 and it is deployed as static files on Vercel.
 
@@ -17,10 +17,13 @@ and it is deployed as static files on Vercel.
 |---|---|
 | `/` | Landing page: live charts, the UI components, the four frameworks, features, author |
 | `/docs` … | Overview, installation, a guide per framework (`/docs/react`, `/docs/vue`, `/docs/angular`, `/docs/reflex`) and the concepts (grounds, precision, common props, interaction, export, dashboards, drill-down & hierarchies, UI components, SSR, accessibility, Tailwind), and what 0.7 adds (`/docs/palettes`, `/docs/composed`, `/docs/timeline`), with code in React, Vue, Angular and Reflex |
-| `/gallery` | The 60 charts (nine families, three of them new in 0.6), the 17 UI components of 0.3, and the composed components, overlays and Knight Lab timeline of 0.7 (drawn by reflex-silverpoint-react 0.7), live, with ground / substrate / mode / hatch-fill / size / palette controls (client-side state) |
+| `/docs/ai` | Use with AI (new in 0.8): the hosted MCP server `https://silverpointweb.vercel.app/mcp`, configurations for Claude Code, Claude, Cursor and VS Code, the two Claude Code plugins and skills, the local `npx @silverpoint/mcp`, the server's tools and its answers to a worked example |
+| `/llms.txt`, `/llms-full.txt`, `/agent-catalog.json` | For agents: the llms.txt index, the whole agent catalog as Markdown (every chart and component with its props per framework, grounds, palettes, diagnostics) and the catalog itself, written at export from the catalog `@silverpoint/mcp` ships |
+| `/mcp` | Rewritten by `vercel.json` to the MCP server's Vercel project (`silverpoint-mcp.vercel.app/mcp`) |
+| `/gallery` | The 60 charts (nine families, three of them new in 0.6), the 17 UI components of 0.3, and the composed components, overlays and Knight Lab timeline of 0.7 (drawn by reflex-silverpoint-react 0.8), live, with ground / substrate / mode / hatch-fill / size / palette controls (client-side state) |
 | `/components`, `/components/<slug>` | The UI component reference: one page per component: the 17 of 0.3 with every declared state live on both grounds, and the 21 of 0.7 (composed components, overlays, SpSurface, SpGlyph) with a live demo; each with its code in React, Vue, Angular and Reflex, imports, events or value binding, and props |
 | `/charts`, `/charts/<slug>` | The chart reference: one page per chart with a live example, its code in React, Vue, Angular and Reflex, imports, props and events |
-| `/packages` | The seven npm packages and the PyPI component |
+| `/packages` | The eight npm packages (`@silverpoint/mcp` new in 0.8) and the PyPI component |
 | `/versions` | Every release, newest first, and the Reflex component's own releases |
 | `/support` | How to report a bug, with pre-filled GitHub issue forms |
 | `/about` | Author (Ernesto Crespo, [seraph.to](https://www.seraph.to/)) and license |
@@ -35,6 +38,7 @@ page-wide framework switch for every code example, a live gallery, and a per-cha
 uv sync
 uv run reflex run            # http://localhost:3000
 uv run ruff check . && uv run ruff format --check .
+uv run pytest -q             # tests/ (agent access: REQ-537, REQ-558, REQ-564, REQ-565, REQ-569)
 ```
 
 ## Build and deploy (Vercel)
@@ -53,14 +57,17 @@ Vercel with the framework preset **Other** and no build command. Set `DEPLOY_URL
 ## When silverpoint releases a new version
 
 1. Add the release at the top of `VERSIONS` in `silverpoint_web/site_data.py` (it becomes `LATEST`).
-2. Bump `reflex-silverpoint-react` in `pyproject.toml` if it wraps the new version, then `uv lock`.
-3. New chart? Add its example to `EXAMPLES` in `silverpoint_web/examples.py` (an assertion fails until
+2. Set `CATALOG_VERSION` in `silverpoint_web/agent.py` to the new version, run
+   `uv run python scripts/agent_files.py fetch` (the catalog and tool table of `@silverpoint/mcp`, and the
+   hosted server's answers to the AI page's examples) and commit `agent/`. A test fails until it matches `LATEST`.
+3. Bump `reflex-silverpoint-react` in `pyproject.toml` if it wraps the new version, then `uv lock`.
+4. New chart? Add its example to `EXAMPLES` in `silverpoint_web/examples.py` (an assertion fails until
    every chart in the catalog has one). A new family also wants a line in `FAMILY_BLURBS` (`site_data.py`). Pages, gallery, sidebar and counts come from
    `reflex_silverpoint_react.CHARTS`.
-4. New UI component? Nothing to write: its pages, states and code come from
+5. New UI component? Nothing to write: its pages, states and code come from
    `reflex_silverpoint_react.UI_COMPONENTS` and `UI_DEMOS` (`silverpoint_web/ui_examples.py`).
-5. A reflex-silverpoint-react release of its own (no new npm version)? Add it to `REFLEX_VERSIONS` in
-   `site_data.py`. The palettes, composed components and timeline (new in 0.7) live in
+6. A reflex-silverpoint-react release? Add it to `REFLEX_VERSIONS` in `site_data.py` (the latest is the one
+   the site is drawn with; its `wraps` names the `@silverpoint/react` version). The palettes, composed components and timeline (new in 0.7) live in
    `silverpoint_web/reflex_only.py` (Reflex demos, data and Python code), `composed_code.py` (their React, Vue
    and Angular code) and `pages/reflex_docs.py` (their docs pages).
 
@@ -70,6 +77,7 @@ Vercel with the framework preset **Other** and no build command. Set `DEPLOY_URL
 silverpoint_web/
   silverpoint_web.py   the app (enable_state=False) and its routes
   site_data.py         links, packages, frameworks, versions
+  agent.py             agent access: the catalog pin, the MCP URL and client configs, llms.txt / llms-full.txt
   examples.py          one example per chart → live props + React / Vue / Angular / Reflex code
   datasets.py          the silverpoint demo datasets (from reflex-silverpoint-react's demo)
   datasets_0_6.json    the larger datasets of the second catalog (0.6), from @silverpoint/core
@@ -78,6 +86,9 @@ silverpoint_web/
   ui_props_0_7.json    the props of the 21 components of 0.7, extracted from the @silverpoint/core and /react 0.7.0 types
   components/          layout (header, sidebar, TOC, footer) and UI blocks (code, tabs, tables)
   pages/               home, gallery, charts, docs, reflex_docs, project (packages, versions, support, about)
+agent/                       the agent catalog of @silverpoint/mcp, its tool table and the server's example answers
+scripts/agent_files.py       fetch (refresh agent/) and write (the agent files into public/, run by build_local.sh)
+tests/                       pytest, each test named after the REQ it checks
 assets/silverpoint_web.css   the paper style: cream substrate, graphite ink, EB Garamond, hatching
 assets/css/icons/            TimelineJS's icon font (MPL-2.0), at the path TimelineJS requests it from
 ```

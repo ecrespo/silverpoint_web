@@ -10,4 +10,6 @@ rm -rf public
 uv run reflex export --frontend-only
 unzip -q frontend.zip -d public
 rm -f frontend.zip
+# The agent files (silverpoint feature-005): /agent-catalog.json, /llms.txt and /llms-full.txt.
+uv run python scripts/agent_files.py write public
 echo "Static site in public/ — preview with: python -m http.server -d public 8000"

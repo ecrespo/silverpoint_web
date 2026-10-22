@@ -8,11 +8,12 @@ authors = [{ name = "Ernesto Crespo", email = "ecrespo@gmail.com" }]
 license = { text = "MIT" }
 dependencies = [
         "reflex>=0.10.0",
-    "reflex-silverpoint-react[timeline]>=0.7.0",
+    "reflex-silverpoint-react[timeline]>=0.8.0",
 ]
 
 [dependency-groups]
 dev = [
+    "pytest>=9.1.1",
     "ruff>=0.17.1",
 ]
 
@@ -24,3 +25,7 @@ extend-exclude = [".web", "public", "node_modules", "assets"]
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "UP", "B", "SIM"]
 ignore = ["E501"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

@@ -394,7 +394,7 @@ def composed_page(item: ro.Composed) -> Callable[[], rx.Component]:
                 rx.el.p(
                     "In Reflex the names are snake_case; ",
                     rx.el.a("the Reflex column of Composed components", href=f"/docs/composed#{item.slug}"),
-                    " notes where its API differs.",
+                    " shows the builder's arguments.",
                     class_name="spw-small",
                 ),
             ),
@@ -403,7 +403,7 @@ def composed_page(item: ro.Composed) -> Callable[[], rx.Component]:
                 "Common props",
                 rx.el.p(
                     "Every UI component also takes these, falling back to the dashboard it sits in, then to the "
-                    "provider. In Reflex, the composed components do not read silverpoint_provider: pass them."
+                    "provider. In Reflex they read silverpoint_provider too; only sp_trigger does not: pass them to it."
                 ),
                 props_table(COMMON_PROPS_0_7),
             ),
@@ -459,7 +459,7 @@ def components_index() -> rx.Component:
         f"The {len(UI_COMPONENTS)} form and display components silverpoint has shipped since 0.3 in React, Vue and "
         "Angular (and in Reflex through reflex-silverpoint-react), drawn with the charts' language: an exact frame, "
         "tone by hatching or by line weight, keyboard and screen-reader semantics from the native element. The 21 "
-        f"composed components and overlays of {sd.LATEST.version} are indexed at the end.",
+        "composed components and overlays of 0.7 are indexed at the end.",
         rx.el.div(
             *[
                 rx.el.a(

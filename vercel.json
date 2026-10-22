@@ -8,7 +8,7 @@
   "trailingSlash": false,
   "rewrites": [
     { "source": "/mcp", "destination": "https://silverpoint-mcp.vercel.app/mcp" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/((?!mcp|agent-catalog\\.json|llms).*)", "destination": "/index.html" }
   ],
   "headers": [
     {

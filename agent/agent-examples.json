@@ -1,0 +1,165 @@
+{
+  "version": "0.8.0",
+  "endpoint": "https://silverpointweb.vercel.app/mcp",
+  "calls": [
+    {
+      "tool": "recommend_chart",
+      "arguments": {
+        "shape": "series",
+        "intent": "trend"
+      },
+      "result": {
+        "version": "0.8.0",
+        "recommendations": [
+          {
+            "slug": "line-chart",
+            "score": 0.9,
+            "reasons": [
+              "A line is the plainest reading of a value over an ordered axis."
+            ]
+          },
+          {
+            "slug": "area-chart",
+            "score": 0.8,
+            "reasons": [
+              "An area gives one series the weight of its magnitude."
+            ]
+          },
+          {
+            "slug": "step-chart",
+            "score": 0.6,
+            "reasons": [
+              "Steps show a value that holds until it changes."
+            ]
+          },
+          {
+            "slug": "stream-chart",
+            "score": 0.5,
+            "reasons": [
+              "Several value columns overlay or stack as waves."
+            ]
+          },
+          {
+            "slug": "polar-line-chart",
+            "score": 0.3,
+            "reasons": [
+              "A cyclic axis (hours, months, degrees) closes the line around a circle."
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tool": "generate_code",
+      "arguments": {
+        "target": {
+          "chart": "line-chart"
+        },
+        "framework": "react",
+        "fields": {
+          "x": "hour",
+          "value": "hits"
+        }
+      },
+      "result": {
+        "version": "0.8.0",
+        "imports": [
+          "@silverpoint/react/line-chart"
+        ],
+        "stylesheets": [
+          "@silverpoint/fonts/fonts.css",
+          "@silverpoint/grounds/styles.css"
+        ],
+        "code": "import '@silverpoint/fonts/fonts.css';\nimport '@silverpoint/grounds/styles.css';\nimport { LineChart } from '@silverpoint/react/line-chart';\n\nexport function LineChartView({ rows }: { rows: readonly Record<string, unknown>[] }) {\n  return (\n    <LineChart\n      data={rows}\n      xKey=\"hour\"\n      valueKey=\"hits\"\n      title=\"Line chart\"\n    />\n  );\n}\n",
+        "notes": [
+          "The rows are the `rows` prop: plain objects, one per datum, read through the accessor props."
+        ]
+      }
+    },
+    {
+      "tool": "generate_code",
+      "arguments": {
+        "target": {
+          "chart": "line-chart"
+        },
+        "framework": "vue",
+        "fields": {
+          "x": "hour",
+          "value": "hits"
+        }
+      },
+      "result": {
+        "version": "0.8.0",
+        "imports": [
+          "@silverpoint/vue/line-chart"
+        ],
+        "stylesheets": [
+          "@silverpoint/fonts/fonts.css",
+          "@silverpoint/grounds/styles.css"
+        ],
+        "code": "<script setup lang=\"ts\">\nimport '@silverpoint/fonts/fonts.css';\nimport '@silverpoint/grounds/styles.css';\nimport { SpLineChart } from '@silverpoint/vue/line-chart';\n\ndefineProps<{ rows: readonly Record<string, unknown>[] }>();\n</script>\n\n<template>\n  <SpLineChart\n    :data=\"rows\"\n    xKey=\"hour\"\n    valueKey=\"hits\"\n    title=\"Line chart\"\n  />\n</template>\n",
+        "notes": [
+          "The rows are the `rows` prop: plain objects, one per datum, read through the accessor props."
+        ]
+      }
+    },
+    {
+      "tool": "generate_code",
+      "arguments": {
+        "target": {
+          "chart": "line-chart"
+        },
+        "framework": "angular",
+        "fields": {
+          "x": "hour",
+          "value": "hits"
+        }
+      },
+      "result": {
+        "version": "0.8.0",
+        "imports": [
+          "@angular/core",
+          "@silverpoint/angular/line-chart"
+        ],
+        "stylesheets": [
+          "@silverpoint/fonts/fonts.css",
+          "@silverpoint/grounds/styles.css"
+        ],
+        "code": "import { ChangeDetectionStrategy, Component, input } from '@angular/core';\nimport { SpLineChart } from '@silverpoint/angular/line-chart';\n\n/** Add '@silverpoint/fonts/fonts.css', '@silverpoint/grounds/styles.css' to the `styles` of angular.json. */\n@Component({\n  selector: 'app-line-chart-view',\n  imports: [SpLineChart],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  template: `\n    <sp-line-chart\n      [data]=\"rows()\"\n      [xKey]=\"'hour'\"\n      [valueKey]=\"'hits'\"\n      [title]=\"'Line chart'\"\n    />\n  `,\n})\nexport class LineChartView {\n  readonly rows = input.required<readonly Record<string, unknown>[]>();\n}\n",
+        "notes": [
+          "Add the stylesheets to the `styles` array of angular.json.",
+          "The rows are the `rows` prop: plain objects, one per datum, read through the accessor props."
+        ]
+      }
+    },
+    {
+      "tool": "generate_code",
+      "arguments": {
+        "target": {
+          "chart": "line-chart"
+        },
+        "framework": "reflex",
+        "fields": {
+          "x": "hour",
+          "value": "hits"
+        }
+      },
+      "result": {
+        "version": "0.8.0",
+        "imports": [
+          "reflex",
+          "reflex_silverpoint_react"
+        ],
+        "stylesheets": [
+          "@silverpoint/fonts/fonts.css",
+          "@silverpoint/grounds/styles.css"
+        ],
+        "code": "import reflex as rx\nfrom reflex_silverpoint_react import line_chart\n\n\nclass State(rx.State):\n    rows: list[dict] = []\n\n\ndef line_chart_view() -> rx.Component:\n    return line_chart(\n        data=State.rows,\n        x_key=\"hour\",\n        value_key=\"hits\",\n        title=\"Line chart\",\n    )\n",
+        "notes": [
+          "`State` is a placeholder name: merge its fields into your own state class.",
+          "Fill `State.rows` with the rows, a list of dicts, from an event handler."
+        ]
+      }
+    }
+  ]
+}

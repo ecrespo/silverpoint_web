@@ -1,7 +1,7 @@
 """The live demos of silverpoint 0.7's additions: palettes, the composed components, the timeline.
 
-silverpoint 0.7.0 ships them in React, Vue and Angular; the site draws them with the Reflex versions
-of reflex-silverpoint-react 0.7.0, which builds the same three in Reflex. The demos are driven by
+silverpoint ships them in React, Vue and Angular; the site draws them with reflex-silverpoint-react
+0.8, whose builders are the same npm components (@silverpoint/react 0.8). The demos are driven by
 client-side state (``ClientStateVar``), as the site has no backend; the Python printed beside them is
 the usual ``rx.State`` version a Reflex app writes, and ``composed_code`` holds the React, Vue and
 Angular code of each.
@@ -47,8 +47,10 @@ from reflex_silverpoint_react import (
     sp_trigger,
 )
 
-#: The reflex-silverpoint-react release this module documents.
-REFLEX_VERSION = "0.7.0"
+from . import site_data as sd
+
+#: The reflex-silverpoint-react release that draws the demos.
+REFLEX_VERSION = sd.REFLEX_LATEST.version
 
 # ── Palettes ─────────────────────────────────────────────────────────────────────────────
 
@@ -168,7 +170,7 @@ class Composed:
 
     slug: str
     name: str  # the Python builder(s)
-    level: str  # "A" (native markup) or "B" (Radix primitives)
+    level: str  # "A" (native markup) or "B" (overlays on <dialog> and the Popover API)
     summary: str
     render: Callable[[dict[str, Any]], rx.Component]
     code: str
@@ -285,7 +287,7 @@ def _textarea(s: dict[str, Any]) -> rx.Component:
         rows=3,
         max_length=120,
         show_count=True,
-        textarea_id="composed-note",
+        id="composed-note",
         **s,
     )
 
@@ -298,7 +300,7 @@ def _input_number(s: dict[str, Any]) -> rx.Component:
             on_change=COPIES.set_value,
             min=1,
             max=10,
-            input_id="composed-copies",
+            id="composed-copies",
             **s,
         ),
         rx.el.p("Value ", rx.el.code(COPIES.value), class_name="spw-small"),
@@ -324,7 +326,7 @@ def _drawer(s: dict[str, Any]) -> rx.Component:
         rx.el.p("A panel that slides in from any edge, over a hatched backdrop."),
         trigger=sp_trigger("Open the drawer", **s),
         title="Settings",
-        side="right",
+        side="end",
         **s,
     )
 
@@ -586,7 +588,7 @@ sp_statistic("Churn", "2.1", suffix="%", trend="down", delta="−0.4 %")""",
         _input_number,
         """sp_input_number(label="Copies", value=State.copies, on_change=State.set_copies, min=1, max=10)""",
     ),
-    # Level B: overlays on Radix primitives.
+    # Level B: overlays, on <dialog> and the Popover API.
     Composed(
         "modal",
         "sp_modal",
@@ -607,15 +609,15 @@ sp_statistic("Churn", "2.1", suffix="%", trend="down", delta="−0.4 %")""",
         "drawer",
         "sp_drawer",
         "B",
-        "The same dialog, sliding in from any edge (side='right', 'left', 'top' or 'bottom').",
+        "The same dialog, sliding in from any edge (side='end', the default, 'start', 'top' or 'bottom').",
         _drawer,
-        """sp_drawer(rx.el.p("A panel that slides in…"), trigger="Open the drawer", title="Settings", side="right")""",
+        """sp_drawer(rx.el.p("A panel that slides in…"), trigger="Open the drawer", title="Settings", side="end")""",
     ),
     Composed(
         "popover",
         "sp_popover",
         "B",
-        "Anchored content on a card frame, positioned by Radix; Escape or a click outside closes it.",
+        "Anchored content on a card frame, placed by the core on the Popover API; Escape or a click outside closes it.",
         _popover,
         """sp_popover(
     rx.el.p("Anchored content, on a card frame."),
@@ -640,7 +642,7 @@ sp_statistic("Churn", "2.1", suffix="%", trend="down", delta="−0.4 %")""",
         "A single choice with typeahead: the chosen option ticked, the highlighted one heightened.",
         _select,
         """sp_select(
-    ["North", "East", "South", "West"],  # or [{"value", "label", "disabled"}]
+    ["North", "East", "South", "West"],  # or [{"key", "label", "disabled"}]
     value=State.region,
     on_change=State.set_region,  # receives the value
     label="Region",
@@ -680,15 +682,15 @@ sp_toaster(
         open=State.toast_open,
         on_open_change=State.set_toast_open,  # False when it closes
     ),
-    position="bottom-right",
+    position="bottom-end",  # the default; logical, so it mirrors in right-to-left text
 )""",
     ),
     Composed(
         "trigger",
         "sp_trigger",
         "B",
-        "The drawn button of every overlay: the SpButton look on a surface, and it forwards Radix's props "
-        "(sp_button does not).",
+        "The drawn button of every overlay: SpButton's drawing on a native button that keeps the ARIA and the "
+        "toggle an overlay clones onto it (sp_button does not).",
         _trigger,
         """sp_trigger("Default")
 sp_trigger("Primary", variant="primary")  # light hatching
@@ -702,9 +704,9 @@ LEVEL_TITLES = {"A": "Composed components · native markup", "B": "Overlays"}
 LEVEL_BLURBS = {
     "A": "Native HTML underneath (a <table>, <details>, <textarea>…) or a few lines of JS; drawn with the ground's "
     "own hand-inked frames, hatched tones and heightening.",
-    "B": "Opened by a trigger you write. In React, Vue and Angular they are the platform's <dialog> and Popover API; "
-    "in Reflex, Radix primitives at the versions Reflex already installs, rendered in a portal at the end of <body>: "
-    "give those ground and palette directly.",
+    "B": "Opened by a trigger you write, on the platform's <dialog> and Popover API, in React, Vue, Angular and "
+    "Reflex alike. They render in place, in the top layer, so they read the provider's ground and palette; "
+    "sp_trigger does not, so give it those directly.",
 }
 
 

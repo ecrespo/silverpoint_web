@@ -1134,9 +1134,9 @@ def framework_guide(key: str) -> Callable[[], rx.Component]:
                         f". It exposes all {len(CHARTS)} charts, the Dashboard (with linking), the {len(UI_COMPONENTS)} UI "
                         "components (sp_button, sp_input, sp_tabs…), the provider, both grounds, the interaction events, "
                         "custom readouts (tooltip_template) and the imperative handle (download_svg, get_svg, get_geometry) "
-                        "as Python. On top of that it builds in Reflex what silverpoint "
-                        f"{sd.LATEST.version} added to React, Vue and Angular: palettes, {len(cc.REFERENCE)} composed "
-                        "components and overlays, and the Knight Lab timeline.",
+                        "as Python, and what silverpoint 0.7 added: palettes, "
+                        f"{len(cc.REFERENCE)} composed components and overlays, and the Knight Lab timeline, each the "
+                        "npm component itself behind a Python builder.",
                     ),
                     rx.el.p(
                         f"reflex-silverpoint-react {sd.REFLEX_LATEST.version} requires Reflex 0.10.0 or later (React 19) "
@@ -1164,12 +1164,12 @@ def framework_guide(key: str) -> Callable[[], rx.Component]:
             2,
             (
                 "new-0-7",
-                f"New in {sd.REFLEX_LATEST.version}: palettes, composed components, timeline",
+                "Since 0.7: palettes, composed components, timeline",
                 [
                     rx.el.p(
-                        f"The three additions of silverpoint {sd.LATEST.version}, built in Reflex on silverpoint's own "
-                        "frames, tones and custom properties, with a Python API of their own (the adapters' versions "
-                        "are on the same pages, in React, Vue and Angular):"
+                        "The three additions of silverpoint 0.7. Since reflex-silverpoint-react 0.7.1 they are the "
+                        "@silverpoint/react components themselves, drawn on silverpoint's own frames, tones and custom "
+                        "properties, behind Python builders (the React, Vue and Angular code is on the same pages):"
                     ),
                     table(
                         ["", "What", ""],
@@ -1189,22 +1189,23 @@ def framework_guide(key: str) -> Callable[[], rx.Component]:
                             [
                                 rx.el.strong("Composed components"),
                                 f"{len(cc.REFERENCE)} components: tables, pagination, statistics, collapse… and overlays "
-                                "(modal, drawer, popover, tooltip, select, menu, toast), in Reflex on Radix primitives.",
+                                "(modal, drawer, popover, tooltip, select, menu, toast) on <dialog> and the Popover API, "
+                                "rendered in place.",
                                 rx.el.a("Composed components →", href="/docs/composed"),
                             ],
                             [
                                 rx.el.strong("Timeline"),
                                 rx.el.span(
                                     c("sp_timeline"),
-                                    ": Knight Lab TimelineJS drawn in silverpoint (the ",
-                                    c("[timeline]"),
-                                    " extra).",
+                                    ": Knight Lab TimelineJS drawn in silverpoint, the npm ",
+                                    c("SpTimeline"),
+                                    " (no Python extra needed).",
                                 ),
                                 rx.el.a("Timeline →", href="/docs/timeline"),
                             ],
                         ],
                     ),
-                    shell('pip install "reflex-silverpoint-react[timeline]"'),
+                    shell("pip install reflex-silverpoint-react"),
                     code_block(
                         """from reflex_silverpoint_react import bar_chart, sort_rows, sp_table, silverpoint_palette
 

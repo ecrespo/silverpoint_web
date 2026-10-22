@@ -68,17 +68,17 @@ def packages() -> rx.Component:
             "On PyPI: the Reflex component",
             rx.el.p(
                 ext_link(rx.el.code("reflex-silverpoint-react"), sd.REFLEX_PYPI),
-                f" wraps @silverpoint/react {sd.REFLEX_LATEST.wraps} and exposes all {len(CHARTS)} charts, the Dashboard, "
-                f"the {len(UI_COMPONENTS)} UI components and the provider as Python components for ",
-                ext_link("Reflex", "https://reflex.dev"),
-                f". Version {sd.REFLEX_LATEST.version} builds, in Reflex, ",
+                f" {sd.REFLEX_LATEST.version} wraps @silverpoint/react {sd.REFLEX_LATEST.wraps} and exposes all "
+                f"{len(CHARTS)} charts, the Dashboard, the {len(UI_COMPONENTS)} UI components, the provider, the ",
                 rx.el.a("palettes", href="/docs/palettes"),
                 f", {len(cc.REFERENCE)} ",
                 rx.el.a("composed components and overlays", href="/docs/composed"),
                 " and the Knight Lab ",
                 rx.el.a("timeline", href="/docs/timeline"),
-                f" — what silverpoint {sd.LATEST.version} ships in React, Vue and Angular — with a Python API of its "
-                "own; it requires Reflex 0.10 and Python 3.11+. Source: ",
+                " as Python components for ",
+                ext_link("Reflex", "https://reflex.dev"),
+                ": the npm components themselves, behind Python builders. It requires Reflex 0.10 and Python 3.11+. "
+                "Source: ",
                 ext_link("ecrespo/reflex-silverpoint-react", sd.REFLEX_REPO),
                 ".",
             ),
@@ -89,8 +89,7 @@ def packages() -> rx.Component:
                 loading="lazy",
             ),
             code_block(
-                'pip install reflex-silverpoint-react\n# with the timeline\npip install "reflex-silverpoint-react[timeline]"\n'
-                "# or\nuv add reflex-silverpoint-react",
+                "pip install reflex-silverpoint-react\n# or\nuv add reflex-silverpoint-react",
                 "shell",
             ),
         ),
@@ -191,7 +190,7 @@ def versions() -> rx.Component:
             "reflex-silverpoint-react",
             rx.el.p(
                 "The Reflex component has its own version line. Most of its releases follow the npm release they wrap "
-                "(the Reflex column above); these add something of their own, built in Reflex."
+                "(the Reflex column above); these add something of their own."
             ),
             *[
                 rx.el.div(

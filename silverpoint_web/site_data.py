@@ -41,7 +41,7 @@ def npm_url(package: str) -> str:
 
 @dataclass(frozen=True)
 class Release:
-    """One release of the seven packages (they share one version)."""
+    """One release of the npm packages (they share one version)."""
 
     version: str
     date: str
@@ -70,6 +70,27 @@ class Release:
 
 VERSIONS: tuple[Release, ...] = (
     Release(
+        version="0.8.0",
+        date="2026-10-21",
+        summary="Agent access: @silverpoint/mcp, an MCP server that tells agents what silverpoint holds, the agent "
+        "catalog, the silverpoint skill and a Claude Code plugin.",
+        highlights=(
+            "A new package, @silverpoint/mcp: a Model Context Protocol server over stdio (npx @silverpoint/mcp) and "
+            "stateless Streamable HTTP, hosted read-only at silverpointweb.vercel.app/mcp. See Use with AI (/docs/ai).",
+            "Eleven tools: get_version, list_charts, get_chart, list_components, get_component, recommend_chart, "
+            "generate_code (React, Vue, Angular and Reflex), search_catalog, validate_props, render_chart (the "
+            "canonical SVG) and check_palette; the catalog, each chart and component, the diagnostics and the "
+            "skill's guides as resources; the choose-chart and build-dashboard prompts.",
+            "The agent catalog, agent-catalog.json, generated from the published types: the 60 charts and 38 UI "
+            "components with their names, imports and props in the four frameworks, the grounds, palettes, timeline "
+            "and the 25 diagnostics. This site publishes it at /agent-catalog.json, with /llms.txt and /llms-full.txt.",
+            "The silverpoint skill (skills/silverpoint/) and a Claude Code plugin that installs it with the hosted "
+            "server: /plugin marketplace add ecrespo/silverpoint, then /plugin install silverpoint@silverpoint.",
+            "No change to the API of @silverpoint/react, vue, angular, core, grounds or fonts, nor to any render.",
+        ),
+        reflex="0.8.0",
+    ),
+    Release(
         version="0.7.0",
         date="2026-10-20",
         summary="Palettes, 21 composed and overlay components (38 UI components in all) and the Knight Lab "
@@ -95,6 +116,7 @@ VERSIONS: tuple[Release, ...] = (
             "a headingLevel outside 2..6 draws h3. Both warn SP017.",
             "No change to the rendered output of the 60 charts.",
         ),
+        reflex="0.7.1",
     ),
     Release(
         version="0.6.0",
@@ -211,6 +233,44 @@ class ReflexRelease:
 #: described here; the others follow the npm release they wrap (``Release.reflex``).
 REFLEX_VERSIONS: tuple[ReflexRelease, ...] = (
     ReflexRelease(
+        version="0.8.0",
+        date="2026-10-21",
+        wraps="0.8.0",
+        summary="Wraps @silverpoint/react 0.8.0, and brings agent access to Reflex: the reflex-silverpoint skill, its "
+        "catalog and a Claude Code plugin.",
+        highlights=(
+            "SILVERPOINT_VERSION is 0.8.0 and every npm dependency is pinned to it; the Python builders are unchanged.",
+            "The reflex-silverpoint skill (skills/reflex-silverpoint/): builders, snake_case props, State patterns and "
+            "events, the provider and palettes, composed components and overlays, the dashboard and the timeline. "
+            "Every Python example in it is imported and rendered in CI.",
+            "A Claude Code plugin with the skill and the hosted silverpoint MCP server: /plugin marketplace add "
+            "ecrespo/reflex-silverpoint-react, then /plugin install reflex-silverpoint@reflex-silverpoint.",
+            "reflex-catalog.json (scripts/export_catalog.py): each builder's snake_case props and their JS names, "
+            "joined into silverpoint's agent catalog; attached to every GitHub release.",
+            "CHARTS documents on_root_change for squarified_treemap and sunburst_chart.",
+        ),
+    ),
+    ReflexRelease(
+        version="0.7.1",
+        date="2026-10-20",
+        wraps="0.7.0",
+        summary="Wraps @silverpoint/react 0.7.0: the palettes, composed components, overlays and timeline are now the "
+        "npm components, with the same Python builders.",
+        highlights=(
+            "Palettes are the npm palette prop, merged element → dashboard → provider field by field; check_palette() "
+            "measures the core's PALETTE_PAIRS, the focus ring included.",
+            "The composed components (sp_table, sp_pagination, sp_breadcrumb, sp_avatar, sp_statistic, …) and "
+            "sp_surface and sp_glyph are the npm components, and read silverpoint_provider.",
+            "Overlays (sp_modal, sp_drawer, sp_popover, sp_tooltip, sp_select, sp_dropdown_menu, sp_toast in an "
+            "sp_toaster) are the npm components on <dialog> and the Popover API, in place of Radix: they render in place.",
+            "sp_trigger is a native button drawn by the core that keeps the ARIA an overlay clones onto it.",
+            "sp_timeline is the npm SpTimeline; @knight-lab/timelinejs 3.9.13 comes with it, so the [timeline] extra is "
+            "empty.",
+            'New arguments in the npm names (side="start"/"end", position="bottom-end", extent=, offset=); '
+            "the old ones still work, deprecated.",
+        ),
+    ),
+    ReflexRelease(
         version="0.7.0",
         date="2026-10-18",
         wraps="0.6.0",
@@ -301,6 +361,15 @@ PACKAGES: tuple[Package, ...] = (
         f"{REPO}/tree/main/packages/fonts",
     ),
     Package(
+        "@silverpoint/mcp",
+        "MCP server",
+        "Optional, for agents. A Model Context Protocol server that answers from the agent catalog: the charts and "
+        "components, a chart recommender, code for React, Vue, Angular and Reflex, prop validation and canonical SVG "
+        "renders. stdio (npx @silverpoint/mcp) or a stateless HTTP handler.",
+        "optional",
+        f"{REPO}/tree/main/packages/mcp",
+    ),
+    Package(
         "@silverpoint/tailwind",
         "Tailwind preset",
         "Optional. Names silverpoint's public --sp- variables as Tailwind 4 / 3.4 theme tokens. No dependencies.",
@@ -369,8 +438,9 @@ FRAMEWORKS: tuple[Framework, ...] = (
         package="reflex-silverpoint-react",
         install="pip install reflex-silverpoint-react",
         peers="reflex >= 0.10.0 (React 19), Python 3.11+",
-        integration="A Reflex custom component wrapping @silverpoint/react 0.6; Reflex installs the npm side for "
-        "you. Its palettes, composed components and timeline are built in Reflex, with a Python API of their own.",
+        integration="A Reflex custom component wrapping @silverpoint/react 0.8; Reflex installs the npm side for "
+        "you. Every chart, UI component, composed component, overlay and the timeline is the npm component, "
+        "with a snake_case Python API.",
         create="reflex init",
         run="reflex run",
         prefix="line_chart()",

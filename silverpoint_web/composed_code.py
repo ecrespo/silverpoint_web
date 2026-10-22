@@ -3,9 +3,10 @@
 ``reflex_only.COMPOSED`` holds the live Reflex demos and their Python; this module holds the same
 examples written against ``@silverpoint/react``, ``@silverpoint/vue`` and ``@silverpoint/angular``
 0.7, so ``/docs/composed`` prints all four behind the page-wide framework switch. Prop names, events
-and slots follow the 0.7.0 type declarations; Reflex's own API differs in a few places (snake_case,
-``side="right"`` where the adapters say ``"end"``, a toaster at ``"bottom-right"`` where they say
-``"bottom-end"``, overlays on Radix where the adapters use ``<dialog>`` and the Popover API).
+and slots follow the 0.7.0 type declarations (unchanged in 0.8). In Reflex the builders wrap the same
+``@silverpoint/react`` components, so props and values match (``side="end"``, ``position="bottom-end"``,
+``extent=``, ``offset=``) apart from snake_case and a few positional arguments (``sp_tooltip``'s
+``content`` is the npm ``text``).
 """
 
 import json

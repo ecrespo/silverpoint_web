@@ -15,6 +15,7 @@ NAV: tuple[tuple[str, str], ...] = (
     ("/charts", "Charts"),
     ("/components", "Components"),
     ("/docs/dashboard", "Dashboard"),
+    ("/docs/ai", "Use with AI"),
     ("/packages", "Packages"),
     ("/versions", "Versions"),
     ("/support", "Report a bug"),
@@ -48,6 +49,10 @@ DOCS_NAV: tuple[tuple[str, tuple[tuple[str, str], ...]], ...] = (
             ("/docs/accessibility", "Accessibility"),
             ("/docs/tailwind", "Tailwind preset"),
         ),
+    ),
+    (
+        "New in 0.8",
+        (("/docs/ai", "Use with AI"),),
     ),
     (
         "New in 0.7",
@@ -200,7 +205,7 @@ def footer() -> rx.Component:
             "This site is built with Reflex and ",
             ext_link("reflex-silverpoint-react", sd.REFLEX_REPO),
             f" {sd.REFLEX_LATEST.version}: every chart and every control on it is live silverpoint, drawn by "
-            f"@silverpoint/react {sd.REFLEX_LATEST.wraps} (the 60 charts are unchanged in {sd.LATEST.version}).",
+            f"@silverpoint/react {sd.REFLEX_LATEST.wraps}.",
             class_name="spw-footer-note",
         ),
         class_name="spw-footer",

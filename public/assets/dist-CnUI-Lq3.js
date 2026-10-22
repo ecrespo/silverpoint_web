@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-ClttyunN.js";import{t}from"./styles-BTaUpbmu.js";var n=e();function r({children:e,...r}){return(0,n.jsx)(t.Provider,{value:r,children:e})}export{r as t};

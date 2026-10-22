@@ -1,1 +1,0 @@
-import{i as e,n as t,u as n}from"./ui-B0tXyone.js";function r({children:r,extra:i,footer:a,dashboardCell:o,...s}){let c=n(s,e(s,o),{extra:i!=null,footer:a!=null});return t(c,{slots:{content:r,extra:i,footer:a}})}export{r as t};

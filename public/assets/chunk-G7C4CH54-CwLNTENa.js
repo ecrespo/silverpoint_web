@@ -1,1 +1,0 @@
-import{c as e,i as t,n,r}from"./ui-B0tXyone.js";function i({children:i,dashboardCell:a,...o}){return n(e(o,t(o,a),{text:r(i)}),{slots:{content:i}})}export{i as t};

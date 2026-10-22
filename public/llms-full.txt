@@ -1,0 +1,2506 @@
+# silverpoint 0.8.0: the agent catalog
+
+> silverpoint 0.8.0 draws 60 charts and 38 UI components as metal point on prepared paper, for React, Vue, Angular and Reflex (Python, through reflex-silverpoint-react), from one framework-free engine, on the silverpoint and cyanotype grounds with 6 palette presets; accessible and server-renderable.
+
+Generated from https://silverpointweb.vercel.app/agent-catalog.json, the catalog `@silverpoint/mcp@0.8.0` ships (schema 1). Reflex: `reflex-silverpoint-react` 0.7.1, wrapping silverpoint 0.7.0. Its Reflex names are those of that release, which wraps silverpoint 0.7.0. React, Vue and Angular share each prop's name (Vue templates may write it in kebab-case); Reflex spells it in snake_case. The MCP server at https://silverpointweb.vercel.app/mcp answers from the same catalog.
+
+## Stylesheets
+
+- always: `@silverpoint/fonts/fonts.css`, `@silverpoint/grounds/styles.css`
+- ui: `@silverpoint/grounds/ui.css`
+- timeline: `@knight-lab/timelinejs/dist/css/timeline.css`, `@silverpoint/grounds/timeline.css`
+
+## Common props
+
+### Every chart
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `data` | `data` | `readonly Datum[]` |  | Rows to draw. If omitted, the demo dataset is rendered (REQ-093): accessor props (`…Key`, `keys`, `names`, `levels`, `axis`, `dimensions`, `period`, `nodes`) are ignored, every other prop applies. |
+| `ground` | `ground` | `GroundRef` | `'silverpoint'` | Style ground. Defaults to the app provider's, or `silverpoint`. |
+| `substrate` | `substrate` | `SubstrateName` | `'cream'` | Prepared substrate within the ground (REQ-046). |
+| `mode` | `mode` | `InkMode` | `'ink'` | `ink` by default; `precision` disables inking (REQ-021). |
+| `palette` | `palette` | `Palette` |  | Colours over the ground's, field by field, written on the root's `style` (REQ-461). Merged over the dashboard's and the provider's (REQ-462); presets are on `@silverpoint/core/palettes`. |
+| `seed` | `seed` | `Seed` |  | Seed. If omitted, it is derived from `id` stably (REQ-003). |
+| `id` | `id` | `string` |  | Stable identifier. If omitted, it is generated deterministically. |
+| `height` | `height` | `number` | `160` | Height of the drawing area in px. Width is the container's unless pinned. |
+| `width` | `width` | `number` |  |  |
+| `chrome` | `chrome` | `'card' \| 'bare'` | `'card'` | `card` draws the full frame; `bare` only the drawing area (REQ-095). |
+| `hatchFill` | `hatch_fill` | `'tile' \| 'per-shape'` | `'tile'` | How areas are filled (REQ-029). |
+| `title` | `title` | `string` |  |  |
+| `badge` | `badge` | `string` |  |  |
+| `value` | `value` | `string \| number` |  |  |
+| `unit` | `unit` | `string` |  |  |
+| `footerLeft` | `footer_left` | `string` |  |  |
+| `footerRight` | `footer_right` | `string` |  |  |
+| `label` | `label` | `string` |  | Accessible name. If omitted, it is derived from `title` (REQ-120). |
+| `description` | `description` | `string` |  | Long description for screen readers (REQ-120). |
+| `dataTable` | `data_table` | `'visible' \| 'hidden' \| 'none'` | `'hidden'` | Tabular alternative; `hidden` leaves it for assistive technology only (REQ-121). |
+| `locale` | `locale` | `string` |  |  |
+| `numberFormat` | `number_format` | `Intl.NumberFormatOptions` |  |  |
+| `className` | `class_name` | `string` |  |  |
+
+### Every UI component
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `id` | — | `string` |  | The frame variant and every related id derive from it (REQ-307, REQ-329). |
+| `seed` | `seed` | `Seed` |  | Overrides `id` for the frame variant only. |
+| `ground` | `ground` | `GroundRef` | `'silverpoint'` | Style ground. Defaults to the dashboard's, then the app provider's, or `silverpoint` (REQ-311). |
+| `substrate` | `substrate` | `SubstrateName` | `'cream'` | Prepared substrate within the ground (REQ-046). |
+| `mode` | `mode` | `InkMode` | `'ink'` | `ink` by default; `precision` disables inking (REQ-021, REQ-306). |
+| `palette` | `palette` | `Palette` |  | Colours over the ground's, merged over the dashboard's and the provider's (REQ-461, REQ-462). |
+| `size` | `size` | `UiSize` | `'md'` | Default `'md'`. |
+| `className` | — | `string` |  | Added to the component's root element, after its own classes. |
+
+## Charts: Lines
+
+### LineChart
+
+`line-chart`: Spline with an optional dotted baseline series.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `LineChart` | `@silverpoint/react/line-chart` |
+| Vue | `SpLineChart` | `@silverpoint/vue/line-chart` |
+| Angular | `sp-line-chart` | `@silverpoint/angular/line-chart` |
+| Reflex | `line_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `series`; fields: x → `xKey` (string), value → `valueKey` (number), secondary → `secondaryKey` (number, optional)
+- Intents: trend, change, compare
+- Demo dataset: `LINE_CHART_DEMO`
+- Demo rows: `[{"hour": "00", "hits": 18, "baseline": 22}, {"hour": "02", "hits": 14, "baseline": 18}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `xKey` | `x_key` | `Accessor<string \| number>` | `'x'` | Ignored without `data`. |
+| `valueKey` | `value_key` | `Accessor<number \| null \| undefined>` | `'value'` | Ignored without `data`. |
+| `secondaryKey` | `secondary_key` | `Accessor<number \| null \| undefined>` |  | Ignored without `data`. |
+| `curve` | `curve` | `LineCurve` | `'monotone'` |  |
+| `series` | `series` | `'all' \| 'primary'` | `'all'` | `all` draws the secondary series when there is one; `primary` omits it. |
+| `connectNulls` | `connect_nulls` | `boolean` | `false` | Whether a gap left by a missing value is bridged (REQ-008). |
+
+### StepChart
+
+`step-chart`: A series drawn as steps.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `StepChart` | `@silverpoint/react/step-chart` |
+| Vue | `SpStepChart` | `@silverpoint/vue/step-chart` |
+| Angular | `sp-step-chart` | `@silverpoint/angular/step-chart` |
+| Reflex | `step_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `series`; fields: x → `xKey` (string), value → `valueKey` (number)
+- Intents: trend, change
+- Demo dataset: `STEP_CHART_DEMO`
+- Demo rows: `[{"x": "Jan", "value": 12}, {"x": "Feb", "value": 12}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `xKey` | `x_key` | `Accessor<string \| number>` | `'x'` | Ignored without `data`. |
+| `valueKey` | `value_key` | `Accessor<number \| null \| undefined>` | `'value'` | Ignored without `data`. |
+| `step` | `step` | `'after' \| 'before' \| 'middle'` | `'after'` | Where the step sits between two points; `after` by default. |
+
+### SparklineRows
+
+`sparkline-rows`: One row per series — name, sparkline, readout.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SparklineRows` | `@silverpoint/react/sparkline-rows` |
+| Vue | `SpSparklineRows` | `@silverpoint/vue/sparkline-rows` |
+| Angular | `sp-sparkline-rows` | `@silverpoint/angular/sparkline-rows` |
+| Reflex | `sparkline_rows` | `reflex_silverpoint_react` |
+
+- Data shape: `series`; fields: name → `nameKey` (string), points → `seriesKey` (array), point → `pointKey` (number, optional), readout → `readoutKey` (string, optional)
+- Intents: trend, compare, kpi
+- Demo dataset: `SPARKLINE_ROWS_DEMO`
+- Demo rows: `[{"name": "API", "readout": "99.9%", "points": [98, 99, 99, 97, 99, 100, 99, 100]}, {"name": "Queue", "points": [12, 18, 15, 22, 19, 25, 21, 17]}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `rows` | `rows` | `number` |  | Rows shown, from the first; all by default. |
+| `nameKey` | `name_key` | `Accessor<string>` | `'name'` | Ignored without `data`. |
+| `readoutKey` | `readout_key` | `Accessor<string \| number \| null \| undefined>` | `'readout'` | The printed readout; the last value of the series by default. Ignored without `data`. |
+| `seriesKey` | `series_key` | `Accessor<readonly unknown[] \| null \| undefined>` | `'points'` | The row's points: an array. Ignored without `data`. |
+| `pointKey` | `point_key` | `Accessor<number \| null \| undefined>` |  | The value of one point; the point itself when it is a number, else its `value`. Ignored without `data`. |
+
+### KpiCard
+
+`kpi-card`: A metric, its delta, and an area sparkline of the series.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `KpiCard` | `@silverpoint/react/kpi-card` |
+| Vue | `SpKpiCard` | `@silverpoint/vue/kpi-card` |
+| Angular | `sp-kpi-card` | `@silverpoint/angular/kpi-card` |
+| Reflex | `kpi_card` | `reflex_silverpoint_react` |
+
+- Data shape: `single`; fields: value → `valueKey` (number)
+- Intents: kpi, change
+- Demo dataset: `KPI_CARD_DEMO`
+- Demo rows: `[{"value": 118}, {"value": 124}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `valueKey` | `value_key` | `Accessor<number \| null \| undefined>` | `'value'` | Ignored without `data`. |
+| `metric` | `metric` | `string` |  | The metric's name, printed under the figure. |
+| `delta` | `delta` | `number` |  | Signed change, printed with its sign and a direction mark. |
+| `deltaTone` | `delta_tone` | `'up' \| 'down' \| 'flat'` | `delta` | Direction of the mark; from the sign of `delta` by default. |
+
+## Charts: Bars
+
+### BulletChart
+
+`bullet-chart`: One bar per target, with a marker at the target. Values in 0-100.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `BulletChart` | `@silverpoint/react/bullet-chart` |
+| Vue | `SpBulletChart` | `@silverpoint/vue/bullet-chart` |
+| Angular | `sp-bullet-chart` | `@silverpoint/angular/bullet-chart` |
+| Reflex | `bullet_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `categories`; fields: title → `titleKey` (string), actual → `actualKey` (number), target → `targetKey` (number)
+- Intents: progress, kpi, compare
+- Demo dataset: `BULLET_CHART_DEMO`
+- Demo rows: `[{"title": "Revenue", "actual": 72, "target": 80}, {"title": "Profit", "actual": 58, "target": 65}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `titleKey` | `title_key` | `Accessor<string>` | `'title'` | Ignored without `data`. |
+| `actualKey` | `actual_key` | `Accessor<number \| null \| undefined>` | `'actual'` | Ignored without `data`. |
+| `targetKey` | `target_key` | `Accessor<number \| null \| undefined>` | `'target'` | Ignored without `data`. |
+
+### PyramidChart
+
+`pyramid-chart`: Stacked tiers whose width encodes the value (0-100).
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `PyramidChart` | `@silverpoint/react/pyramid-chart` |
+| Vue | `SpPyramidChart` | `@silverpoint/vue/pyramid-chart` |
+| Angular | `sp-pyramid-chart` | `@silverpoint/angular/pyramid-chart` |
+| Reflex | `pyramid_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `categories`; fields: label → `labelKey` (string), width → `widthKey` (number), tone → `toneKey` (number, optional)
+- Intents: rank, compare
+- Demo dataset: `PYRAMID_CHART_DEMO`
+- Demo rows: `[{"label": "Leads", "width": 18}, {"label": "Managers", "width": 42}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `labelKey` | `label_key` | `Accessor<string>` | `'label'` | Ignored without `data`. |
+| `widthKey` | `width_key` | `Accessor<number \| null \| undefined>` | `'width'` | Ignored without `data`. |
+| `toneKey` | `tone_key` | `Accessor<number \| null \| undefined>` |  | Ignored without `data`. |
+
+### BarChart
+
+`bar-chart`: Pill bars, as columns or rows, with an optional second series.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `BarChart` | `@silverpoint/react/bar-chart` |
+| Vue | `SpBarChart` | `@silverpoint/vue/bar-chart` |
+| Angular | `sp-bar-chart` | `@silverpoint/angular/bar-chart` |
+| Reflex | `bar_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `categories`; fields: x → `xKey` (string), value → `valueKey` (number), secondary → `secondaryKey` (number, optional)
+- Intents: compare, rank
+- Demo dataset: `BAR_CHART_DEMO`
+- Demo rows: `[{"x": "Q1", "value": 42, "previous": 35}, {"x": "Q2", "value": 58, "previous": 44}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `xKey` | `x_key` | `Accessor<string \| number>` | `'x'` | Ignored without `data`. |
+| `valueKey` | `value_key` | `Accessor<number \| null \| undefined>` | `'value'` | Ignored without `data`. |
+| `secondaryKey` | `secondary_key` | `Accessor<number \| null \| undefined>` |  | Ignored without `data`. |
+| `orientation` | `orientation` | `'columns' \| 'rows'` |  |  |
+
+### StackedBarChart
+
+`stacked-bar-chart`: One stacked segment per key.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `StackedBarChart` | `@silverpoint/react/stacked-bar-chart` |
+| Vue | `SpStackedBarChart` | `@silverpoint/vue/stacked-bar-chart` |
+| Angular | `sp-stacked-bar-chart` | `@silverpoint/angular/stacked-bar-chart` |
+| Reflex | `stacked_bar_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `categories`; fields: x → `xKey` (string), values → `keys` (number)
+- Intents: compare, part-to-whole
+- Demo dataset: `STACKED_BAR_CHART_DEMO`
+- Demo rows: `[{"x": "Jan", "free": 40, "pro": 18, "team": 6}, {"x": "Feb", "free": 46, "pro": 21, "team": 9}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `xKey` | `x_key` | `Accessor<string \| number>` | `'x'` | Ignored without `data`. |
+| `keys` | `keys` | `readonly string[]` |  | Ignored without `data`. |
+| `names` | `names` | `readonly string[]` |  | Display names of the keys, in order; the keys themselves by default. Ignored without `data`. |
+
+### ComposedChart
+
+`composed-chart`: Columns and a spline on one value scale.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `ComposedChart` | `@silverpoint/react/composed-chart` |
+| Vue | `SpComposedChart` | `@silverpoint/vue/composed-chart` |
+| Angular | `sp-composed-chart` | `@silverpoint/angular/composed-chart` |
+| Reflex | `composed_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `series`; fields: x → `xKey` (string), bar → `barKey` (number), line → `lineKey` (number, optional)
+- Intents: compare, trend
+- Demo dataset: `COMPOSED_CHART_DEMO`
+- Demo rows: `[{"x": "Jan", "revenue": 42, "margin": 18}, {"x": "Feb", "revenue": 48, "margin": 21}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `xKey` | `x_key` | `Accessor<string \| number>` | `'x'` | Ignored without `data`. |
+| `barKey` | `bar_key` | `Accessor<number \| null \| undefined>` | `'bar'` | Ignored without `data`. |
+| `lineKey` | `line_key` | `Accessor<number \| null \| undefined>` | `'line'` | Ignored without `data`. |
+| `showLine` | `show_line` | `boolean` | `true` |  |
+
+### WaterfallChart
+
+`waterfall-chart`: Totals from zero and floating deltas from the running total.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `WaterfallChart` | `@silverpoint/react/waterfall-chart` |
+| Vue | `SpWaterfallChart` | `@silverpoint/vue/waterfall-chart` |
+| Angular | `sp-waterfall-chart` | `@silverpoint/angular/waterfall-chart` |
+| Reflex | `waterfall_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `categories`; fields: step → `stepKey` (string), base → `baseKey` (number, optional), delta → `deltaKey` (number, optional)
+- Intents: change, part-to-whole
+- Demo dataset: `WATERFALL_CHART_DEMO`
+- Demo rows: `[{"step": "Opening", "base": 120}, {"step": "Sales", "delta": 64}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `stepKey` | `step_key` | `Accessor<string>` | `'step'` | Ignored without `data`. |
+| `baseKey` | `base_key` | `Accessor<number \| null \| undefined>` | `'base'` | An absolute total: the bar starts at zero and resets the running total. Ignored without `data`. |
+| `deltaKey` | `delta_key` | `Accessor<number \| null \| undefined>` | `'delta'` | A change from the running total. Ignored without `data`. |
+
+### FunnelChart
+
+`funnel-chart`: Horizontal, centred stages.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `FunnelChart` | `@silverpoint/react/funnel-chart` |
+| Vue | `SpFunnelChart` | `@silverpoint/vue/funnel-chart` |
+| Angular | `sp-funnel-chart` | `@silverpoint/angular/funnel-chart` |
+| Reflex | `funnel_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `categories`; fields: stage → `stageKey` (string), value → `valueKey` (number)
+- Intents: progress, compare
+- Demo dataset: `FUNNEL_CHART_DEMO`
+- Demo rows: `[{"stage": "Visits", "value": 12400}, {"stage": "Product", "value": 6800}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `stageKey` | `stage_key` | `Accessor<string>` | `'stage'` | Ignored without `data`. |
+| `valueKey` | `value_key` | `Accessor<number \| null \| undefined>` | `'value'` | Ignored without `data`. |
+
+### CandlestickChart
+
+`candlestick-chart`: OHLC bodies and wicks.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `CandlestickChart` | `@silverpoint/react/candlestick-chart` |
+| Vue | `SpCandlestickChart` | `@silverpoint/vue/candlestick-chart` |
+| Angular | `sp-candlestick-chart` | `@silverpoint/angular/candlestick-chart` |
+| Reflex | `candlestick_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `intervals`; fields: time → `timeKey` (string), open → `openKey` (number), high → `highKey` (number), low → `lowKey` (number), close → `closeKey` (number)
+- Intents: change, trend
+- Demo dataset: `CANDLESTICK_CHART_DEMO`
+- Demo rows: `[{"time": "Mon", "open": 102, "high": 108, "low": 99, "close": 106}, {"time": "Tue", "open": 106, "high": 109, "low": 101, "close": 103}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `timeKey` | `time_key` | `Accessor<string \| number>` | `'time'` | Ignored without `data`. |
+| `openKey` | `open_key` | `Accessor<number \| null \| undefined>` | `'open'` | Ignored without `data`. |
+| `highKey` | `high_key` | `Accessor<number \| null \| undefined>` | `'high'` | Ignored without `data`. |
+| `lowKey` | `low_key` | `Accessor<number \| null \| undefined>` | `'low'` | Ignored without `data`. |
+| `closeKey` | `close_key` | `Accessor<number \| null \| undefined>` | `'close'` | Ignored without `data`. |
+| `bounds` | `bounds` | `readonly [number, number]` |  | Price bounds of the scale; derived from the data when omitted (REQ-097). |
+
+## Charts: Areas
+
+### AreaChart
+
+`area-chart`: A curved, toned area under its line.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `AreaChart` | `@silverpoint/react/area-chart` |
+| Vue | `SpAreaChart` | `@silverpoint/vue/area-chart` |
+| Angular | `sp-area-chart` | `@silverpoint/angular/area-chart` |
+| Reflex | `area_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `series`; fields: x → `xKey` (string), value → `valueKey` (number)
+- Intents: trend, change
+- Demo dataset: `AREA_CHART_DEMO`
+- Demo rows: `[{"x": "Mon", "value": 32}, {"x": "Tue", "value": 45}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `xKey` | `x_key` | `Accessor<string \| number>` | `'x'` | Ignored without `data`. |
+| `valueKey` | `value_key` | `Accessor<number \| null \| undefined>` | `'value'` | Ignored without `data`. |
+| `curve` | `curve` | `LineCurve` | `'monotone'` |  |
+
+### RangeBandChart
+
+`range-band-chart`: The band between a low and a high series.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `RangeBandChart` | `@silverpoint/react/range-band-chart` |
+| Vue | `SpRangeBandChart` | `@silverpoint/vue/range-band-chart` |
+| Angular | `sp-range-band-chart` | `@silverpoint/angular/range-band-chart` |
+| Reflex | `range_band_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `intervals`; fields: x → `xKey` (string), low → `lowKey` (number), high → `highKey` (number)
+- Intents: uncertainty, trend
+- Demo dataset: `RANGE_BAND_CHART_DEMO`
+- Demo rows: `[{"x": "Mon", "low": 11, "high": 19}, {"x": "Tue", "low": 12, "high": 22}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `xKey` | `x_key` | `Accessor<string \| number>` | `'x'` | Ignored without `data`. |
+| `lowKey` | `low_key` | `Accessor<number \| null \| undefined>` | `'low'` | Ignored without `data`. |
+| `highKey` | `high_key` | `Accessor<number \| null \| undefined>` | `'high'` | Ignored without `data`. |
+
+### StreamChart
+
+`stream-chart`: Two waves, overlaid or stacked.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `StreamChart` | `@silverpoint/react/stream-chart` |
+| Vue | `SpStreamChart` | `@silverpoint/vue/stream-chart` |
+| Angular | `sp-stream-chart` | `@silverpoint/angular/stream-chart` |
+| Reflex | `stream_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `series`; fields: x → `xKey` (string), values → `keys` (number)
+- Intents: trend, part-to-whole, compare
+- Demo dataset: `STREAM_CHART_DEMO`
+- Demo rows: `[{"x": "Mon", "organic": 22, "paid": 14}, {"x": "Tue", "organic": 28, "paid": 18}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `xKey` | `x_key` | `Accessor<string \| number>` | `'x'` | Ignored without `data`. |
+| `keys` | `keys` | `readonly string[]` |  | Ignored without `data`. |
+| `stacked` | `stacked` | `boolean` | `false` |  |
+
+## Charts: Points & grids
+
+### HeatmapChart
+
+`heatmap-chart`: Labelled rows of values, normalised against `scaleMax`.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `HeatmapChart` | `@silverpoint/react/heatmap-chart` |
+| Vue | `SpHeatmapChart` | `@silverpoint/vue/heatmap-chart` |
+| Angular | `sp-heatmap-chart` | `@silverpoint/angular/heatmap-chart` |
+| Reflex | `heatmap_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `matrix`; fields: label → `labelKey` (string), values → `valuesKey` (array)
+- Intents: compare, distribution
+- Demo dataset: `HEATMAP_CHART_DEMO`
+- Demo rows: `[{"label": "Mon", "values": [12, 34, 58, 71, 66, 40]}, {"label": "Tue", "values": [18, 42, 77, 88, 70, 35]}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `labelKey` | `label_key` | `Accessor<string>` | `'label'` | Ignored without `data`. |
+| `valuesKey` | `values_key` | `Accessor<readonly (number \| null)[] \| null \| undefined>` | `'values'` | Ignored without `data`. |
+| `scaleMax` | `scale_max` | `number` | `100` | Value that maps to the darkest tone; 100 by default. |
+| `columnLabels` | `column_labels` | `readonly string[]` |  | Names of the columns, in order; missing ones fall back to `#k` (delta-006). |
+
+### TreemapChart
+
+`treemap-chart`: Tiles of `cols × rows` cells placed in a `columns × rows` grid.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `TreemapChart` | `@silverpoint/react/treemap-chart` |
+| Vue | `SpTreemapChart` | `@silverpoint/vue/treemap-chart` |
+| Angular | `sp-treemap-chart` | `@silverpoint/angular/treemap-chart` |
+| Reflex | `treemap_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `parts`; fields: label → `labelKey` (string), share → `shareKey` (number)
+- Intents: part-to-whole
+- Demo dataset: `TREEMAP_CHART_DEMO`
+- Demo rows: `[{"label": "Search", "share": 48, "cols": 3, "rows": 4}, {"label": "Direct", "share": 26, "cols": 3, "rows": 2}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `labelKey` | `label_key` | `Accessor<string>` | `'label'` | Ignored without `data`. |
+| `shareKey` | `share_key` | `Accessor<number \| null \| undefined>` | `'share'` | Ignored without `data`. |
+| `columns` | `columns` | `number` |  |  |
+| `rows` | `rows` | `number` |  |  |
+
+### ActivityGrid
+
+`activity-grid`: One cell per day, a column per week.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `ActivityGrid` | `@silverpoint/react/activity-grid` |
+| Vue | `SpActivityGrid` | `@silverpoint/vue/activity-grid` |
+| Angular | `sp-activity-grid` | `@silverpoint/angular/activity-grid` |
+| Reflex | `activity_grid` | `reflex_silverpoint_react` |
+
+- Data shape: `events`; fields: date → `dateKey` (date), count → `countKey` (number, optional), level → `levelKey` (number, optional)
+- Intents: schedule, trend
+- Demo dataset: `ACTIVITY_GRID_DEMO`
+- Demo rows: `[{"date": "2025-12-31", "count": 1, "level": 1}, {"date": "2026-01-01", "count": 0, "level": 0}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `dateKey` | `date_key` | `Accessor<string>` | `'date'` | Ignored without `data`. |
+| `countKey` | `count_key` | `Accessor<number \| null \| undefined>` | `'count'` | Ignored without `data`. |
+| `levelKey` | `level_key` | `Accessor<number \| null \| undefined>` | `'level'` | Ignored without `data`. |
+| `weeks` | `weeks` | `number` | `26` | Weeks shown, the most recent last; 26 by default. |
+
+### ScatterChart
+
+`scatter-chart`: Points on two linear scales, optionally sized.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `ScatterChart` | `@silverpoint/react/scatter-chart` |
+| Vue | `SpScatterChart` | `@silverpoint/vue/scatter-chart` |
+| Angular | `sp-scatter-chart` | `@silverpoint/angular/scatter-chart` |
+| Reflex | `scatter_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `points`; fields: x → `xKey` (number), y → `yKey` (number), size → `sizeKey` (number, optional)
+- Intents: correlation, distribution
+- Demo dataset: `SCATTER_CHART_DEMO`
+- Demo rows: `[{"x": 152, "y": 51, "size": 2}, {"x": 158, "y": 56, "size": 4}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `xKey` | `x_key` | `Accessor<number \| null \| undefined>` |  | Ignored without `data`. |
+| `yKey` | `y_key` | `Accessor<number \| null \| undefined>` |  | Ignored without `data`. |
+| `sizeKey` | `size_key` | `Accessor<number \| null \| undefined>` |  | Ignored without `data`. |
+| `sizeRange` | `size_range` | `readonly [number, number]` | `[60, 240]` | Marker area in px², smallest to largest; `[60, 240]` by default. |
+
+### BubbleChart
+
+`bubble-chart`: Circles whose area encodes `sizeKey`.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `BubbleChart` | `@silverpoint/react/bubble-chart` |
+| Vue | `SpBubbleChart` | `@silverpoint/vue/bubble-chart` |
+| Angular | `sp-bubble-chart` | `@silverpoint/angular/bubble-chart` |
+| Reflex | `bubble_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `points`; fields: x → `xKey` (number), y → `yKey` (number), size → `sizeKey` (number)
+- Intents: correlation, compare
+- Demo dataset: `BUBBLE_CHART_DEMO`
+- Demo rows: `[{"x": 2, "y": 18, "size": 40}, {"x": 5, "y": 24, "size": 120}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `xKey` | `x_key` | `Accessor<number \| null \| undefined>` |  | Ignored without `data`. |
+| `yKey` | `y_key` | `Accessor<number \| null \| undefined>` |  | Ignored without `data`. |
+| `sizeKey` | `size_key` | `Accessor<number \| null \| undefined>` |  | Ignored without `data`. |
+| `sizeRange` | `size_range` | `readonly [number, number]` | `[100, 500]` | Circle area in px², smallest to largest; `[100, 500]` by default. |
+
+## Charts: Flows
+
+### SankeyChart
+
+`sankey-chart`: Flow bands between layered nodes.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SankeyChart` | `@silverpoint/react/sankey-chart` |
+| Vue | `SpSankeyChart` | `@silverpoint/vue/sankey-chart` |
+| Angular | `sp-sankey-chart` | `@silverpoint/angular/sankey-chart` |
+| Reflex | `sankey_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `links`; fields: source → `sourceKey` (string), target → `targetKey` (string), value → `valueKey` (number)
+- Intents: flow, part-to-whole
+- Demo dataset: `SANKEY_CHART_DEMO`
+- Demo rows: `[{"source": "Search", "target": "Visit", "value": 48}, {"source": "Social", "target": "Visit", "value": 27}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `sourceKey` | `source_key` | `Accessor<string>` | `'source'` | Ignored without `data`. |
+| `targetKey` | `target_key` | `Accessor<string>` | `'target'` | Ignored without `data`. |
+| `valueKey` | `value_key` | `Accessor<number \| null \| undefined>` | `'value'` | Ignored without `data`. |
+
+### ChordRing
+
+`chord-ring`: Directed flows between categories around a circle.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `ChordRing` | `@silverpoint/react/chord-ring` |
+| Vue | `SpChordRing` | `@silverpoint/vue/chord-ring` |
+| Angular | `sp-chord-ring` | `@silverpoint/angular/chord-ring` |
+| Reflex | `chord_ring` | `reflex_silverpoint_react` |
+
+- Data shape: `links`; fields: source → `sourceKey` (string), target → `targetKey` (string), value → `valueKey` (number)
+- Intents: flow, network
+- Demo dataset: `CHORD_RING_DEMO`
+- Demo rows: `[{"source": "Home", "target": "Shop", "value": 42}, {"source": "Home", "target": "Blog", "value": 28}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `sourceKey` | `source_key` | `Accessor<string \| number>` | `'source'` | Ignored without `data`. |
+| `targetKey` | `target_key` | `Accessor<string \| number>` | `'target'` | Ignored without `data`. |
+| `valueKey` | `value_key` | `Accessor<number \| null \| undefined>` | `'value'` | Ignored without `data`. |
+| `maxCategories` | `max_categories` | `number` | `12` | Categories drawn; past it the smallest merge into "Other" (`SP010`). 12 by default. |
+
+## Charts: Radial
+
+### DonutChart
+
+`donut-chart`: Sectors ∝ value around a central readout.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `DonutChart` | `@silverpoint/react/donut-chart` |
+| Vue | `SpDonutChart` | `@silverpoint/vue/donut-chart` |
+| Angular | `sp-donut-chart` | `@silverpoint/angular/donut-chart` |
+| Reflex | `donut_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `parts`; fields: name → `nameKey` (string), value → `valueKey` (number)
+- Intents: part-to-whole
+- Demo dataset: `DONUT_CHART_DEMO`
+- Demo rows: `[{"name": "Rent", "value": 38}, {"name": "Food", "value": 22}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `nameKey` | `name_key` | `Accessor<string \| number>` | `'name'` | Ignored without `data`. |
+| `valueKey` | `value_key` | `Accessor<number \| null \| undefined>` | `'value'` | Ignored without `data`. |
+| `centerValue` | `center_value` | `string \| number` |  | Printed in the centre; the total by default. |
+| `centerLabel` | `center_label` | `string` |  | A line under the centre value. |
+| `legend` | `legend` | `boolean` | `true` | Names every sector with its share beside the ring; `true` by default. |
+
+### RadarChart
+
+`radar-chart`: One spoke per subject, a closed polygon of values.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `RadarChart` | `@silverpoint/react/radar-chart` |
+| Vue | `SpRadarChart` | `@silverpoint/vue/radar-chart` |
+| Angular | `sp-radar-chart` | `@silverpoint/angular/radar-chart` |
+| Reflex | `radar_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `categories`; fields: subject → `subjectKey` (string), value → `valueKey` (number)
+- Intents: compare
+- Demo dataset: `RADAR_CHART_DEMO`
+- Demo rows: `[{"subject": "Speed", "value": 8}, {"subject": "Range", "value": 6}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `subjectKey` | `subject_key` | `Accessor<string \| number>` | `'subject'` | Ignored without `data`. |
+| `valueKey` | `value_key` | `Accessor<number \| null \| undefined>` | `'value'` | Ignored without `data`. |
+| `domain` | `domain` | `readonly [number, number]` |  | The value range along a spoke; `[0, the largest value]`, niced, by default. |
+
+### PolarBarChart
+
+`polar-bar-chart`: 360° bars out from a hole, length ∝ value.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `PolarBarChart` | `@silverpoint/react/polar-bar-chart` |
+| Vue | `SpPolarBarChart` | `@silverpoint/vue/polar-bar-chart` |
+| Angular | `sp-polar-bar-chart` | `@silverpoint/angular/polar-bar-chart` |
+| Reflex | `polar_bar_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `categories`; fields: name → `nameKey` (string), value → `valueKey` (number)
+- Intents: compare, rank
+- Demo dataset: `POLAR_BAR_CHART_DEMO`
+- Demo rows: `[{"name": "Jan", "value": 32}, {"name": "Feb", "value": 28}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `nameKey` | `name_key` | `Accessor<string \| number>` | `'name'` | Ignored without `data`. |
+| `valueKey` | `value_key` | `Accessor<number \| null \| undefined>` | `'value'` | Ignored without `data`. |
+
+### RadialArcGroup
+
+`radial-arc-group`: Concentric 180° tracks, sweep ∝ value / the largest.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `RadialArcGroup` | `@silverpoint/react/radial-arc-group` |
+| Vue | `SpRadialArcGroup` | `@silverpoint/vue/radial-arc-group` |
+| Angular | `sp-radial-arc-group` | `@silverpoint/angular/radial-arc-group` |
+| Reflex | `radial_arc_group` | `reflex_silverpoint_react` |
+
+- Data shape: `categories`; fields: name → `nameKey` (string), value → `valueKey` (number)
+- Intents: compare, progress
+- Demo dataset: `RADIAL_ARC_GROUP_DEMO`
+- Demo rows: `[{"name": "Direct", "value": 84}, {"name": "Partners", "value": 62}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `nameKey` | `name_key` | `Accessor<string \| number>` |  | Ignored without `data`. |
+| `valueKey` | `value_key` | `Accessor<number \| null \| undefined>` |  | Ignored without `data`. |
+
+### RadialRings
+
+`radial-rings`: Concentric progress rings, sweep ∝ value in 0-100.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `RadialRings` | `@silverpoint/react/radial-rings` |
+| Vue | `SpRadialRings` | `@silverpoint/vue/radial-rings` |
+| Angular | `sp-radial-rings` | `@silverpoint/angular/radial-rings` |
+| Reflex | `radial_rings` | `reflex_silverpoint_react` |
+
+- Data shape: `categories`; fields: name → `nameKey` (string), value → `valueKey` (number)
+- Intents: progress
+- Demo dataset: `RADIAL_RINGS_DEMO`
+- Demo rows: `[{"name": "Move", "value": 82}, {"name": "Exercise", "value": 64}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `nameKey` | `name_key` | `Accessor<string \| number>` |  | Ignored without `data`. |
+| `valueKey` | `value_key` | `Accessor<number \| null \| undefined>` |  | Ignored without `data`. |
+
+### GaugeArc
+
+`gauge-arc`: A 240° arc swept to a percent.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `GaugeArc` | `@silverpoint/react/gauge-arc` |
+| Vue | `SpGaugeArc` | `@silverpoint/vue/gauge-arc` |
+| Angular | `sp-gauge-arc` | `@silverpoint/angular/gauge-arc` |
+| Reflex | `gauge_arc` | `reflex_silverpoint_react` |
+
+- Data shape: `single`; fields: none
+- Intents: kpi, progress
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `percent` | `percent` | `number` |  | 0 to 100; saturated at the ends outside it. |
+| `caption` | `caption` | `string` |  | Names the measure under the readout. |
+| `readout` | `readout` | `string` |  | Printed in place of the percent. |
+
+### MeterChart
+
+`meter-chart`: A semicircular meter with a needle at a percent.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `MeterChart` | `@silverpoint/react/meter-chart` |
+| Vue | `SpMeterChart` | `@silverpoint/vue/meter-chart` |
+| Angular | `sp-meter-chart` | `@silverpoint/angular/meter-chart` |
+| Reflex | `meter_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `single`; fields: none
+- Intents: kpi, progress
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `percent` | `percent` | `number` |  | 0 to 100; saturated at the ends outside it. |
+| `caption` | `caption` | `string` |  | Names the measure under the readout. |
+| `readout` | `readout` | `string` |  | Printed in place of the percent. |
+
+### CoxcombChart
+
+`coxcomb-chart`: Equal angles, sector area ∝ value.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `CoxcombChart` | `@silverpoint/react/coxcomb-chart` |
+| Vue | `SpCoxcombChart` | `@silverpoint/vue/coxcomb-chart` |
+| Angular | `sp-coxcomb-chart` | `@silverpoint/angular/coxcomb-chart` |
+| Reflex | `coxcomb_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `categories`; fields: name → `nameKey` (string), value → `valueKey` (number)
+- Intents: compare, part-to-whole
+- Demo dataset: `COXCOMB_CHART_DEMO`
+- Demo rows: `[{"name": "Mon", "value": 42}, {"name": "Tue", "value": 35}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `nameKey` | `name_key` | `Accessor<string \| number>` | `'name'` | Ignored without `data`. |
+| `valueKey` | `value_key` | `Accessor<number \| null \| undefined>` | `'value'` | Ignored without `data`. |
+| `startAngle` | `start_angle` | `number` | `0` | Where the first sector starts, in degrees clockwise from 12 o'clock; 0 by default. |
+
+### WindRose
+
+`wind-rose`: Observations of (bearing, speed) binned by compass sector and speed.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `WindRose` | `@silverpoint/react/wind-rose` |
+| Vue | `SpWindRose` | `@silverpoint/vue/wind-rose` |
+| Angular | `sp-wind-rose` | `@silverpoint/angular/wind-rose` |
+| Reflex | `wind_rose` | `reflex_silverpoint_react` |
+
+- Data shape: `distribution`; fields: bearing → `bearingKey` (number), value → `valueKey` (number)
+- Intents: distribution
+- Demo dataset: `WIND_ROSE_DEMO`
+- Demo rows: `[{"bearing": 180, "speed": 11}, {"bearing": 170, "speed": 11}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `bearingKey` | `bearing_key` | `Accessor<number \| null \| undefined>` | `'bearing'` | Where the wind blows from, in degrees clockwise from north. Ignored without `data`. |
+| `valueKey` | `value_key` | `Accessor<number \| null \| undefined>` | `'speed'` | The wind speed; 0 is a calm, which has no direction. Ignored without `data`. |
+| `sectors` | `sectors` | `number` | `16` | Compass sectors: 4, 8, 16 or 32; 16 by default. |
+| `bins` | `bins` | `readonly number[]` | `[5, 10, 15, 20]` | Ascending speed thresholds that split each sector; `[5, 10, 15, 20]` by default. |
+
+### VolvelleChart
+
+`volvelle-chart`: Concentric categorical rings read against one index.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `VolvelleChart` | `@silverpoint/react/volvelle-chart` |
+| Vue | `SpVolvelleChart` | `@silverpoint/vue/volvelle-chart` |
+| Angular | `sp-volvelle-chart` | `@silverpoint/angular/volvelle-chart` |
+| Reflex | `volvelle_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `categories`; fields: none
+- Intents: schedule, compare
+- Demo dataset: `VOLVELLE_CHART_DEMO`
+- Demo rows: `[{"label": "Day", "segments": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]}, {"label": "Shift", "segments": ["Early", "Late", "Night"]}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `rings` | `rings` | `number` |  | Rings shown, from the inside out; all by default. |
+| `indexRing` | `index_ring` | `number` | `0` | The ring whose segment is brought under the index, 0-based; 0 by default. Without `data`, it addresses the demo’s rings: `Day`, `Shift`, `Team`. |
+| `indexValue` | `index_value` | `string` |  | The segment of `indexRing` under the index; its first segment by default. Without `data`, it addresses the demo’s rings: `Day`, `Shift`, `Team`. |
+
+### OrbitChart
+
+`orbit-chart`: Nested elliptical orbits with markers along them.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `OrbitChart` | `@silverpoint/react/orbit-chart` |
+| Vue | `SpOrbitChart` | `@silverpoint/vue/orbit-chart` |
+| Angular | `sp-orbit-chart` | `@silverpoint/angular/orbit-chart` |
+| Reflex | `orbit_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `events`; fields: markers → `markerKey` (array), period → `periodKey` (number)
+- Intents: schedule
+- Demo dataset: `ORBIT_CHART_DEMO`
+- Demo rows: `[{"label": "2023", "markers": [{"period": 0.08, "value": 12}, {"period": 0.33, "value": 30}, {"period": 0.61, "value": 18}, {"period": 0.9, "value": 24}]}, {"label": "2024", "markers": [{"period": 0.12, "value": 20}, {"period": 0.4, "value": 42}, {"period": 0.66, "value": 15}, {"period": 0.87, "value": 33}]}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `orbits` | `orbits` | `number` |  | Orbits shown, from the inside out; all by default. |
+| `markerKey` | `marker_key` | `Accessor<readonly unknown[] \| null \| undefined>` | `'markers'` | A row's markers; `'markers'` by default. Ignored without `data`. |
+| `periodKey` | `period_key` | `Accessor<number \| null \| undefined>` | `'period'` | A marker's period, 0-1 over the cycle; `'period'` by default. Ignored without `data`. |
+
+## Charts: Distributions & comparisons
+
+### HistogramChart
+
+`histogram-chart`: Raw observations binned in the core.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `HistogramChart` | `@silverpoint/react/histogram-chart` |
+| Vue | `SpHistogramChart` | `@silverpoint/vue/histogram-chart` |
+| Angular | `sp-histogram-chart` | `@silverpoint/angular/histogram-chart` |
+| Reflex | `histogram_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `distribution`; fields: value → `valueKey` (number)
+- Intents: distribution
+- Demo dataset: `HISTOGRAM_CHART_DEMO`
+- Demo rows: `[{"reader": "R001", "device": "desktop", "minutes": 4}, {"reader": "R002", "device": "phone", "minutes": 17}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `valueKey` | `value_key` | `Accessor<number \| null \| undefined>` | `'value'` | Ignored without `data`. |
+| `bins` | `bins` | `number \| readonly number[]` |  | A number asks for that many equal-width bins over the niced extent; an array gives the thresholds, increasing. Freedman–Diaconis by default, Sturges when the IQR is 0 (REQ-432). |
+| `cumulative` | `cumulative` | `boolean` |  | Turns the counts into a running total. |
+| `orientation` | `orientation` | `ChartOrientation` |  |  |
+
+### EcdfChart
+
+`ecdf-chart`: The empirical cumulative distribution as a step function.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `EcdfChart` | `@silverpoint/react/ecdf-chart` |
+| Vue | `SpEcdfChart` | `@silverpoint/vue/ecdf-chart` |
+| Angular | `sp-ecdf-chart` | `@silverpoint/angular/ecdf-chart` |
+| Reflex | `ecdf_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `distribution`; fields: value → `valueKey` (number), group → `groupKey` (string, optional)
+- Intents: distribution, compare
+- Demo dataset: `ECDF_CHART_DEMO`
+- Demo rows: `[{"reader": "R001", "device": "desktop", "minutes": 4}, {"reader": "R002", "device": "phone", "minutes": 17}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `valueKey` | `value_key` | `Accessor<number \| null \| undefined>` | `'value'` | Ignored without `data`. |
+| `groupKey` | `group_key` | `Accessor<string \| null \| undefined>` |  | Two groups at most are drawn. Ignored without `data`. |
+| `markers` | `markers` | `readonly number[]` |  | Quantiles, in 0-1, drawn as rules. |
+
+### BoxPlotChart
+
+`box-plot-chart`: Quartiles, median, Tukey whiskers and outliers per group.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `BoxPlotChart` | `@silverpoint/react/box-plot-chart` |
+| Vue | `SpBoxPlotChart` | `@silverpoint/vue/box-plot-chart` |
+| Angular | `sp-box-plot-chart` | `@silverpoint/angular/box-plot-chart` |
+| Reflex | `box_plot_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `distribution`; fields: value → `valueKey` (number), group → `groupKey` (string, optional)
+- Intents: distribution, compare
+- Demo dataset: `BOX_PLOT_CHART_DEMO`
+- Demo rows: `[{"service": "Search", "ms": 220}, {"service": "Search", "ms": 177}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `valueKey` | `value_key` | `Accessor<number \| null \| undefined>` |  | Ignored without `data`. |
+| `groupKey` | `group_key` | `Accessor<string \| null \| undefined>` |  | Ignored without `data`. |
+| `whisker` | `whisker` | `number` | `1.5` | Whisker reach as a multiple of the IQR; 1.5 by default (REQ-432). |
+| `outliers` | `outliers` | `boolean` | `true` | Draws the observations past the whiskers; `true` by default. |
+| `orientation` | `orientation` | `ChartOrientation` |  |  |
+
+### ViolinChart
+
+`violin-chart`: A mirrored kernel density per group.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `ViolinChart` | `@silverpoint/react/violin-chart` |
+| Vue | `SpViolinChart` | `@silverpoint/vue/violin-chart` |
+| Angular | `sp-violin-chart` | `@silverpoint/angular/violin-chart` |
+| Reflex | `violin_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `distribution`; fields: value → `valueKey` (number), group → `groupKey` (string, optional)
+- Intents: distribution, compare
+- Demo dataset: `VIOLIN_CHART_DEMO`
+- Demo rows: `[{"service": "Search", "ms": 220}, {"service": "Search", "ms": 177}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `valueKey` | `value_key` | `Accessor<number \| null \| undefined>` |  | Ignored without `data`. |
+| `groupKey` | `group_key` | `Accessor<string \| null \| undefined>` |  | Ignored without `data`. |
+| `bandwidth` | `bandwidth` | `number` |  | Kernel bandwidth in data units, shared by every group; Silverman's rule by default. |
+| `quartiles` | `quartiles` | `boolean` | `true` | Marks the quartiles inside each violin; `true` by default. |
+| `orientation` | `orientation` | `ChartOrientation` |  |  |
+
+### RidgelineChart
+
+`ridgeline-chart`: A kernel density per group on overlapping baselines.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `RidgelineChart` | `@silverpoint/react/ridgeline-chart` |
+| Vue | `SpRidgelineChart` | `@silverpoint/vue/ridgeline-chart` |
+| Angular | `sp-ridgeline-chart` | `@silverpoint/angular/ridgeline-chart` |
+| Reflex | `ridgeline_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `distribution`; fields: value → `valueKey` (number), group → `groupKey` (string)
+- Intents: distribution, compare, change
+- Demo dataset: `RIDGELINE_CHART_DEMO`
+- Demo rows: `[{"service": "Search", "ms": 220}, {"service": "Search", "ms": 177}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `valueKey` | `value_key` | `Accessor<number \| null \| undefined>` |  | Ignored without `data`. |
+| `groupKey` | `group_key` | `Accessor<string \| null \| undefined>` |  | The group of an observation; one ridge per group. Ignored without `data`. Required. |
+| `bandwidth` | `bandwidth` | `number` |  | Kernel bandwidth in data units, shared by every group; Silverman's rule by default. |
+| `overlap` | `overlap` | `number` | `0.5` | How far a ridge reaches into the one behind it, 0-1; 0.5 by default. |
+
+### BeeswarmChart
+
+`beeswarm-chart`: One point per observation, packed without overlap.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `BeeswarmChart` | `@silverpoint/react/beeswarm-chart` |
+| Vue | `SpBeeswarmChart` | `@silverpoint/vue/beeswarm-chart` |
+| Angular | `sp-beeswarm-chart` | `@silverpoint/angular/beeswarm-chart` |
+| Reflex | `beeswarm_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `distribution`; fields: value → `valueKey` (number), group → `groupKey` (string, optional), label → `labelKey` (string, optional)
+- Intents: distribution
+- Demo dataset: `BEESWARM_CHART_DEMO`
+- Demo rows: `[{"reader": "R001", "device": "desktop", "minutes": 4}, {"reader": "R002", "device": "phone", "minutes": 17}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `valueKey` | `value_key` | `Accessor<number \| null \| undefined>` | `'value'` | Ignored without `data`. |
+| `groupKey` | `group_key` | `Accessor<string \| null \| undefined>` |  | Ignored without `data`. |
+| `labelKey` | `label_key` | `Accessor<string \| null \| undefined>` |  | Names the point in the readout and the table. Ignored without `data`. |
+| `radius` | `radius` | `number` | `3` | Point radius in px; 3 by default. |
+
+### LollipopChart
+
+`lollipop-chart`: A stem from the baseline and a head at the value.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `LollipopChart` | `@silverpoint/react/lollipop-chart` |
+| Vue | `SpLollipopChart` | `@silverpoint/vue/lollipop-chart` |
+| Angular | `sp-lollipop-chart` | `@silverpoint/angular/lollipop-chart` |
+| Reflex | `lollipop_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `categories`; fields: x → `xKey` (string), value → `valueKey` (number)
+- Intents: compare, rank
+- Demo dataset: `LOLLIPOP_CHART_DEMO`
+- Demo rows: `[{"branch": "Northgate", "loans": 2969}, {"branch": "Riverside Commons", "loans": 2695}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `xKey` | `x_key` | `Accessor<string \| number>` | `'x'` | Ignored without `data`. |
+| `valueKey` | `value_key` | `Accessor<number \| null \| undefined>` | `'value'` | Ignored without `data`. |
+| `orientation` | `orientation` | `ChartOrientation` |  |  |
+| `sort` | `sort` | `'none' \| 'ascending' \| 'descending'` |  | Order of the categories; `none` keeps the data order. |
+
+### DumbbellChart
+
+`dumbbell-chart`: Two values per category joined by a segment.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `DumbbellChart` | `@silverpoint/react/dumbbell-chart` |
+| Vue | `SpDumbbellChart` | `@silverpoint/vue/dumbbell-chart` |
+| Angular | `sp-dumbbell-chart` | `@silverpoint/angular/dumbbell-chart` |
+| Reflex | `dumbbell_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `categories`; fields: label → `labelKey` (string), start → `startKey` (number), end → `endKey` (number)
+- Intents: change, compare
+- Demo dataset: `DUMBBELL_CHART_DEMO`
+- Demo rows: `[{"clinic": "Ashford", "y2024": 59, "y2025": 66}, {"clinic": "Brook Lane", "y2024": 24, "y2025": 30}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `labelKey` | `label_key` | `Accessor<string>` | `'label'` | Ignored without `data`. |
+| `startKey` | `start_key` | `Accessor<number \| null \| undefined>` | `'start'` | Ignored without `data`. |
+| `endKey` | `end_key` | `Accessor<number \| null \| undefined>` | `'end'` | Ignored without `data`. |
+| `names` | `names` | `readonly [string, string]` | `['start', 'end']` | Titles of the two values; `['start', 'end']` by default. Ignored without `data`. |
+| `endMarker` | `end_marker` | `'dot' \| 'arrow'` |  | `arrow` encodes the direction from the first value to the second. |
+| `orientation` | `orientation` | `ChartOrientation` | `rows` | `rows` by default: long category names read across. |
+
+### SlopeChart
+
+`slope-chart`: Two period axes, one segment per category.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SlopeChart` | `@silverpoint/react/slope-chart` |
+| Vue | `SpSlopeChart` | `@silverpoint/vue/slope-chart` |
+| Angular | `sp-slope-chart` | `@silverpoint/angular/slope-chart` |
+| Reflex | `slope_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `categories`; fields: label → `labelKey` (string), start → `startKey` (number), end → `endKey` (number)
+- Intents: change, rank
+- Demo dataset: `SLOPE_CHART_DEMO`
+- Demo rows: `[{"clinic": "Ashford", "y2024": 59, "y2025": 66}, {"clinic": "Brook Lane", "y2024": 24, "y2025": 30}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `labelKey` | `label_key` | `Accessor<string>` | `'label'` | Ignored without `data`. |
+| `startKey` | `start_key` | `Accessor<number \| null \| undefined>` | `'start'` | Ignored without `data`. |
+| `endKey` | `end_key` | `Accessor<number \| null \| undefined>` | `'end'` | Ignored without `data`. |
+| `names` | `names` | `readonly [string, string]` | `['start', 'end']` | Titles of the two periods; `['start', 'end']` by default. Ignored without `data`. |
+
+### BumpChart
+
+`bump-chart`: The rank of each series at each x.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `BumpChart` | `@silverpoint/react/bump-chart` |
+| Vue | `SpBumpChart` | `@silverpoint/vue/bump-chart` |
+| Angular | `sp-bump-chart` | `@silverpoint/angular/bump-chart` |
+| Reflex | `bump_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `series`; fields: x → `xKey` (string), series → `seriesKey` (string), value → `valueKey` (number)
+- Intents: rank, change
+- Demo dataset: `BUMP_CHART_DEMO`
+- Demo rows: `[{"season": 2018, "team": "Kestrel", "points": 57}, {"season": 2018, "team": "Otter", "points": 53}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `xKey` | `x_key` | `Accessor<string \| number>` | `'x'` | Ignored without `data`. |
+| `seriesKey` | `series_key` | `Accessor<string>` | `'series'` | Ignored without `data`. |
+| `valueKey` | `value_key` | `Accessor<number \| null \| undefined>` | `'value'` | Ignored without `data`. |
+| `order` | `order` | `'descending' \| 'ascending'` | `'descending'` | `descending` gives rank 1 to the highest value (the default). |
+| `series` | `series` | `number` |  | Series drawn, the best-ranked first; all by default. |
+
+### ErrorBarChart
+
+`error-bar-chart`: A point estimate with its interval per category.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `ErrorBarChart` | `@silverpoint/react/error-bar-chart` |
+| Vue | `SpErrorBarChart` | `@silverpoint/vue/error-bar-chart` |
+| Angular | `sp-error-bar-chart` | `@silverpoint/angular/error-bar-chart` |
+| Reflex | `error_bar_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `intervals`; fields: label → `labelKey` (string), estimate → `estimateKey` (number), low → `lowKey` (number), high → `highKey` (number)
+- Intents: uncertainty, compare
+- Demo dataset: `ERROR_BAR_CHART_DEMO`
+- Demo rows: `[{"arm": "Arm A", "effect": 1.61, "low": 1.01, "high": 2.07}, {"arm": "Arm B", "effect": 0.2, "low": -0.16, "high": 1.04}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `labelKey` | `label_key` | `Accessor<string>` | `'label'` | Ignored without `data`. |
+| `estimateKey` | `estimate_key` | `Accessor<number \| null \| undefined>` | `'estimate'` | Ignored without `data`. |
+| `lowKey` | `low_key` | `Accessor<number \| null \| undefined>` | `'low'` | Ignored without `data`. |
+| `highKey` | `high_key` | `Accessor<number \| null \| undefined>` | `'high'` | Ignored without `data`. |
+| `reference` | `reference` | `number` |  | A reference value drawn as a dotted rule. |
+| `orientation` | `orientation` | `ChartOrientation` | `rows` | `rows` by default, as a forest plot reads. |
+
+### IntervalChart
+
+`interval-chart`: Floating bars from start to end on lanes.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `IntervalChart` | `@silverpoint/react/interval-chart` |
+| Vue | `SpIntervalChart` | `@silverpoint/vue/interval-chart` |
+| Angular | `sp-interval-chart` | `@silverpoint/angular/interval-chart` |
+| Reflex | `interval_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `intervals`; fields: lane → `laneKey` (string), start → `startKey` (number), end → `endKey` (number), label → `labelKey` (string, optional)
+- Intents: schedule
+- Demo dataset: `INTERVAL_CHART_DEMO`
+- Demo rows: `[{"crew": "North crew", "task": "Signage", "from": "2026-03-15", "to": "2026-03-21"}, {"crew": "North crew", "task": "Grading", "from": "2026-02-17", "to": "2026-03-07"}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `laneKey` | `lane_key` | `Accessor<string>` | `'lane'` | Ignored without `data`. |
+| `startKey` | `start_key` | `Accessor<number \| string \| null \| undefined>` | `'start'` | Ignored without `data`. |
+| `endKey` | `end_key` | `Accessor<number \| string \| null \| undefined>` | `'end'` | Ignored without `data`. |
+| `labelKey` | `label_key` | `Accessor<string \| null \| undefined>` |  | Ignored without `data`. |
+| `axis` | `axis` | `'number' \| 'date'` | `'number'` | `date` reads ISO `YYYY-MM-DD` days in UTC; `number` by default. Ignored without `data`. |
+
+### DivergingBarChart
+
+`diverging-bar-chart`: Ordered levels stacked on both sides of a neutral centre.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `DivergingBarChart` | `@silverpoint/react/diverging-bar-chart` |
+| Vue | `SpDivergingBarChart` | `@silverpoint/vue/diverging-bar-chart` |
+| Angular | `sp-diverging-bar-chart` | `@silverpoint/angular/diverging-bar-chart` |
+| Reflex | `diverging_bar_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `parts`; fields: label → `labelKey` (string), levels → `levels` (number)
+- Intents: part-to-whole, compare
+- Demo dataset: `DIVERGING_BAR_CHART_DEMO`
+- Demo rows: `[{"question": "The site is easy to use", "Strongly disagree": 43, "Disagree": 53, "Neutral": 50, "Agree": 24, "Strongly agree": 29}, {"question": "Prices are fair", "Strongly disagree": 38, "Disagree": 36, "Neutral": 62, "Agree": 42, "Strongly agree": 21}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `labelKey` | `label_key` | `Accessor<string>` | `'label'` | Ignored without `data`. |
+| `levels` | `levels` | `readonly string[]` |  | The level columns, most negative first. Ignored without `data`. Required. |
+| `neutral` | `neutral` | `number \| null` |  | Index of the neutral level, split across the centre; `null` for none. The middle one by default. |
+| `percent` | `percent` | `boolean` | `true` | Normalises each row to 100 %; `true` by default. |
+
+### ConnectedScatterChart
+
+`connected-scatter-chart`: An ordered path through x-y points.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `ConnectedScatterChart` | `@silverpoint/react/connected-scatter-chart` |
+| Vue | `SpConnectedScatterChart` | `@silverpoint/vue/connected-scatter-chart` |
+| Angular | `sp-connected-scatter-chart` | `@silverpoint/angular/connected-scatter-chart` |
+| Reflex | `connected_scatter_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `points`; fields: x → `xKey` (number), y → `yKey` (number), label → `labelKey` (string, optional)
+- Intents: correlation, change
+- Demo dataset: `CONNECTED_SCATTER_CHART_DEMO`
+- Demo rows: `[{"year": 2012, "fare": 1.5, "riders": 39.8}, {"year": 2013, "fare": 1.62, "riders": 41.8}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `xKey` | `x_key` | `Accessor<number \| null \| undefined>` | `'x'` | Ignored without `data`. |
+| `yKey` | `y_key` | `Accessor<number \| null \| undefined>` | `'y'` | Ignored without `data`. |
+| `labelKey` | `label_key` | `Accessor<string \| null \| undefined>` |  | Ignored without `data`. |
+| `arrows` | `arrows` | `boolean` | `true` | Draws direction marks along the path; `true` by default. |
+
+## Charts: Hierarchies & dimensions
+
+### WaffleChart
+
+`waffle-chart`: A unit grid filled in reading order by category.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `WaffleChart` | `@silverpoint/react/waffle-chart` |
+| Vue | `SpWaffleChart` | `@silverpoint/vue/waffle-chart` |
+| Angular | `sp-waffle-chart` | `@silverpoint/angular/waffle-chart` |
+| Reflex | `waffle_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `parts`; fields: name → `nameKey` (string), value → `valueKey` (number)
+- Intents: part-to-whole, progress
+- Demo dataset: `WAFFLE_CHART_DEMO`
+- Demo rows: `[{"use": "Heating", "kwh": 412}, {"use": "Water heating", "kwh": 263}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `nameKey` | `name_key` | `Accessor<string \| number>` | `'name'` | Ignored without `data`. |
+| `valueKey` | `value_key` | `Accessor<number \| null \| undefined>` | `'value'` | Ignored without `data`. |
+| `cells` | `cells` | `number` | `100` | Cells in the grid; 100 by default. |
+| `columns` | `columns` | `number` | `10` | Cells per row; 10 by default. |
+
+### MarimekkoChart
+
+`marimekko-chart`: Column width by total, segment height by share.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `MarimekkoChart` | `@silverpoint/react/marimekko-chart` |
+| Vue | `SpMarimekkoChart` | `@silverpoint/vue/marimekko-chart` |
+| Angular | `sp-marimekko-chart` | `@silverpoint/angular/marimekko-chart` |
+| Reflex | `marimekko_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `matrix`; fields: column → `columnKey` (string), segment → `segmentKey` (string), value → `valueKey` (number)
+- Intents: part-to-whole, compare
+- Demo dataset: `MARIMEKKO_CHART_DEMO`
+- Demo rows: `[{"region": "North", "channel": "Retail", "sales": 115}, {"region": "North", "channel": "Online", "sales": 80}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `columnKey` | `column_key` | `Accessor<string>` | `'column'` | Ignored without `data`. |
+| `segmentKey` | `segment_key` | `Accessor<string>` | `'segment'` | Ignored without `data`. |
+| `valueKey` | `value_key` | `Accessor<number \| null \| undefined>` | `'value'` | Ignored without `data`. |
+
+### SquarifiedTreemap
+
+`squarified-treemap`: Nested rectangles, area by value, drillable through `rootId` and `onRootChange`.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SquarifiedTreemap` | `@silverpoint/react/squarified-treemap` |
+| Vue | `SpSquarifiedTreemap` | `@silverpoint/vue/squarified-treemap` |
+| Angular | `sp-squarified-treemap` | `@silverpoint/angular/squarified-treemap` |
+| Reflex | `squarified_treemap` | `reflex_silverpoint_react` |
+
+- Data shape: `hierarchy`; fields: id → `idKey` (string), parent → `parentKey` (string), label → `labelKey` (string, optional), value → `valueKey` (number)
+- Intents: hierarchy, part-to-whole
+- Drillable: `rootId` + `onRootChange`
+- Demo dataset: `SQUARIFIED_TREEMAP_DEMO`
+- Demo rows: `[{"id": "budget", "parent": null, "name": "City budget"}, {"id": "works", "parent": "budget", "name": "Public works"}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `idKey` | `id_key` | `Accessor<string>` | `'id'` | Ignored without `data`. |
+| `parentKey` | `parent_key` | `Accessor<string \| null \| undefined>` | `'parent'` | `null` for the root. Ignored without `data`. |
+| `labelKey` | `label_key` | `Accessor<string \| null \| undefined>` |  | Ignored without `data`. |
+| `valueKey` | `value_key` | `Accessor<number \| null \| undefined>` | `'value'` | Read on leaves; an internal node is the sum of its children. Ignored without `data`. |
+| `depth` | `depth` | `number` |  | Levels drawn below the root; all by default. |
+| `rootId` | `root_id` | `string \| null` |  | The node drawn as root, controlled (REQ-439); the data root by default. |
+
+### SunburstChart
+
+`sunburst-chart`: A hierarchy as rings of arcs, drillable through `rootId` and `onRootChange`.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SunburstChart` | `@silverpoint/react/sunburst-chart` |
+| Vue | `SpSunburstChart` | `@silverpoint/vue/sunburst-chart` |
+| Angular | `sp-sunburst-chart` | `@silverpoint/angular/sunburst-chart` |
+| Reflex | `sunburst_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `hierarchy`; fields: id → `idKey` (string), parent → `parentKey` (string), label → `labelKey` (string, optional), value → `valueKey` (number)
+- Intents: hierarchy, part-to-whole
+- Drillable: `rootId` + `onRootChange`
+- Demo dataset: `SUNBURST_CHART_DEMO`
+- Demo rows: `[{"id": "budget", "parent": null, "name": "City budget"}, {"id": "works", "parent": "budget", "name": "Public works"}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `idKey` | `id_key` | `Accessor<string>` | `'id'` | Ignored without `data`. |
+| `parentKey` | `parent_key` | `Accessor<string \| null \| undefined>` | `'parent'` | `null` for the root. Ignored without `data`. |
+| `labelKey` | `label_key` | `Accessor<string \| null \| undefined>` |  | Ignored without `data`. |
+| `valueKey` | `value_key` | `Accessor<number \| null \| undefined>` | `'value'` | Read on leaves; an internal node is the sum of its children. Ignored without `data`. |
+| `depth` | `depth` | `number` |  | Rings drawn below the root; all by default. |
+| `rootId` | `root_id` | `string \| null` |  | The node drawn as root, controlled (REQ-439); the data root by default. |
+
+### TreeChart
+
+`tree-chart`: A tidy node-link tree.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `TreeChart` | `@silverpoint/react/tree-chart` |
+| Vue | `SpTreeChart` | `@silverpoint/vue/tree-chart` |
+| Angular | `sp-tree-chart` | `@silverpoint/angular/tree-chart` |
+| Reflex | `tree_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `hierarchy`; fields: id → `idKey` (string), parent → `parentKey` (string), label → `labelKey` (string, optional), value → `valueKey` (number, optional)
+- Intents: hierarchy
+- Demo dataset: `TREE_CHART_DEMO`
+- Demo rows: `[{"id": "budget", "parent": null, "name": "City budget"}, {"id": "works", "parent": "budget", "name": "Public works"}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `idKey` | `id_key` | `Accessor<string>` | `'id'` | Ignored without `data`. |
+| `parentKey` | `parent_key` | `Accessor<string \| null \| undefined>` | `'parent'` | `null` for the root. Ignored without `data`. |
+| `labelKey` | `label_key` | `Accessor<string \| null \| undefined>` |  | Ignored without `data`. |
+| `valueKey` | `value_key` | `Accessor<number \| null \| undefined>` |  | Ignored without `data`. |
+| `orientation` | `orientation` | `'horizontal' \| 'vertical'` |  |  |
+
+### ParallelCoordinatesChart
+
+`parallel-coordinates-chart`: One polyline per row across parallel axes.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `ParallelCoordinatesChart` | `@silverpoint/react/parallel-coordinates-chart` |
+| Vue | `SpParallelCoordinatesChart` | `@silverpoint/vue/parallel-coordinates-chart` |
+| Angular | `sp-parallel-coordinates-chart` | `@silverpoint/angular/parallel-coordinates-chart` |
+| Reflex | `parallel_coordinates_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `matrix`; fields: label → `labelKey` (string, optional), dimensions → `dimensions` (number)
+- Intents: correlation, compare
+- Demo dataset: `PARALLEL_COORDINATES_CHART_DEMO`
+- Demo rows: `[{"model": "Model 01", "mass": 13.9, "gears": 15, "price": 3434, "range": 125, "rating": 1.5}, {"model": "Model 02", "mass": 8.6, "gears": 22, "price": 3897, "range": 29, "rating": 3.8}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `labelKey` | `label_key` | `Accessor<string \| null \| undefined>` |  | Ignored without `data`. |
+| `dimensions` | `dimensions` | `readonly string[]` |  | The dimension columns, in axis order. Ignored without `data`. Required. |
+| `domains` | `domains` | `Readonly<Record<string, readonly [number, number]>>` |  | Axis domains by dimension; derived from the data when omitted (REQ-097). |
+
+### PolarLineChart
+
+`polar-line-chart`: A line over angle and radius.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `PolarLineChart` | `@silverpoint/react/polar-line-chart` |
+| Vue | `SpPolarLineChart` | `@silverpoint/vue/polar-line-chart` |
+| Angular | `sp-polar-line-chart` | `@silverpoint/angular/polar-line-chart` |
+| Reflex | `polar_line_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `series`; fields: angle → `angleKey` (number), value → `valueKey` (number)
+- Intents: trend, compare
+- Demo dataset: `POLAR_LINE_CHART_DEMO`
+- Demo rows: `[{"month": 0, "rain": 82}, {"month": 1, "rain": 62}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `angleKey` | `angle_key` | `Accessor<number \| null \| undefined>` | `'angle'` | In the units of `period`. Ignored without `data`. |
+| `valueKey` | `value_key` | `Accessor<number \| null \| undefined>` | `'value'` | The radius, `≥ 0`. Ignored without `data`. |
+| `period` | `period` | `number` |  | One turn, in the units of the angle; when set, the line closes. Ignored without `data`. |
+| `startAngle` | `start_angle` | `number` | `0` | Where the angle 0 sits, in degrees clockwise from 12 o'clock; 0 by default. |
+
+### PolarScatterChart
+
+`polar-scatter-chart`: Points over angle and radius.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `PolarScatterChart` | `@silverpoint/react/polar-scatter-chart` |
+| Vue | `SpPolarScatterChart` | `@silverpoint/vue/polar-scatter-chart` |
+| Angular | `sp-polar-scatter-chart` | `@silverpoint/angular/polar-scatter-chart` |
+| Reflex | `polar_scatter_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `points`; fields: angle → `angleKey` (number), radius → `radiusKey` (number), size → `sizeKey` (number, optional)
+- Intents: distribution, correlation
+- Demo dataset: `POLAR_SCATTER_CHART_DEMO`
+- Demo rows: `[{"bearing": 28, "distance": 2.5}, {"bearing": 149.6, "distance": 1.4}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `angleKey` | `angle_key` | `Accessor<number \| null \| undefined>` | `'angle'` | In the units of `period`. Ignored without `data`. |
+| `radiusKey` | `radius_key` | `Accessor<number \| null \| undefined>` | `'radius'` | The radius, `≥ 0`. Ignored without `data`. |
+| `sizeKey` | `size_key` | `Accessor<number \| null \| undefined>` |  | Ignored without `data`. |
+| `period` | `period` | `number` | `360` | One turn, in the units of the angle; 360 by default. Ignored without `data`. |
+
+## Charts: Fields & networks
+
+### DensityBinChart
+
+`density-bin-chart`: X-y points counted in two-dimensional bins.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `DensityBinChart` | `@silverpoint/react/density-bin-chart` |
+| Vue | `SpDensityBinChart` | `@silverpoint/vue/density-bin-chart` |
+| Angular | `sp-density-bin-chart` | `@silverpoint/angular/density-bin-chart` |
+| Reflex | `density_bin_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `points`; fields: x → `xKey` (number), y → `yKey` (number)
+- Intents: distribution, correlation
+- Demo dataset: `DENSITY_BIN_CHART_DEMO`
+- Demo rows: `[{"x": 18.48, "y": 44.44}, {"x": 38.26, "y": 64.71}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `xKey` | `x_key` | `Accessor<number \| null \| undefined>` | `'x'` | Ignored without `data`. |
+| `yKey` | `y_key` | `Accessor<number \| null \| undefined>` | `'y'` | Ignored without `data`. |
+| `binShape` | `bin_shape` | `'hexagon' \| 'rect'` |  |  |
+| `binSize` | `bin_size` | `number` | `14` | Bin size in px; 14 by default. |
+
+### ContourChart
+
+`contour-chart`: Iso-lines and filled bands of a density or a grid.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `ContourChart` | `@silverpoint/react/contour-chart` |
+| Vue | `SpContourChart` | `@silverpoint/vue/contour-chart` |
+| Angular | `sp-contour-chart` | `@silverpoint/angular/contour-chart` |
+| Reflex | `contour_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `points`; fields: x → `xKey` (number), y → `yKey` (number), value → `valueKey` (number, optional)
+- Intents: distribution, correlation
+- Demo dataset: `CONTOUR_CHART_DEMO`
+- Demo rows: `[{"x": 18.48, "y": 44.44}, {"x": 38.26, "y": 64.71}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `source` | `source` | `'points' \| 'grid'` |  | `points` estimates a density from a point cloud; `grid` reads a regular grid of values. |
+| `xKey` | `x_key` | `Accessor<number \| null \| undefined>` | `'x'` | Ignored without `data`. |
+| `yKey` | `y_key` | `Accessor<number \| null \| undefined>` | `'y'` | Ignored without `data`. |
+| `valueKey` | `value_key` | `Accessor<number \| null \| undefined>` | `'value'` | The grid value (`source: 'grid'`). Ignored without `data`. |
+| `levels` | `levels` | `number \| readonly number[]` |  | A count of levels, or the thresholds, increasing: in the grid's values, or as shares of the density's peak. Ignored without `data`. |
+| `filled` | `filled` | `boolean` | `true` | Fills the bands between levels; `true` by default. |
+
+### DelaunayChart
+
+`delaunay-chart`: The triangulation of x-y points, or its Voronoi cells.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `DelaunayChart` | `@silverpoint/react/delaunay-chart` |
+| Vue | `SpDelaunayChart` | `@silverpoint/vue/delaunay-chart` |
+| Angular | `sp-delaunay-chart` | `@silverpoint/angular/delaunay-chart` |
+| Reflex | `delaunay_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `points`; fields: x → `xKey` (number), y → `yKey` (number), label → `labelKey` (string, optional)
+- Intents: network, distribution
+- Demo dataset: `DELAUNAY_CHART_DEMO`
+- Demo rows: `[{"label": "P01", "x": 45, "y": 27.3}, {"label": "P02", "x": 37.4, "y": 55.6}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `xKey` | `x_key` | `Accessor<number \| null \| undefined>` | `'x'` | Ignored without `data`. |
+| `yKey` | `y_key` | `Accessor<number \| null \| undefined>` | `'y'` | Ignored without `data`. |
+| `labelKey` | `label_key` | `Accessor<string \| null \| undefined>` |  | Ignored without `data`. |
+| `mesh` | `mesh` | `'delaunay' \| 'voronoi'` |  |  |
+
+### VectorFieldChart
+
+`vector-field-chart`: An arrow per grid point.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `VectorFieldChart` | `@silverpoint/react/vector-field-chart` |
+| Vue | `SpVectorFieldChart` | `@silverpoint/vue/vector-field-chart` |
+| Angular | `sp-vector-field-chart` | `@silverpoint/angular/vector-field-chart` |
+| Reflex | `vector_field_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `field`; fields: x → `xKey` (number), y → `yKey` (number), u → `uKey` (number), v → `vKey` (number)
+- Intents: flow
+- Demo dataset: `VECTOR_FIELD_CHART_DEMO`
+- Demo rows: `[{"x": 0, "y": 0, "u": 0.852, "v": -1.246}, {"x": 1, "y": 0, "u": 0.967, "v": -1.264}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `xKey` | `x_key` | `Accessor<number \| null \| undefined>` | `'x'` | Ignored without `data`. |
+| `yKey` | `y_key` | `Accessor<number \| null \| undefined>` | `'y'` | Ignored without `data`. |
+| `uKey` | `u_key` | `Accessor<number \| null \| undefined>` | `'u'` | Ignored without `data`. |
+| `vKey` | `v_key` | `Accessor<number \| null \| undefined>` | `'v'` | Ignored without `data`. |
+| `scale` | `scale` | `number` |  | Arrow length per unit of magnitude; fitted to the grid by default. |
+
+### NetworkChart
+
+`network-chart`: A node-link graph.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `NetworkChart` | `@silverpoint/react/network-chart` |
+| Vue | `SpNetworkChart` | `@silverpoint/vue/network-chart` |
+| Angular | `sp-network-chart` | `@silverpoint/angular/network-chart` |
+| Reflex | `network_chart` | `reflex_silverpoint_react` |
+
+- Data shape: `links`; fields: source → `sourceKey` (string), target → `targetKey` (string), value → `valueKey` (number, optional)
+- Intents: network, flow
+- Demo dataset: `NETWORK_CHART_DEMO`
+- Demo rows: `[{"source": "s05", "target": "s02", "weight": 5}, {"source": "p10", "target": "a06", "weight": 1}]`
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `sourceKey` | `source_key` | `Accessor<string>` | `'source'` | Ignored without `data`. |
+| `targetKey` | `target_key` | `Accessor<string>` | `'target'` | Ignored without `data`. |
+| `valueKey` | `value_key` | `Accessor<number \| null \| undefined>` | `1` | 1 by default. Ignored without `data`. |
+| `nodes` | `nodes` | `readonly NetworkNode[]` |  | The nodes, as data; the distinct ends of the links by default. Ignored without `data`. |
+| `iterations` | `iterations` | `number` | `300` | Layout iterations; 300 by default. |
+
+## UI components
+
+### SpButton
+
+`button` (ui, actions): A button or a link styled as one; `primary` and `danger` variants.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpButton` | `@silverpoint/react/ui/button` |
+| Vue | `SpButton` | `@silverpoint/vue/ui/button` |
+| Angular | `button[spButton]` | `@silverpoint/angular/ui/button` |
+| Reflex | `sp_button` | `reflex_silverpoint_react` |
+
+- Events: React `onClick`; Vue `click`; Angular none
+- Slots: React `children`; Vue `default`; Angular `content`
+- States: default, primary, danger, disabled
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `variant` | `variant` | `UiVariant` | `'default'` | Default `'default'`; `danger` also draws the exact ✕ glyph (REQ-310). |
+| `type` | `type` | `'button' \| 'submit' \| 'reset'` | `'button'` | Default `'button'`. |
+| `disabled` | `disabled` | `boolean` |  | Not focusable, not submitted; drawn with the disabled tone. |
+| `label` | `label` | `string` |  | Accessible name of an icon-only button (REQ-319). |
+| `block` | `block` | `boolean` |  | Fills the width of its container. |
+| `href` | `href` | `string` |  | Renders an `<a>`. |
+
+### SpInput
+
+`input` (ui, data-entry): A labelled text field with an optional message and an invalid state.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpInput` | `@silverpoint/react/ui/input` |
+| Vue | `SpInput` | `@silverpoint/vue/ui/input` |
+| Angular | `sp-input` | `@silverpoint/angular/ui/input` |
+| Reflex | `sp_input` | `reflex_silverpoint_react` |
+
+- Binds `value`: React `value + onChange`; Vue `v-model`; Angular `[(value)]`
+- Events: React `onChange`; Vue `change`; Angular none
+- Slots: React `prefix`, `suffix`; Vue `prefix`, `suffix`; Angular `spPrefix`, `spSuffix`
+- States: empty, filled, invalid, disabled
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `type` | `type` | `'text' \| 'search' \| 'email' \| 'url' \| 'tel' \| 'password' \| 'number'` | `'text'` | Native input type. Default `'text'`. |
+| `placeholder` | `placeholder` | `string` |  | Hint shown while empty; not a substitute for the accessible name. |
+| `name` | `name` | `string` |  | Form field name; the native input submits under it (REQ-323). |
+| `disabled` | `disabled` | `boolean` |  | Not focusable and not submitted. |
+| `readOnly` | `read_only` | `boolean` |  | Focusable and submitted, but not editable. |
+| `invalid` | `invalid` | `boolean` |  | Sets `aria-invalid` and draws the exact ⚠ glyph (REQ-334). |
+| `message` | `message` | `string` |  | Help or error text under the control, referenced by `aria-describedby` (REQ-334). |
+| `label` | `label` | `string` |  | Accessible name, when no `<label for>` names the control. |
+
+### SpCheckbox
+
+`checkbox` (ui, data-entry): A labelled checkbox, with an indeterminate state.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpCheckbox` | `@silverpoint/react/ui/checkbox` |
+| Vue | `SpCheckbox` | `@silverpoint/vue/ui/checkbox` |
+| Angular | `sp-checkbox` | `@silverpoint/angular/ui/checkbox` |
+| Reflex | `sp_checkbox` | `reflex_silverpoint_react` |
+
+- Binds `value`: React `checked + onChange`; Vue `v-model`; Angular `[(value)]`
+- Events: React `onChange`; Vue `change`; Angular none
+- Slots: React none; Vue none; Angular none
+- States: unchecked, checked, indeterminate, disabled
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `label` | `label` | `string` |  | The visible text and accessible name. Required. |
+| `name` | `name` | `string` |  | Form field name; submitted as `on` when checked. |
+| `disabled` | `disabled` | `boolean` |  | Not focusable and not submitted. |
+| `indeterminate` | `indeterminate` | `boolean` |  | Draws the exact dash and sets the native `indeterminate` state. |
+
+### SpRadioGroup
+
+`radio-group` (ui, data-entry): One choice among a few, as a fieldset of radios.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpRadioGroup` | `@silverpoint/react/ui/radio-group` |
+| Vue | `SpRadioGroup` | `@silverpoint/vue/ui/radio-group` |
+| Angular | `sp-radio-group` | `@silverpoint/angular/ui/radio-group` |
+| Reflex | `sp_radio_group` | `reflex_silverpoint_react` |
+
+- Binds `value`: React `value + onChange`; Vue `v-model`; Angular `[(value)]`
+- Events: React `onChange`; Vue `change`; Angular none
+- Slots: React none; Vue none; Angular none
+- States: selected, disabled-item
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `items` | `items` | `readonly UiItem[]` |  | The choices; each a native radio. Keys are unique (REQ-325). Required. |
+| `name` | `name` | `string` |  | Required: the native radios submit under it (REQ-323). Required. |
+| `label` | `label` | `string` |  | The group's name, its `<legend>`. Required. |
+| `orientation` | `orientation` | `UiOrientation` | `'vertical'` | Default `'vertical'`. |
+
+### SpSwitch
+
+`switch` (ui, data-entry): An on/off toggle with the switch role.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpSwitch` | `@silverpoint/react/ui/switch` |
+| Vue | `SpSwitch` | `@silverpoint/vue/ui/switch` |
+| Angular | `sp-switch` | `@silverpoint/angular/ui/switch` |
+| Reflex | `sp_switch` | `reflex_silverpoint_react` |
+
+- Binds `value`: React `checked + onChange`; Vue `v-model`; Angular `[(value)]`
+- Events: React `onChange`; Vue `change`; Angular none
+- Slots: React none; Vue none; Angular none
+- States: off, on, disabled
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `label` | `label` | `string` |  | The visible text and accessible name. Required. |
+| `name` | `name` | `string` |  | Form field name; submitted as `on` when on. |
+| `disabled` | `disabled` | `boolean` |  | Not focusable and not submitted. |
+
+### SpSlider
+
+`slider` (ui, data-entry): A value on a range, with optional marks.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpSlider` | `@silverpoint/react/ui/slider` |
+| Vue | `SpSlider` | `@silverpoint/vue/ui/slider` |
+| Angular | `sp-slider` | `@silverpoint/angular/ui/slider` |
+| Reflex | `sp_slider` | `reflex_silverpoint_react` |
+
+- Binds `value`: React `value + onChange`; Vue `v-model`; Angular `[(value)]`
+- Events: React `onChange`; Vue `change`; Angular none
+- Slots: React none; Vue none; Angular none
+- States: marks, disabled
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `label` | `label` | `string` |  | Accessible name of the native range input. Required. |
+| `min` | `min` | `number` | `0` | Default `0`. |
+| `max` | `max` | `number` | `100` | Default `100`. |
+| `step` | `step` | `number` | `1` | Default `1`. |
+| `name` | `name` | `string` |  | Form field name; the native input submits under it. |
+| `disabled` | `disabled` | `boolean` |  | Not focusable and not submitted. |
+| `marks` | `marks` | `readonly number[]` |  | Values on the rail that get a labelled mark. |
+
+### SpRate
+
+`rate` (ui, data-entry): A rating from 1 to `count`, optionally read-only.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpRate` | `@silverpoint/react/ui/rate` |
+| Vue | `SpRate` | `@silverpoint/vue/ui/rate` |
+| Angular | `sp-rate` | `@silverpoint/angular/ui/rate` |
+| Reflex | `sp_rate` | `reflex_silverpoint_react` |
+
+- Binds `value`: React `value + onChange`; Vue `v-model`; Angular `[(value)]`
+- Events: React `onChange`; Vue `change`; Angular none
+- Slots: React none; Vue none; Angular none
+- States: three, read-only
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `label` | `label` | `string` |  | The group's name, its `<legend>`. Required. |
+| `count` | `count` | `number` | `5` | Default `5`, in 1..10; each mark an exact lozenge. |
+| `name` | `name` | `string` |  | Form field name; the native radios submit under it. |
+| `disabled` | `disabled` | `boolean` |  | Not focusable and not submitted. |
+| `readOnly` | `read_only` | `boolean` |  | Shows the value; the keyboard and the pointer do not change it. |
+
+### SpSegmented
+
+`segmented` (ui, data-entry): One choice among a few, as joined segments.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpSegmented` | `@silverpoint/react/ui/segmented` |
+| Vue | `SpSegmented` | `@silverpoint/vue/ui/segmented` |
+| Angular | `sp-segmented` | `@silverpoint/angular/ui/segmented` |
+| Reflex | `sp_segmented` | `reflex_silverpoint_react` |
+
+- Binds `value`: React `value + onChange`; Vue `v-model`; Angular `[(value)]`
+- Events: React `onChange`; Vue `change`; Angular none
+- Slots: React none; Vue none; Angular none
+- States: first, middle
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `items` | `items` | `readonly UiItem[]` |  | The options; each a native radio. Keys are unique (REQ-325). Required. |
+| `label` | `label` | `string` |  | The control's name, its `<legend>`. Required. |
+| `name` | `name` | `string` |  | Form field name; the native radios submit under it. |
+| `block` | `block` | `boolean` |  | Fills the width of its container. |
+
+### SpTabs
+
+`tabs` (ui, navigation): Tabs and their panels (`SpTabPanel`), with automatic or manual activation.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpTabs` | `@silverpoint/react/ui/tabs` |
+| Vue | `SpTabs` | `@silverpoint/vue/ui/tabs` |
+| Angular | `sp-tabs` | `@silverpoint/angular/ui/tabs` |
+| Reflex | `sp_tabs` | `reflex_silverpoint_react` |
+
+- Binds `value`: React `value + onChange`; Vue `v-model`; Angular `[(value)]`
+- Events: React `onChange`; Vue `change`; Angular none
+- Slots: React `children`; Vue `default`; Angular `content`
+- States: first, disabled-tab
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `items` | `items` | `readonly UiItem[]` |  | The tabs; a disabled one is skipped by the arrows. Keys are unique (REQ-325). Required. |
+| `label` | `label` | `string` |  | Accessible name of the tab list. |
+| `orientation` | `orientation` | `UiOrientation` | `'horizontal'` | Default `'horizontal'`. |
+| `activation` | `activation` | `'automatic' \| 'manual'` | `'automatic'` | Default `'automatic'`: a tab is selected as focus reaches it. |
+
+### SpSteps
+
+`steps` (ui, navigation): The steps of a process, with the current one and an error state.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpSteps` | `@silverpoint/react/ui/steps` |
+| Vue | `SpSteps` | `@silverpoint/vue/ui/steps` |
+| Angular | `sp-steps` | `@silverpoint/angular/ui/steps` |
+| Reflex | `sp_steps` | `reflex_silverpoint_react` |
+
+- Events: React none; Vue none; Angular none
+- Slots: React none; Vue none; Angular none
+- States: current, error
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `items` | `items` | `readonly StepItem[]` |  | The steps, in order; a status is derived from `current` unless set. Required. |
+| `current` | `current` | `number` |  | 0-based. Required. |
+| `orientation` | `orientation` | `UiOrientation` | `'horizontal'` | Default `'horizontal'`. |
+| `label` | `label` | `string` |  | Accessible name of the list. |
+
+### SpCard
+
+`card` (ui, data-display): A framed card with a title, an extra slot and a footer.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpCard` | `@silverpoint/react/ui/card` |
+| Vue | `SpCard` | `@silverpoint/vue/ui/card` |
+| Angular | `sp-card` | `@silverpoint/angular/ui/card` |
+| Reflex | `sp_card` | `reflex_silverpoint_react` |
+
+- Events: React none; Vue none; Angular none
+- Slots: React `children`, `extra`, `footer`; Vue `default`, `extra`, `footer`; Angular `content`, `spExtra`, `spFooter`
+- States: plain, titled
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `title` | `title` | `string` |  | Heading of the card; without it the card is a plain container. |
+| `headingLevel` | `heading_level` | `2 \| 3 \| 4 \| 5 \| 6` | `3` | Default `3`. |
+
+### SpTag
+
+`tag` (ui, data-display): A short toned label, optionally closable.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpTag` | `@silverpoint/react/ui/tag` |
+| Vue | `SpTag` | `@silverpoint/vue/ui/tag` |
+| Angular | `sp-tag` | `@silverpoint/angular/ui/tag` |
+| Reflex | `sp_tag` | `reflex_silverpoint_react` |
+
+- Events: React `onClose`; Vue `close`; Angular `close`
+- Slots: React `children`; Vue `default`; Angular `content`
+- States: tone-1, closable
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `tone` | `tone` | `UiToneLevel` |  | Tonal level, default `1`. |
+| `closable` | `closable` | `boolean` |  | Adds a native close button; each adapter raises its close event. |
+| `closeLabel` | `close_label` | `string` | `Remove <text>` | Accessible name of the close button. Default `Remove <text>`. |
+
+### SpBadge
+
+`badge` (ui, data-display): A count or a dot over its content.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpBadge` | `@silverpoint/react/ui/badge` |
+| Vue | `SpBadge` | `@silverpoint/vue/ui/badge` |
+| Angular | `sp-badge` | `@silverpoint/angular/ui/badge` |
+| Reflex | `sp_badge` | `reflex_silverpoint_react` |
+
+- Events: React none; Vue none; Angular none
+- Slots: React `children`; Vue `default`; Angular `content`
+- States: count, dot, overflow
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `count` | `count` | `number` |  | The number shown, up to `max`. |
+| `max` | `max` | `number` | `99` | Default `99`; above it the badge reads `99+`. |
+| `dot` | `dot` | `boolean` |  | A dot with no number. |
+| `label` | `label` | `string` |  | Accessible text of the badge, e.g. `unread messages`. |
+
+### SpDivider
+
+`divider` (ui, data-display): A rule between sections, optionally with text.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpDivider` | `@silverpoint/react/ui/divider` |
+| Vue | `SpDivider` | `@silverpoint/vue/ui/divider` |
+| Angular | `sp-divider` | `@silverpoint/angular/ui/divider` |
+| Reflex | `sp_divider` | `reflex_silverpoint_react` |
+
+- Events: React none; Vue none; Angular none
+- Slots: React none; Vue none; Angular none
+- States: plain, text
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `orientation` | `orientation` | `UiOrientation` | `'horizontal'` | Default `'horizontal'`. |
+| `text` | `text` | `string` |  | A caption set in the rule. |
+| `align` | `align` | `'start' \| 'center' \| 'end'` | `'center'` | Default `'center'`. |
+
+### SpProgress
+
+`progress` (ui, feedback): Progress as a line or a circle, or indeterminate.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpProgress` | `@silverpoint/react/ui/progress` |
+| Vue | `SpProgress` | `@silverpoint/vue/ui/progress` |
+| Angular | `sp-progress` | `@silverpoint/angular/ui/progress` |
+| Reflex | `sp_progress` | `reflex_silverpoint_react` |
+
+- Events: React none; Vue none; Angular none
+- Slots: React none; Vue none; Angular none
+- States: line, circle, indeterminate
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `value` | `value` | `number` |  | 0..100; omitted, the progress is indeterminate. |
+| `shape` | `shape` | `'line' \| 'circle'` | `'line'` | Default `'line'`. |
+| `label` | `label` | `string` |  | Accessible name (REQ-318). Required. |
+| `showValue` | `show_value` | `boolean` | `true` | Default `true`. |
+
+### SpAlert
+
+`alert` (ui, feedback): An info, success, warning or error message, optionally closable.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpAlert` | `@silverpoint/react/ui/alert` |
+| Vue | `SpAlert` | `@silverpoint/vue/ui/alert` |
+| Angular | `sp-alert` | `@silverpoint/angular/ui/alert` |
+| Reflex | `sp_alert` | `reflex_silverpoint_react` |
+
+- Events: React `onClose`; Vue `close`; Angular `close`
+- Slots: React `children`; Vue `default`; Angular `content`
+- States: info, success, warning, error
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `kind` | `kind` | `AlertKind` | `'info'` | Default `'info'`. |
+| `title` | `title` | `string` |  | Bold first line of the alert. |
+| `closable` | `closable` | `boolean` |  | Adds a native close button; each adapter raises its close event. |
+| `closeLabel` | `close_label` | `string` | `'Close'` | Accessible name of the close button. Default `'Close'`. |
+
+### SpSkeleton
+
+`skeleton` (ui, feedback): A placeholder for content that is loading.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpSkeleton` | `@silverpoint/react/ui/skeleton` |
+| Vue | `SpSkeleton` | `@silverpoint/vue/ui/skeleton` |
+| Angular | `sp-skeleton` | `@silverpoint/angular/ui/skeleton` |
+| Reflex | `sp_skeleton` | `reflex_silverpoint_react` |
+
+- Events: React none; Vue none; Angular none
+- Slots: React none; Vue none; Angular none
+- States: paragraph, avatar
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `lines` | `lines` | `number` | `3` | Default `3`, in 1..8. |
+| `avatar` | `avatar` | `boolean` |  | Draws an avatar placeholder before the lines. |
+| `label` | `label` | `string` | `'Loading'` | Default `'Loading'`. |
+
+### SpSurface
+
+`surface` (composed, building-blocks): A framed, toned surface to build your own components on.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpSurface` | `@silverpoint/react/ui/surface` |
+| Vue | `SpSurface` | `@silverpoint/vue/ui/surface` |
+| Angular | `[spSurface]` | `@silverpoint/angular/ui/surface` |
+| Reflex | `sp_surface` | `reflex_silverpoint_react` |
+
+- Events: React none; Vue none; Angular none
+- Slots: React `children`; Vue `default`; Angular `content`
+- States: frame-card, tone-2
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `as` | — | `string` | `'div'` | The element, a lowercase HTML tag name. Default `'div'`. |
+| `name` | `name` | `string` |  | Adds the class `sp-<name>`, a lowercase ident. |
+| `frame` | `frame` | `UiFrameKind` |  | Draws a frame of that kind. |
+| `tone` | `tone` | `UiToneLevel \| string` |  | Lays a tone: a level 1-4 of the ramp, or a state (`selected`, `primary`…). |
+
+### SpGlyph
+
+`glyph` (composed, building-blocks): One of the exact glyphs the components draw (tick, cross, arrows, chevrons…).
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpGlyph` | `@silverpoint/react/ui/glyph` |
+| Vue | `SpGlyph` | `@silverpoint/vue/ui/glyph` |
+| Angular | `sp-glyph` | `@silverpoint/angular/ui/glyph` |
+| Reflex | `sp_glyph` | `reflex_silverpoint_react` |
+
+- Events: React none; Vue none; Angular none
+- Slots: React none; Vue none; Angular none
+- States: all
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `glyph` | `glyph` | `string` |  | A key of `UI_GLYPHS`. Required. |
+
+### SpTable
+
+`table` (composed, data-display): A data table with sortable columns, stripes and an empty state.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpTable` | `@silverpoint/react/ui/table` |
+| Vue | `SpTable` | `@silverpoint/vue/ui/table` |
+| Angular | `sp-table` | `@silverpoint/angular/ui/table` |
+| Reflex | `sp_table` | `reflex_silverpoint_react` |
+
+- Events: React `onSort`; Vue `sort`; Angular `sort`
+- Slots: React none; Vue none; Angular none
+- States: plain, sorted-striped, empty
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `columns` | `columns` | `readonly TableColumn[]` |  | The columns, in order; each names the key it reads from a row. Required. |
+| `data` | `data` | `readonly Readonly<Record<string, unknown>>[]` |  | The rows, drawn as given: the consumer sorts them (DD-040). Required. |
+| `caption` | `caption` | `string` |  | The table's `<caption>`, its accessible name. |
+| `sortKey` | `sort_key` | `string` |  | A sortable column's key; another key sorts nothing, silently. |
+| `sortOrder` | `sort_order` | `'asc' \| 'desc'` | `'asc'` | Default `'asc'`. |
+| `striped` | `striped` | `boolean` | `false` | Default `false`. |
+| `hoverable` | `hoverable` | `boolean` | `true` | Default `true`. |
+| `bordered` | `bordered` | `boolean` | `true` | Default `true`. |
+| `emptyText` | `empty_text` | `string` | `'No data'` | Default `'No data'`. |
+| `rowKey` | `row_key` | `string` |  | The column whose value keys each row. |
+
+### SpPagination
+
+`pagination` (composed, navigation): Page navigation with a current page, siblings and an optional total.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpPagination` | `@silverpoint/react/ui/pagination` |
+| Vue | `SpPagination` | `@silverpoint/vue/ui/pagination` |
+| Angular | `sp-pagination` | `@silverpoint/angular/ui/pagination` |
+| Reflex | `sp_pagination` | `reflex_silverpoint_react` |
+
+- Binds `value`: React `current + onChange`; Vue `v-model:current`; Angular `[(current)]`
+- Events: React `onChange`; Vue none; Angular none
+- Slots: React none; Vue none; Angular none
+- States: middle, total
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `total` | `total` | `number` |  | The number of items paged over. Required. |
+| `pageSize` | `page_size` | `number` | `10` | Default `10`. |
+| `siblings` | `siblings` | `number` | `1` | Pages shown on each side of the current one. Default `1`. |
+| `showTotal` | `show_total` | `boolean` | `false` | Default `false`. |
+| `totalTemplate` | `total_template` | `string` | `'{start}–{end} of {total}'` | Default `'{start}–{end} of {total}'`. |
+| `label` | `label` | `string` | `'Pagination'` | Default `'Pagination'`. |
+| `previousLabel` | `previous_label` | `string` | `'Previous page'` | Default `'Previous page'`. |
+| `nextLabel` | `next_label` | `string` | `'Next page'` | Default `'Next page'`. |
+| `pageLabel` | `page_label` | `string` | `'Page'` | Default `'Page'`. |
+| `disabled` | `disabled` | `boolean` |  | Every page button disabled. |
+
+### SpBreadcrumb
+
+`breadcrumb` (composed, navigation): The trail of pages to the current one.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpBreadcrumb` | `@silverpoint/react/ui/breadcrumb` |
+| Vue | `SpBreadcrumb` | `@silverpoint/vue/ui/breadcrumb` |
+| Angular | `sp-breadcrumb` | `@silverpoint/angular/ui/breadcrumb` |
+| Reflex | `sp_breadcrumb` | `reflex_silverpoint_react` |
+
+- Events: React none; Vue none; Angular none
+- Slots: React none; Vue none; Angular none
+- States: three
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `items` | `items` | `readonly BreadcrumbItem[]` |  | The last item is the current page. Required. |
+| `label` | `label` | `string` | `'Breadcrumb'` | Default `'Breadcrumb'`. |
+
+### SpAvatar
+
+`avatar` (composed, data-display): A picture or initials in a round or square frame; `SpAvatarGroup` stacks several.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpAvatar` | `@silverpoint/react/ui/avatar` |
+| Vue | `SpAvatar` | `@silverpoint/vue/ui/avatar` |
+| Angular | `sp-avatar` | `@silverpoint/angular/ui/avatar` |
+| Reflex | `sp_avatar` | `reflex_silverpoint_react` |
+
+- Events: React none; Vue none; Angular none
+- Slots: React none; Vue none; Angular none
+- States: initials, square, group
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `src` | `src` | `string` |  | An image; the initials are drawn without one. |
+| `name` | `name` | `string` |  | The person's name: the accessible name and the source of the initials. |
+| `initials` | `initials` | `string` |  | Overrides the initials derived from `name`. |
+| `alt` | `alt` | `string` |  | Overrides `name` as the accessible name. |
+| `shape` | `shape` | `'circle' \| 'square'` | `'circle'` | Default `'circle'`. |
+| `pixelSize` | `pixel_size` | `number` |  | Side length in px; the ground's control height when omitted. |
+
+### SpStatistic
+
+`statistic` (composed, data-display): A titled figure with a prefix, a suffix and an optional trend.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpStatistic` | `@silverpoint/react/ui/statistic` |
+| Vue | `SpStatistic` | `@silverpoint/vue/ui/statistic` |
+| Angular | `sp-statistic` | `@silverpoint/angular/ui/statistic` |
+| Reflex | `sp_statistic` | `reflex_silverpoint_react` |
+
+- Events: React none; Vue none; Angular none
+- Slots: React none; Vue none; Angular none
+- States: plain, trend-down
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `title` | `title` | `string` |  | The label above the value. Required. |
+| `value` | `value` | `string \| number` |  | Printed as given. Required. |
+| `prefix` | `prefix` | `string` |  | Printed before the value (`$`). |
+| `suffix` | `suffix` | `string` |  | Printed after the value (`%`). |
+| `trend` | `trend` | `'up' \| 'down'` |  | Draws the exact ↑ or ↓ glyph beside the delta. |
+| `delta` | `delta` | `string` |  | The change, as text (`+4.2%`). |
+
+### SpDescriptions
+
+`descriptions` (composed, data-display): Label and value pairs as a description list.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpDescriptions` | `@silverpoint/react/ui/descriptions` |
+| Vue | `SpDescriptions` | `@silverpoint/vue/ui/descriptions` |
+| Angular | `sp-descriptions` | `@silverpoint/angular/ui/descriptions` |
+| Reflex | `sp_descriptions` | `reflex_silverpoint_react` |
+
+- Events: React none; Vue none; Angular none
+- Slots: React none; Vue none; Angular none
+- States: bordered, plain
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `items` | `items` | `readonly DescriptionItem[]` |  | The label–value pairs, a `<dl>`. Keys, when given, are unique (REQ-325). Required. |
+| `title` | `title` | `string` |  | A heading above the list, at `headingLevel`. |
+| `columns` | `columns` | `number` | `3` | Default `3`, in 1..6. |
+| `bordered` | `bordered` | `boolean` | `true` | Default `true`. |
+| `headingLevel` | `heading_level` | `2 \| 3 \| 4 \| 5 \| 6` | `3` | Default `3`. |
+
+### SpTimelineList
+
+`timeline-list` (composed, data-display): Events in order, each done, current, pending or in error.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpTimelineList` | `@silverpoint/react/ui/timeline-list` |
+| Vue | `SpTimelineList` | `@silverpoint/vue/ui/timeline-list` |
+| Angular | `sp-timeline-list` | `@silverpoint/angular/ui/timeline-list` |
+| Reflex | `sp_timeline_list` | `reflex_silverpoint_react` |
+
+- Events: React none; Vue none; Angular none
+- Slots: React none; Vue none; Angular none
+- States: mixed
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `items` | `items` | `readonly TimelineListItem[]` |  | The events, in reading order. Required. |
+| `label` | `label` | `string` |  | Accessible name of the list. |
+
+### SpCollapse
+
+`collapse` (composed, disclosure): Disclosure panels (`SpCollapseItem`), optionally as an accordion.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpCollapse` | `@silverpoint/react/ui/collapse` |
+| Vue | `SpCollapse` | `@silverpoint/vue/ui/collapse` |
+| Angular | `sp-collapse` | `@silverpoint/angular/ui/collapse` |
+| Reflex | `sp_collapse` | `reflex_silverpoint_react` |
+
+- Events: React none; Vue none; Angular none
+- Slots: React `children`; Vue `default`; Angular `content`
+- States: one-open, accordion-disabled
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `accordion` | `accordion` | `boolean` | `false` | One item open at a time, natively (`<details name>`). Default `false`. |
+| `bordered` | `bordered` | `boolean` | `true` | Default `true`. |
+
+### SpEmpty
+
+`empty` (composed, data-display): The empty state of a list or a table.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpEmpty` | `@silverpoint/react/ui/empty` |
+| Vue | `SpEmpty` | `@silverpoint/vue/ui/empty` |
+| Angular | `sp-empty` | `@silverpoint/angular/ui/empty` |
+| Reflex | `sp_empty` | `reflex_silverpoint_react` |
+
+- Events: React none; Vue none; Angular none
+- Slots: React `extra`; Vue `extra`; Angular `spExtra`
+- States: plain
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `description` | `description` | `string` | `'No data'` | Default `'No data'`. |
+
+### SpResult
+
+`result` (composed, data-display): The outcome of an action: success, error, information or warning.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpResult` | `@silverpoint/react/ui/result` |
+| Vue | `SpResult` | `@silverpoint/vue/ui/result` |
+| Angular | `sp-result` | `@silverpoint/angular/ui/result` |
+| Reflex | `sp_result` | `reflex_silverpoint_react` |
+
+- Events: React none; Vue none; Angular none
+- Slots: React `extra`; Vue `extra`; Angular `spExtra`
+- States: success, error
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `status` | `status` | `AlertKind` | `'info'` | Default `'info'`. |
+| `title` | `title` | `string` |  | The heading, at `headingLevel`. Required. |
+| `subtitle` | `subtitle` | `string` |  | A paragraph under the title. |
+| `headingLevel` | `heading_level` | `2 \| 3 \| 4 \| 5 \| 6` | `3` | Default `3`. |
+
+### SpTextarea
+
+`textarea` (composed, data-entry): A multi-line text field with a counter and an invalid state.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpTextarea` | `@silverpoint/react/ui/textarea` |
+| Vue | `SpTextarea` | `@silverpoint/vue/ui/textarea` |
+| Angular | `sp-textarea` | `@silverpoint/angular/ui/textarea` |
+| Reflex | `sp_textarea` | `reflex_silverpoint_react` |
+
+- Binds `value`: React `value + onChange`; Vue `v-model`; Angular `[(value)]`
+- Events: React `onChange`; Vue `change`; Angular none
+- Slots: React none; Vue none; Angular none
+- States: count, invalid
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `rows` | `rows` | `number` | `3` | Default `3`. |
+| `placeholder` | `placeholder` | `string` |  | Hint shown while empty; not a substitute for the accessible name. |
+| `label` | `label` | `string` |  | Accessible name, when no `<label for>` names the control. |
+| `message` | `message` | `string` |  | Help or error text under the control, referenced by `aria-describedby` (REQ-334). |
+| `invalid` | `invalid` | `boolean` |  | Sets `aria-invalid` and draws the exact ⚠ glyph (REQ-334). |
+| `disabled` | `disabled` | `boolean` |  | Not focusable and not submitted. |
+| `readOnly` | `read_only` | `boolean` |  | Focusable and submitted, but not editable. |
+| `maxLength` | `max_length` | `number` |  | The native limit; the counter shows it with `showCount`. |
+| `showCount` | `show_count` | `boolean` | `false` | Default `false`. |
+| `name` | `name` | `string` |  | Form field name; the native textarea submits under it (REQ-323). |
+
+### SpInputNumber
+
+`input-number` (composed, data-entry): A number field with steppers, bounds and precision.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpInputNumber` | `@silverpoint/react/ui/input-number` |
+| Vue | `SpInputNumber` | `@silverpoint/vue/ui/input-number` |
+| Angular | `sp-input-number` | `@silverpoint/angular/ui/input-number` |
+| Reflex | `sp_input_number` | `reflex_silverpoint_react` |
+
+- Binds `value`: React `value + onChange`; Vue `v-model`; Angular `[(value)]`
+- Events: React `onChange`; Vue none; Angular none
+- Slots: React none; Vue none; Angular none
+- States: value, at-min
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `min` | `min` | `number` |  | The lowest value; the value is clamped to it (REQ-485). |
+| `max` | `max` | `number` |  | The highest value; the value is clamped to it (REQ-485). |
+| `step` | `step` | `number` | `1` | Default `1`. |
+| `precision` | `precision` | `number` |  | Decimals. |
+| `placeholder` | `placeholder` | `string` |  | Hint shown while empty; not a substitute for the accessible name. |
+| `label` | `label` | `string` |  | Accessible name, when no `<label for>` names the control. |
+| `message` | `message` | `string` |  | Help or error text under the control, referenced by `aria-describedby` (REQ-334). |
+| `invalid` | `invalid` | `boolean` |  | Sets `aria-invalid` and draws the exact ⚠ glyph (REQ-334). |
+| `disabled` | `disabled` | `boolean` |  | Not focusable and not submitted; the steppers are disabled too. |
+| `readOnly` | `read_only` | `boolean` |  | Focusable and submitted, but not editable. |
+| `name` | `name` | `string` |  | Form field name; the native input submits under it (REQ-323). |
+| `decrementLabel` | `decrement_label` | `string` | `'Decrease'` | Default `'Decrease'`. |
+| `incrementLabel` | `increment_label` | `string` | `'Increase'` | Default `'Increase'`. |
+
+### SpModal
+
+`modal` (overlay, overlays): A modal dialog on the native `<dialog>`, opened by its trigger.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpModal` | `@silverpoint/react/ui/modal` |
+| Vue | `SpModal` | `@silverpoint/vue/ui/modal` |
+| Angular | `sp-modal` | `@silverpoint/angular/ui/modal` |
+| Reflex | `sp_modal` | `reflex_silverpoint_react` |
+
+- Binds `open`: React `open + onOpenChange`; Vue `v-model:open`; Angular `[(open)]`
+- Events: React `onOpenChange`; Vue none; Angular none
+- Slots: React `children`, `footer`, `trigger`; Vue `default`, `footer`, `trigger`; Angular `content`, `spFooter`, `spTrigger`
+- States: open
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `title` | `title` | `string` |  | The heading, `${id}--title`, that names the dialog. |
+| `description` | `description` | `string` |  | A paragraph, `${id}--description`, that describes the dialog. |
+| `label` | `label` | `string` |  | Accessible name without a title (REQ-501). |
+| `closable` | `closable` | `boolean` | `true` | Default `true`. |
+| `closeLabel` | `close_label` | `string` | `'Close'` | Default `'Close'`. |
+| `width` | `width` | `string` | `'520px'` | CSS length. Default `'520px'` (from `ui.css`). |
+| `dismissible` | `dismissible` | `boolean` | `true` | Escape and a backdrop click close it. Default `true`. |
+
+### SpDrawer
+
+`drawer` (overlay, overlays): A dialog sliding in from one side of the viewport.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpDrawer` | `@silverpoint/react/ui/drawer` |
+| Vue | `SpDrawer` | `@silverpoint/vue/ui/drawer` |
+| Angular | `sp-drawer` | `@silverpoint/angular/ui/drawer` |
+| Reflex | `sp_drawer` | `reflex_silverpoint_react` |
+
+- Binds `open`: React `open + onOpenChange`; Vue `v-model:open`; Angular `[(open)]`
+- Events: React `onOpenChange`; Vue none; Angular none
+- Slots: React `children`, `footer`, `trigger`; Vue `default`, `footer`, `trigger`; Angular `content`, `spFooter`, `spTrigger`
+- States: end-open
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `side` | `side` | `'start' \| 'end' \| 'top' \| 'bottom'` | `'end'` | Default `'end'`. |
+| `extent` | `extent` | `string` | `'380px'` | CSS length across the side. Default `'380px'` (start/end) or `'320px'` (top/bottom). |
+| `modal` | `modal` | `boolean` | `true` | `false` opens with `show()`. Default `true`. |
+
+### SpPopover
+
+`popover` (overlay, overlays): Non-modal content anchored to its trigger, on the Popover API.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpPopover` | `@silverpoint/react/ui/popover` |
+| Vue | `SpPopover` | `@silverpoint/vue/ui/popover` |
+| Angular | `sp-popover` | `@silverpoint/angular/ui/popover` |
+| Reflex | `sp_popover` | `reflex_silverpoint_react` |
+
+- Binds `open`: React `open + onOpenChange`; Vue `v-model:open`; Angular `[(open)]`
+- Events: React `onOpenChange`; Vue none; Angular none
+- Slots: React `children`, `trigger`; Vue `default`, `trigger`; Angular `content`, `spTrigger`
+- States: open
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `title` | `title` | `string` |  | A heading that names the popover. |
+| `label` | `label` | `string` |  | Accessible name without a title. |
+| `side` | `side` | `'top' \| 'end' \| 'bottom' \| 'start'` | `'bottom'` | Default `'bottom'`. |
+| `align` | `align` | `'start' \| 'center' \| 'end'` | `'center'` | Default `'center'`. |
+| `offset` | `offset` | `number` | `6` | Default `6`. |
+| `closable` | `closable` | `boolean` | `false` | Default `false`. |
+| `closeLabel` | `close_label` | `string` | `'Close'` | Default `'Close'`. |
+| `width` | `width` | `string` | `'320px'` | CSS length. Default `'320px'` (from `ui.css`). |
+
+### SpTooltip
+
+`tooltip` (overlay, overlays): A short text shown on hover or focus of its trigger.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpTooltip` | `@silverpoint/react/ui/tooltip` |
+| Vue | `SpTooltip` | `@silverpoint/vue/ui/tooltip` |
+| Angular | `sp-tooltip` | `@silverpoint/angular/ui/tooltip` |
+| Reflex | `sp_tooltip` | `reflex_silverpoint_react` |
+
+- Binds `open`: React `open + onOpenChange`; Vue `v-model:open`; Angular `[(open)]`
+- Events: React `onOpenChange`; Vue none; Angular none
+- Slots: React `trigger`; Vue `trigger`; Angular `spTrigger`
+- States: open
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `text` | `text` | `string` |  | The tooltip, the trigger's accessible description. Required. |
+| `side` | `side` | `'top' \| 'end' \| 'bottom' \| 'start'` | `'top'` | Default `'top'`. |
+| `align` | `align` | `'start' \| 'center' \| 'end'` | `'center'` | Default `'center'`. |
+| `offset` | `offset` | `number` | `6` | Default `6`. |
+| `delay` | `delay` | `number` | `300` | Default `300` ms. |
+
+### SpSelect
+
+`select` (overlay, overlays): A select-only combobox: one option from a list.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpSelect` | `@silverpoint/react/ui/select` |
+| Vue | `SpSelect` | `@silverpoint/vue/ui/select` |
+| Angular | `sp-select` | `@silverpoint/angular/ui/select` |
+| Reflex | `sp_select` | `reflex_silverpoint_react` |
+
+- Binds `value`: React `value + onChange`; Vue `v-model`; Angular `[(value)]`
+- Binds `open`: React `open + onOpenChange`; Vue `v-model:open`; Angular `[(open)]`
+- Events: React `onChange`, `onOpenChange`; Vue none; Angular none
+- Slots: React none; Vue none; Angular none
+- States: placeholder, open-selected
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `items` | `items` | `readonly (string \| UiItem)[]` |  | A string is its own key and label. Required. |
+| `placeholder` | `placeholder` | `string` | `'Select…'` | Default `'Select…'`. |
+| `label` | `label` | `string` |  | Accessible name of the combobox. Required. |
+| `disabled` | `disabled` | `boolean` |  | Not focusable and not submitted. |
+| `required` | `required` | `boolean` |  | Sets `aria-required` on the combobox. |
+| `name` | `name` | `string` |  | Submits the key under this name, from a hidden input (REQ-323). |
+| `width` | `width` | `string` | `'180px'` | CSS length. Default `'180px'` (from `ui.css`). |
+
+### SpDropdownMenu
+
+`dropdown-menu` (overlay, overlays): A menu of actions opened from its trigger.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpDropdownMenu` | `@silverpoint/react/ui/dropdown-menu` |
+| Vue | `SpDropdownMenu` | `@silverpoint/vue/ui/dropdown-menu` |
+| Angular | `sp-dropdown-menu` | `@silverpoint/angular/ui/dropdown-menu` |
+| Reflex | `sp_dropdown_menu` | `reflex_silverpoint_react` |
+
+- Binds `open`: React `open + onOpenChange`; Vue `v-model:open`; Angular `[(open)]`
+- Events: React `onOpenChange`, `onSelect`; Vue `select`; Angular `select`
+- Slots: React `trigger`; Vue `trigger`; Angular `spTrigger`
+- States: open
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `items` | `items` | `readonly MenuEntry[]` |  | Items, separators and labels, in order. Keys are unique (REQ-325). Required. |
+| `label` | `label` | `string` |  | The menu's accessible name and the trigger's text when no trigger slot. Required. |
+| `side` | `side` | `'top' \| 'end' \| 'bottom' \| 'start'` | `'bottom'` | Default `'bottom'`. |
+| `align` | `align` | `'start' \| 'center' \| 'end'` | `'start'` | Default `'start'`. |
+
+### SpToast
+
+`toast` (overlay, overlays): A transient message in a `SpToaster`, with an optional action.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpToast` | `@silverpoint/react/ui/toast` |
+| Vue | `SpToast` | `@silverpoint/vue/ui/toast` |
+| Angular | `sp-toast` | `@silverpoint/angular/ui/toast` |
+| Reflex | `sp_toast` | `reflex_silverpoint_react` |
+
+- Binds `open`: React `open + onOpenChange`; Vue `v-model:open`; Angular `[(open)]`
+- Events: React `onOpenChange`; Vue none; Angular none
+- Slots: React `action`; Vue `action`; Angular `spAction`
+- States: info, error-action
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `title` | `title` | `string` |  | The toast's first line. Required. |
+| `description` | `description` | `string` |  | A line under the title. |
+| `kind` | `kind` | `AlertKind` | `'info'` | Default `'info'`. |
+| `duration` | `duration` | `number` |  | ms, at least 1000, or `Infinity`; the toaster's when omitted. |
+| `closeLabel` | `close_label` | `string` | `'Dismiss'` | Default `'Dismiss'`. |
+
+## Dashboard
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `title` | `title` | `string` |  |  |
+| `label` | `label` | `string` |  |  |
+| `id` | — | `string` |  | Stable identifier; seeds of unnamed charts derive from it (REQ-209). Required. Required. |
+| `layout` | `layout` | `DashboardLayout` |  |  |
+| `description` | `description` | `string` |  | Long description, exposed as the region's description (REQ-214). |
+| `headingLevel` | `heading_level` | `2 \| 3 \| 4 \| 5 \| 6` | `2` | Heading level of `title`. Default `2`. |
+| `ssrWidth` | `ssr_width` | `number` | `1200` | Width in px used for nominal cell boxes on the server and at hydration (REQ-207). Default `1200`. |
+| `link` | `link` | `DashboardLink` |  | Linked interaction (REQ-216); client entry points only. |
+| `ground` | `ground` | `GroundRef` |  | Inherited by every chart inside, below the chart's own prop (REQ-212). |
+| `substrate` | `substrate` | `SubstrateName` |  |  |
+| `mode` | `mode` | `InkMode` |  |  |
+| `locale` | `locale` | `string` |  |  |
+| `palette` | `palette` | `Palette` |  | The section's colours, written on its root and merged under every chart's and component's own (REQ-462). |
+| `className` | — | `string` |  |  |
+
+### Dashboard layout
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `columns` | — | `PerBreakpoint<number>` | `{ sm: 1, md: 2, lg: 4 }` | Columns per breakpoint. Default `{ sm: 1, md: 2, lg: 4 }` (REQ-208). |
+| `rowHeight` | — | `number` | `240` | Height of one row unit, in px, card chrome included. Default `240`. |
+| `gap` | — | `number` | `16` | Gap between cells, in px. Default `16`. |
+| `cells` | — | `readonly DashboardCellLayout[]` |  | Cells in reading order (REQ-203). Omitted: every child, span 1. |
+
+### Dashboard cell
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `id` | — | `string` |  | Matches `DashboardCell`'s `cell` prop; unique within the dashboard (REQ-205). Required. |
+| `colSpan` | — | `PerBreakpoint<number>` | `1` | Default `1`. Clamped to the breakpoint's columns with `SP014` (REQ-204). |
+| `rowSpan` | — | `PerBreakpoint<number>` | `1` | Default `1`. |
+
+## Timeline
+
+Optional peer: `@knight-lab/timelinejs@^3.9.13`.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpTimeline` | `@silverpoint/react/timeline` |
+| Vue | `SpTimeline` | `@silverpoint/vue/timeline` |
+| Angular | `sp-timeline` | `@silverpoint/angular/timeline` |
+| Reflex | `sp_timeline` | `reflex_silverpoint_react` |
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `data` | `data` | `TimelineData` |  | TimelineJS's JSON: a `title` slide, the `events`, optional `eras` and `scale`. Required. |
+| `options` | `options` | `Readonly<Record<string, unknown>>` |  | TimelineJS options; `font` and `theme` are ignored, the skin sets both. |
+| `height` | `height` | `string` | `'600px'` | A plain CSS length. Default `'600px'`. |
+| `inkedFrames` | `inked_frames` | `boolean` | `true` | Lays the ground's frames and tones on TimelineJS's pieces (REQ-512). Default `true`. |
+| `card` | `card` | `boolean` | `true` | Frames the whole timeline as a card. Default `true`. |
+| `label` | `label` | `string` |  | The region's accessible name; the title's headline when omitted. |
+
+## Grounds
+
+| Ground | Substrates | Description |
+|---|---|---|
+| `silverpoint` | `cream`, `green`, `blue`, `ochre` | Metal point on prepared paper: hatched tone, a hand-inked line, cream and other prepared substrates. |
+| `cyanotype` | `prussian` | A contact print: a white, exact line on Prussian blue; tone is line weight, nothing is hatched. |
+
+## Palettes
+
+### Fields
+
+| Field | Default | Description |
+|---|---|---|
+| `substrate` |  | The prepared ground the drawing sits on. |
+| `ink` |  | The main series and the frames of UI components. |
+| `inkSecondary` |  | The second series and the hatch of tones. |
+| `heighten` |  | White heightening on the live value (always outlined with `ink`). |
+| `rule` |  | Rules and baselines. |
+| `grid` |  | Grid lines. |
+| `text` |  | Large figures and primary labels. |
+| `textMuted` |  | Axis labels and secondary text. |
+| `focus` | `ink` | Focus ring of UI components; `ink` by default. |
+
+### Presets
+
+| Preset | substrate | ink | inkSecondary | heighten | rule | grid | text | textMuted | focus |
+|---|---|---|---|---|---|---|---|---|---|
+| `silverpoint` | #EDE7DA | #5A5E65 | #685C4D | #FFFFFF | #737A82 | #737A82 | #3F4348 | #5A5E65 |  |
+| `sanguine` | #F2E8DC | #8A3A24 | #6A4A3A | #FFFFFF | #9A6450 | #9A6450 | #4A2216 | #7A3E2C |  |
+| `sepia` | #F0E6D2 | #6B4C2C | #5A5148 | #FFFFFF | #8A6E52 | #8A6E52 | #3B2A18 | #6B4C2C |  |
+| `ironGall` | #EEEAE0 | #3C4858 | #6A4E36 | #FFFFFF | #6C7584 | #6C7584 | #232B36 | #4A5566 |  |
+| `verdigris` | #E7EDE6 | #2C6355 | #65563F | #FFFFFF | #5C7B71 | #5C7B71 | #1F3D36 | #3E6A5E |  |
+| `indigo` | #E9EAF1 | #3A4884 | #675641 | #FFFFFF | #68709A | #68709A | #232C52 | #4A5590 |  |
+
+## Diagnostics
+
+| Code | Severity | Requirement | When | Remedy |
+|---|---|---|---|---|
+| `SP001` | warn | REQ-007 | the dataset is empty; the ground's empty state is drawn | Pass at least one row, or omit `data` to see the demo dataset |
+| `SP002` | warn | REQ-008 | a value cannot be drawn as given (null, not finite, or outside the data contract); it is corrected or omitted | Check the value against the chart's data contract (Data Model §2) |
+| `SP003` | warn | REQ-009 | the container measures 0 px; the render is deferred | Give the container a size, or pin `width` and `height` |
+| `SP004` | warn | REQ-010 | the scale domain has zero length; it is expanded with the ground's domainPadding | Nothing to do if the data is constant; otherwise check the accessor |
+| `SP005` | error | REQ-025 | more than one element is marked with white heightening; only the first is applied | Heighten a single element per chart |
+| `SP006` | warn | REQ-026 | the inker is not registered; falling back to NullInker | Register the inker or fix the ground's `inker` token |
+| `SP007` | warn | REQ-045 | the ground is not registered; falling back to silverpoint | Call registerGround() before rendering, or fix the name |
+| `SP008` | warn | REQ-096 | the data volume is above the family's threshold | Aggregate the data before charting it |
+| `SP009` | error | REQ-097 | a scale bound cannot be derived from the data and was not supplied | Pass the named property explicitly |
+| `SP010` | warn | REQ-091 | the chord ring has more than 12 categories | Group the smaller categories |
+| `SP011` | warn | NFR §7 | the path byte budget of 40 KB is exceeded | Use `hatchFill: 'tile'` or a larger hatch gap |
+| `SP012` | error | REQ-127 | the ground does not reach the minimum contrast | Recompute the palette; colours are not chosen by eye |
+| `SP013` | warn | REQ-032 | the @silverpoint/fonts face failed to load; rendering fell back to the system stack | Install @silverpoint/fonts and import its stylesheet; golden images will not match until then |
+| `SP014` | warn | REQ-204 | a dashboard cell spans more columns than the breakpoint has; it is clamped | Lower the span, or give that breakpoint more columns |
+| `SP015` | warn | REQ-205 | the dashboard layout and its children disagree; unmatched children are placed in source order, span 1 | Give every child a `cell` the layout declares, once |
+| `SP016` | warn | REQ-217 | a chart in a linked dashboard has no field named by `link.key`; it shows no linked mark | Link on a field every linked chart carries, or leave this chart out of the link |
+| `SP017` | warn | REQ-324 | a value or a range cannot be drawn as given; it is clamped, rounded to its step or defaulted | Keep the value within `min`..`max` and on `step`, with `min < max` and `step > 0` |
+| `SP018` | warn | REQ-319 | the component has no accessible name: no text content and no `label` | Give it visible text, or a `label` for an icon-only control |
+| `SP019` | warn | REQ-325 | items share a key, or have none; the first is kept and the later ones are skipped | Give every item a unique, non-empty `key` |
+| `SP020` | warn | REQ-437 | the hierarchy is invalid (a duplicate or empty `id`, a missing `parent`, a cycle, or several roots); the offending rows are dropped | Give every row a unique `id` and an existing `parent`, under a single root |
+| `SP021` | warn | REQ-433 | a statistic parameter is invalid; its default is used | Keep the parameter in its documented range |
+| `SP022` | warn | REQ-434 | a group has too few observations for its statistic; they are drawn as points | Give the group more observations, or expect it drawn as points |
+| `SP023` | warn | REQ-466 | a palette colour is below its contrast threshold against its substrate; it is drawn as given | Recompute the palette with checkPalette(); colours are not chosen by eye |
+| `SP024` | warn | REQ-467 | a palette field is unknown, or its value is not a CSS colour; the field is dropped | Use the fields of PALETTE_PROPERTIES with plain CSS colour values |
+| `SP025` | warn | REQ-515 | @knight-lab/timelinejs could not be loaded; the fallback is rendered | Install the optional peer @knight-lab/timelinejs and import its stylesheet |
+
+## Choosing a chart
+
+| Data shape | Intent | Charts, best first |
+|---|---|---|
+| `series` | trend | `line-chart`: A line is the plainest reading of a value over an ordered axis.; `area-chart`: An area gives one series the weight of its magnitude.; `step-chart`: Steps show a value that holds until it changes.; `stream-chart`: Several value columns overlay or stack as waves.; `polar-line-chart`: A cyclic axis (hours, months, degrees) closes the line around a circle. |
+| `series` | change | `line-chart`: The slope between points is the change.; `step-chart`: Steps mark when the value changed and by how much.; `area-chart`: An area shows the change in magnitude.; `bump-chart`: When the change that matters is in rank. |
+| `series` | compare | `line-chart`: A second series draws as a dotted baseline against the first.; `composed-chart`: Columns and a line share one value scale.; `stream-chart`: Several series overlaid on one axis.; `sparkline-rows`: One small line per series, side by side with its readout.; `polar-line-chart`: Values around a cycle compared by angle. |
+| `series` | rank | `bump-chart`: The rank of each series at each x, ranks joined across x. |
+| `series` | kpi | `sparkline-rows`: One row per series: its name, its trend and its latest readout.; `kpi-card`: One metric, its delta and its trend. |
+| `series` | part-to-whole | `stream-chart`: Stacked waves show each part of a total over x. |
+| `categories` | compare | `bar-chart`: Bars compare values against one common baseline.; `lollipop-chart`: A lighter mark per category, readable with many of them.; `radar-chart`: Spokes compare a few subjects at once.; `polar-bar-chart`: Bars around a circle, for a cyclic set of categories.; `coxcomb-chart`: Equal angles, area by value: cyclic categories such as months.; `radial-arc-group`: Concentric tracks, each swept by its value. |
+| `categories` | rank | `bar-chart`: Sorted bars read as a ranking.; `lollipop-chart`: Lollipops sort themselves with `sort`.; `pyramid-chart`: Stacked tiers, widest at the base.; `polar-bar-chart`: A ranking around a circle. |
+| `categories` | part-to-whole | `stacked-bar-chart`: Each bar stacks its parts, one segment per value column.; `waterfall-chart`: Parts that add up to a running total.; `coxcomb-chart`: Sectors whose area is each part. |
+| `categories` | change | `dumbbell-chart`: Two values per category joined by a segment: before and after.; `slope-chart`: Two period axes, one segment per category: the slope is the change.; `waterfall-chart`: Each step a delta from the running total. |
+| `categories` | progress | `bullet-chart`: Each bar against its own target.; `radial-rings`: Concentric rings, each swept to its percent.; `funnel-chart`: Stages that narrow, such as a conversion.; `radial-arc-group`: Tracks swept relative to the largest. |
+| `categories` | kpi | `bullet-chart`: Each measure against its target, compact.; `radial-rings`: A few percents at a glance. |
+| `parts` | part-to-whole | `donut-chart`: A ring reads a few shares of one whole around a central figure.; `waffle-chart`: Unit cells make the shares countable.; `treemap-chart`: Tiles sized by share.; `diverging-bar-chart`: For ordered levels (agree… disagree) around a neutral centre.; `stacked-bar-chart`: One bar stacked with the shares, to set beside other wholes. |
+| `parts` | compare | `diverging-bar-chart`: Likert-style levels on both sides of a neutral centre, row by row.; `waffle-chart`: Countable cells per part. |
+| `parts` | progress | `waffle-chart`: A hundred cells filled to the share done. |
+| `matrix` | compare | `heatmap-chart`: One toned cell per row and column.; `marimekko-chart`: Columns by total, segments by share.; `parallel-coordinates-chart`: One polyline per row across many dimensions. |
+| `matrix` | part-to-whole | `marimekko-chart`: Each column a whole, each segment its share, column width by total. |
+| `matrix` | correlation | `parallel-coordinates-chart`: Crossing lines between axes show how dimensions move together.; `heatmap-chart`: A grid of values, read for patterns. |
+| `matrix` | distribution | `heatmap-chart`: Where the high values gather in the grid. |
+| `hierarchy` | hierarchy | `tree-chart`: The structure itself, node by node.; `squarified-treemap`: Nested rectangles, drillable.; `sunburst-chart`: Rings of arcs, one ring per level, drillable. |
+| `hierarchy` | part-to-whole | `squarified-treemap`: Area by value, nested by level.; `sunburst-chart`: Each arc its share of its parent. |
+| `links` | flow | `sankey-chart`: Bands between layered stages, width by value.; `chord-ring`: Flows between categories around a circle, both ways.; `network-chart`: When the links matter more than their volume. |
+| `links` | network | `network-chart`: Nodes and links laid out by a seeded force.; `chord-ring`: Who connects to whom, around a circle. |
+| `links` | part-to-whole | `sankey-chart`: How a total splits and merges across stages. |
+| `points` | correlation | `scatter-chart`: Points on two linear scales.; `bubble-chart`: A third variable as each point’s area.; `density-bin-chart`: Counts per bin when points overlap.; `connected-scatter-chart`: When the points have an order.; `polar-scatter-chart`: When one variable is an angle. |
+| `points` | distribution | `density-bin-chart`: Points counted in hexagonal or square bins.; `contour-chart`: Iso-lines of the density.; `scatter-chart`: Every point, when there are few.; `polar-scatter-chart`: Points by angle and radius. |
+| `points` | change | `connected-scatter-chart`: An ordered path through x-y points: how two values moved together. |
+| `points` | network | `delaunay-chart`: Neighbours by triangulation, or each point’s Voronoi cell. |
+| `points` | compare | `bubble-chart`: Positions and sizes compared at once. |
+| `distribution` | distribution | `histogram-chart`: Observations binned in the core.; `box-plot-chart`: Quartiles, median, whiskers and outliers.; `violin-chart`: The density’s shape, mirrored.; `beeswarm-chart`: Every observation, packed without overlap.; `ecdf-chart`: The cumulative share below each value.; `wind-rose`: When the observations carry a bearing. |
+| `distribution` | compare | `box-plot-chart`: Quartiles side by side, one box per group.; `violin-chart`: Density shapes side by side.; `ridgeline-chart`: Densities on overlapping baselines, one per group.; `ecdf-chart`: Cumulative curves of each group on one axis. |
+| `distribution` | change | `ridgeline-chart`: A density per period, stacked in order. |
+| `intervals` | uncertainty | `error-bar-chart`: A point estimate with its interval per category.; `range-band-chart`: A band between low and high over x. |
+| `intervals` | trend | `range-band-chart`: The band between low and high over time.; `candlestick-chart`: Open, high, low and close per period. |
+| `intervals` | change | `candlestick-chart`: Each period’s open-to-close change and its range. |
+| `intervals` | schedule | `interval-chart`: Floating bars from start to end on lanes. |
+| `events` | schedule | `activity-grid`: One cell per day, a column per week. |
+| `events` | trend | `activity-grid`: Activity per day over weeks. |
+| `single` | kpi | `kpi-card`: The figure, its delta and its trend.; `gauge-arc`: A percent on a 240° arc.; `meter-chart`: A percent with a needle. |
+| `single` | progress | `gauge-arc`: An arc swept to the percent done.; `meter-chart`: A needle at the percent done. |
+| `field` | flow | `vector-field-chart`: An arrow per grid point, its direction and magnitude. |
+| `field` | distribution | `contour-chart`: Iso-lines and bands of a scalar grid (`source: 'grid'`). |

@@ -1,1 +1,0 @@
-import{G as e,J as t}from"./components-B1lk-uNG.js";import{a as n,i as r,n as i,w as a}from"./ui-B0tXyone.js";var o=(0,t(e(),1).forwardRef)(function({checked:e,defaultChecked:t,onChange:o,dashboardCell:s,...c},l){let[u,d]=n(e,t??!1,o),f=a(c,r(c,s),{checked:u});return i(f,{native:{ref:l,checked:u,onChange:e=>d(e.target.checked)}})});export{o as t};

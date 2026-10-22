@@ -1,0 +1,156 @@
+# silverpoint
+
+> silverpoint 0.8.0 draws 60 charts and 38 UI components as metal point on prepared paper, for React, Vue, Angular and Reflex (Python, through reflex-silverpoint-react), from one framework-free engine, on the silverpoint and cyanotype grounds with 6 palette presets; accessible and server-renderable.
+
+Everything below describes that version. Agents write silverpoint best through its MCP server, which answers from the same catalog and checks and renders what they write.
+
+## For agents
+
+- [Full reference](https://silverpointweb.vercel.app/llms-full.txt): every chart and component with its props per framework (React, Vue, Angular, Reflex), the grounds, the palettes and the diagnostics, as Markdown
+- [MCP server](https://silverpointweb.vercel.app/mcp): Streamable HTTP, read-only, no account; or locally `npx -y @silverpoint/mcp@0.8.0`
+- [Use with AI](https://silverpointweb.vercel.app/docs/ai): client configurations, the Claude Code plugins and the tools
+- [Agent catalog](https://silverpointweb.vercel.app/agent-catalog.json): the same facts as JSON
+
+## Getting started
+
+- [Overview](https://silverpointweb.vercel.app/docs)
+- [Installation](https://silverpointweb.vercel.app/docs/installation)
+- [React](https://silverpointweb.vercel.app/docs/react)
+- [Vue](https://silverpointweb.vercel.app/docs/vue)
+- [Angular](https://silverpointweb.vercel.app/docs/angular)
+- [Reflex (Python)](https://silverpointweb.vercel.app/docs/reflex)
+
+## Concepts
+
+- [Grounds & substrates](https://silverpointweb.vercel.app/docs/grounds)
+- [Ink & precision](https://silverpointweb.vercel.app/docs/precision)
+- [Common props](https://silverpointweb.vercel.app/docs/props)
+- [Interaction & readouts](https://silverpointweb.vercel.app/docs/interaction)
+- [Export & imperative handle](https://silverpointweb.vercel.app/docs/export)
+- [Dashboards](https://silverpointweb.vercel.app/docs/dashboard)
+- [Drill-down & hierarchies](https://silverpointweb.vercel.app/docs/drill-down)
+- [UI components](https://silverpointweb.vercel.app/docs/ui)
+- [Server rendering](https://silverpointweb.vercel.app/docs/ssr)
+- [Accessibility](https://silverpointweb.vercel.app/docs/accessibility)
+- [Tailwind preset](https://silverpointweb.vercel.app/docs/tailwind)
+
+## New in 0.8
+
+- [Use with AI](https://silverpointweb.vercel.app/docs/ai)
+
+## New in 0.7
+
+- [Palettes](https://silverpointweb.vercel.app/docs/palettes)
+- [Composed components](https://silverpointweb.vercel.app/docs/composed)
+- [Timeline](https://silverpointweb.vercel.app/docs/timeline)
+
+## Project
+
+- [Packages on npm & PyPI](https://silverpointweb.vercel.app/packages)
+- [Versions & changelog](https://silverpointweb.vercel.app/versions)
+- [Report a bug](https://silverpointweb.vercel.app/support)
+- [Author & license](https://silverpointweb.vercel.app/about)
+
+## Charts
+
+- [LineChart](https://silverpointweb.vercel.app/charts/line-chart): Lines. Spline with an optional dotted baseline series.
+- [BulletChart](https://silverpointweb.vercel.app/charts/bullet-chart): Bars. One bar per target, with a marker at the target. Values in 0-100.
+- [PyramidChart](https://silverpointweb.vercel.app/charts/pyramid-chart): Bars. Stacked tiers whose width encodes the value (0-100).
+- [HeatmapChart](https://silverpointweb.vercel.app/charts/heatmap-chart): Points & grids. Labelled rows of values, normalised against `scaleMax`.
+- [TreemapChart](https://silverpointweb.vercel.app/charts/treemap-chart): Points & grids. Tiles of `cols × rows` cells placed in a `columns × rows` grid.
+- [SankeyChart](https://silverpointweb.vercel.app/charts/sankey-chart): Flows. Flow bands between layered nodes.
+- [ActivityGrid](https://silverpointweb.vercel.app/charts/activity-grid): Points & grids. One cell per day, a column per week.
+- [StepChart](https://silverpointweb.vercel.app/charts/step-chart): Lines. A series drawn as steps.
+- [SparklineRows](https://silverpointweb.vercel.app/charts/sparkline-rows): Lines. One row per series — name, sparkline, readout.
+- [KpiCard](https://silverpointweb.vercel.app/charts/kpi-card): Lines. A metric, its delta, and an area sparkline of the series.
+- [BarChart](https://silverpointweb.vercel.app/charts/bar-chart): Bars. Pill bars, as columns or rows, with an optional second series.
+- [StackedBarChart](https://silverpointweb.vercel.app/charts/stacked-bar-chart): Bars. One stacked segment per key.
+- [ComposedChart](https://silverpointweb.vercel.app/charts/composed-chart): Bars. Columns and a spline on one value scale.
+- [WaterfallChart](https://silverpointweb.vercel.app/charts/waterfall-chart): Bars. Totals from zero and floating deltas from the running total.
+- [FunnelChart](https://silverpointweb.vercel.app/charts/funnel-chart): Bars. Horizontal, centred stages.
+- [CandlestickChart](https://silverpointweb.vercel.app/charts/candlestick-chart): Bars. OHLC bodies and wicks.
+- [AreaChart](https://silverpointweb.vercel.app/charts/area-chart): Areas. A curved, toned area under its line.
+- [RangeBandChart](https://silverpointweb.vercel.app/charts/range-band-chart): Areas. The band between a low and a high series.
+- [StreamChart](https://silverpointweb.vercel.app/charts/stream-chart): Areas. Two waves, overlaid or stacked.
+- [ScatterChart](https://silverpointweb.vercel.app/charts/scatter-chart): Points & grids. Points on two linear scales, optionally sized.
+- [BubbleChart](https://silverpointweb.vercel.app/charts/bubble-chart): Points & grids. Circles whose area encodes `sizeKey`.
+- [DonutChart](https://silverpointweb.vercel.app/charts/donut-chart): Radial. Sectors ∝ value around a central readout.
+- [RadarChart](https://silverpointweb.vercel.app/charts/radar-chart): Radial. One spoke per subject, a closed polygon of values.
+- [PolarBarChart](https://silverpointweb.vercel.app/charts/polar-bar-chart): Radial. 360° bars out from a hole, length ∝ value.
+- [RadialArcGroup](https://silverpointweb.vercel.app/charts/radial-arc-group): Radial. Concentric 180° tracks, sweep ∝ value / the largest.
+- [RadialRings](https://silverpointweb.vercel.app/charts/radial-rings): Radial. Concentric progress rings, sweep ∝ value in 0-100.
+- [GaugeArc](https://silverpointweb.vercel.app/charts/gauge-arc): Radial. A 240° arc swept to a percent.
+- [MeterChart](https://silverpointweb.vercel.app/charts/meter-chart): Radial. A semicircular meter with a needle at a percent.
+- [CoxcombChart](https://silverpointweb.vercel.app/charts/coxcomb-chart): Radial. Equal angles, sector area ∝ value.
+- [WindRose](https://silverpointweb.vercel.app/charts/wind-rose): Radial. Observations of (bearing, speed) binned by compass sector and speed.
+- [VolvelleChart](https://silverpointweb.vercel.app/charts/volvelle-chart): Radial. Concentric categorical rings read against one index.
+- [ChordRing](https://silverpointweb.vercel.app/charts/chord-ring): Flows. Directed flows between categories around a circle.
+- [OrbitChart](https://silverpointweb.vercel.app/charts/orbit-chart): Radial. Nested elliptical orbits with markers along them.
+- [HistogramChart](https://silverpointweb.vercel.app/charts/histogram-chart): Distributions & comparisons. Raw observations binned in the core.
+- [EcdfChart](https://silverpointweb.vercel.app/charts/ecdf-chart): Distributions & comparisons. The empirical cumulative distribution as a step function.
+- [BoxPlotChart](https://silverpointweb.vercel.app/charts/box-plot-chart): Distributions & comparisons. Quartiles, median, Tukey whiskers and outliers per group.
+- [ViolinChart](https://silverpointweb.vercel.app/charts/violin-chart): Distributions & comparisons. A mirrored kernel density per group.
+- [RidgelineChart](https://silverpointweb.vercel.app/charts/ridgeline-chart): Distributions & comparisons. A kernel density per group on overlapping baselines.
+- [BeeswarmChart](https://silverpointweb.vercel.app/charts/beeswarm-chart): Distributions & comparisons. One point per observation, packed without overlap.
+- [LollipopChart](https://silverpointweb.vercel.app/charts/lollipop-chart): Distributions & comparisons. A stem from the baseline and a head at the value.
+- [DumbbellChart](https://silverpointweb.vercel.app/charts/dumbbell-chart): Distributions & comparisons. Two values per category joined by a segment.
+- [SlopeChart](https://silverpointweb.vercel.app/charts/slope-chart): Distributions & comparisons. Two period axes, one segment per category.
+- [BumpChart](https://silverpointweb.vercel.app/charts/bump-chart): Distributions & comparisons. The rank of each series at each x.
+- [ErrorBarChart](https://silverpointweb.vercel.app/charts/error-bar-chart): Distributions & comparisons. A point estimate with its interval per category.
+- [IntervalChart](https://silverpointweb.vercel.app/charts/interval-chart): Distributions & comparisons. Floating bars from start to end on lanes.
+- [DivergingBarChart](https://silverpointweb.vercel.app/charts/diverging-bar-chart): Distributions & comparisons. Ordered levels stacked on both sides of a neutral centre.
+- [ConnectedScatterChart](https://silverpointweb.vercel.app/charts/connected-scatter-chart): Distributions & comparisons. An ordered path through x-y points.
+- [WaffleChart](https://silverpointweb.vercel.app/charts/waffle-chart): Hierarchies & dimensions. A unit grid filled in reading order by category.
+- [MarimekkoChart](https://silverpointweb.vercel.app/charts/marimekko-chart): Hierarchies & dimensions. Column width by total, segment height by share.
+- [SquarifiedTreemap](https://silverpointweb.vercel.app/charts/squarified-treemap): Hierarchies & dimensions. Nested rectangles, area by value, drillable through `rootId` and `onRootChange`.
+- [SunburstChart](https://silverpointweb.vercel.app/charts/sunburst-chart): Hierarchies & dimensions. A hierarchy as rings of arcs, drillable through `rootId` and `onRootChange`.
+- [TreeChart](https://silverpointweb.vercel.app/charts/tree-chart): Hierarchies & dimensions. A tidy node-link tree.
+- [ParallelCoordinatesChart](https://silverpointweb.vercel.app/charts/parallel-coordinates-chart): Hierarchies & dimensions. One polyline per row across parallel axes.
+- [PolarLineChart](https://silverpointweb.vercel.app/charts/polar-line-chart): Hierarchies & dimensions. A line over angle and radius.
+- [PolarScatterChart](https://silverpointweb.vercel.app/charts/polar-scatter-chart): Hierarchies & dimensions. Points over angle and radius.
+- [DensityBinChart](https://silverpointweb.vercel.app/charts/density-bin-chart): Fields & networks. X-y points counted in two-dimensional bins.
+- [ContourChart](https://silverpointweb.vercel.app/charts/contour-chart): Fields & networks. Iso-lines and filled bands of a density or a grid.
+- [DelaunayChart](https://silverpointweb.vercel.app/charts/delaunay-chart): Fields & networks. The triangulation of x-y points, or its Voronoi cells.
+- [VectorFieldChart](https://silverpointweb.vercel.app/charts/vector-field-chart): Fields & networks. An arrow per grid point.
+- [NetworkChart](https://silverpointweb.vercel.app/charts/network-chart): Fields & networks. A node-link graph.
+
+## UI components
+
+- [SpButton](https://silverpointweb.vercel.app/components/button): A button or a link styled as one; `primary` and `danger` variants.
+- [SpInput](https://silverpointweb.vercel.app/components/input): A labelled text field with an optional message and an invalid state.
+- [SpCheckbox](https://silverpointweb.vercel.app/components/checkbox): A labelled checkbox, with an indeterminate state.
+- [SpRadioGroup](https://silverpointweb.vercel.app/components/radio-group): One choice among a few, as a fieldset of radios.
+- [SpSwitch](https://silverpointweb.vercel.app/components/switch): An on/off toggle with the switch role.
+- [SpSlider](https://silverpointweb.vercel.app/components/slider): A value on a range, with optional marks.
+- [SpRate](https://silverpointweb.vercel.app/components/rate): A rating from 1 to `count`, optionally read-only.
+- [SpSegmented](https://silverpointweb.vercel.app/components/segmented): One choice among a few, as joined segments.
+- [SpTabs](https://silverpointweb.vercel.app/components/tabs): Tabs and their panels (`SpTabPanel`), with automatic or manual activation.
+- [SpSteps](https://silverpointweb.vercel.app/components/steps): The steps of a process, with the current one and an error state.
+- [SpCard](https://silverpointweb.vercel.app/components/card): A framed card with a title, an extra slot and a footer.
+- [SpTag](https://silverpointweb.vercel.app/components/tag): A short toned label, optionally closable.
+- [SpBadge](https://silverpointweb.vercel.app/components/badge): A count or a dot over its content.
+- [SpDivider](https://silverpointweb.vercel.app/components/divider): A rule between sections, optionally with text.
+- [SpProgress](https://silverpointweb.vercel.app/components/progress): Progress as a line or a circle, or indeterminate.
+- [SpAlert](https://silverpointweb.vercel.app/components/alert): An info, success, warning or error message, optionally closable.
+- [SpSkeleton](https://silverpointweb.vercel.app/components/skeleton): A placeholder for content that is loading.
+- [SpSurface](https://silverpointweb.vercel.app/components/surface): A framed, toned surface to build your own components on.
+- [SpGlyph](https://silverpointweb.vercel.app/components/glyph): One of the exact glyphs the components draw (tick, cross, arrows, chevrons…).
+- [SpTable](https://silverpointweb.vercel.app/components/table): A data table with sortable columns, stripes and an empty state.
+- [SpPagination](https://silverpointweb.vercel.app/components/pagination): Page navigation with a current page, siblings and an optional total.
+- [SpBreadcrumb](https://silverpointweb.vercel.app/components/breadcrumb): The trail of pages to the current one.
+- [SpAvatar](https://silverpointweb.vercel.app/components/avatar): A picture or initials in a round or square frame; `SpAvatarGroup` stacks several.
+- [SpStatistic](https://silverpointweb.vercel.app/components/statistic): A titled figure with a prefix, a suffix and an optional trend.
+- [SpDescriptions](https://silverpointweb.vercel.app/components/descriptions): Label and value pairs as a description list.
+- [SpTimelineList](https://silverpointweb.vercel.app/components/timeline-list): Events in order, each done, current, pending or in error.
+- [SpCollapse](https://silverpointweb.vercel.app/components/collapse): Disclosure panels (`SpCollapseItem`), optionally as an accordion.
+- [SpEmpty](https://silverpointweb.vercel.app/components/empty): The empty state of a list or a table.
+- [SpResult](https://silverpointweb.vercel.app/components/result): The outcome of an action: success, error, information or warning.
+- [SpTextarea](https://silverpointweb.vercel.app/components/textarea): A multi-line text field with a counter and an invalid state.
+- [SpInputNumber](https://silverpointweb.vercel.app/components/input-number): A number field with steppers, bounds and precision.
+- [SpModal](https://silverpointweb.vercel.app/components/modal): A modal dialog on the native `<dialog>`, opened by its trigger.
+- [SpDrawer](https://silverpointweb.vercel.app/components/drawer): A dialog sliding in from one side of the viewport.
+- [SpPopover](https://silverpointweb.vercel.app/components/popover): Non-modal content anchored to its trigger, on the Popover API.
+- [SpTooltip](https://silverpointweb.vercel.app/components/tooltip): A short text shown on hover or focus of its trigger.
+- [SpSelect](https://silverpointweb.vercel.app/components/select): A select-only combobox: one option from a list.
+- [SpDropdownMenu](https://silverpointweb.vercel.app/components/dropdown-menu): A menu of actions opened from its trigger.
+- [SpToast](https://silverpointweb.vercel.app/components/toast): A transient message in a `SpToaster`, with an optional action.

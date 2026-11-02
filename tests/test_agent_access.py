@@ -81,7 +81,7 @@ def test_req_558_mcp_is_rewritten_to_the_mcp_project_before_the_catch_all():
 
 def test_req_558_catch_all_leaves_the_agent_paths_alone():
     catch_all = vercel_rewrites()[-1]["source"]
-    assert catch_all == r"/((?!mcp|agent-catalog\.json|llms).*)"
+    assert catch_all == r"/((?!_vercel|mcp|agent-catalog\.json|llms).*)"
     pattern = re.compile(catch_all + "$")
     for path in AGENT_PATHS:
         assert not pattern.match(path), path

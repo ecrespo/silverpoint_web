@@ -7,6 +7,7 @@ state.
 """
 
 import reflex as rx
+import reflex_vercel_analytics as rva
 
 from .pages import ai_docs, charts, components, deck_docs, docs, gallery, home, project, reflex_docs, ui_docs
 
@@ -26,6 +27,8 @@ app = rx.App(
     ],
     html_lang="en",
 )
+# Vercel Web Analytics: page views on every route, configured by vercel_analytics.toml.
+rva.install(app)
 
 home.register(app)
 gallery.register(app)

@@ -560,6 +560,18 @@ wheels = [
 ]
 
 [[package]]
+name = "reflex-vercel-analytics"
+version = "0.1.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "reflex" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/03/5f/d4b25f7763334b9c914b98a4e9d14074f26a93a3fd389ed4b9e56dd487f5/reflex_vercel_analytics-0.1.0.tar.gz", hash = "sha256:83b831fcb891f8912d78d783af73f49c6ea3e8f7df41f8f5c36a70b30b444130", size = 32910, upload-time = "2026-11-02T22:52:00.618Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/9a/1d/9b03504352a8f930d1e7106b2ec9d1637e25e5dafabcf293c79935abd365/reflex_vercel_analytics-0.1.0-py3-none-any.whl", hash = "sha256:05a77ace9a2792b0434df40b8d78c65a77d6106005af5a498365a67db27efa0a", size = 28105, upload-time = "2026-11-02T22:51:59.169Z" },
+]
+
+[[package]]
 name = "rich"
 version = "15.0.0"
 source = { registry = "https://pypi.org/simple" }
@@ -604,6 +616,7 @@ source = { virtual = "." }
 dependencies = [
     { name = "reflex" },
     { name = "reflex-silverpoint-react" },
+    { name = "reflex-vercel-analytics" },
 ]
 
 [package.dev-dependencies]
@@ -616,6 +629,7 @@ dev = [
 requires-dist = [
     { name = "reflex", specifier = ">=0.10.1" },
     { name = "reflex-silverpoint-react", extras = ["timeline"], specifier = ">=0.9.1" },
+    { name = "reflex-vercel-analytics", specifier = ">=0.1.0" },
 ]
 
 [package.metadata.requires-dev]

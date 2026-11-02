@@ -1,0 +1,12 @@
+# Vercel Web Analytics (reflex-vercel-analytics), mounted by rva.install(app) in silverpoint_web.py.
+# Enable it once in the Vercel dashboard: Project > Analytics > Enable. Vercel serves the script and
+# the collection endpoints under /_vercel/insights on the deployment itself, so no URL or DSN is needed.
+enabled = true
+# "auto": Vercel's debug script under `reflex run` (console only, nothing sent), the production
+# script in `reflex export` (build_local.sh, CI).
+mode = "auto"
+# One page view per React Router navigation, reported with its route template
+# (/components/[slug] rather than /components/sp-tabs).
+track_page_views = true
+# The site has no sensitive query strings; keep them so ?tab=… stays visible in the dashboard.
+include_search = true

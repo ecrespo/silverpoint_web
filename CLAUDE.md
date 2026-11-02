@@ -33,6 +33,10 @@ Documentation site of silverpoint (Reflex, frontend-only, deployed statically on
   silverpoint release with no new reflex-silverpoint-react (0.9.2) gets `Release.reflex=""`.
 - The site's controls are silverpoint UI components (`sp_tabs`, `sp_alert`, `sp_segmented`…) bound to
   `ClientStateVar` (`on_change=VAR.set_value`). Put them on a ground panel (`ui_examples.panel`) for cyanotype.
+- Vercel Web Analytics: `reflex-vercel-analytics`, `rva.install(app)` in `silverpoint_web.py`, settings in
+  `vercel_analytics.toml` (`mode = "auto"`: debug script under `reflex run`, production in the export). The
+  catch-all rewrite skips `/_vercel` so the script and `/_vercel/insights/*` are not served `index.html`.
+  Enable it in the Vercel dashboard (Project > Analytics). Tests: `tests/test_vercel_analytics.py`.
 - Local build without touching `public/`: `uv run reflex export --frontend-only --zip-dest-dir <dir>`.
 - Check: `uv run ruff check . && uv run ruff format --check . && uv run pytest -q && bash build_local.sh`.
 - `public/` is generated (by CI on `main`); do not hand-edit it.

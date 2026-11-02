@@ -1,5 +1,5 @@
 {
-  "version": "0.8.0",
+  "version": "0.9.2",
   "endpoint": "https://silverpointweb.vercel.app/mcp",
   "calls": [
     {
@@ -9,7 +9,7 @@
         "intent": "trend"
       },
       "result": {
-        "version": "0.8.0",
+        "version": "0.9.2",
         "recommendations": [
           {
             "slug": "line-chart",
@@ -62,7 +62,7 @@
         }
       },
       "result": {
-        "version": "0.8.0",
+        "version": "0.9.2",
         "imports": [
           "@silverpoint/react/line-chart"
         ],
@@ -89,7 +89,7 @@
         }
       },
       "result": {
-        "version": "0.8.0",
+        "version": "0.9.2",
         "imports": [
           "@silverpoint/vue/line-chart"
         ],
@@ -116,7 +116,7 @@
         }
       },
       "result": {
-        "version": "0.8.0",
+        "version": "0.9.2",
         "imports": [
           "@angular/core",
           "@silverpoint/angular/line-chart"
@@ -145,7 +145,7 @@
         }
       },
       "result": {
-        "version": "0.8.0",
+        "version": "0.9.2",
         "imports": [
           "reflex",
           "reflex_silverpoint_react"

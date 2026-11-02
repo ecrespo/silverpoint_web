@@ -224,7 +224,7 @@ def ai_page() -> Callable[[], rx.Component]:
                         [
                             rx.el.a(c("/llms-full.txt"), href="/llms-full.txt"),
                             "The whole catalog as Markdown: every chart and component with its props per framework, "
-                            "the grounds, the palettes and the diagnostics.",
+                            "the slide deck, the grounds, the palettes and the diagnostics.",
                         ],
                         [
                             rx.el.a(c("/agent-catalog.json"), href="/agent-catalog.json"),
@@ -234,8 +234,9 @@ def ai_page() -> Callable[[], rx.Component]:
                 ),
                 callout(
                     f"The catalog's Reflex names come from reflex-silverpoint-react {CATALOG['reflex']['version']}, "
-                    f"which wraps silverpoint {CATALOG['reflex']['wraps']}; the builders and their props did not change "
-                    f"in reflex-silverpoint-react {sd.REFLEX_LATEST.version}.",
+                    f"which wraps silverpoint {CATALOG['reflex']['wraps']}. Those builders and their props are unchanged in "
+                    f"reflex-silverpoint-react {sd.REFLEX_LATEST.version}; what it adds since is not in the "
+                    "catalog yet.",
                     kind="note",
                 )
                 if CATALOG["reflex"].get("stale")

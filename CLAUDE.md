@@ -14,8 +14,12 @@ Documentation site of silverpoint (Reflex, frontend-only, deployed statically on
 - silverpoint 0.7's palettes, composed components and timeline: Reflex demos in `reflex_only.py`, their
   React/Vue/Angular code, events and props (`ui_props_0_7.json`, from the npm 0.7.0 types) in `composed_code.py`,
   pages in `pages/reflex_docs.py` and `/components/<slug>` (`pages/components.py`, `composed_page`). Since reflex-silverpoint-react 0.7.1
-  they are the npm components behind Python builders (0.8.0 wraps @silverpoint/react 0.8.0); its own releases go
+  they are the npm components behind Python builders (0.9.1 wraps @silverpoint/react 0.9.1); its own releases go
   in `site_data.REFLEX_VERSIONS`.
+- silverpoint 0.9 (feature-006, slide decks): `SpDeck` / `sp_deck` on `@silverpoint/marp`. The page is `/docs/decks`
+  (`pages/deck_docs.py`), its decks, code and tables in `deck_examples.py`; a deck also on the home page. Keep
+  `hash` off on the site's decks (the docs' anchors would be read as slides); `tests/test_decks.py` checks every
+  fence against the catalog (the showcase's `pie-chart` fence is a deliberate SP026).
 - silverpoint 0.8 (feature-005, agent access): this site's half, T-243 and T-244, is implemented on
   `feat/agent-access`. `vercel.json` rewrites `/mcp` to `https://silverpoint-mcp.vercel.app/mcp` before the
   catch-all, which skips `/mcp`, `/agent-catalog.json` and `/llms*` (REQ-558). `agent/` holds the catalog
@@ -24,8 +28,9 @@ Documentation site of silverpoint (Reflex, frontend-only, deployed statically on
   and commit. `build_local.sh` then writes `/agent-catalog.json`, `/llms.txt` and `/llms-full.txt` into
   `public/` from that catalog only (REQ-537, REQ-564); `/docs/ai` is "Use with AI" (`pages/ai_docs.py`,
   REQ-565, tools read from the server's definitions, REQ-569). Tests: `uv run pytest` (`tests/`, REQ in each
-  name). The catalog `@silverpoint/mcp@0.8.0` ships marks its Reflex names stale (reflex-silverpoint-react
-  0.7.1, wrapping 0.7.0) until silverpoint takes the wrapper's own export.
+  name). Since `@silverpoint/mcp@0.9.2` the catalog's Reflex names are reflex-silverpoint-react's own export
+  (0.9.1, `sp_deck` included, not stale); `tests/test_decks.py` checks they match the installed wrapper. A
+  silverpoint release with no new reflex-silverpoint-react (0.9.2) gets `Release.reflex=""`.
 - The site's controls are silverpoint UI components (`sp_tabs`, `sp_alert`, `sp_segmented`…) bound to
   `ClientStateVar` (`on_change=VAR.set_value`). Put them on a ground panel (`ui_examples.panel`) for cyanotype.
 - Local build without touching `public/`: `uv run reflex export --frontend-only --zip-dest-dir <dir>`.

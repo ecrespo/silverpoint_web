@@ -15,6 +15,7 @@ from reflex_silverpoint_react import (
     sp_alert,
     sp_button,
     sp_card,
+    sp_deck,
     sp_progress,
     sp_segmented,
     sp_steps,
@@ -27,6 +28,7 @@ from reflex_silverpoint_react import (
 
 from .. import composed_code as cc
 from .. import datasets as ds
+from .. import deck_examples as dx
 from .. import reflex_only as ro
 from .. import site_data as sd
 from .. import ui_examples as ux
@@ -249,6 +251,26 @@ def index() -> rx.Component:
             class_name="spw-home-section",
         ),
         rx.el.section(
+            sp_tag("new in 0.9", tone=4, id="home-deck-new"),
+            rx.el.h2("Slide decks, from Markdown"),
+            rx.el.p(
+                "SpDeck draws a Marp presentation in silverpoint: the theme on the library's grounds and substrates, "
+                "one directive to move a slide to cyanotype or to precision, fragments and presenter notes, and a "
+                "silverpoint fence that becomes a live chart inside a slide. Server-rendered, in React, Vue, Angular "
+                "and Python. Click into the deck and use the arrows.",
+                class_name="spw-lede",
+            ),
+            rx.el.div(
+                sp_deck(dx.HOME_DECK, default_page=1, label="silverpoint slide decks", id="home-deck"),
+                class_name="spw-deck-wrap spw-home-deck",
+            ),
+            rx.el.div(
+                sp_button("Slide decks", href="/docs/decks", size="sm", id="home-decks"),
+                class_name="spw-row",
+            ),
+            class_name="spw-home-section",
+        ),
+        rx.el.section(
             sp_tag("new in 0.7", tone=4, id="home-composed-new"),
             rx.el.h2("Palettes, overlays and a timeline"),
             rx.el.p(
@@ -383,7 +405,7 @@ def index() -> rx.Component:
                         f"charts, the Dashboard, the {len(UI_COMPONENTS)} UI components, the provider, events, custom "
                         "readouts and SVG export, as Python, and the palettes, "
                         f"{len(cc.REFERENCE)} composed components and overlays and the Knight Lab timeline of silverpoint "
-                        f"0.7. Version {sd.REFLEX_LATEST.version} wraps @silverpoint/react {sd.REFLEX_LATEST.wraps}. This "
+                        f"0.7, and the slide decks of 0.9. Version {sd.REFLEX_LATEST.version} wraps @silverpoint/react {sd.REFLEX_LATEST.wraps}. This "
                         "site is built with it.",
                     ),
                     rx.el.div(

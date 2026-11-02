@@ -51,6 +51,10 @@ DOCS_NAV: tuple[tuple[str, tuple[tuple[str, str], ...]], ...] = (
         ),
     ),
     (
+        "New in 0.9",
+        (("/docs/decks", "Slide decks"),),
+    ),
+    (
         "New in 0.8",
         (("/docs/ai", "Use with AI"),),
     ),

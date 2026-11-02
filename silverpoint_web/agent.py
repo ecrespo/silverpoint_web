@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Any
 
 #: The silverpoint version whose catalog the site publishes: the one it documents (site_data.LATEST).
-CATALOG_VERSION = "0.8.0"
+CATALOG_VERSION = "0.9.2"
 
 SITE_URL = "https://silverpointweb.vercel.app"
 #: The hosted MCP server, behind the site's own /mcp (vercel.json rewrites it to the MCP project).
@@ -197,6 +197,83 @@ def llms_txt(catalog: dict[str, Any], docs_nav: tuple[tuple[str, tuple[tuple[str
     return "\n".join(lines)
 
 
+def _deck(catalog: dict[str, Any]) -> list[str]:
+    """The slide deck (silverpoint 0.9): SpDeck's names, props, events, directives and fence."""
+    deck = catalog["deck"]
+    fence = deck["fence"]["schema"]
+    return [
+        "## Slide decks",
+        "",
+        f"`SpDeck` renders Marp/Marpit Markdown in the silverpoint style. Optional peer: `{deck['peer']}`. "
+        "Stylesheets, in order: " + ", ".join(_code(sheet) for sheet in deck["stylesheets"]) + ".",
+        "",
+        *_table(
+            ["Framework", "Name", "Import"],
+            [
+                [
+                    FRAMEWORK_LABELS.get(fw, fw),
+                    _code(deck["names"].get(fw, "")) or "—",
+                    _code(deck["imports"].get(fw, "")) or "—",
+                ]
+                for fw in catalog["frameworks"]
+            ],
+        ),
+        *_props(deck["props"]),
+        "### Deck events",
+        "",
+        *_table(
+            ["Event", "Payload", "Bindings", "Description"],
+            [
+                [
+                    _code(event["name"]),
+                    _code(event["payload"]),
+                    "; ".join(
+                        f"{FRAMEWORK_LABELS.get(fw, fw)} {_code(binding)}"
+                        for fw, binding in event["bindings"].items()
+                    ),
+                    _cell(event["doc"]),
+                ]
+                for event in deck["events"]
+            ],
+        ),
+        "### Deck directives",
+        "",
+        *_table(
+            ["Directive", "Values", "Default"],
+            [
+                [
+                    _code(d["name"]),
+                    ", ".join(_code(v) for v in d["values"])
+                    if isinstance(d["values"], list)
+                    else d["values"],
+                    _code(d["default"]),
+                ]
+                for d in deck["directives"]
+            ],
+        ),
+        "Theme classes: " + ", ".join(_code(name) for name in deck["classes"]) + ".",
+        "",
+        "### The silverpoint fence",
+        "",
+        "A ```` ```silverpoint ```` block holds one chart as JSON, the input of the MCP `render_chart` tool; "
+        "an invalid fence draws an error figure in its place and warns `SP026`.",
+        "",
+        *_table(
+            ["Field", "Type", "Description"],
+            [
+                [
+                    _code(name) + (" (required)" if name in fence.get("required", []) else ""),
+                    _code(str(spec.get("type", "enum" if "enum" in spec else ""))),
+                    _cell(spec.get("description", "")),
+                ]
+                for name, spec in fence["properties"].items()
+            ],
+        ),
+        "Deck diagnostics: " + ", ".join(_code(code) for code in deck["diagnostics"]) + ".",
+        "",
+    ]
+
+
 def llms_full_txt(catalog: dict[str, Any]) -> str:
     """The whole catalog as Markdown."""
     reflex = catalog["reflex"]
@@ -293,6 +370,7 @@ def llms_full_txt(catalog: dict[str, Any]) -> str:
         "",
         *_names(catalog, timeline),
         *_props(timeline["props"]),
+        *(_deck(catalog) if "deck" in catalog else []),
         "## Grounds",
         "",
         *_table(

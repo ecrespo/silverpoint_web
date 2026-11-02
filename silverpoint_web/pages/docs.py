@@ -37,6 +37,7 @@ from reflex_silverpoint_react import (
 
 from .. import composed_code as cc
 from .. import datasets as ds
+from .. import deck_examples as dx
 from .. import reflex_only as ro
 from .. import site_data as sd
 from .. import ui_examples as ux
@@ -778,6 +779,21 @@ def overview() -> Callable[[], rx.Component]:
                                 ),
                             ],
                             [
+                                "Slide decks",
+                                rx.el.span(
+                                    "New in 0.9: ",
+                                    rx.el.a("Marp Markdown decks", href="/docs/decks"),
+                                    " with live charts in the slides",
+                                ),
+                            ],
+                            [
+                                "Agents",
+                                rx.el.span(
+                                    "New in 0.8: ",
+                                    rx.el.a("an MCP server, the agent catalog and skills", href="/docs/ai"),
+                                ),
+                            ],
+                            [
                                 "Accessibility",
                                 "Accessible names, hidden data tables, keyboard navigation, contrast fallbacks",
                             ],
@@ -795,7 +811,7 @@ def overview() -> Callable[[], rx.Component]:
                 "How it is built",
                 [
                     rx.el.p(
-                        "Seven packages share one version. ",
+                        "Nine packages share one version. ",
                         c("@silverpoint/core"),
                         " computes every scale, arc and layout, with no DOM and no framework. ",
                         c("@silverpoint/grounds"),
@@ -806,7 +822,11 @@ def overview() -> Callable[[], rx.Component]:
                         ", ",
                         c("@silverpoint/angular"),
                         ") only translate the core's geometry into their own markup: no maths in the adapters. "
-                        "CI parses each adapter's SVG and compares it as a tree against the canonical render.",
+                        "CI parses each adapter's SVG and compares it as a tree against the canonical render. ",
+                        c("@silverpoint/marp"),
+                        " renders slide decks on the same core and grounds, and ",
+                        c("@silverpoint/mcp"),
+                        " describes the library to agents.",
                     ),
                     code_block(
                         "@silverpoint/core ──► @silverpoint/grounds ──► @silverpoint/react   (JSX)\n"
@@ -852,6 +872,10 @@ def overview() -> Callable[[], rx.Component]:
                             " and their ",
                             rx.el.a("reference", href="/components"),
                             f" — the {len(UI_COMPONENTS)} interface components of 0.3.",
+                        ),
+                        rx.el.li(
+                            rx.el.a("Slide decks", href="/docs/decks"),
+                            " — Marp Markdown presentations with live charts, new in 0.9.",
                         ),
                         rx.el.li(rx.el.a("Report a bug", href="/support"), " — how to open a useful issue."),
                     )
@@ -899,6 +923,14 @@ def installation() -> Callable[[], rx.Component]:
                                 c("@silverpoint/fonts"),
                                 "Optional. Self-hosted EB Garamond, the typeface the charts are designed for.",
                             ],
+                            [
+                                c("@silverpoint/marp"),
+                                rx.el.span(
+                                    "Optional, new in 0.9. The engine behind SpDeck, for ",
+                                    rx.el.a("slide decks", href="/docs/decks"),
+                                    "; its deck.css comes after ui.css.",
+                                ),
+                            ],
                         ],
                     ),
                 ],
@@ -922,11 +954,13 @@ def installation() -> Callable[[], rx.Component]:
                         "// React / Vue\nimport '@silverpoint/fonts/fonts.css';\nimport '@silverpoint/grounds/styles.css';\n"
                         "import '@silverpoint/grounds/ui.css'; // only if you use the UI components\n"
                         "import '@knight-lab/timelinejs/dist/css/timeline.css'; // only with SpTimeline (0.7)…\n"
-                        "import '@silverpoint/grounds/timeline.css'; // …and after TimelineJS's own\n\n"
+                        "import '@silverpoint/grounds/timeline.css'; // …and after TimelineJS's own\n"
+                        "import '@silverpoint/marp/deck.css'; // only with SpDeck (0.9), after ui.css\n\n"
                         "/* Angular: src/styles.css */\n@import '@silverpoint/fonts/fonts.css';\n@import '@silverpoint/grounds/styles.css';\n"
                         "@import '@silverpoint/grounds/ui.css'; /* only if you use the UI components */\n"
                         "@import '@knight-lab/timelinejs/dist/css/timeline.css'; /* only with SpTimeline */\n"
-                        "@import '@silverpoint/grounds/timeline.css';",
+                        "@import '@silverpoint/grounds/timeline.css';\n"
+                        "@import '@silverpoint/marp/deck.css'; /* only with SpDeck, after ui.css */",
                         "css",
                     ),
                     callout(
@@ -1135,8 +1169,8 @@ def framework_guide(key: str) -> Callable[[], rx.Component]:
                         "components (sp_button, sp_input, sp_tabs…), the provider, both grounds, the interaction events, "
                         "custom readouts (tooltip_template) and the imperative handle (download_svg, get_svg, get_geometry) "
                         "as Python, and what silverpoint 0.7 added: palettes, "
-                        f"{len(cc.REFERENCE)} composed components and overlays, and the Knight Lab timeline, each the "
-                        "npm component itself behind a Python builder.",
+                        f"{len(cc.REFERENCE)} composed components and overlays, and the Knight Lab timeline, and what 0.9 "
+                        "added: Marp slide decks (sp_deck), each the npm component itself behind a Python builder.",
                     ),
                     rx.el.p(
                         f"reflex-silverpoint-react {sd.REFLEX_LATEST.version} requires Reflex 0.10.0 or later (React 19) "
@@ -1248,7 +1282,7 @@ silverpoint_palette(
             -1,
             (
                 "new-0-7",
-                f"New in {sd.LATEST.version}: palettes, overlays, timeline",
+                "New in 0.7: palettes, overlays, timeline",
                 [
                     rx.el.p(
                         "21 more UI components from the same ",
@@ -1273,6 +1307,29 @@ silverpoint_palette(
                 ],
             ),
         )
+    sections.insert(
+        -1,
+        (
+            "new-0-9",
+            "New in 0.9: slide decks",
+            [
+                rx.el.p(
+                    "A Marp/Marpit Markdown presentation drawn in silverpoint: ",
+                    c("sp_deck" if key == "reflex" else ("<sp-deck>" if key == "angular" else "SpDeck")),
+                    " from ",
+                    c("reflex_silverpoint_react" if key == "reflex" else f"{fw.package}/deck"),
+                    ", with ",
+                    c("@silverpoint/marp"),
+                    " as its engine. Directives move a slide to another ground or to precision, list items are "
+                    "fragments, comments are presenter notes, and a ",
+                    c("silverpoint"),
+                    " fence draws a live chart inside a slide.",
+                ),
+                one(dx.CODES[key], lang),
+                rx.el.div(rx.el.a("Slide decks →", href="/docs/decks"), class_name="spw-chip-list"),
+            ],
+        ),
+    )
     if key == "react":
         sections.insert(
             -1,
@@ -1293,7 +1350,7 @@ silverpoint_palette(
         f"/docs/{key}",
         f"{fw.label}" if key != "reflex" else "Reflex (Python)",
         f"Everything you need to use silverpoint with {fw.label}: install, quickstart, app-wide configuration, "
-        "precision mode, interaction, export, server rendering, the UI components and what 0.7 adds.",
+        "precision mode, interaction, export, server rendering, the UI components and what 0.7 and 0.9 add.",
         sections,
         eyebrow="Getting started · Frameworks",
     )

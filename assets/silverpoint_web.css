@@ -658,3 +658,9 @@ td > .spw-pill { margin-left: 0; }
 .spw-code-live code { background: none; border: 0; padding: 0; }
 
 .spw-timeline-wrap { margin: 12px 0; min-width: 0; }
+.spw-deck-wrap { margin: 12px 0; min-width: 0; max-width: 100%; }
+/* The deck paints its ground behind the controls and notes too: on cyanotype they are drawn in white. */
+.spw-deck-wrap .sp-deck { background: var(--sp-substrate, transparent); padding: 12px; border-radius: 6px; }
+/* Inside a slide, code is the silverpoint theme's own (display face, ground inks): undo the site's code chip. */
+.spw-site .sp-deck section code { font-family: inherit; font-size: inherit; background: none; padding: 0 0.3em; overflow-wrap: normal; }
+.spw-home-deck { max-width: 880px; margin-inline: auto; }

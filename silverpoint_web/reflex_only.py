@@ -1,7 +1,7 @@
 """The live demos of silverpoint 0.7's additions: palettes, the composed components, the timeline.
 
 silverpoint ships them in React, Vue and Angular; the site draws them with reflex-silverpoint-react
-0.8, whose builders are the same npm components (@silverpoint/react 0.8). The demos are driven by
+0.9, whose builders are the same npm components (@silverpoint/react 0.9). The demos are driven by
 client-side state (``ClientStateVar``), as the site has no backend; the Python printed beside them is
 the usual ``rx.State`` version a Reflex app writes, and ``composed_code`` holds the React, Vue and
 Angular code of each.

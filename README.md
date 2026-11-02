@@ -3,10 +3,10 @@
 The documentation site of **[silverpoint](https://github.com/ecrespo/silverpoint)**: charts and UI components
 for React, Vue and Angular whose visual language is historical drawing technique (Renaissance silverpoint and cyanotype).
 
-The site documents silverpoint **0.8** (60 charts, 38 UI components, palettes and the Knight Lab timeline). It is
+The site documents silverpoint **0.9.2** (60 charts, 38 UI components, palettes, the Knight Lab timeline and Marp slide decks). It is
 written in Python with [Reflex](https://reflex.dev) and draws every chart and component live with
-[reflex-silverpoint-react](https://github.com/ecrespo/reflex-silverpoint-react) 0.8 (on Reflex 0.10), the Reflex component of
-`@silverpoint/react` (it wraps 0.8: the palettes, composed components, overlays and timeline are the
+[reflex-silverpoint-react](https://github.com/ecrespo/reflex-silverpoint-react) 0.9.1 (on Reflex 0.10.1), the Reflex component of
+`@silverpoint/react` (it wraps 0.9.1: the palettes, composed components, overlays, timeline and `sp_deck` are the
 npm components behind Python builders). The site's own controls (code tabs, callouts, the gallery's controls, buttons, tags,
 the release timeline) are silverpoint's UI components, bound to client-side state. It is **frontend-only**: `rx.App(enable_state=False)` compiles it without a backend,
 and it is deployed as static files on Vercel.
@@ -16,14 +16,15 @@ and it is deployed as static files on Vercel.
 | Route | |
 |---|---|
 | `/` | Landing page: live charts, the UI components, the four frameworks, features, author |
-| `/docs` … | Overview, installation, a guide per framework (`/docs/react`, `/docs/vue`, `/docs/angular`, `/docs/reflex`) and the concepts (grounds, precision, common props, interaction, export, dashboards, drill-down & hierarchies, UI components, SSR, accessibility, Tailwind), and what 0.7 adds (`/docs/palettes`, `/docs/composed`, `/docs/timeline`), with code in React, Vue, Angular and Reflex |
+| `/docs` … | Overview, installation, a guide per framework (`/docs/react`, `/docs/vue`, `/docs/angular`, `/docs/reflex`) and the concepts (grounds, precision, common props, interaction, export, dashboards, drill-down & hierarchies, UI components, SSR, accessibility, Tailwind), what 0.7 adds (`/docs/palettes`, `/docs/composed`, `/docs/timeline`) and 0.9's slide decks (`/docs/decks`), with code in React, Vue, Angular and Reflex |
+| `/docs/decks` | Slide decks (new in 0.9): a live `sp_deck` with ground / mode / palette / size / notes controls and its events, install and stylesheets, the code in React, Vue, Angular and Reflex, directives, theme classes, the `silverpoint` chart fence, props and events, SSR and print, Marp CLI and VS Code, and the MCP deck tools |
 | `/docs/ai` | Use with AI (new in 0.8): the hosted MCP server `https://silverpointweb.vercel.app/mcp`, configurations for Claude Code, Claude, Cursor and VS Code, the two Claude Code plugins and skills, the local `npx @silverpoint/mcp`, the server's tools and its answers to a worked example |
 | `/llms.txt`, `/llms-full.txt`, `/agent-catalog.json` | For agents: the llms.txt index, the whole agent catalog as Markdown (every chart and component with its props per framework, grounds, palettes, diagnostics) and the catalog itself, written at export from the catalog `@silverpoint/mcp` ships |
 | `/mcp` | Rewritten by `vercel.json` to the MCP server's Vercel project (`silverpoint-mcp.vercel.app/mcp`) |
-| `/gallery` | The 60 charts (nine families, three of them new in 0.6), the 17 UI components of 0.3, and the composed components, overlays and Knight Lab timeline of 0.7 (drawn by reflex-silverpoint-react 0.8), live, with ground / substrate / mode / hatch-fill / size / palette controls (client-side state) |
+| `/gallery` | The 60 charts (nine families, three of them new in 0.6), the 17 UI components of 0.3, and the composed components, overlays and Knight Lab timeline of 0.7 (drawn by reflex-silverpoint-react 0.9), live, with ground / substrate / mode / hatch-fill / size / palette controls (client-side state) |
 | `/components`, `/components/<slug>` | The UI component reference: one page per component: the 17 of 0.3 with every declared state live on both grounds, and the 21 of 0.7 (composed components, overlays, SpSurface, SpGlyph) with a live demo; each with its code in React, Vue, Angular and Reflex, imports, events or value binding, and props |
 | `/charts`, `/charts/<slug>` | The chart reference: one page per chart with a live example, its code in React, Vue, Angular and Reflex, imports, props and events |
-| `/packages` | The eight npm packages (`@silverpoint/mcp` new in 0.8) and the PyPI component |
+| `/packages` | The nine npm packages (`@silverpoint/mcp` new in 0.8, `@silverpoint/marp` new in 0.9) and the PyPI component |
 | `/versions` | Every release, newest first, and the Reflex component's own releases |
 | `/support` | How to report a bug, with pre-filled GitHub issue forms |
 | `/about` | Author (Ernesto Crespo, [seraph.to](https://www.seraph.to/)) and license |

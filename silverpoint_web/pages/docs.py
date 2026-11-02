@@ -26,6 +26,7 @@ from reflex_silverpoint_react import (
     silverpoint_palette,
     silverpoint_provider,
     sp_button,
+    sp_deck,
     sp_input,
     sp_switch,
     sp_table,
@@ -1324,6 +1325,24 @@ silverpoint_palette(
                     "fragments, comments are presenter notes, and a ",
                     c("silverpoint"),
                     " fence draws a live chart inside a slide.",
+                ),
+                *(
+                    [
+                        rx.el.p(
+                            "This deck is ",
+                            c("sp_deck"),
+                            ", live: click into it and use the arrows, Space or Home/End; list items are revealed "
+                            "a step at a time, and the chart is a silverpoint fence.",
+                        ),
+                        rx.el.div(
+                            sp_deck(
+                                dx.HOME_DECK, default_page=1, label="sp_deck, live", id="reflex-guide-deck"
+                            ),
+                            class_name="spw-deck-wrap",
+                        ),
+                    ]
+                    if key == "reflex"
+                    else []
                 ),
                 one(dx.CODES[key], lang),
                 rx.el.div(rx.el.a("Slide decks →", href="/docs/decks"), class_name="spw-chip-list"),

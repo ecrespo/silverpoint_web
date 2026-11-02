@@ -1,0 +1,1 @@
+import{W as e,i as t,n}from"./ui-djKjX-7N.js";function r({dashboardCell:r,...i}){return n(e(i,t(i,r)),{})}export{r as t};

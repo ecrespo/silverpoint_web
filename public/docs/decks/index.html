@@ -1,0 +1,769 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><meta content="Ernesto Crespo" name="author"/><meta content="#ede7da" name="theme-color"/><link href="/favicon.svg" rel="icon" type="image/svg+xml"/><link as="style" href="/assets/__reflex_global_styles-D6WuMl9v.css" rel="preload"/><title>Slide decks · silverpoint docs</title><meta content="favicon.ico" property="og:image"/><link rel="modulepreload" href="/assets/manifest-9cf78edb.js"/><link rel="modulepreload" href="/assets/entry.client-D15NELOZ.js"/><link rel="modulepreload" href="/assets/rolldown-runtime-BWaJ3C7D.js"/><link rel="modulepreload" href="/assets/components-BRno7RdY.js"/><link rel="modulepreload" href="/assets/react-dom-Bj3SNxe9.js"/><link rel="modulepreload" href="/assets/errorBoundaries-B5zoBnqD.js"/><link rel="modulepreload" href="/assets/root-D9kmN4MZ.js"/><link rel="modulepreload" href="/assets/context-BXYSX0Cy.js"/><link rel="modulepreload" href="/assets/state-DZX63ubC.js"/><link rel="modulepreload" href="/assets/emotion-react.browser.esm-BSmvw_3e.js"/><link rel="modulepreload" href="/assets/jsx-runtime-lTuChwRC.js"/><link rel="modulepreload" href="/assets/reflex-env-BVGF6eGS.js"/><link rel="modulepreload" href="/assets/_docs_._decks_._index-DLaQ-J4l.js"/><link rel="modulepreload" href="/assets/menu-_IuBjuFZ.js"/><link rel="modulepreload" href="/assets/copy-BrzSISXO.js"/><link rel="modulepreload" href="/assets/docs-CD1QKgAm.js"/><link rel="modulepreload" href="/assets/ui-djKjX-7N.js"/><link rel="modulepreload" href="/assets/chunk-B2PXXOBL-6AM3r-mt.js"/><link rel="modulepreload" href="/assets/styles-CC9PYie8.js"/><link rel="modulepreload" href="/assets/chunk-ZLLXEN62-BGT6CFFf.js"/><link rel="modulepreload" href="/assets/chunk-75OPBAPH-CaMztgcE.js"/><link rel="modulepreload" href="/assets/chunk-66IM2IXD-fTG0aTZ0.js"/><link rel="modulepreload" href="/assets/chunk-RQSVCKFR-C6kp3xR7.js"/><link rel="modulepreload" href="/assets/chunk-X7SDSL76-M3SOyE0a.js"/><link rel="modulepreload" href="/assets/chunk-JONYVBSY-RbrOl6bo.js"/><link rel="modulepreload" href="/assets/chunk-VMWFSK37-DVI2oesV.js"/><link rel="modulepreload" href="/assets/chunk-KIPRPYSA-BYhh96xq.js"/><link rel="modulepreload" href="/assets/chunk-TJJRHTZV-CPehDPvl.js"/><link rel="modulepreload" href="/assets/chunk-QTH6EQXI-CQwCh6aq.js"/><link rel="modulepreload" href="/assets/chunk-WRZQ3HOZ-Dwtbd5y9.js"/><link rel="modulepreload" href="/assets/chunk-UVHATDNH-1Herv41T.js"/><link rel="modulepreload" href="/assets/chunk-O6TRLTJ5-BlxXRPKN.js"/><link rel="modulepreload" href="/assets/chunk-DXGTV2L5-DzPnOovp.js"/><link rel="modulepreload" href="/assets/timeline-DeLfyoCI.js"/><link rel="modulepreload" href="/assets/deck-PIc0PHZK.js"/><link rel="modulepreload" href="/assets/chunk-QBFKMX4V-CZfnes8-.js"/><link rel="modulepreload" href="/assets/catalog-BfB4l_JJ.js"/><link rel="modulepreload" href="/assets/chunk-XNPNCJ6Y-l_Zyrcka.js"/><link rel="modulepreload" href="/assets/dist-DEDVXmWW.js"/><link rel="modulepreload" href="/assets/preload-helper-BLdHbfdN.js"/><script>
+// Only run in browser environment, not during SSR
+if (typeof document !== 'undefined') {
+    try {
+        const theme = localStorage.getItem("theme") || 'light';
+        const systemPreference = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        const resolvedTheme = theme === "system" ? systemPreference : theme;
+
+        // Apply theme immediately - blocks until complete
+        // Use classList to avoid overwriting other classes
+        document.documentElement.classList.remove("light", "dark");
+        document.documentElement.classList.add(resolvedTheme);
+        document.documentElement.style.colorScheme = resolvedTheme;
+
+    } catch (e) {
+        // Fallback to system preference on any error (resolve "system" to actual theme)
+        const fallbackTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        document.documentElement.classList.remove("light", "dark");
+        document.documentElement.classList.add(fallbackTheme);
+        document.documentElement.style.colorScheme = fallbackTheme;
+    }
+}
+</script><link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/><link href="/assets/__reflex_global_styles-D6WuMl9v.css" rel="stylesheet" type="text/css"/><link rel="stylesheet" href="/assets/styles-Be6mvhFH.css"/><link rel="stylesheet" href="/assets/ui-BgXsl7uJ.css"/><link rel="stylesheet" href="/assets/timeline-5jjURshx.css"/><link rel="stylesheet" href="/assets/deck-cKlG159l.css"/></head><body><section aria-label="Notifications alt+T" tabindex="-1" aria-live="polite" aria-relevant="additions text" aria-atomic="false" data-react-aria-top-layer="true"></section><div data-is-root-theme="true" data-accent-color="gray" data-gray-color="sand" data-has-background="false" data-panel-background="translucent" data-radius="small" data-scaling="100%" class="radix-themes css-0"><div class="spw-site"><a class="spw-skip" href="/docs/decks/#main" data-discover="true">Skip to content</a><header class="spw-header"><a class="spw-brand" href="/" data-discover="true"><svg aria-hidden="true" class="spw-mark" height="26" viewBox="0 0 32 32" width="26"><g stroke="currentColor"><style data-emotion="css 1e8tvui">.css-1e8tvui{stroke-width:0.8;}</style><line x1="4.75" x2="18.25" y1="13.75" y2="27.25" class="css-1e8tvui"></line><line x1="7.00" x2="20.50" y1="11.50" y2="25.00" class="css-1e8tvui"></line><line x1="9.25" x2="22.75" y1="9.25" y2="22.75" class="css-1e8tvui"></line><line x1="11.50" x2="25.00" y1="7.00" y2="20.50" class="css-1e8tvui"></line><line x1="13.75" x2="27.25" y1="4.75" y2="18.25" class="css-1e8tvui"></line></g><style data-emotion="css 152ihdr">.css-152ihdr{fill:none;stroke:currentColor;stroke-width:1.1;}</style><path d="M16 2.5 C22 8.4 25.6 12 29.5 16 C23.4 22 20 25.6 16 29.5 C10.1 23.6 6.4 20 2.5 16 C8.6 10 12 6.4 16 2.5Z" class="css-152ihdr"></path><style data-emotion="css 1r49ui">.css-1r49ui{fill:#fff;stroke:currentColor;stroke-width:1.1;}</style><circle cx="16" cy="16" r="3.2" class="css-1r49ui"></circle></svg><span class="spw-brand-name">silverpoint</span></a><nav aria-label="Main" class="spw-nav"><a href="/docs" data-discover="true">Docs</a><a href="/gallery" data-discover="true">Gallery</a><a href="/charts" data-discover="true">Charts</a><a href="/components" data-discover="true">Components</a><a href="/docs/dashboard" data-discover="true">Dashboard</a><a href="/docs/ai" data-discover="true">Use with AI</a><a href="/packages" data-discover="true">Packages</a><a href="/versions" data-discover="true">Versions</a><a href="/support" data-discover="true">Report a bug</a></nav><div class="spw-header-tools"><details class="spw-version"><summary class="spw-version-summary">v0.9.2<small> latest</small></summary><div class="spw-version-menu"><a href="/versions#v0-9-2" data-discover="true"><span>v0.9.2</span><small>2026-11-01</small></a><a href="/versions#v0-9-1" data-discover="true"><span>v0.9.1</span><small>2026-11-01</small></a><a href="/versions#v0-9-0" data-discover="true"><span>v0.9.0</span><small>2026-11-01</small></a><a href="/versions#v0-8-0" data-discover="true"><span>v0.8.0</span><small>2026-10-21</small></a><a href="/versions#v0-7-0" data-discover="true"><span>v0.7.0</span><small>2026-10-20</small></a><a href="/versions#v0-6-0" data-discover="true"><span>v0.6.0</span><small>2026-10-10</small></a><a href="/versions#v0-3-0" data-discover="true"><span>v0.3.0</span><small>2026-09-30</small></a><a href="/versions#v0-2-0" data-discover="true"><span>v0.2.0</span><small>2026-09-26</small></a><a href="/versions#v0-1-1" data-discover="true"><span>v0.1.1</span><small>2026-09-25</small></a><a href="/versions#v0-1-0" data-discover="true"><span>v0.1.0</span><small>2026-09-25</small></a><a rel="noopener noreferrer" href="https://github.com/ecrespo/silverpoint/releases" target="_blank">All releases on GitHub ↗</a></div></details><a aria-label="silverpoint on GitHub" class="spw-icon-link" rel="noopener noreferrer" href="https://github.com/ecrespo/silverpoint" target="_blank"><style data-emotion="css kqzqgg">.css-kqzqgg{fill:currentColor;}</style><svg aria-hidden="true" class="spw-gh css-kqzqgg" height="20" viewBox="0 0 16 16" width="20"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a><a aria-label="silverpoint on npm" class="spw-icon-link" rel="noopener noreferrer" href="https://www.npmjs.com/search?q=silverpoint" target="_blank"><span class="spw-npm">npm</span></a></div><details class="spw-burger"><summary aria-label="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu" aria-hidden="true"><path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h16"></path></svg></summary><nav><a href="/docs" data-discover="true">Docs</a><a href="/gallery" data-discover="true">Gallery</a><a href="/charts" data-discover="true">Charts</a><a href="/components" data-discover="true">Components</a><a href="/docs/dashboard" data-discover="true">Dashboard</a><a href="/docs/ai" data-discover="true">Use with AI</a><a href="/packages" data-discover="true">Packages</a><a href="/versions" data-discover="true">Versions</a><a href="/support" data-discover="true">Report a bug</a></nav></details></header><div class="spw-docs"><details class="spw-sidebar-mobile"><summary>Documentation menu</summary><nav aria-label="Documentation" class="spw-sidebar"><div class="spw-side-group"><p class="spw-side-title">Getting started</p><a class="spw-side-link" href="/docs" data-discover="true">Overview</a><a class="spw-side-link" href="/docs/installation" data-discover="true">Installation</a><a class="spw-side-link" href="/docs/react" data-discover="true">React</a><a class="spw-side-link" href="/docs/vue" data-discover="true">Vue</a><a class="spw-side-link" href="/docs/angular" data-discover="true">Angular</a><a class="spw-side-link" href="/docs/reflex" data-discover="true">Reflex (Python)</a></div><div class="spw-side-group"><p class="spw-side-title">Concepts</p><a class="spw-side-link" href="/docs/grounds" data-discover="true">Grounds &amp; substrates</a><a class="spw-side-link" href="/docs/precision" data-discover="true">Ink &amp; precision</a><a class="spw-side-link" href="/docs/props" data-discover="true">Common props</a><a class="spw-side-link" href="/docs/interaction" data-discover="true">Interaction &amp; readouts</a><a class="spw-side-link" href="/docs/export" data-discover="true">Export &amp; imperative handle</a><a class="spw-side-link" href="/docs/dashboard" data-discover="true">Dashboards</a><a class="spw-side-link" href="/docs/drill-down" data-discover="true">Drill-down &amp; hierarchies</a><a class="spw-side-link" href="/docs/ui" data-discover="true">UI components</a><a class="spw-side-link" href="/docs/ssr" data-discover="true">Server rendering</a><a class="spw-side-link" href="/docs/accessibility" data-discover="true">Accessibility</a><a class="spw-side-link" href="/docs/tailwind" data-discover="true">Tailwind preset</a></div><div class="spw-side-group"><p class="spw-side-title">New in 0.9</p><a class="spw-side-link is-current" href="/docs/decks" data-discover="true">Slide decks</a></div><div class="spw-side-group"><p class="spw-side-title">Charts · 60</p><details class="spw-side-family"><summary>Lines · 4</summary><a class="spw-side-link" href="/charts/line-chart" data-discover="true">LineChart</a><a class="spw-side-link" href="/charts/step-chart" data-discover="true">StepChart</a><a class="spw-side-link" href="/charts/sparkline-rows" data-discover="true">SparklineRows</a><a class="spw-side-link" href="/charts/kpi-card" data-discover="true">KpiCard</a></details><details class="spw-side-family"><summary>Bars · 8</summary><a class="spw-side-link" href="/charts/bar-chart" data-discover="true">BarChart</a><a class="spw-side-link" href="/charts/stacked-bar-chart" data-discover="true">StackedBarChart</a><a class="spw-side-link" href="/charts/composed-chart" data-discover="true">ComposedChart</a><a class="spw-side-link" href="/charts/waterfall-chart" data-discover="true">WaterfallChart</a><a class="spw-side-link" href="/charts/funnel-chart" data-discover="true">FunnelChart</a><a class="spw-side-link" href="/charts/bullet-chart" data-discover="true">BulletChart</a><a class="spw-side-link" href="/charts/pyramid-chart" data-discover="true">PyramidChart</a><a class="spw-side-link" href="/charts/candlestick-chart" data-discover="true">CandlestickChart</a></details><details class="spw-side-family"><summary>Areas · 3</summary><a class="spw-side-link" href="/charts/area-chart" data-discover="true">AreaChart</a><a class="spw-side-link" href="/charts/range-band-chart" data-discover="true">RangeBandChart</a><a class="spw-side-link" href="/charts/stream-chart" data-discover="true">StreamChart</a></details><details class="spw-side-family"><summary>Points &amp; grids · 5</summary><a class="spw-side-link" href="/charts/scatter-chart" data-discover="true">ScatterChart</a><a class="spw-side-link" href="/charts/bubble-chart" data-discover="true">BubbleChart</a><a class="spw-side-link" href="/charts/heatmap-chart" data-discover="true">HeatmapChart</a><a class="spw-side-link" href="/charts/treemap-chart" data-discover="true">TreemapChart</a><a class="spw-side-link" href="/charts/activity-grid" data-discover="true">ActivityGrid</a></details><details class="spw-side-family"><summary>Flows · 2</summary><a class="spw-side-link" href="/charts/sankey-chart" data-discover="true">SankeyChart</a><a class="spw-side-link" href="/charts/chord-ring" data-discover="true">ChordRing</a></details><details class="spw-side-family"><summary>Radial · 11</summary><a class="spw-side-link" href="/charts/donut-chart" data-discover="true">DonutChart</a><a class="spw-side-link" href="/charts/radar-chart" data-discover="true">RadarChart</a><a class="spw-side-link" href="/charts/polar-bar-chart" data-discover="true">PolarBarChart</a><a class="spw-side-link" href="/charts/radial-arc-group" data-discover="true">RadialArcGroup</a><a class="spw-side-link" href="/charts/radial-rings" data-discover="true">RadialRings</a><a class="spw-side-link" href="/charts/gauge-arc" data-discover="true">GaugeArc</a><a class="spw-side-link" href="/charts/meter-chart" data-discover="true">MeterChart</a><a class="spw-side-link" href="/charts/coxcomb-chart" data-discover="true">CoxcombChart</a><a class="spw-side-link" href="/charts/wind-rose" data-discover="true">WindRose</a><a class="spw-side-link" href="/charts/volvelle-chart" data-discover="true">VolvelleChart</a><a class="spw-side-link" href="/charts/orbit-chart" data-discover="true">OrbitChart</a></details><details class="spw-side-family"><summary>Distributions &amp; comparisons · 14</summary><a class="spw-side-link" href="/charts/histogram-chart" data-discover="true">HistogramChart</a><a class="spw-side-link" href="/charts/ecdf-chart" data-discover="true">EcdfChart</a><a class="spw-side-link" href="/charts/box-plot-chart" data-discover="true">BoxPlotChart</a><a class="spw-side-link" href="/charts/violin-chart" data-discover="true">ViolinChart</a><a class="spw-side-link" href="/charts/ridgeline-chart" data-discover="true">RidgelineChart</a><a class="spw-side-link" href="/charts/beeswarm-chart" data-discover="true">BeeswarmChart</a><a class="spw-side-link" href="/charts/lollipop-chart" data-discover="true">LollipopChart</a><a class="spw-side-link" href="/charts/dumbbell-chart" data-discover="true">DumbbellChart</a><a class="spw-side-link" href="/charts/slope-chart" data-discover="true">SlopeChart</a><a class="spw-side-link" href="/charts/bump-chart" data-discover="true">BumpChart</a><a class="spw-side-link" href="/charts/error-bar-chart" data-discover="true">ErrorBarChart</a><a class="spw-side-link" href="/charts/interval-chart" data-discover="true">IntervalChart</a><a class="spw-side-link" href="/charts/diverging-bar-chart" data-discover="true">DivergingBarChart</a><a class="spw-side-link" href="/charts/connected-scatter-chart" data-discover="true">ConnectedScatterChart</a></details><details class="spw-side-family"><summary>Hierarchies &amp; dimensions · 8</summary><a class="spw-side-link" href="/charts/waffle-chart" data-discover="true">WaffleChart</a><a class="spw-side-link" href="/charts/marimekko-chart" data-discover="true">MarimekkoChart</a><a class="spw-side-link" href="/charts/squarified-treemap" data-discover="true">SquarifiedTreemap</a><a class="spw-side-link" href="/charts/sunburst-chart" data-discover="true">SunburstChart</a><a class="spw-side-link" href="/charts/tree-chart" data-discover="true">TreeChart</a><a class="spw-side-link" href="/charts/parallel-coordinates-chart" data-discover="true">ParallelCoordinatesChart</a><a class="spw-side-link" href="/charts/polar-line-chart" data-discover="true">PolarLineChart</a><a class="spw-side-link" href="/charts/polar-scatter-chart" data-discover="true">PolarScatterChart</a></details><details class="spw-side-family"><summary>Fields &amp; networks · 5</summary><a class="spw-side-link" href="/charts/density-bin-chart" data-discover="true">DensityBinChart</a><a class="spw-side-link" href="/charts/contour-chart" data-discover="true">ContourChart</a><a class="spw-side-link" href="/charts/delaunay-chart" data-discover="true">DelaunayChart</a><a class="spw-side-link" href="/charts/vector-field-chart" data-discover="true">VectorFieldChart</a><a class="spw-side-link" href="/charts/network-chart" data-discover="true">NetworkChart</a></details></div><div class="spw-side-group"><p class="spw-side-title">UI components · 38</p><details class="spw-side-family"><summary>Actions · 1</summary><a class="spw-side-link" href="/components/button" data-discover="true">Button</a></details><details class="spw-side-family"><summary>Data entry · 7</summary><a class="spw-side-link" href="/components/input" data-discover="true">Input</a><a class="spw-side-link" href="/components/checkbox" data-discover="true">Checkbox</a><a class="spw-side-link" href="/components/radio-group" data-discover="true">RadioGroup</a><a class="spw-side-link" href="/components/switch" data-discover="true">Switch</a><a class="spw-side-link" href="/components/slider" data-discover="true">Slider</a><a class="spw-side-link" href="/components/rate" data-discover="true">Rate</a><a class="spw-side-link" href="/components/segmented" data-discover="true">Segmented</a></details><details class="spw-side-family"><summary>Navigation · 2</summary><a class="spw-side-link" href="/components/tabs" data-discover="true">Tabs</a><a class="spw-side-link" href="/components/steps" data-discover="true">Steps</a></details><details class="spw-side-family"><summary>Data display · 4</summary><a class="spw-side-link" href="/components/card" data-discover="true">Card</a><a class="spw-side-link" href="/components/tag" data-discover="true">Tag</a><a class="spw-side-link" href="/components/badge" data-discover="true">Badge</a><a class="spw-side-link" href="/components/divider" data-discover="true">Divider</a></details><details class="spw-side-family"><summary>Feedback · 3</summary><a class="spw-side-link" href="/components/progress" data-discover="true">Progress</a><a class="spw-side-link" href="/components/alert" data-discover="true">Alert</a><a class="spw-side-link" href="/components/skeleton" data-discover="true">Skeleton</a></details><details class="spw-side-family"><summary>Composed · 14</summary><a class="spw-side-link" href="/components/surface" data-discover="true">SpSurface</a><a class="spw-side-link" href="/components/glyph" data-discover="true">SpGlyph</a><a class="spw-side-link" href="/components/table" data-discover="true">SpTable</a><a class="spw-side-link" href="/components/pagination" data-discover="true">SpPagination</a><a class="spw-side-link" href="/components/breadcrumb" data-discover="true">SpBreadcrumb</a><a class="spw-side-link" href="/components/avatar" data-discover="true">SpAvatar</a><a class="spw-side-link" href="/components/statistic" data-discover="true">SpStatistic</a><a class="spw-side-link" href="/components/descriptions" data-discover="true">SpDescriptions</a><a class="spw-side-link" href="/components/timeline-list" data-discover="true">SpTimelineList</a><a class="spw-side-link" href="/components/collapse" data-discover="true">SpCollapse</a><a class="spw-side-link" href="/components/empty" data-discover="true">SpEmpty</a><a class="spw-side-link" href="/components/result" data-discover="true">SpResult</a><a class="spw-side-link" href="/components/textarea" data-discover="true">SpTextarea</a><a class="spw-side-link" href="/components/input-number" data-discover="true">SpInputNumber</a></details><details class="spw-side-family"><summary>Overlays · 7</summary><a class="spw-side-link" href="/components/modal" data-discover="true">SpModal</a><a class="spw-side-link" href="/components/drawer" data-discover="true">SpDrawer</a><a class="spw-side-link" href="/components/popover" data-discover="true">SpPopover</a><a class="spw-side-link" href="/components/tooltip" data-discover="true">SpTooltip</a><a class="spw-side-link" href="/components/select" data-discover="true">SpSelect</a><a class="spw-side-link" href="/components/dropdown-menu" data-discover="true">SpDropdownMenu</a><a class="spw-side-link" href="/components/toast" data-discover="true">SpToast</a></details></div><div class="spw-side-group"><p class="spw-side-title">New in 0.8</p><a class="spw-side-link" href="/docs/ai" data-discover="true">Use with AI</a></div></nav></details><aside class="spw-sidebar-col"><nav aria-label="Documentation" class="spw-sidebar"><div class="spw-side-group"><p class="spw-side-title">Getting started</p><a class="spw-side-link" href="/docs" data-discover="true">Overview</a><a class="spw-side-link" href="/docs/installation" data-discover="true">Installation</a><a class="spw-side-link" href="/docs/react" data-discover="true">React</a><a class="spw-side-link" href="/docs/vue" data-discover="true">Vue</a><a class="spw-side-link" href="/docs/angular" data-discover="true">Angular</a><a class="spw-side-link" href="/docs/reflex" data-discover="true">Reflex (Python)</a></div><div class="spw-side-group"><p class="spw-side-title">Concepts</p><a class="spw-side-link" href="/docs/grounds" data-discover="true">Grounds &amp; substrates</a><a class="spw-side-link" href="/docs/precision" data-discover="true">Ink &amp; precision</a><a class="spw-side-link" href="/docs/props" data-discover="true">Common props</a><a class="spw-side-link" href="/docs/interaction" data-discover="true">Interaction &amp; readouts</a><a class="spw-side-link" href="/docs/export" data-discover="true">Export &amp; imperative handle</a><a class="spw-side-link" href="/docs/dashboard" data-discover="true">Dashboards</a><a class="spw-side-link" href="/docs/drill-down" data-discover="true">Drill-down &amp; hierarchies</a><a class="spw-side-link" href="/docs/ui" data-discover="true">UI components</a><a class="spw-side-link" href="/docs/ssr" data-discover="true">Server rendering</a><a class="spw-side-link" href="/docs/accessibility" data-discover="true">Accessibility</a><a class="spw-side-link" href="/docs/tailwind" data-discover="true">Tailwind preset</a></div><div class="spw-side-group"><p class="spw-side-title">New in 0.9</p><a class="spw-side-link is-current" href="/docs/decks" data-discover="true">Slide decks</a></div><div class="spw-side-group"><p class="spw-side-title">Charts · 60</p><details class="spw-side-family"><summary>Lines · 4</summary><a class="spw-side-link" href="/charts/line-chart" data-discover="true">LineChart</a><a class="spw-side-link" href="/charts/step-chart" data-discover="true">StepChart</a><a class="spw-side-link" href="/charts/sparkline-rows" data-discover="true">SparklineRows</a><a class="spw-side-link" href="/charts/kpi-card" data-discover="true">KpiCard</a></details><details class="spw-side-family"><summary>Bars · 8</summary><a class="spw-side-link" href="/charts/bar-chart" data-discover="true">BarChart</a><a class="spw-side-link" href="/charts/stacked-bar-chart" data-discover="true">StackedBarChart</a><a class="spw-side-link" href="/charts/composed-chart" data-discover="true">ComposedChart</a><a class="spw-side-link" href="/charts/waterfall-chart" data-discover="true">WaterfallChart</a><a class="spw-side-link" href="/charts/funnel-chart" data-discover="true">FunnelChart</a><a class="spw-side-link" href="/charts/bullet-chart" data-discover="true">BulletChart</a><a class="spw-side-link" href="/charts/pyramid-chart" data-discover="true">PyramidChart</a><a class="spw-side-link" href="/charts/candlestick-chart" data-discover="true">CandlestickChart</a></details><details class="spw-side-family"><summary>Areas · 3</summary><a class="spw-side-link" href="/charts/area-chart" data-discover="true">AreaChart</a><a class="spw-side-link" href="/charts/range-band-chart" data-discover="true">RangeBandChart</a><a class="spw-side-link" href="/charts/stream-chart" data-discover="true">StreamChart</a></details><details class="spw-side-family"><summary>Points &amp; grids · 5</summary><a class="spw-side-link" href="/charts/scatter-chart" data-discover="true">ScatterChart</a><a class="spw-side-link" href="/charts/bubble-chart" data-discover="true">BubbleChart</a><a class="spw-side-link" href="/charts/heatmap-chart" data-discover="true">HeatmapChart</a><a class="spw-side-link" href="/charts/treemap-chart" data-discover="true">TreemapChart</a><a class="spw-side-link" href="/charts/activity-grid" data-discover="true">ActivityGrid</a></details><details class="spw-side-family"><summary>Flows · 2</summary><a class="spw-side-link" href="/charts/sankey-chart" data-discover="true">SankeyChart</a><a class="spw-side-link" href="/charts/chord-ring" data-discover="true">ChordRing</a></details><details class="spw-side-family"><summary>Radial · 11</summary><a class="spw-side-link" href="/charts/donut-chart" data-discover="true">DonutChart</a><a class="spw-side-link" href="/charts/radar-chart" data-discover="true">RadarChart</a><a class="spw-side-link" href="/charts/polar-bar-chart" data-discover="true">PolarBarChart</a><a class="spw-side-link" href="/charts/radial-arc-group" data-discover="true">RadialArcGroup</a><a class="spw-side-link" href="/charts/radial-rings" data-discover="true">RadialRings</a><a class="spw-side-link" href="/charts/gauge-arc" data-discover="true">GaugeArc</a><a class="spw-side-link" href="/charts/meter-chart" data-discover="true">MeterChart</a><a class="spw-side-link" href="/charts/coxcomb-chart" data-discover="true">CoxcombChart</a><a class="spw-side-link" href="/charts/wind-rose" data-discover="true">WindRose</a><a class="spw-side-link" href="/charts/volvelle-chart" data-discover="true">VolvelleChart</a><a class="spw-side-link" href="/charts/orbit-chart" data-discover="true">OrbitChart</a></details><details class="spw-side-family"><summary>Distributions &amp; comparisons · 14</summary><a class="spw-side-link" href="/charts/histogram-chart" data-discover="true">HistogramChart</a><a class="spw-side-link" href="/charts/ecdf-chart" data-discover="true">EcdfChart</a><a class="spw-side-link" href="/charts/box-plot-chart" data-discover="true">BoxPlotChart</a><a class="spw-side-link" href="/charts/violin-chart" data-discover="true">ViolinChart</a><a class="spw-side-link" href="/charts/ridgeline-chart" data-discover="true">RidgelineChart</a><a class="spw-side-link" href="/charts/beeswarm-chart" data-discover="true">BeeswarmChart</a><a class="spw-side-link" href="/charts/lollipop-chart" data-discover="true">LollipopChart</a><a class="spw-side-link" href="/charts/dumbbell-chart" data-discover="true">DumbbellChart</a><a class="spw-side-link" href="/charts/slope-chart" data-discover="true">SlopeChart</a><a class="spw-side-link" href="/charts/bump-chart" data-discover="true">BumpChart</a><a class="spw-side-link" href="/charts/error-bar-chart" data-discover="true">ErrorBarChart</a><a class="spw-side-link" href="/charts/interval-chart" data-discover="true">IntervalChart</a><a class="spw-side-link" href="/charts/diverging-bar-chart" data-discover="true">DivergingBarChart</a><a class="spw-side-link" href="/charts/connected-scatter-chart" data-discover="true">ConnectedScatterChart</a></details><details class="spw-side-family"><summary>Hierarchies &amp; dimensions · 8</summary><a class="spw-side-link" href="/charts/waffle-chart" data-discover="true">WaffleChart</a><a class="spw-side-link" href="/charts/marimekko-chart" data-discover="true">MarimekkoChart</a><a class="spw-side-link" href="/charts/squarified-treemap" data-discover="true">SquarifiedTreemap</a><a class="spw-side-link" href="/charts/sunburst-chart" data-discover="true">SunburstChart</a><a class="spw-side-link" href="/charts/tree-chart" data-discover="true">TreeChart</a><a class="spw-side-link" href="/charts/parallel-coordinates-chart" data-discover="true">ParallelCoordinatesChart</a><a class="spw-side-link" href="/charts/polar-line-chart" data-discover="true">PolarLineChart</a><a class="spw-side-link" href="/charts/polar-scatter-chart" data-discover="true">PolarScatterChart</a></details><details class="spw-side-family"><summary>Fields &amp; networks · 5</summary><a class="spw-side-link" href="/charts/density-bin-chart" data-discover="true">DensityBinChart</a><a class="spw-side-link" href="/charts/contour-chart" data-discover="true">ContourChart</a><a class="spw-side-link" href="/charts/delaunay-chart" data-discover="true">DelaunayChart</a><a class="spw-side-link" href="/charts/vector-field-chart" data-discover="true">VectorFieldChart</a><a class="spw-side-link" href="/charts/network-chart" data-discover="true">NetworkChart</a></details></div><div class="spw-side-group"><p class="spw-side-title">UI components · 38</p><details class="spw-side-family"><summary>Actions · 1</summary><a class="spw-side-link" href="/components/button" data-discover="true">Button</a></details><details class="spw-side-family"><summary>Data entry · 7</summary><a class="spw-side-link" href="/components/input" data-discover="true">Input</a><a class="spw-side-link" href="/components/checkbox" data-discover="true">Checkbox</a><a class="spw-side-link" href="/components/radio-group" data-discover="true">RadioGroup</a><a class="spw-side-link" href="/components/switch" data-discover="true">Switch</a><a class="spw-side-link" href="/components/slider" data-discover="true">Slider</a><a class="spw-side-link" href="/components/rate" data-discover="true">Rate</a><a class="spw-side-link" href="/components/segmented" data-discover="true">Segmented</a></details><details class="spw-side-family"><summary>Navigation · 2</summary><a class="spw-side-link" href="/components/tabs" data-discover="true">Tabs</a><a class="spw-side-link" href="/components/steps" data-discover="true">Steps</a></details><details class="spw-side-family"><summary>Data display · 4</summary><a class="spw-side-link" href="/components/card" data-discover="true">Card</a><a class="spw-side-link" href="/components/tag" data-discover="true">Tag</a><a class="spw-side-link" href="/components/badge" data-discover="true">Badge</a><a class="spw-side-link" href="/components/divider" data-discover="true">Divider</a></details><details class="spw-side-family"><summary>Feedback · 3</summary><a class="spw-side-link" href="/components/progress" data-discover="true">Progress</a><a class="spw-side-link" href="/components/alert" data-discover="true">Alert</a><a class="spw-side-link" href="/components/skeleton" data-discover="true">Skeleton</a></details><details class="spw-side-family"><summary>Composed · 14</summary><a class="spw-side-link" href="/components/surface" data-discover="true">SpSurface</a><a class="spw-side-link" href="/components/glyph" data-discover="true">SpGlyph</a><a class="spw-side-link" href="/components/table" data-discover="true">SpTable</a><a class="spw-side-link" href="/components/pagination" data-discover="true">SpPagination</a><a class="spw-side-link" href="/components/breadcrumb" data-discover="true">SpBreadcrumb</a><a class="spw-side-link" href="/components/avatar" data-discover="true">SpAvatar</a><a class="spw-side-link" href="/components/statistic" data-discover="true">SpStatistic</a><a class="spw-side-link" href="/components/descriptions" data-discover="true">SpDescriptions</a><a class="spw-side-link" href="/components/timeline-list" data-discover="true">SpTimelineList</a><a class="spw-side-link" href="/components/collapse" data-discover="true">SpCollapse</a><a class="spw-side-link" href="/components/empty" data-discover="true">SpEmpty</a><a class="spw-side-link" href="/components/result" data-discover="true">SpResult</a><a class="spw-side-link" href="/components/textarea" data-discover="true">SpTextarea</a><a class="spw-side-link" href="/components/input-number" data-discover="true">SpInputNumber</a></details><details class="spw-side-family"><summary>Overlays · 7</summary><a class="spw-side-link" href="/components/modal" data-discover="true">SpModal</a><a class="spw-side-link" href="/components/drawer" data-discover="true">SpDrawer</a><a class="spw-side-link" href="/components/popover" data-discover="true">SpPopover</a><a class="spw-side-link" href="/components/tooltip" data-discover="true">SpTooltip</a><a class="spw-side-link" href="/components/select" data-discover="true">SpSelect</a><a class="spw-side-link" href="/components/dropdown-menu" data-discover="true">SpDropdownMenu</a><a class="spw-side-link" href="/components/toast" data-discover="true">SpToast</a></details></div><div class="spw-side-group"><p class="spw-side-title">New in 0.8</p><a class="spw-side-link" href="/docs/ai" data-discover="true">Use with AI</a></div></nav></aside><main class="spw-docs-main" id="main"><article class="spw-article"><p class="spw-eyebrow">New in 0.9</p><h1>Slide decks</h1><div class="spw-lede">New in silverpoint 0.9 and reflex-silverpoint-react 0.9. SpDeck draws a Marp/Marpit Markdown presentation in silverpoint: the silverpoint theme on the library&#x27;s grounds and substrates, directives that move a slide to another ground or to precision, fragments, presenter notes, and silverpoint fences that become real charts inside a slide.</div><section class="spw-section"><h2 id="live"><a class="spw-anchor" href="/docs/decks/#live" data-discover="true">Try it</a></h2><p>A Marp deck drawn by <code>sp_deck</code>. Click into it, then use the arrows, Space, PageUp/PageDown or Home/End; <code>o</code> opens the overview, <code>f</code> full screen and <code>n</code> the notes. Each list item is a fragment, revealed a step at a time; each chart is a <code>silverpoint</code> fence, hydrated in place. The controls set the deck&#x27;s props; a slide&#x27;s own directive wins.</p><div class="spw-controls"><div class="spw-choice"><span aria-hidden="true" class="spw-choice-label">Ground</span><fieldset class="sp-ui sp-segmented sp-ground-silverpoint" data-ground="silverpoint" data-substrate="cream" data-mode="ink" data-size="sm" data-frame="0"><legend class="sp-ui-legend sp-ui-sr">Ground</legend><span class="sp-ui-segments"><span part="sp-frame" data-kind="control" aria-hidden="true"></span><label class="sp-ui-item" data-key="silverpoint"><input type="radio" class="sp-ui-native" name="ctl-ground" checked="" value="silverpoint"/><span class="sp-ui-segment"><span part="sp-tone" data-tone="selected" data-kind="control" aria-hidden="true"></span><span part="sp-heighten" aria-hidden="true"></span><span class="sp-ui-label sp-ui-plate">silverpoint</span></span></label><label class="sp-ui-item" data-key="cyanotype"><input type="radio" class="sp-ui-native" name="ctl-ground" value="cyanotype"/><span class="sp-ui-segment"><span class="sp-ui-label">cyanotype</span></span></label></span></fieldset></div><div class="spw-choice"><span aria-hidden="true" class="spw-choice-label">Mode</span><fieldset class="sp-ui sp-segmented sp-ground-silverpoint" data-ground="silverpoint" data-substrate="cream" data-mode="ink" data-size="sm" data-frame="0"><legend class="sp-ui-legend sp-ui-sr">Mode</legend><span class="sp-ui-segments"><span part="sp-frame" data-kind="control" aria-hidden="true"></span><label class="sp-ui-item" data-key="ink"><input type="radio" class="sp-ui-native" name="ctl-mode" checked="" value="ink"/><span class="sp-ui-segment"><span part="sp-tone" data-tone="selected" data-kind="control" aria-hidden="true"></span><span part="sp-heighten" aria-hidden="true"></span><span class="sp-ui-label sp-ui-plate">ink</span></span></label><label class="sp-ui-item" data-key="precision"><input type="radio" class="sp-ui-native" name="ctl-mode" value="precision"/><span class="sp-ui-segment"><span class="sp-ui-label">precision</span></span></label></span></fieldset></div><div class="spw-choice"><span aria-hidden="true" class="spw-choice-label">Palette</span><fieldset class="sp-ui sp-segmented sp-ground-silverpoint" data-ground="silverpoint" data-substrate="cream" data-mode="ink" data-size="sm" data-frame="0"><legend class="sp-ui-legend sp-ui-sr">Palette</legend><span class="sp-ui-segments"><span part="sp-frame" data-kind="control" aria-hidden="true"></span><label class="sp-ui-item" data-key="none"><input type="radio" class="sp-ui-native" name="ctl-palette" checked="" value="none"/><span class="sp-ui-segment"><span part="sp-tone" data-tone="selected" data-kind="control" aria-hidden="true"></span><span part="sp-heighten" aria-hidden="true"></span><span class="sp-ui-label sp-ui-plate">none</span></span></label><label class="sp-ui-item" data-key="silverpoint"><input type="radio" class="sp-ui-native" name="ctl-palette" value="silverpoint"/><span class="sp-ui-segment"><span class="sp-ui-label">silverpoint</span></span></label><label class="sp-ui-item" data-key="sanguine"><input type="radio" class="sp-ui-native" name="ctl-palette" value="sanguine"/><span class="sp-ui-segment"><span class="sp-ui-label">sanguine</span></span></label><label class="sp-ui-item" data-key="sepia"><input type="radio" class="sp-ui-native" name="ctl-palette" value="sepia"/><span class="sp-ui-segment"><span class="sp-ui-label">sepia</span></span></label><label class="sp-ui-item" data-key="ironGall"><input type="radio" class="sp-ui-native" name="ctl-palette" value="ironGall"/><span class="sp-ui-segment"><span class="sp-ui-label">ironGall</span></span></label><label class="sp-ui-item" data-key="verdigris"><input type="radio" class="sp-ui-native" name="ctl-palette" value="verdigris"/><span class="sp-ui-segment"><span class="sp-ui-label">verdigris</span></span></label><label class="sp-ui-item" data-key="indigo"><input type="radio" class="sp-ui-native" name="ctl-palette" value="indigo"/><span class="sp-ui-segment"><span class="sp-ui-label">indigo</span></span></label></span></fieldset></div><div class="spw-choice"><span aria-hidden="true" class="spw-choice-label">Size</span><fieldset class="sp-ui sp-segmented sp-ground-silverpoint" data-ground="silverpoint" data-substrate="cream" data-mode="ink" data-size="sm" data-frame="0"><legend class="sp-ui-legend sp-ui-sr">Size</legend><span class="sp-ui-segments"><span part="sp-frame" data-kind="control" aria-hidden="true"></span><label class="sp-ui-item" data-key="16:9"><input type="radio" class="sp-ui-native" name="ctl-size" checked="" value="16:9"/><span class="sp-ui-segment"><span part="sp-tone" data-tone="selected" data-kind="control" aria-hidden="true"></span><span part="sp-heighten" aria-hidden="true"></span><span class="sp-ui-label sp-ui-plate">16:9</span></span></label><label class="sp-ui-item" data-key="4:3"><input type="radio" class="sp-ui-native" name="ctl-size" value="4:3"/><span class="sp-ui-segment"><span class="sp-ui-label">4:3</span></span></label></span></fieldset></div><div class="spw-choice"><span aria-hidden="true" class="spw-choice-label">Notes</span><fieldset class="sp-ui sp-segmented sp-ground-silverpoint" data-ground="silverpoint" data-substrate="cream" data-mode="ink" data-size="sm" data-frame="0"><legend class="sp-ui-legend sp-ui-sr">Notes</legend><span class="sp-ui-segments"><span part="sp-frame" data-kind="control" aria-hidden="true"></span><label class="sp-ui-item" data-key="shown"><input type="radio" class="sp-ui-native" name="ctl-notes" value="shown"/><span class="sp-ui-segment"><span class="sp-ui-label">shown</span></span></label><label class="sp-ui-item" data-key="hidden"><input type="radio" class="sp-ui-native" name="ctl-notes" checked="" value="hidden"/><span class="sp-ui-segment"><span part="sp-tone" data-tone="selected" data-kind="control" aria-hidden="true"></span><span part="sp-heighten" aria-hidden="true"></span><span class="sp-ui-label sp-ui-plate">hidden</span></span></label></span></fieldset></div></div><div class="spw-deck-wrap"><div class="sp-deck sp-ground-silverpoint" part="sp-deck" role="region" aria-roledescription="slide deck" aria-label="silverpoint slide decks: a showcase" tabindex="0" data-substrate="cream" data-mode="ink" data-sp-page="1" data-sp-step="0" data-sp-overview="false"><style>div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section {
+  width: 1280px;
+  height: 720px;
+
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+
+  scroll-snap-align: center center;
+
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section::after {
+  bottom: 0;
+  content: attr(data-marpit-pagination);
+  padding: inherit;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+}div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section:not([data-marpit-pagination])::after {
+  display: none;
+}/* Normalization */div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section :where(h1) {
+  font-size: 2em;
+  margin-block: 0.67em;
+}div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section section:where(h1) {
+  --marpit-root-font-size: 2em;
+}div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section video::-webkit-media-controls {
+  will-change: transform;
+}@page {
+  size: 1280px 720px;
+  margin: 0;
+}@media print {html, body {
+  background-color: #fff;
+  margin: 0;
+  page-break-inside: avoid;
+  break-inside: avoid-page;
+}
+  div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section {
+    page-break-before: always;
+    break-before: page;
+  }
+
+  div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section, div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section * {
+    -webkit-print-color-adjust: exact !important;
+    animation-delay: 0s !important;
+    animation-duration: 0s !important;
+    color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    transition: none !important;
+  }
+
+  div.sp-deck-docs-deck > div.sp-deck-slide > svg[data-marpit-svg] {
+    display: block;
+    height: 100vh;
+    width: 100vw;
+  }
+}
+/* @theme silverpoint */
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section {
+  width: 1280px;
+  height: 720px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  font-family: var(--sp-font-display);
+  font-size: 30px;
+  line-height: 1.3;
+  padding: 64px 80px;
+  color: var(--sp-text);
+  background-color: var(--sp-substrate);
+  background-image: var(--sp-deck-backdrop, none);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  font-kerning: normal;
+}
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section {
+  --marpit-root-font-size: 30px;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section h1, div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section h2, div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section h3, div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section h4, div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section h5, div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section h6 {
+  color: var(--sp-text);
+  font-weight: 500;
+  line-height: 1.1;
+  margin: 0 0 24px;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section h1 {
+  font-size: 64px;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section h2 {
+  font-size: 48px;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section h3 {
+  font-size: 36px;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section h4, div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section h5, div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section h6 {
+  font-size: 30px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section p {
+  margin: 0 0 20px;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section ul, div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section ol {
+  margin: 0 0 20px;
+  padding-left: 40px;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section ul {
+  list-style: disc;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section ol {
+  font-variant-numeric: tabular-nums;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section li::marker {
+  color: var(--sp-ink);
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section a {
+  color: var(--sp-ink);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section strong {
+  font-weight: 500;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section em {
+  font-style: italic;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section blockquote {
+  margin: 0 0 20px;
+  padding: 0 0 0 24px;
+  border-left: 2px solid var(--sp-rule);
+  color: var(--sp-text-muted);
+  font-style: italic;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section table {
+  border-collapse: collapse;
+  margin: 0 0 20px;
+  font-variant-numeric: tabular-nums;
+  border-top: 1px solid var(--sp-rule);
+  border-bottom: 1px solid var(--sp-rule);
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section th {
+  font-size: 22px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-align: left;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--sp-rule);
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section td {
+  padding: 8px 16px;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section code {
+  font-family: var(--sp-font-display);
+  font-variant-numeric: tabular-nums;
+  color: var(--sp-ink-secondary);
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section pre {
+  font-family: var(--sp-font-display);
+  font-size: 24px;
+  line-height: 1.35;
+  font-variant-numeric: tabular-nums;
+  border: 1px solid var(--sp-rule);
+  outline: 1px solid var(--sp-rule);
+  outline-offset: 4px;
+  margin: 4px 4px 24px;
+  padding: 20px 28px;
+  white-space: pre-wrap;
+  tab-size: 2;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section :not(pre) > code {
+  border: 1px solid var(--sp-rule);
+  border-radius: 2px;
+  padding: 0 6px;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section pre code {
+  color: var(--sp-text);
+  font-size: inherit;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section img {
+  max-width: 100%;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section header, div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section footer {
+  position: absolute;
+  left: 80px;
+  right: 80px;
+  font-size: 22px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--sp-text-muted);
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section:has(> header) {
+  padding-top: 104px;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section header {
+  top: 24px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--sp-rule);
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section footer {
+  bottom: 24px;
+  padding-top: 6px;
+  border-top: 1px solid var(--sp-rule);
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section[data-marpit-pagination] footer {
+  right: 200px;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section[data-marpit-pagination]::after {
+  content: attr(data-marpit-pagination) ' / ' attr(data-marpit-pagination-total);
+  padding: 0;
+  position: absolute;
+  right: 80px;
+  bottom: 24px;
+  font-size: 22px;
+  font-variant-numeric: tabular-nums;
+  color: var(--sp-text-muted);
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section[data-marpit-pagination]::after {
+  --marpit-root-font-size: 22px;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section .sp-deck-chart {
+  margin: 0 0 20px;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section .sp-deck-chart--error {
+  border: 1px solid var(--sp-rule);
+  padding: 16px 24px;
+  font-size: 22px;
+  font-style: italic;
+  color: var(--sp-text);
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section section.sp-deck-chart--error {
+  --marpit-root-font-size: 22px;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section .sp-deck-chart--error figcaption {
+  margin: 0;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section.lead {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section.lead h1 {
+  font-size: 88px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--sp-rule);
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section.plate {
+  padding: 80px 104px;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section.plate header, div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section.plate footer {
+  left: 104px;
+  right: 104px;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section.plate header {
+  top: 44px;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section.plate:has(> header) {
+  padding-top: 120px;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section.plate footer {
+  bottom: 44px;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section.plate[data-marpit-pagination] footer {
+  right: 224px;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section.plate[data-marpit-pagination]::after {
+  right: 104px;
+  bottom: 44px;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section.hatched {
+  padding: 80px 104px;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section.hatched header, div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section.hatched footer {
+  left: 104px;
+  right: 104px;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section.hatched header {
+  top: 44px;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section.hatched:has(> header) {
+  padding-top: 120px;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section.hatched footer {
+  bottom: 44px;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section.hatched[data-marpit-pagination] footer {
+  right: 224px;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section.hatched[data-marpit-pagination]::after {
+  right: 104px;
+  bottom: 44px;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section[data-sp-ground="silverpoint"][data-sp-substrate="cream"] {
+  --sp-font-display: 'EB Garamond', 'Iowan Old Style', Georgia, serif;
+  --sp-substrate: #EDE7DA;
+  --sp-ink: #5A5E65;
+  --sp-ink-secondary: #685C4D;
+  --sp-heighten: #FFFFFF;
+  --sp-rule: #737A82;
+  --sp-grid: #737A82;
+  --sp-text: #3F4348;
+  --sp-text-muted: #5A5E65;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section.invert[data-sp-ground="silverpoint"][data-sp-substrate="cream"] {
+  --sp-font-display: 'EB Garamond', 'Iowan Old Style', Georgia, serif;
+  --sp-substrate: #5A5E65;
+  --sp-ink: #FFFFFF;
+  --sp-ink-secondary: #EDE7DA;
+  --sp-heighten: #EDE7DA;
+  --sp-rule: #EDE7DA;
+  --sp-grid: #EDE7DA;
+  --sp-text: #FFFFFF;
+  --sp-text-muted: #EDE7DA;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section[data-sp-ground="silverpoint"][data-sp-substrate="green"] {
+  --sp-font-display: 'EB Garamond', 'Iowan Old Style', Georgia, serif;
+  --sp-substrate: #D8DCD0;
+  --sp-ink: #5A5E65;
+  --sp-ink-secondary: #685C4D;
+  --sp-heighten: #FFFFFF;
+  --sp-rule: #737A82;
+  --sp-grid: #737A82;
+  --sp-text: #3F4348;
+  --sp-text-muted: #5A5E65;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section.invert[data-sp-ground="silverpoint"][data-sp-substrate="green"] {
+  --sp-font-display: 'EB Garamond', 'Iowan Old Style', Georgia, serif;
+  --sp-substrate: #5A5E65;
+  --sp-ink: #FFFFFF;
+  --sp-ink-secondary: #D8DCD0;
+  --sp-heighten: #D8DCD0;
+  --sp-rule: #D8DCD0;
+  --sp-grid: #D8DCD0;
+  --sp-text: #FFFFFF;
+  --sp-text-muted: #D8DCD0;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section[data-sp-ground="silverpoint"][data-sp-substrate="blue"] {
+  --sp-font-display: 'EB Garamond', 'Iowan Old Style', Georgia, serif;
+  --sp-substrate: #D2D8DF;
+  --sp-ink: #5A5E65;
+  --sp-ink-secondary: #685C4D;
+  --sp-heighten: #FFFFFF;
+  --sp-rule: #737A82;
+  --sp-grid: #737A82;
+  --sp-text: #3F4348;
+  --sp-text-muted: #5A5E65;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section.invert[data-sp-ground="silverpoint"][data-sp-substrate="blue"] {
+  --sp-font-display: 'EB Garamond', 'Iowan Old Style', Georgia, serif;
+  --sp-substrate: #5A5E65;
+  --sp-ink: #FFFFFF;
+  --sp-ink-secondary: #D2D8DF;
+  --sp-heighten: #D2D8DF;
+  --sp-rule: #D2D8DF;
+  --sp-grid: #D2D8DF;
+  --sp-text: #FFFFFF;
+  --sp-text-muted: #D2D8DF;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section[data-sp-ground="silverpoint"][data-sp-substrate="ochre"] {
+  --sp-font-display: 'EB Garamond', 'Iowan Old Style', Georgia, serif;
+  --sp-substrate: #E7DABC;
+  --sp-ink: #5A5E65;
+  --sp-ink-secondary: #685C4D;
+  --sp-heighten: #FFFFFF;
+  --sp-rule: #737A82;
+  --sp-grid: #737A82;
+  --sp-text: #3F4348;
+  --sp-text-muted: #5A5E65;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section.invert[data-sp-ground="silverpoint"][data-sp-substrate="ochre"] {
+  --sp-font-display: 'EB Garamond', 'Iowan Old Style', Georgia, serif;
+  --sp-substrate: #5A5E65;
+  --sp-ink: #FFFFFF;
+  --sp-ink-secondary: #E7DABC;
+  --sp-heighten: #E7DABC;
+  --sp-rule: #E7DABC;
+  --sp-grid: #E7DABC;
+  --sp-text: #FFFFFF;
+  --sp-text-muted: #E7DABC;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section[data-sp-ground="cyanotype"][data-sp-substrate="prussian"] {
+  --sp-font-display: 'EB Garamond', 'Iowan Old Style', Georgia, serif;
+  --sp-substrate: #1B3F6B;
+  --sp-ink: #E2EAF2;
+  --sp-ink-secondary: #DCCBA8;
+  --sp-heighten: #0C2240;
+  --sp-rule: #8AA8C7;
+  --sp-grid: #8AA8C7;
+  --sp-text: #F4F6F8;
+  --sp-text-muted: #B8CBDE;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section.invert[data-sp-ground="cyanotype"][data-sp-substrate="prussian"] {
+  --sp-font-display: 'EB Garamond', 'Iowan Old Style', Georgia, serif;
+  --sp-substrate: #E2EAF2;
+  --sp-ink: #0C2240;
+  --sp-ink-secondary: #1B3F6B;
+  --sp-heighten: #1B3F6B;
+  --sp-rule: #1B3F6B;
+  --sp-grid: #1B3F6B;
+  --sp-text: #0C2240;
+  --sp-text-muted: #1B3F6B;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section[data-marpit-advanced-background="background"] {
+  columns: initial !important;
+  display: block !important;
+  padding: 0 !important;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section[data-marpit-advanced-background="background"]::before,
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section[data-marpit-advanced-background="background"]::after,
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section[data-marpit-advanced-background="content"]::before,
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section[data-marpit-advanced-background="content"]::after {
+  display: none !important;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section[data-marpit-advanced-background="background"] > div[data-marpit-advanced-background-container] {
+  all: initial;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section[data-marpit-advanced-background="background"] > div[data-marpit-advanced-background-container][data-marpit-advanced-background-direction="vertical"] {
+  flex-direction: column;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section[data-marpit-advanced-background="background"][data-marpit-advanced-background-split] > div[data-marpit-advanced-background-container] {
+  width: var(--marpit-advanced-background-split, 50%);
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section[data-marpit-advanced-background="background"][data-marpit-advanced-background-split="right"] > div[data-marpit-advanced-background-container] {
+  margin-left: calc(100% - var(--marpit-advanced-background-split, 50%));
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section[data-marpit-advanced-background="background"] > div[data-marpit-advanced-background-container] > figure {
+  all: initial;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  flex: auto;
+  margin: 0;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section[data-marpit-advanced-background="background"] > div[data-marpit-advanced-background-container] > figure > figcaption {
+	position: absolute;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  white-space: nowrap;
+  width: 1px;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section[data-marpit-advanced-background="content"],
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section[data-marpit-advanced-background="pseudo"] {
+  background: transparent !important;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section[data-marpit-advanced-background="pseudo"],
+div.sp-deck-docs-deck > div.sp-deck-slide > svg[data-marpit-svg] > foreignObject[data-marpit-advanced-background="pseudo"] {
+  pointer-events: none !important;
+}
+
+div.sp-deck-docs-deck > div.sp-deck-slide > svg > foreignObject > section[data-marpit-advanced-background-split] {
+  width: 100%;
+  height: 100%;
+}
+</style><div class="sp-deck-viewport" part="sp-deck-viewport"><div class="sp-deck-docs-deck"><div class="sp-deck-slide" data-sp-slide="1" data-sp-current=""><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section data-header="silverpoint · slide decks" data-footer="silverpoint 0.9" data-class="lead" class="lead" style="--header:silverpoint · slide decks;--footer:silverpoint 0.9;--class:lead;" role="group" aria-roledescription="slide" aria-label="Slide 1 of 9" data-sp-ground="silverpoint" data-sp-substrate="cream" data-sp-mode="ink">
+<header>silverpoint · slide decks</header>
+
+<h1>Charts drawn like silverpoint</h1>
+<p>A Marp deck, from Markdown</p>
+<footer>silverpoint 0.9</footer>
+</section>
+</foreignObject></svg></div><div class="sp-deck-slide" data-sp-slide="2" hidden="" inert=""><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section data-marpit-fragments="4" data-paginate="true" data-header="silverpoint · slide decks" data-footer="silverpoint 0.9" data-marpit-pagination="2" style="--paginate:true;--header:silverpoint · slide decks;--footer:silverpoint 0.9;" data-marpit-pagination-total="9" role="group" aria-roledescription="slide" aria-label="Slide 2 of 9" data-sp-ground="silverpoint" data-sp-substrate="cream" data-sp-mode="ink">
+<header>silverpoint · slide decks</header>
+<h2>What a deck is made of</h2>
+<ul>
+<li data-marpit-fragment="1" data-sp-pending="">Slides separated by <code>---</code>, directives in comments</li>
+<li data-marpit-fragment="2" data-sp-pending="">Lists revealed one item at a time</li>
+<li data-marpit-fragment="3" data-sp-pending=""><code>silverpoint</code> fences that become live charts</li>
+<li data-marpit-fragment="4" data-sp-pending="">Presenter notes from any other comment</li>
+</ul>
+<footer>silverpoint 0.9</footer>
+</section>
+</foreignObject></svg></div><div class="sp-deck-slide" data-sp-slide="3" hidden="" inert=""><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section data-paginate="true" data-header="silverpoint · slide decks" data-footer="silverpoint 0.9" data-marpit-pagination="3" style="--paginate:true;--header:silverpoint · slide decks;--footer:silverpoint 0.9;" data-marpit-pagination-total="9" role="group" aria-roledescription="slide" aria-label="Slide 3 of 9" data-sp-ground="silverpoint" data-sp-substrate="cream" data-sp-mode="ink">
+<header>silverpoint · slide decks</header>
+<h2>Visits by quarter</h2>
+<figure class="sp-deck-chart" data-sp-slot="s3-c1" part="sp-deck-chart" data-sp-spec="{&quot;chart&quot;:&quot;bar-chart&quot;,&quot;props&quot;:{&quot;title&quot;:&quot;Visits by quarter&quot;,&quot;xKey&quot;:&quot;quarter&quot;,&quot;valueKey&quot;:&quot;visits&quot;},&quot;data&quot;:[{&quot;quarter&quot;:&quot;Q1&quot;,&quot;visits&quot;:412},{&quot;quarter&quot;:&quot;Q2&quot;,&quot;visits&quot;:538},{&quot;quarter&quot;:&quot;Q3&quot;,&quot;visits&quot;:611},{&quot;quarter&quot;:&quot;Q4&quot;,&quot;visits&quot;:574}],&quot;height&quot;:380}"><div class="sp-root sp-ground-silverpoint" data-substrate="cream" data-chrome="card" data-status="ready" tabindex="0" role="group" aria-label="Visits by quarter"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 440" width="1120" height="440" class="sp-chart sp-ground-silverpoint" data-substrate="cream" data-mode="ink" role="img" aria-labelledby="docs-deck-s3-c1-title docs-deck-s3-c1-desc"><title id="docs-deck-s3-c1-title">Visits by quarter</title><desc id="docs-deck-s3-c1-desc">Visits by quarter. Bar chart in columns of 4 quarter values; visits from 412 to 611.</desc><defs><pattern id="docs-deck-s3-c1-tone-2" width="45" height="45" patternUnits="userSpaceOnUse" patternTransform="rotate(-41)"><path d="M0 3.75 C10.57 2.8, 20.75 2.99, 45 3.75" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M0 11.25 C10.05 11.73, 19.7 12.01, 45 11.25" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M0 18.75 C9.54 18.62, 20.46 18.99, 45 18.75" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M0 26.25 C10.82 25.75, 21.22 26.21, 45 26.25" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M0 33.75 C10.31 34.68, 20.17 33.43, 45 33.75" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M0 41.25 C9.8 41.57, 20.93 40.41, 45 41.25" part="sp-ink" data-role="hatch" data-paint="stroke"></path></pattern></defs><path d="M0.5 0.5 C264.13 -0.22, 527.17 0.18, 1119.5 0.5 M0.5 0.5 C232.31 0.2, 463.99 0.34, 1119.5 0.5 M1119.5 0.5 C1119.99 160.2, 1119.89 320.21, 1119.5 439.5 M1119.5 0.5 C1119.85 170.78, 1119.97 340.7, 1119.5 439.5 M1119.5 439.5 C885.51 439.34, 650.76 439.94, 0.5 439.5 M1119.5 439.5 C694.88 440.14, 269.97 439.98, 0.5 439.5 M0.5 439.5 C-0.23 295.72, 0.11 151.73, 0.5 0.5 M0.5 439.5 C0.67 266.4, 0.48 93.6, 0.5 0.5" part="sp-rule" data-role="ornament" data-paint="stroke"></path><path d="M22 315.5 C275.61 316.3, 529.68 316.11, 1098 315.5 M22 315.5 C253.19 314.81, 483.93 314.58, 1098 315.5" part="sp-grid" data-role="ornament" data-paint="stroke"></path><path d="M22 227 C275.71 226.26, 530.21 226.93, 1098 227 M22 227 C261.11 227.87, 500.55 227.63, 1098 227" part="sp-grid" data-role="ornament" data-paint="stroke"></path><path d="M22 138.5 C276.54 139.26, 530.75 139.34, 1098 138.5 M22 138.5 C269.39 138.6, 516.8 138.72, 1098 138.5" part="sp-grid" data-role="ornament" data-paint="stroke"></path><path d="M22 50 C276.64 49.94, 531.28 49.43, 1098 50 M22 50 C277.68 49.34, 533.06 49.45, 1098 50" part="sp-grid" data-role="ornament" data-paint="stroke"></path><path d="M22 404 C276.75 404.72, 531.82 405.07, 1098 404 M22 404 C285.6 404.9, 549.67 405.01, 1098 404" part="sp-rule" data-role="ornament" data-paint="stroke"></path><path d="M90.59,287.59A65.9,65.9,0,0,1,156.5,221.69H156.5A65.9,65.9,0,0,1,222.4,287.59V338.1A65.9,65.9,0,0,1,156.5,404H156.5A65.9,65.9,0,0,1,90.59,338.1Z" part="sp-ink" data-role="hatch" data-paint="tile" fill="url(#docs-deck-s3-c1-tone-2)"></path><path d="M90.59,287.59A65.9,65.9,0,0,1,156.5,221.69H156.5A65.9,65.9,0,0,1,222.4,287.59V338.1A65.9,65.9,0,0,1,156.5,404H156.5A65.9,65.9,0,0,1,90.59,338.1Z" part="sp-ink" data-role="encoding" data-paint="stroke"></path><path d="M359.6,231.84A65.9,65.9,0,0,1,425.5,165.94H425.5A65.9,65.9,0,0,1,491.41,231.84V338.1A65.9,65.9,0,0,1,425.5,404H425.5A65.9,65.9,0,0,1,359.6,338.1Z" part="sp-ink" data-role="hatch" data-paint="tile" fill="url(#docs-deck-s3-c1-tone-2)"></path><path d="M359.6,231.84A65.9,65.9,0,0,1,425.5,165.94H425.5A65.9,65.9,0,0,1,491.41,231.84V338.1A65.9,65.9,0,0,1,425.5,404H425.5A65.9,65.9,0,0,1,359.6,338.1Z" part="sp-ink" data-role="encoding" data-paint="stroke"></path><path d="M628.59,199.54A65.9,65.9,0,0,1,694.5,133.63H694.5A65.9,65.9,0,0,1,760.4,199.54V338.1A65.9,65.9,0,0,1,694.5,404H694.5A65.9,65.9,0,0,1,628.59,338.1Z" part="sp-ink" data-role="hatch" data-paint="tile" fill="url(#docs-deck-s3-c1-tone-2)"></path><path d="M628.59,199.54A65.9,65.9,0,0,1,694.5,133.63H694.5A65.9,65.9,0,0,1,760.4,199.54V338.1A65.9,65.9,0,0,1,694.5,404H694.5A65.9,65.9,0,0,1,628.59,338.1Z" part="sp-ink" data-role="encoding" data-paint="stroke"></path><path d="M897.59,215.91A65.9,65.9,0,0,1,963.5,150.01H963.5A65.9,65.9,0,0,1,1029.41,215.91V338.1A65.9,65.9,0,0,1,963.5,404H963.5A65.9,65.9,0,0,1,897.59,338.1Z" part="sp-ink" data-role="hatch" data-paint="tile" fill="url(#docs-deck-s3-c1-tone-2)"></path><path d="M897.59,215.91A65.9,65.9,0,0,1,963.5,150.01H963.5A65.9,65.9,0,0,1,1029.41,215.91V338.1A65.9,65.9,0,0,1,963.5,404H963.5A65.9,65.9,0,0,1,897.59,338.1Z" part="sp-ink" data-role="encoding" data-paint="stroke"></path><text x="16" y="27" part="sp-text" data-kind="title" text-anchor="start">Visits by quarter</text><text x="22" y="312.5" part="sp-axis" data-kind="tick" text-anchor="start">200</text><text x="22" y="224" part="sp-axis" data-kind="tick" text-anchor="start">400</text><text x="22" y="135.5" part="sp-axis" data-kind="tick" text-anchor="start">600</text><text x="22" y="47" part="sp-axis" data-kind="tick" text-anchor="start">800</text><text x="156.5" y="419" part="sp-axis" data-kind="tick" text-anchor="start">Q1</text><text x="425.5" y="419" part="sp-axis" data-kind="tick" text-anchor="middle">Q2</text><text x="694.5" y="419" part="sp-axis" data-kind="tick" text-anchor="middle">Q3</text><text x="963.5" y="419" part="sp-axis" data-kind="tick" text-anchor="middle">Q4</text></svg><div class="sp-live" aria-live="polite"></div><div class="sp-table-box" data-visibility="hidden"><table class="sp-table" id="docs-deck-s3-c1-table" data-visibility="hidden"><caption>Visits by quarter</caption><thead><tr><th scope="col">quarter</th><th scope="col">visits</th></tr></thead><tbody><tr><th scope="row">Q1</th><td>412</td></tr><tr><th scope="row">Q2</th><td>538</td></tr><tr><th scope="row">Q3</th><td>611</td></tr><tr><th scope="row">Q4</th><td>574</td></tr></tbody></table></div></div></figure><footer>silverpoint 0.9</footer>
+</section>
+</foreignObject></svg></div><div class="sp-deck-slide" data-sp-slide="4" hidden="" inert=""><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section data-paginate="true" data-header="silverpoint · slide decks" data-footer="silverpoint 0.9" data-marpit-pagination="4" style="--paginate:true;--header:silverpoint · slide decks;--footer:silverpoint 0.9;" data-marpit-pagination-total="9" role="group" aria-roledescription="slide" aria-label="Slide 4 of 9" data-sp-ground="cyanotype" data-sp-substrate="prussian" data-sp-mode="ink">
+<header>silverpoint · slide decks</header>
+
+<h2>The cyanotype ground</h2>
+<figure class="sp-deck-chart" data-sp-slot="s4-c1" part="sp-deck-chart" data-sp-spec="{&quot;chart&quot;:&quot;line-chart&quot;,&quot;props&quot;:{&quot;title&quot;:&quot;Visits over the year&quot;},&quot;height&quot;:380}"><div class="sp-root sp-ground-cyanotype" data-substrate="prussian" data-chrome="card" data-status="ready" tabindex="0" role="group" aria-label="Visits over the year"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 440" width="1120" height="440" class="sp-chart sp-ground-cyanotype" data-substrate="prussian" data-mode="ink" role="img" aria-labelledby="docs-deck-s4-c1-title docs-deck-s4-c1-desc"><title id="docs-deck-s4-c1-title">Visits over the year</title><desc id="docs-deck-s4-c1-desc">Visits over the year. Line chart of 12 hour values in 2 series; hits ranges from 11 to 88; baseline ranges from 15 to 70.</desc><path d="M0.5,0.5H1119.5V439.5H0.5Z" part="sp-rule" data-role="ornament" data-paint="stroke"></path><path d="M22,333.2H1098" part="sp-grid" data-role="ornament" data-paint="stroke"></path><path d="M22,262.4H1098" part="sp-grid" data-role="ornament" data-paint="stroke"></path><path d="M22,191.6H1098" part="sp-grid" data-role="ornament" data-paint="stroke"></path><path d="M22,120.8H1098" part="sp-grid" data-role="ornament" data-paint="stroke"></path><path d="M22,50H1098" part="sp-grid" data-role="ornament" data-paint="stroke"></path><path d="M22,404H1098" part="sp-rule" data-role="ornament" data-paint="stroke"></path><path d="M66.83,326.12C96.72,331.14,126.61,336.15,156.5,340.28C186.39,344.41,216.28,350.9,246.17,350.9C276.06,350.9,305.94,348.54,335.83,343.82C365.72,339.1,395.61,316.09,425.5,297.8C455.39,279.51,485.28,251.78,515.17,234.08C545.06,216.38,574.94,196.32,604.83,191.6C634.72,186.88,664.61,186.88,694.5,184.52C724.39,182.16,754.28,182.16,784.17,177.44C814.06,172.72,843.94,156.2,873.83,156.2C903.72,156.2,933.61,191.6,963.5,209.3C993.39,227,1023.28,244.7,1053.17,262.4" part="sp-ink-secondary" data-role="encoding" data-paint="stroke" data-dash="dotted"></path><path d="M66.83,340.28C96.72,345.3,126.61,350.31,156.5,354.44C186.39,358.57,216.28,365.06,246.17,365.06C276.06,365.06,305.94,359.16,335.83,347.36C365.72,335.56,395.61,308.42,425.5,283.64C455.39,258.86,485.28,220.51,515.17,198.68C545.06,176.85,574.94,152.66,604.83,152.66C634.72,152.66,664.61,170.36,694.5,170.36C724.39,170.36,754.28,155.02,784.17,142.04C814.06,129.06,843.94,92.48,873.83,92.48C903.72,92.48,933.61,156.79,963.5,184.52C993.39,212.25,1023.28,235.56,1053.17,258.86" part="sp-ink" data-role="encoding" data-paint="stroke"></path><path d="M1049.67,258.86A3.5,3.5,0,1,0,1056.67,258.86A3.5,3.5,0,1,0,1049.67,258.86Z" part="sp-heighten" data-role="encoding" data-paint="fill"></path><path d="M1049.67,258.86A3.5,3.5,0,1,0,1056.67,258.86A3.5,3.5,0,1,0,1049.67,258.86Z" part="sp-ink" data-role="encoding" data-paint="stroke"></path><text x="16" y="27" part="sp-text" data-kind="title" text-anchor="start">Visits over the year</text><text x="22" y="330.2" part="sp-axis" data-kind="tick" text-anchor="start">20</text><text x="22" y="259.4" part="sp-axis" data-kind="tick" text-anchor="start">40</text><text x="22" y="188.6" part="sp-axis" data-kind="tick" text-anchor="start">60</text><text x="22" y="117.8" part="sp-axis" data-kind="tick" text-anchor="start">80</text><text x="22" y="47" part="sp-axis" data-kind="tick" text-anchor="start">100</text><text x="66.83" y="419" part="sp-axis" data-kind="tick" text-anchor="start">00</text><text x="156.5" y="419" part="sp-axis" data-kind="tick" text-anchor="middle">02</text><text x="246.17" y="419" part="sp-axis" data-kind="tick" text-anchor="middle">04</text><text x="335.83" y="419" part="sp-axis" data-kind="tick" text-anchor="middle">06</text><text x="425.5" y="419" part="sp-axis" data-kind="tick" text-anchor="middle">08</text><text x="515.17" y="419" part="sp-axis" data-kind="tick" text-anchor="middle">10</text><text x="604.83" y="419" part="sp-axis" data-kind="tick" text-anchor="middle">12</text><text x="694.5" y="419" part="sp-axis" data-kind="tick" text-anchor="middle">14</text><text x="784.17" y="419" part="sp-axis" data-kind="tick" text-anchor="middle">16</text><text x="873.83" y="419" part="sp-axis" data-kind="tick" text-anchor="middle">18</text><text x="963.5" y="419" part="sp-axis" data-kind="tick" text-anchor="middle">20</text><text x="1053.17" y="419" part="sp-axis" data-kind="tick" text-anchor="middle">22</text></svg><div class="sp-live" aria-live="polite"></div><div class="sp-table-box" data-visibility="hidden"><table class="sp-table" id="docs-deck-s4-c1-table" data-visibility="hidden"><caption>Visits over the year</caption><thead><tr><th scope="col">hour</th><th scope="col">hits</th><th scope="col">baseline</th></tr></thead><tbody><tr><th scope="row">00</th><td>18</td><td>22</td></tr><tr><th scope="row">02</th><td>14</td><td>18</td></tr><tr><th scope="row">04</th><td>11</td><td>15</td></tr><tr><th scope="row">06</th><td>16</td><td>17</td></tr><tr><th scope="row">08</th><td>34</td><td>30</td></tr><tr><th scope="row">10</th><td>58</td><td>48</td></tr><tr><th scope="row">12</th><td>71</td><td>60</td></tr><tr><th scope="row">14</th><td>66</td><td>62</td></tr><tr><th scope="row">16</th><td>74</td><td>64</td></tr><tr><th scope="row">18</th><td>88</td><td>70</td></tr><tr><th scope="row">20</th><td>62</td><td>55</td></tr><tr><th scope="row">22</th><td>41</td><td>40</td></tr></tbody></table></div></div></figure><footer>silverpoint 0.9</footer>
+</section>
+</foreignObject></svg></div><div class="sp-deck-slide" data-sp-slide="5" hidden="" inert=""><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section data-paginate="true" data-header="silverpoint · slide decks" data-footer="silverpoint 0.9" data-marpit-pagination="5" style="--paginate:true;--header:silverpoint · slide decks;--footer:silverpoint 0.9;" data-marpit-pagination-total="9" role="group" aria-roledescription="slide" aria-label="Slide 5 of 9" data-sp-ground="silverpoint" data-sp-substrate="cream" data-sp-mode="precision">
+<header>silverpoint · slide decks</header>
+
+<h2>Precision mode</h2>
+<figure class="sp-deck-chart" data-sp-slot="s5-c1" part="sp-deck-chart" data-sp-spec="{&quot;chart&quot;:&quot;radar-chart&quot;,&quot;props&quot;:{&quot;title&quot;:&quot;Skills, with exact strokes&quot;},&quot;height&quot;:400}"><div class="sp-root sp-ground-silverpoint" data-substrate="cream" data-chrome="card" data-status="ready" tabindex="0" role="group" aria-label="Skills, with exact strokes"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 460" width="1120" height="460" class="sp-chart sp-ground-silverpoint" data-substrate="cream" data-mode="precision" role="img" aria-labelledby="docs-deck-s5-c1-title docs-deck-s5-c1-desc"><title id="docs-deck-s5-c1-title">Skills, with exact strokes</title><desc id="docs-deck-s5-c1-desc">Skills, with exact strokes. Radar of 6 subjects on a scale from 0 to 10; highest Safety at 9, lowest Cost at 4.</desc><path d="M0.5,0.5H1119.5V459.5H0.5Z" part="sp-rule" data-role="ornament" data-paint="stroke"></path><path d="M560,208L591.18,226L591.18,262L560,280L528.82,262L528.82,226Z" part="sp-grid" data-role="ornament" data-paint="stroke"></path><path d="M560,172L622.35,208L622.35,280L560,316L497.65,280L497.65,208Z" part="sp-grid" data-role="ornament" data-paint="stroke"></path><path d="M560,136L653.53,190L653.53,298L560,352L466.47,298L466.47,190Z" part="sp-grid" data-role="ornament" data-paint="stroke"></path><path d="M560,100L684.71,172L684.71,316L560,388L435.29,316L435.29,172Z" part="sp-grid" data-role="ornament" data-paint="stroke"></path><path d="M560,64L715.88,154L715.88,334L560,424L404.12,334L404.12,154Z" part="sp-grid" data-role="ornament" data-paint="stroke"></path><path d="M560,244L560,64" part="sp-grid" data-role="ornament" data-paint="stroke"></path><path d="M560,244L715.88,154" part="sp-grid" data-role="ornament" data-paint="stroke"></path><path d="M560,244L715.88,334" part="sp-grid" data-role="ornament" data-paint="stroke"></path><path d="M560,244L560,424" part="sp-grid" data-role="ornament" data-paint="stroke"></path><path d="M560,244L404.12,334" part="sp-grid" data-role="ornament" data-paint="stroke"></path><path d="M560,244L404.12,154" part="sp-grid" data-role="ornament" data-paint="stroke"></path><path d="M560,100L653.53,190L669.12,307L560,406L497.65,280L466.47,190Z" part="sp-ink" data-role="encoding" data-paint="stroke"></path><text x="16" y="27" part="sp-text" data-kind="title" text-anchor="start">Skills, with exact strokes</text><text x="563" y="206" part="sp-axis" data-kind="tick" text-anchor="start">2</text><text x="563" y="170" part="sp-axis" data-kind="tick" text-anchor="start">4</text><text x="563" y="134" part="sp-axis" data-kind="tick" text-anchor="start">6</text><text x="563" y="98" part="sp-axis" data-kind="tick" text-anchor="start">8</text><text x="560" y="59" part="sp-axis" data-kind="tick" text-anchor="middle">Speed</text><text x="722.81" y="153" part="sp-axis" data-kind="tick" text-anchor="start">Range</text><text x="722.81" y="341" part="sp-axis" data-kind="tick" text-anchor="start">Comfort</text><text x="560" y="435" part="sp-axis" data-kind="tick" text-anchor="middle">Safety</text><text x="397.19" y="341" part="sp-axis" data-kind="tick" text-anchor="end">Cost</text><text x="397.19" y="153" part="sp-axis" data-kind="tick" text-anchor="end">Style</text></svg><div class="sp-live" aria-live="polite"></div><div class="sp-table-box" data-visibility="hidden"><table class="sp-table" id="docs-deck-s5-c1-table" data-visibility="hidden"><caption>Skills, with exact strokes</caption><thead><tr><th scope="col">subject</th><th scope="col">value</th></tr></thead><tbody><tr><th scope="row">Speed</th><td>8</td></tr><tr><th scope="row">Range</th><td>6</td></tr><tr><th scope="row">Comfort</th><td>7</td></tr><tr><th scope="row">Safety</th><td>9</td></tr><tr><th scope="row">Cost</th><td>4</td></tr><tr><th scope="row">Style</th><td>6</td></tr></tbody></table></div></div></figure><footer>silverpoint 0.9</footer>
+</section>
+</foreignObject></svg></div><div class="sp-deck-slide" data-sp-slide="6" hidden="" inert=""><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section data-marpit-fragments="4" data-paginate="true" data-header="silverpoint · slide decks" data-footer="silverpoint 0.9" data-class="plate" class="plate" data-marpit-pagination="6" style="--paginate:true;--header:silverpoint · slide decks;--footer:silverpoint 0.9;--class:plate;--sp-deck-backdrop:url(&quot;data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201280%20720%22%20width%3D%221280%22%20height%3D%22720%22%3E%3Crect%20width%3D%221280%22%20height%3D%22720%22%20fill%3D%22%23E7DABC%22%2F%3E%3Cpath%20d%3D%22M24%2024%20C305.51%2022.78%2C%20586.92%2022.71%2C%201256%2024%20M24%2024%20C403.27%2023.24%2C%20782.27%2023.29%2C%201256%2024%20M1256%2024%20C1255.09%20166.19%2C%201255.5%20308.23%2C%201256%20696%20M1256%2024%20C1255.43%20230.27%2C%201255.42%20436.81%2C%201256%20696%20M1256%20696%20C790.99%20694.62%2C%20325.39%20694.63%2C%2024%20696%20M1256%20696%20C949.05%20695.21%2C%20642.21%20695.19%2C%2024%20696%20M24%20696%20C24.66%20456.59%2C%2024.61%20217.54%2C%2024%2024%20M24%20696%20C24.5%20516.59%2C%2024.63%20336.98%2C%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23737A82%22%20stroke-width%3D%220.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M30%2030%20C308.92%2030.46%2C%20588.06%2030.52%2C%201250%2030%20M30%2030%20C414.6%2031.03%2C%20799.33%2031.07%2C%201250%2030%20M1250%2030%20C1249.8%20201.52%2C%201250.04%20373.54%2C%201250%20690%20M1250%2030%20C1250.4%20244.69%2C%201250.28%20459.08%2C%201250%20690%20M1250%20690%20C866.78%20690.67%2C%20482.52%20690.67%2C%2030%20690%20M1250%20690%20C924.11%20690.51%2C%20597.98%20690.63%2C%2030%20690%20M30%20690%20C30.52%20451.97%2C%2030.1%20214.5%2C%2030%2030%20M30%20690%20C29.27%20449.31%2C%2029.52%20208.61%2C%2030%2030%22%20fill%3D%22none%22%20stroke%3D%22%23737A82%22%20stroke-width%3D%220.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E&quot;);--sp-deck-backdrop-precision:url(&quot;data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201280%20720%22%20width%3D%221280%22%20height%3D%22720%22%3E%3Crect%20width%3D%221280%22%20height%3D%22720%22%20fill%3D%22%23E7DABC%22%2F%3E%3Cpath%20d%3D%22M24%2024H1256V696H24Z%22%20fill%3D%22none%22%20stroke%3D%22%23737A82%22%20stroke-width%3D%220.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M30%2030H1250V690H30Z%22%20fill%3D%22none%22%20stroke%3D%22%23737A82%22%20stroke-width%3D%220.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E&quot;)" data-marpit-pagination-total="9" role="group" aria-roledescription="slide" aria-label="Slide 6 of 9" data-sp-ground="silverpoint" data-sp-substrate="ochre" data-sp-mode="ink">
+<header>silverpoint · slide decks</header>
+
+<h2>A plate mark on ochre</h2>
+<ol>
+<li data-marpit-fragment="1" data-sp-pending="">Marpit parses the Markdown and the directives</li>
+<li data-marpit-fragment="2" data-sp-pending="">The silverpoint theme lays it on the ground</li>
+<li data-marpit-fragment="3" data-sp-pending="">Each fence is drawn as static SVG</li>
+<li data-marpit-fragment="4" data-sp-pending="">In the browser, the chart is hydrated in place</li>
+</ol>
+<footer>silverpoint 0.9</footer>
+</section>
+</foreignObject></svg></div><div class="sp-deck-slide" data-sp-slide="7" hidden="" inert=""><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section data-paginate="true" data-header="silverpoint · slide decks" data-footer="silverpoint 0.9" data-class="hatched" class="hatched" data-marpit-pagination="7" style="--paginate:true;--header:silverpoint · slide decks;--footer:silverpoint 0.9;--class:hatched;--sp-deck-backdrop:url(&quot;data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201280%20720%22%20width%3D%221280%22%20height%3D%22720%22%3E%3Crect%20width%3D%221280%22%20height%3D%22720%22%20fill%3D%22%23EDE7DA%22%2F%3E%3Cdefs%3E%3Cpattern%20id%3D%22sp-backdrop-tone-1%22%20width%3D%2250%22%20height%3D%2250%22%20patternUnits%3D%22userSpaceOnUse%22%20patternTransform%3D%22rotate(-41)%22%3E%3Cpath%20d%3D%22M0%205%20C16.72%205.85%2C%2034.22%205.86%2C%2050%205%22%20fill%3D%22none%22%20stroke%3D%22%235A5E65%22%20stroke-width%3D%220.54%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M0%2015%20C18.01%2015.49%2C%2034.98%2015.59%2C%2050%2015%22%20fill%3D%22none%22%20stroke%3D%22%235A5E65%22%20stroke-width%3D%220.54%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M0%2025%20C17.49%2024.86%2C%2035.73%2025.05%2C%2050%2025%22%20fill%3D%22none%22%20stroke%3D%22%235A5E65%22%20stroke-width%3D%220.54%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M0%2035%20C16.98%2034.5%2C%2034.69%2034.78%2C%2050%2035%22%20fill%3D%22none%22%20stroke%3D%22%235A5E65%22%20stroke-width%3D%220.54%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M0%2045%20C18.27%2045.95%2C%2035.45%2044.51%2C%2050%2045%22%20fill%3D%22none%22%20stroke%3D%22%235A5E65%22%20stroke-width%3D%220.54%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fpattern%3E%3C%2Fdefs%3E%3Cpath%20d%3D%22M0%200H1280V720H0ZM32%2032V688H1248V32Z%22%20fill%3D%22url(%23sp-backdrop-tone-1)%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E&quot;);--sp-deck-backdrop-precision:url(&quot;data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201280%20720%22%20width%3D%221280%22%20height%3D%22720%22%3E%3Crect%20width%3D%221280%22%20height%3D%22720%22%20fill%3D%22%23EDE7DA%22%2F%3E%3Cpath%20d%3D%22M0%200H1280V720H0ZM32%2032V688H1248V32Z%22%20fill%3D%22none%22%20stroke%3D%22%23685C4D%22%20stroke-width%3D%220.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E&quot;)" data-marpit-pagination-total="9" role="group" aria-roledescription="slide" aria-label="Slide 7 of 9" data-sp-ground="silverpoint" data-sp-substrate="cream" data-sp-mode="ink">
+<header>silverpoint · slide decks</header>
+
+<h2>Share by channel</h2>
+<figure class="sp-deck-chart" data-sp-slot="s7-c1" part="sp-deck-chart" data-sp-spec="{&quot;chart&quot;:&quot;donut-chart&quot;,&quot;props&quot;:{&quot;title&quot;:&quot;Share by channel&quot;,&quot;legend&quot;:true},&quot;height&quot;:320}"><div class="sp-root sp-ground-silverpoint" data-substrate="cream" data-chrome="card" data-status="ready" tabindex="0" role="group" aria-label="Share by channel"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 380" width="1120" height="380" class="sp-chart sp-ground-silverpoint" data-substrate="cream" data-mode="ink" role="img" aria-labelledby="docs-deck-s7-c1-title docs-deck-s7-c1-desc"><title id="docs-deck-s7-c1-title">Share by channel</title><desc id="docs-deck-s7-c1-desc">Share by channel. Donut of 5 sectors totalling 100; the largest is Rent at 38%.</desc><defs><pattern id="docs-deck-s7-c1-tone-1" width="50" height="50" patternUnits="userSpaceOnUse" patternTransform="rotate(-41)"><path d="M0 5 C14.88 4.65, 31.34 5.52, 50 5" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M0 15 C16.16 14.29, 32.1 15.25, 50 15" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M0 25 C15.65 25.46, 31.06 24.71, 50 25" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M0 35 C15.14 35.1, 31.81 34.44, 50 35" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M0 45 C16.42 44.47, 30.77 45.71, 50 45" part="sp-ink" data-role="hatch" data-paint="stroke"></path></pattern><pattern id="docs-deck-s7-c1-tone-2" width="45" height="45" patternUnits="userSpaceOnUse" patternTransform="rotate(-41)"><path d="M0 3.75 C8.63 4.13, 18.47 4.6, 45 3.75" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M0 11.25 C9.91 11.26, 19.23 11.83, 45 11.25" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M0 18.75 C9.4 18.15, 18.19 18.8, 45 18.75" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M0 26.25 C8.89 27.08, 18.94 26.02, 45 26.25" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M0 33.75 C10.17 33.96, 17.9 33, 45 33.75" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M0 41.25 C9.66 41.09, 18.66 42.02, 45 41.25" part="sp-ink" data-role="hatch" data-paint="stroke"></path></pattern><pattern id="docs-deck-s7-c1-tone-3" width="49.5" height="49.5" patternUnits="userSpaceOnUse" patternTransform="rotate(-41)"><path d="M0 2.75 C14.3 2.05, 29.46 2.13, 49.5 2.75" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M0 8.25 C15.59 8.99, 30.21 9.16, 49.5 8.25" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M0 13.75 C15.08 13.87, 29.17 14.13, 49.5 13.75" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M0 19.25 C14.56 19.01, 29.93 19.36, 49.5 19.25" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M0 24.75 C15.85 24.15, 30.68 24.59, 49.5 24.75" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M0 30.25 C15.33 30.82, 29.64 29.55, 49.5 30.25" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M0 35.75 C14.82 35.96, 30.4 36.58, 49.5 35.75" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M0 41.25 C14.31 40.83, 29.35 41.54, 49.5 41.25" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M0 46.75 C15.59 45.97, 30.11 46.77, 49.5 46.75" part="sp-ink" data-role="hatch" data-paint="stroke"></path></pattern><pattern id="docs-deck-s7-c1-tone-4" width="49.5" height="49.5" patternUnits="userSpaceOnUse" patternTransform="rotate(-41)"><path d="M0 2.75 C19.04 2.78, 40.37 2.47, 49.5 2.75" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M0 8.25 C20.33 7.92, 39.33 7.7, 49.5 8.25" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M0 13.75 C19.82 12.8, 40.08 14.46, 49.5 13.75" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M0 19.25 C19.3 19.74, 39.04 19.69, 49.5 19.25" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M0 24.75 C20.59 24.88, 39.8 24.92, 49.5 24.75" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M0 30.25 C20.07 29.75, 38.75 29.88, 49.5 30.25" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M0 35.75 C19.56 36.69, 39.51 35.11, 49.5 35.75" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M0 41.25 C19.05 41.56, 40.26 41.87, 49.5 41.25" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M0 46.75 C20.33 46.7, 39.22 47.1, 49.5 46.75" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M2.75 0 C2.69 19.22, 3.1 39.47, 2.75 49.5" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M8.25 0 C7.7 20.56, 7.58 39.1, 8.25 49.5" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M13.75 0 C14.51 20.09, 13.86 38.72, 13.75 49.5" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M19.25 0 C19.52 19.63, 18.33 40.14, 19.25 49.5" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M24.75 0 C24.53 19.16, 24.61 39.77, 24.75 49.5" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M30.25 0 C29.54 20.49, 30.89 39.39, 30.25 49.5" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M35.75 0 C36.35 20.03, 35.37 39.01, 35.75 49.5" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M41.25 0 C41.35 19.56, 41.65 38.64, 41.25 49.5" part="sp-ink" data-role="hatch" data-paint="stroke"></path><path d="M46.75 0 C46.36 19.1, 46.13 40.06, 46.75 49.5" part="sp-ink" data-role="hatch" data-paint="stroke"></path></pattern></defs><path d="M0.5 0.5 C242.66 0.7, 485.6 0.49, 1119.5 0.5 M0.5 0.5 C372.95 -0.42, 745.31 -0.3, 1119.5 0.5 M1119.5 0.5 C1119.66 81.47, 1120.3 162.35, 1119.5 379.5 M1119.5 0.5 C1119.91 126.07, 1120.02 251.79, 1119.5 379.5 M1119.5 379.5 C876.22 380.34, 632.36 380.23, 0.5 379.5 M1119.5 379.5 C793.69 380.44, 467.64 380.34, 0.5 379.5 M0.5 379.5 C0.58 238.33, -0.09 96.61, 0.5 0.5 M0.5 379.5 C1.17 248.3, 1.09 116.69, 0.5 0.5" part="sp-rule" data-role="ornament" data-paint="stroke"></path><path d="M176,50A154,154,0,0,1,281.42,316.26L241.36,273.6A95.48,95.48,0,0,0,176,108.52Z" part="sp-ink" data-role="hatch" data-paint="tile" fill="url(#docs-deck-s7-c1-tone-1)"></path><path d="M176,50A154,154,0,0,1,281.42,316.26L241.36,273.6A95.48,95.48,0,0,0,176,108.52Z" part="sp-ink" data-role="encoding" data-paint="stroke"></path><path d="M281.42,316.26A154,154,0,0,1,85.48,328.59L119.88,281.24A95.48,95.48,0,0,0,241.36,273.6Z" part="sp-ink" data-role="hatch" data-paint="tile" fill="url(#docs-deck-s7-c1-tone-2)"></path><path d="M281.42,316.26A154,154,0,0,1,85.48,328.59L119.88,281.24A95.48,95.48,0,0,0,241.36,273.6Z" part="sp-ink" data-role="encoding" data-paint="stroke"></path><path d="M85.48,328.59A154,154,0,0,1,22,204L80.52,204A95.48,95.48,0,0,0,119.88,281.24Z" part="sp-ink" data-role="hatch" data-paint="tile" fill="url(#docs-deck-s7-c1-tone-3)"></path><path d="M85.48,328.59A154,154,0,0,1,22,204L80.52,204A95.48,95.48,0,0,0,119.88,281.24Z" part="sp-ink" data-role="encoding" data-paint="stroke"></path><path d="M22,204A154,154,0,0,1,77.84,85.34L115.14,130.43A95.48,95.48,0,0,0,80.52,204Z" part="sp-ink" data-role="hatch" data-paint="tile" fill="url(#docs-deck-s7-c1-tone-4)"></path><path d="M22,204A154,154,0,0,1,77.84,85.34L115.14,130.43A95.48,95.48,0,0,0,80.52,204Z" part="sp-ink" data-role="encoding" data-paint="stroke"></path><path d="M77.84,85.34A154,154,0,0,1,176,50L176,108.52A95.48,95.48,0,0,0,115.14,130.43Z" part="sp-ink" data-role="hatch" data-paint="tile" fill="url(#docs-deck-s7-c1-tone-3)"></path><path d="M77.84,85.34A154,154,0,0,1,176,50L176,108.52A95.48,95.48,0,0,0,115.14,130.43Z" part="sp-ink" data-role="encoding" data-paint="stroke"></path><path d="M350,172H359V179H350Z" part="sp-ink" data-role="hatch" data-paint="tile" fill="url(#docs-deck-s7-c1-tone-1)"></path><path d="M350 172 C351.87 171.95, 353.58 171.82, 359 172 M350 172 C353.22 171.94, 356.69 172.03, 359 172 M359 172 C358.95 173.91, 359.08 176.01, 359 179 M359 172 C358.92 173.53, 359.06 175.27, 359 179 M359 179 C356.79 178.85, 355 178.65, 350 179 M359 179 C357.15 179.1, 355.47 179.15, 350 179 M350 179 C350.22 176.42, 349.79 173.29, 350 172 M350 179 C350.15 176.59, 350.1 174.32, 350 172" part="sp-ink" data-role="ornament" data-paint="stroke"></path><path d="M350,186H359V193H350Z" part="sp-ink" data-role="hatch" data-paint="tile" fill="url(#docs-deck-s7-c1-tone-2)"></path><path d="M350 186 C351.64 186.27, 354.3 186.29, 359 186 M350 186 C353.4 185.85, 357.11 185.94, 359 186 M359 186 C358.95 188.73, 358.94 190.96, 359 193 M359 186 C358.99 187.84, 359.05 189.71, 359 193 M359 193 C355.76 192.96, 352.44 192.75, 350 193 M359 193 C356.89 192.91, 354.94 193.12, 350 193 M350 193 C349.81 191.58, 350.31 190.41, 350 186 M350 193 C349.91 191.43, 349.95 189.84, 350 186" part="sp-ink" data-role="ornament" data-paint="stroke"></path><path d="M350,200H359V207H350Z" part="sp-ink" data-role="hatch" data-paint="tile" fill="url(#docs-deck-s7-c1-tone-3)"></path><path d="M350 200 C352.23 199.83, 354.21 200, 359 200 M350 200 C353.58 199.82, 357.12 199.9, 359 200 M359 200 C358.99 201.52, 358.84 203.1, 359 207 M359 200 C359.11 201.83, 359.08 203.83, 359 207 M359 207 C356.53 207.02, 353.49 206.79, 350 207 M359 207 C357.02 207.08, 354.81 207.04, 350 207 M350 207 C350.02 205.33, 350.2 204.09, 350 200 M350 207 C349.98 204.87, 350.13 202.57, 350 200" part="sp-ink" data-role="ornament" data-paint="stroke"></path><path d="M350,214H359V221H350Z" part="sp-ink" data-role="hatch" data-paint="tile" fill="url(#docs-deck-s7-c1-tone-4)"></path><path d="M350 214 C352 214.15, 354.12 213.66, 359 214 M350 214 C351.96 214.14, 353.53 213.81, 359 214 M359 214 C359 215.71, 358.7 217.42, 359 221 M359 214 C358.88 216.14, 359.06 218.27, 359 221 M359 221 C356.49 221.09, 354.53 220.84, 350 221 M359 221 C356.76 220.89, 354.28 221.01, 350 221 M350 221 C350.27 219.72, 350.13 217.77, 350 214 M350 221 C350.05 219.4, 349.99 217.79, 350 214" part="sp-ink" data-role="ornament" data-paint="stroke"></path><path d="M350,228H359V235H350Z" part="sp-ink" data-role="hatch" data-paint="tile" fill="url(#docs-deck-s7-c1-tone-3)"></path><path d="M350 228 C351.77 227.7, 354.03 228.18, 359 228 M350 228 C351.74 228.06, 353.95 228.12, 359 228 M359 228 C359.04 229.9, 359.22 232.37, 359 235 M359 228 C358.99 230.14, 359.09 232.39, 359 235 M359 235 C355.46 235.15, 351.98 234.89, 350 235 M359 235 C356.49 235.05, 354.15 234.93, 350 235 M350 235 C349.86 233.47, 350.02 232.08, 350 228 M350 235 C350.12 232.84, 350.16 230.52, 350 228" part="sp-ink" data-role="ornament" data-paint="stroke"></path><text x="16" y="27" part="sp-text" data-kind="title" text-anchor="start">Share by channel</text><text x="176" y="210" part="sp-text" data-kind="value" text-anchor="middle">100</text><text x="364" y="179" part="sp-text" data-kind="tick" text-anchor="start">Rent</text><text x="1104" y="179" part="sp-axis" data-kind="tick" text-anchor="end">38%</text><text x="364" y="193" part="sp-text" data-kind="tick" text-anchor="start">Food</text><text x="1104" y="193" part="sp-axis" data-kind="tick" text-anchor="end">22%</text><text x="364" y="207" part="sp-text" data-kind="tick" text-anchor="start">Savings</text><text x="1104" y="207" part="sp-axis" data-kind="tick" text-anchor="end">15%</text><text x="364" y="221" part="sp-text" data-kind="tick" text-anchor="start">Transport</text><text x="1104" y="221" part="sp-axis" data-kind="tick" text-anchor="end">14%</text><text x="364" y="235" part="sp-text" data-kind="tick" text-anchor="start">Leisure</text><text x="1104" y="235" part="sp-axis" data-kind="tick" text-anchor="end">11%</text></svg><div class="sp-live" aria-live="polite"></div><div class="sp-table-box" data-visibility="hidden"><table class="sp-table" id="docs-deck-s7-c1-table" data-visibility="hidden"><caption>Share by channel</caption><thead><tr><th scope="col">name</th><th scope="col">value</th><th scope="col">share</th></tr></thead><tbody><tr><th scope="row">Rent</th><td>38</td><td>38%</td></tr><tr><th scope="row">Food</th><td>22</td><td>22%</td></tr><tr><th scope="row">Savings</th><td>15</td><td>15%</td></tr><tr><th scope="row">Transport</th><td>14</td><td>14%</td></tr><tr><th scope="row">Leisure</th><td>11</td><td>11%</td></tr></tbody></table></div></div></figure><footer>silverpoint 0.9</footer>
+</section>
+</foreignObject></svg></div><div class="sp-deck-slide" data-sp-slide="8" hidden="" inert=""><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section data-paginate="true" data-header="silverpoint · slide decks" data-footer="silverpoint 0.9" data-marpit-pagination="8" style="--paginate:true;--header:silverpoint · slide decks;--footer:silverpoint 0.9;" data-marpit-pagination-total="9" role="group" aria-roledescription="slide" aria-label="Slide 8 of 9" data-sp-ground="silverpoint" data-sp-substrate="cream" data-sp-mode="ink">
+<header>silverpoint · slide decks</header>
+<h2>When a fence is wrong</h2>
+<figure class="sp-deck-chart sp-deck-chart--error" data-sp-slot="s8-c1" role="note" part="sp-deck-chart-error"><figcaption>Chart fence on slide 8: unknown chart &quot;pie-chart&quot;. Did you mean &quot;line-chart&quot; or &quot;area-chart&quot; or &quot;bar-chart&quot;?</figcaption></figure><p>The rest of the deck renders as usual.</p>
+<footer>silverpoint 0.9</footer>
+</section>
+</foreignObject></svg></div><div class="sp-deck-slide" data-sp-slide="9" hidden="" inert=""><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section data-paginate="true" data-header="silverpoint · slide decks" data-footer="silverpoint 0.9" data-class="lead invert" class="lead invert" data-marpit-pagination="9" style="--paginate:true;--header:silverpoint · slide decks;--footer:silverpoint 0.9;--class:lead invert;" data-marpit-pagination-total="9" role="group" aria-roledescription="slide" aria-label="Slide 9 of 9" data-sp-ground="silverpoint" data-sp-substrate="cream" data-sp-mode="ink">
+<header>silverpoint · slide decks</header>
+
+<h1>Thank you</h1>
+<p><code>npm install @silverpoint/marp</code></p>
+<footer>silverpoint 0.9</footer>
+</section>
+</foreignObject></svg></div></div></div><div class="sp-deck-controls" part="sp-deck-controls" role="toolbar" aria-label="Deck controls"><button class="sp-ui sp-button sp-ground-silverpoint" data-ground="silverpoint" data-substrate="cream" data-mode="ink" data-size="sm" data-frame="0" type="button" disabled="" aria-label="Previous slide" data-variant="default" data-sp-action="prev"><span part="sp-frame" data-kind="control" aria-hidden="true"></span><span part="sp-tone" data-tone="disabled" data-kind="control" aria-hidden="true"></span><span class="sp-ui-label sp-ui-plate">‹</span></button><span class="sp-deck-counter" part="sp-deck-counter">1 / 9</span><button class="sp-ui sp-button sp-ground-silverpoint" data-ground="silverpoint" data-substrate="cream" data-mode="ink" data-size="sm" data-frame="0" type="button" aria-label="Next slide" data-variant="default" data-sp-action="next"><span part="sp-frame" data-kind="control" aria-hidden="true"></span><span class="sp-ui-label">›</span></button><button class="sp-ui sp-button sp-ground-silverpoint" data-ground="silverpoint" data-substrate="cream" data-mode="ink" data-size="sm" data-frame="0" type="button" aria-label="Overview" data-variant="default" data-sp-action="overview" aria-pressed="false"><span part="sp-frame" data-kind="control" aria-hidden="true"></span><span class="sp-ui-label">Overview</span></button><button class="sp-ui sp-button sp-ground-silverpoint" data-ground="silverpoint" data-substrate="cream" data-mode="ink" data-size="sm" data-frame="0" type="button" aria-label="Speaker notes" data-variant="default" data-sp-action="notes" aria-pressed="false"><span part="sp-frame" data-kind="control" aria-hidden="true"></span><span class="sp-ui-label">Notes</span></button></div><p class="sp-deck-status" aria-live="polite">Slide 1 of 9</p></div></div><p class="spw-small">on_page_change: page <code>1</code> of <code>0</code> · on_fragment_change: <code>0 / 0</code></p></section><section class="spw-section"><h2 id="install"><a class="spw-anchor" href="/docs/decks/#install" data-discover="true">Install</a></h2><p>In React, Vue and Angular, <code>SpDeck</code> is on the <code>deck</code> subpath of the adapter, and its engine, <code>@silverpoint/marp</code> (which brings <code>@marp-team/marpit</code>), is an optional peer: install it only for decks. Import four stylesheets, in this order (Angular lists them in the <code>styles</code> array of angular.json):</p><div class="spw-code"><div class="spw-code-bar"><span class="spw-code-label">ts</span><button class="spw-copy" title="Copy to clipboard" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg><span>Copy</span></button></div><pre><code>import &#x27;@silverpoint/fonts/fonts.css&#x27;;
+import &#x27;@silverpoint/grounds/styles.css&#x27;;
+import &#x27;@silverpoint/grounds/ui.css&#x27;;
+import &#x27;@silverpoint/marp/deck.css&#x27;;</code></pre></div><p>In Reflex, <code>sp_deck</code> (reflex-silverpoint-react 0.9.0 or later) lists <code>@silverpoint/marp</code> as its own npm dependency and imports the four stylesheets, so an app installs the engine only when a page renders a deck. <code>MARP_VERSION</code> and <code>DECK_STYLESHEETS</code> say which.</p></section><section class="spw-section"><h2 id="code"><a class="spw-anchor" href="/docs/decks/#code" data-discover="true">In your code</a></h2><div class="sp-ui sp-tabs sp-ground-silverpoint spw-tabs" data-ground="silverpoint" data-substrate="cream" data-mode="ink" data-size="sm" data-frame="0" data-orientation="horizontal"><div class="sp-ui-tablist" role="tablist" aria-label="Framework"><button type="button" class="sp-ui-tab" role="tab" aria-selected="true" tabindex="0" data-key="react"><span part="sp-heighten" aria-hidden="true"></span><span class="sp-ui-label">React</span></button><button type="button" class="sp-ui-tab" role="tab" aria-selected="false" tabindex="-1" data-key="vue"><span class="sp-ui-label">Vue</span></button><button type="button" class="sp-ui-tab" role="tab" aria-selected="false" tabindex="-1" data-key="angular"><span class="sp-ui-label">Angular</span></button><button type="button" class="sp-ui-tab" role="tab" aria-selected="false" tabindex="-1" data-key="reflex"><span class="sp-ui-label">Reflex</span></button><span part="sp-rule" aria-hidden="true"></span></div><div class="sp-ui-tabpanels"><div class="sp-ui-tabpanel" role="tabpanel" tabindex="0"><div class="spw-code spw-code-compact"><div class="spw-code-bar"><span class="spw-code-label">shell</span><button class="spw-copy" title="Copy to clipboard" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg><span>Copy</span></button></div><pre><code>npm install @silverpoint/react @silverpoint/marp @silverpoint/grounds @silverpoint/fonts</code></pre></div><div class="spw-code"><div class="spw-code-bar"><span class="spw-code-label">tsx</span><button class="spw-copy" title="Copy to clipboard" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg><span>Copy</span></button></div><pre><code>// src/main.tsx: the stylesheets, in this order
+import &#x27;@silverpoint/fonts/fonts.css&#x27;;
+import &#x27;@silverpoint/grounds/styles.css&#x27;;
+import &#x27;@silverpoint/grounds/ui.css&#x27;;
+import &#x27;@silverpoint/marp/deck.css&#x27;;
+
+// src/Talk.tsx
+import { useState } from &#x27;react&#x27;;
+import { SpDeck } from &#x27;@silverpoint/react/deck&#x27;;
+import markdown from &#x27;./talk.md?raw&#x27;;
+
+export function Talk() {
+  const [page, setPage] = useState(1);
+  return (
+    &lt;SpDeck
+      markdown={markdown}
+      page={page}
+      onPageChange={({ page }) =&gt; setPage(page)}
+      onReady={({ total }) =&gt; console.log(total, &#x27;slides&#x27;)}
+      showNotes
+    /&gt;
+  );
+}</code></pre></div></div><div class="sp-ui-tabpanel" role="tabpanel" tabindex="0" hidden=""><div class="spw-code spw-code-compact"><div class="spw-code-bar"><span class="spw-code-label">shell</span><button class="spw-copy" title="Copy to clipboard" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg><span>Copy</span></button></div><pre><code>npm install @silverpoint/vue @silverpoint/marp @silverpoint/grounds @silverpoint/fonts</code></pre></div><div class="spw-code"><div class="spw-code-bar"><span class="spw-code-label">vue</span><button class="spw-copy" title="Copy to clipboard" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg><span>Copy</span></button></div><pre><code>&lt;!-- src/Talk.vue (the four stylesheets are imported in main.ts, in the same order) --&gt;
+&lt;script setup lang=&quot;ts&quot;&gt;
+import { ref } from &#x27;vue&#x27;;
+import { SpDeck } from &#x27;@silverpoint/vue/deck&#x27;;
+import markdown from &#x27;./talk.md?raw&#x27;;
+
+const page = ref(1);
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;SpDeck :markdown=&quot;markdown&quot; v-model:page=&quot;page&quot; show-notes @ready=&quot;({ total }) =&gt; console.log(total)&quot; /&gt;
+&lt;/template&gt;</code></pre></div></div><div class="sp-ui-tabpanel" role="tabpanel" tabindex="0" hidden=""><div class="spw-code spw-code-compact"><div class="spw-code-bar"><span class="spw-code-label">shell</span><button class="spw-copy" title="Copy to clipboard" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg><span>Copy</span></button></div><pre><code>npm install @silverpoint/angular @silverpoint/marp @silverpoint/grounds @silverpoint/fonts</code></pre></div><div class="spw-code"><div class="spw-code-bar"><span class="spw-code-label">ts</span><button class="spw-copy" title="Copy to clipboard" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg><span>Copy</span></button></div><pre><code>// angular.json → &quot;styles&quot;: [
+//   &quot;@silverpoint/fonts/fonts.css&quot;, &quot;@silverpoint/grounds/styles.css&quot;,
+//   &quot;@silverpoint/grounds/ui.css&quot;, &quot;@silverpoint/marp/deck.css&quot; ]
+
+// src/app/talk.ts
+import { Component, signal } from &#x27;@angular/core&#x27;;
+import { SpDeckComponent } from &#x27;@silverpoint/angular/deck&#x27;;
+import { TALK } from &#x27;./talk&#x27;;
+
+@Component({
+  selector: &#x27;app-talk&#x27;,
+  imports: [SpDeckComponent],
+  template: `
+    &lt;sp-deck
+      [markdown]=&quot;markdown&quot;
+      [page]=&quot;page()&quot;
+      (pageChange)=&quot;page.set($event.page)&quot;
+      [showNotes]=&quot;true&quot;
+    /&gt;
+  `,
+})
+export class Talk {
+  protected readonly markdown = TALK;
+  protected readonly page = signal(1);
+}</code></pre></div></div><div class="sp-ui-tabpanel" role="tabpanel" tabindex="0" hidden=""><div class="spw-code spw-code-compact"><div class="spw-code-bar"><span class="spw-code-label">shell</span><button class="spw-copy" title="Copy to clipboard" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg><span>Copy</span></button></div><pre><code>pip install &#x27;reflex-silverpoint-react&gt;=0.9.1&#x27;</code></pre></div><div class="spw-code"><div class="spw-code-bar"><span class="spw-code-label">python</span><button class="spw-copy" title="Copy to clipboard" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg><span>Copy</span></button></div><pre><code>from pathlib import Path
+
+import reflex as rx
+from reflex_silverpoint_react import sp_deck  # installs @silverpoint/marp as the deck&#x27;s npm dependency
+
+TALK = Path(&quot;assets/decks/talk.md&quot;).read_text()  # read when the app compiles
+
+
+class Deck(rx.State):
+    page: int = 1
+    total: int = 0
+
+    @rx.event
+    def on_page_change(self, page: int, total: int):
+        self.page, self.total = page, total
+
+    @rx.event
+    def on_ready(self, total: int):
+        self.total = total
+
+
+def talk() -&gt; rx.Component:
+    return sp_deck(
+        TALK,
+        page=Deck.page,  # controlled; or default_page=1
+        on_page_change=Deck.on_page_change,  # (page, total)
+        on_ready=Deck.on_ready,  # (total,)
+        show_notes=True,
+        palette=&quot;iron_gall&quot;,  # a preset&#x27;s name, either spelling
+        id=&quot;talk&quot;,
+    )</code></pre></div></div></div></div></section><section class="spw-section"><h2 id="authoring"><a class="spw-anchor" href="/docs/decks/#authoring" data-discover="true">Writing a deck</a></h2><p>Slides are separated by <code>---</code>. The front matter sets the deck&#x27;s directives; a <code>&lt;!-- key: value --&gt;</code> comment sets one from that slide on, and <code>&lt;!-- _key: value --&gt;</code> on that slide only. Any other comment is a presenter note, and each list item a fragment.</p><div class="spw-code"><div class="spw-code-bar"><span class="spw-code-label">markdown</span><button class="spw-copy" title="Copy to clipboard" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg><span>Copy</span></button></div><pre><code>---
+paginate: true
+header: My talk
+ground: silverpoint
+substrate: cream
+---
+
+&lt;!-- _class: lead --&gt;
+
+# Title slide
+
+---
+
+&lt;!-- _ground: cyanotype --&gt;
+
+## A chart on cyanotype
+
+```silverpoint
+{&quot;chart&quot;: &quot;bar-chart&quot;, &quot;props&quot;: {&quot;title&quot;: &quot;Visits&quot;}, &quot;height&quot;: 400}
+```
+
+&lt;!-- A presenter note: any comment that is not a directive. --&gt;
+
+---
+
+* fragment one
+* fragment two
+1) and ordered ones</code></pre></div><div class="spw-table-wrap"><table class="spw-table"><thead><tr><th>Directive</th><th>Values</th><th>Default</th><th>Effect</th></tr></thead><tbody><tr><td><code>ground</code></td><td>silverpoint · cyanotype</td><td>silverpoint</td><td>The ground a slide is drawn on; its charts follow.</td></tr><tr><td><code>substrate</code></td><td>cream · green · blue · ochre (silverpoint); prussian (cyanotype)</td><td>the ground&#x27;s first</td><td>The prepared paper.</td></tr><tr><td><code>mode</code></td><td>ink · precision</td><td>ink</td><td>precision switches the inking off.</td></tr><tr><td><code>class</code></td><td>lead · invert · plate · hatched</td><td>—</td><td>The theme&#x27;s classes (below).</td></tr><tr><td><code>paginate</code></td><td>true · false</td><td>false</td><td>Page numbers (Marpit).</td></tr><tr><td><code>header · footer</code></td><td>text</td><td>—</td><td>Repeated on each slide (Marpit).</td></tr><tr><td><code>backgroundColor · backgroundImage · color</code></td><td>CSS</td><td>—</td><td>Marpit&#x27;s own; ![bg right:40%](…) splits a slide.</td></tr><tr><td><code>size</code></td><td>16:9 · 4:3</td><td>16:9</td><td>The slide size (Marpit); also the size prop.</td></tr></tbody></table></div><p>The silverpoint theme&#x27;s classes, set with <code>&lt;!-- _class: lead --&gt;</code>:</p><div class="spw-table-wrap"><table class="spw-table"><thead><tr><th>Class</th><th>Effect</th></tr></thead><tbody><tr><td><code>lead</code></td><td>A title slide: the content centred, the heading larger, one rule under it.</td></tr><tr><td><code>invert</code></td><td>Light text on the substrate darkened to the ground&#x27;s ink; its contrast computed per ground.</td></tr><tr><td><code>plate</code></td><td>An inked plate mark, a double rule inset from the edge, behind the content.</td></tr><tr><td><code>hatched</code></td><td>An inked hatched band around the slide, behind the content.</td></tr></tbody></table></div><div class="sp-ui sp-alert sp-ground-silverpoint spw-callout spw-callout-note" data-ground="silverpoint" data-substrate="cream" data-mode="ink" data-size="sm" data-frame="0" role="status" data-kind="info"><span part="sp-frame" data-kind="card" aria-hidden="true"></span><svg part="sp-mark" data-glyph="info" viewBox="0 0 16 16" aria-hidden="true"><path d="M14.5,8A6.5,6.5 0 1,1 1.5,8A6.5,6.5 0 1,1 14.5,8Z M8,7.5V11.5 M8,4.75V4.75"></path></svg><div class="sp-ui-alert-body"><div class="sp-ui-alert-title">Note</div><div class="sp-ui-alert-text"><span>Raw HTML is never rendered: it shows as text, and javascript: and non-image data: URLs are dropped. A &lt;style scoped&gt; block still restyles one slide, and Marpit&#x27;s background images (bg, split backgrounds such as bg right:40%, sizing and filters) keep their meaning.</span></div></div></div></section><section class="spw-section"><h2 id="fence"><a class="spw-anchor" href="/docs/decks/#fence" data-discover="true">Charts in a slide: the silverpoint fence</a></h2><p>A fenced block whose language is <code>silverpoint</code> holds one chart as JSON, the same input as the MCP <code>render_chart</code> tool. It is static SVG in the server&#x27;s render and a live chart in the browser (unless <code>interactive</code> is false), and it takes its slide&#x27;s ground, substrate and mode unless it names its own.</p><div class="spw-code"><div class="spw-code-bar"><span class="spw-code-label">markdown</span><button class="spw-copy" title="Copy to clipboard" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg><span>Copy</span></button></div><pre><code>```silverpoint
+{&quot;chart&quot;: &quot;bar-chart&quot;, &quot;props&quot;: {&quot;title&quot;: &quot;Visits by quarter&quot;}, &quot;height&quot;: 400}
+```</code></pre></div><div class="spw-table-wrap"><table class="spw-table"><thead><tr><th>Field</th><th>Value</th><th>Default</th></tr></thead><tbody><tr><td><code>chart</code></td><td>a catalog slug, e.g. bar-chart</td><td>required</td></tr><tr><td><code>props</code></td><td>the chart&#x27;s own props, camelCase (not the fence&#x27;s fields)</td><td>{}</td></tr><tr><td><code>data</code></td><td>the rows the chart reads</td><td>its demo dataset</td></tr><tr><td><code>width</code></td><td>160 .. 1280 canvas px</td><td>the slide&#x27;s content width</td></tr><tr><td><code>height</code></td><td>90 .. 720 canvas px</td><td>360</td></tr><tr><td><code>id</code></td><td>the chart&#x27;s id</td><td>&lt;deck&gt;-s&lt;slide&gt;-c&lt;ordinal&gt;</td></tr><tr><td><code>ground · substrate · mode · palette</code></td><td>as on any chart</td><td>the slide&#x27;s</td></tr></tbody></table></div><div class="spw-table-wrap"><table class="spw-table"><thead><tr><th>Diagnostic</th><th>When</th></tr></thead><tbody><tr><td><code>SP026</code></td><td>A fence that is not JSON, names an unknown chart or prop, or asks for a size out of range: an error figure in its place.</td></tr><tr><td><code>SP027</code></td><td>An unknown directive value, or a substrate of another ground: the inherited value is kept.</td></tr><tr><td><code>SP029</code></td><td>A deck past a limit (512 KB, 300 slides, 60 fences): it renders up to the limit.</td></tr></tbody></table></div></section><section class="spw-section"><h2 id="props"><a class="spw-anchor" href="/docs/decks/#props" data-discover="true">Props and events</a></h2><p>React and Angular use the camelCase names, Vue templates may write them in kebab-case, and Reflex in snake_case. Use the deck controlled (<code>page</code> with <code>pageChange</code>; <code>v-model:page</code> in Vue) or uncontrolled (<code>defaultPage</code>).</p><div class="spw-table-wrap"><table class="spw-table"><thead><tr><th>Prop</th><th>Reflex</th><th>Default</th><th></th></tr></thead><tbody><tr><td><code>markdown</code></td><td><code>markdown</code></td><td>—</td><td>The Marp Markdown: front matter, --- between slides, silverpoint fences. Required.</td></tr><tr><td><code>page</code></td><td><code>page</code></td><td>—</td><td>Controlled current page (1-based); pair it with pageChange.</td></tr><tr><td><code>defaultPage</code></td><td><code>default_page</code></td><td>1</td><td>Uncontrolled initial page.</td></tr><tr><td><code>ground</code></td><td><code>ground</code></td><td>silverpoint</td><td>The deck&#x27;s ground; a ground directive overrides it per slide.</td></tr><tr><td><code>substrate</code></td><td><code>substrate</code></td><td>the ground&#x27;s first</td><td>The deck&#x27;s substrate.</td></tr><tr><td><code>mode</code></td><td><code>mode</code></td><td>ink</td><td>ink or precision; a mode directive overrides it per slide.</td></tr><tr><td><code>palette</code></td><td><code>palette</code></td><td>—</td><td>A palette preset&#x27;s name, for the fence charts (iron_gall or ironGall in Reflex).</td></tr><tr><td><code>size</code></td><td><code>size</code></td><td>16:9</td><td>16:9 or 4:3.</td></tr><tr><td><code>theme</code></td><td><code>theme</code></td><td>silverpoint</td><td>The Marpit theme.</td></tr><tr><td><code>showNotes</code></td><td><code>show_notes</code></td><td>false</td><td>Show the current slide&#x27;s presenter notes.</td></tr><tr><td><code>showControls</code></td><td><code>show_controls</code></td><td>true</td><td>Previous, next, overview, notes and full-screen controls.</td></tr><tr><td><code>keyboard</code></td><td><code>keyboard</code></td><td>true</td><td>Arrows, PageUp/PageDown, Space, Home/End, o, f and n while focus is in the deck.</td></tr><tr><td><code>swipe</code></td><td><code>swipe</code></td><td>true</td><td>A horizontal swipe moves the deck.</td></tr><tr><td><code>hash</code></td><td><code>hash</code></td><td>false</td><td>Read and write a #&lt;n&gt; deep link in the URL.</td></tr><tr><td><code>interactive</code></td><td><code>interactive</code></td><td>true</td><td>Hydrate the fence charts; false keeps them static SVG.</td></tr><tr><td><code>label</code></td><td><code>label</code></td><td>the first heading</td><td>Accessible name of the deck region.</td></tr><tr><td><code>id</code></td><td><code>id</code></td><td>a hydration-safe id</td><td>Scopes the deck&#x27;s CSS and names its charts.</td></tr></tbody></table></div><div class="spw-table-wrap"><table class="spw-table"><thead><tr><th>Event</th><th>React · Vue · Angular</th><th>Reflex</th><th>Payload</th></tr></thead><tbody><tr><td><code>pageChange</code></td><td>onPageChange · @page-change · (pageChange)</td><td>on_page_change(page, total)</td><td>{ page, total }</td></tr><tr><td><code>fragmentChange</code></td><td>onFragmentChange · @fragment-change · (fragmentChange)</td><td>on_fragment_change(page, step, steps)</td><td>{ page, step, steps }</td></tr><tr><td><code>ready</code></td><td>onReady · @ready · (ready)</td><td>on_ready(total)</td><td>{ total }</td></tr></tbody></table></div></section><section class="spw-section"><h2 id="ssr"><a class="spw-anchor" href="/docs/decks/#ssr" data-discover="true">Server rendering and print</a></h2><p>The server sends the current slide, its static charts and the controls; the browser adopts that markup, adds the controller and hydrates the charts, with no mismatch. In Next.js <code>SpDeck</code> renders in the App Router (a component that holds the page in state needs <code>&#x27;use client&#x27;</code>); Vue renders it with @vue/server-renderer and Angular with @angular/ssr. This page is a static export: its deck was rendered when the site was built.</p><p>Printing lays every slide out at its own size, every fragment shown and the controls hidden.</p><p>Without a framework, the engine is pure: the same Markdown, options and id give the same render on the server and in the browser.</p><div class="spw-code"><div class="spw-code-bar"><span class="spw-code-label">ts</span><button class="spw-copy" title="Copy to clipboard" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg><span>Copy</span></button></div><pre><code>import { createDeckEngine } from &#x27;@silverpoint/marp&#x27;;
+
+const deck = createDeckEngine({ id: &#x27;talk&#x27;, ground: &#x27;silverpoint&#x27; }).render(markdown);
+deck.slides;      // per slide: its HTML, notes, fragment count, ground, substrate, mode, classes
+deck.css;         // the theme, scoped to the deck&#x27;s id
+deck.diagnostics; // SP026, SP027, SP029, … with their slide</code></pre></div></section><section class="spw-section"><h2 id="marp"><a class="spw-anchor" href="/docs/decks/#marp" data-discover="true">Marp CLI and VS Code</a></h2><p><code>@silverpoint/marp/theme.css</code> carries both grounds as a plain Marp theme. There, backdrops (plate, hatched) draw no ink, a fence is shown as code and there is no controller; with silverpoint&#x27;s own engine, Marp CLI draws the directives, the backdrops and the fences as static SVG.</p><div class="spw-code"><div class="spw-code-bar"><span class="spw-code-label">shell</span><button class="spw-copy" title="Copy to clipboard" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg><span>Copy</span></button></div><pre><code># Marp CLI with the plain theme (fences shown as code, no controller)
+npx @marp-team/marp-cli --theme node_modules/@silverpoint/marp/theme.css talk.md
+
+# Marp CLI with silverpoint&#x27;s engine (directives, backdrops and fences as static SVG)
+npx @marp-team/marp-cli --engine @silverpoint/marp/cli talk.md
+
+# VS Code: the Marp extension&#x27;s settings.json
+&quot;markdown.marp.themes&quot;: [&quot;./node_modules/@silverpoint/marp/theme.css&quot;]</code></pre></div></section><section class="spw-section"><h2 id="agents"><a class="spw-anchor" href="/docs/decks/#agents" data-discover="true">Decks and agents</a></h2><p>The silverpoint MCP server checks a deck with <code>validate_deck</code> (its slide count and every diagnostic), renders it as a standalone HTML document with <code>render_deck</code>, and writes the deck&#x27;s code (SpDeck, or sp_deck in Reflex) with <code>generate_code</code> and a <code>deck</code> target. The silverpoint skill carries the same guide in references/deck.md, and reflex-silverpoint-react&#x27;s skill its Reflex version. <a href="/docs/ai" data-discover="true">Use with AI →</a></p></section></article></main><aside class="spw-toc-col"><nav aria-label="On this page" class="spw-toc"><p class="spw-toc-title">On this page</p><a href="/docs/decks/#live" data-discover="true">Try it</a><a href="/docs/decks/#install" data-discover="true">Install</a><a href="/docs/decks/#code" data-discover="true">In your code</a><a href="/docs/decks/#authoring" data-discover="true">Writing a deck</a><a href="/docs/decks/#fence" data-discover="true">Charts in a slide: the silverpoint fence</a><a href="/docs/decks/#props" data-discover="true">Props and events</a><a href="/docs/decks/#ssr" data-discover="true">Server rendering and print</a><a href="/docs/decks/#marp" data-discover="true">Marp CLI and VS Code</a><a href="/docs/decks/#agents" data-discover="true">Decks and agents</a></nav></aside></div><footer class="spw-footer"><div class="spw-footer-grid"><div><p class="spw-footer-brand"><svg aria-hidden="true" class="spw-mark" height="22" viewBox="0 0 32 32" width="22"><g stroke="currentColor"><line x1="4.75" x2="18.25" y1="13.75" y2="27.25" class="css-1e8tvui"></line><line x1="7.00" x2="20.50" y1="11.50" y2="25.00" class="css-1e8tvui"></line><line x1="9.25" x2="22.75" y1="9.25" y2="22.75" class="css-1e8tvui"></line><line x1="11.50" x2="25.00" y1="7.00" y2="20.50" class="css-1e8tvui"></line><line x1="13.75" x2="27.25" y1="4.75" y2="18.25" class="css-1e8tvui"></line></g><path d="M16 2.5 C22 8.4 25.6 12 29.5 16 C23.4 22 20 25.6 16 29.5 C10.1 23.6 6.4 20 2.5 16 C8.6 10 12 6.4 16 2.5Z" class="css-152ihdr"></path><circle cx="16" cy="16" r="3.2" class="css-1r49ui"></circle></svg><strong> silverpoint</strong></p><p>Charts and UI components for React, Vue and Angular whose visual language is historical drawing technique.</p><p>Developed by <a rel="noopener noreferrer" href="https://www.seraph.to/" target="_blank">Ernesto Crespo</a> · <a rel="noopener noreferrer" href="https://www.seraph.to/" target="_blank">seraph.to</a> · <a rel="noopener noreferrer" href="https://github.com/ecrespo" target="_blank">@ecrespo</a></p><p><a rel="noopener noreferrer" href="https://github.com/ecrespo/silverpoint/blob/main/LICENSE" target="_blank">MIT License</a> · Typeface: EB Garamond, SIL Open Font License</p></div><div><h4>Library</h4><a rel="noopener noreferrer" href="https://github.com/ecrespo/silverpoint" target="_blank">GitHub repository</a><a rel="noopener noreferrer" href="https://www.npmjs.com/search?q=silverpoint" target="_blank">npm packages</a><a rel="noopener noreferrer" href="https://github.com/ecrespo/silverpoint/releases" target="_blank">Releases</a><a rel="noopener noreferrer" href="https://github.com/ecrespo/silverpoint/tree/main/specs" target="_blank">Specifications</a></div><div><h4>Reflex</h4><a rel="noopener noreferrer" href="https://github.com/ecrespo/reflex-silverpoint-react" target="_blank">reflex-silverpoint-react</a><a rel="noopener noreferrer" href="https://pypi.org/project/reflex-silverpoint-react/" target="_blank">on PyPI</a><a href="/docs/reflex" data-discover="true">Reflex quickstart</a></div><div><h4>Help</h4><a href="/support" data-discover="true">Report a bug</a><a rel="noopener noreferrer" href="https://github.com/ecrespo/silverpoint/issues" target="_blank">Open issues</a><a href="/versions" data-discover="true">Versions</a><a rel="noopener noreferrer" href="https://github.com/ecrespo/silverpoint_web" target="_blank">Source of this site</a></div></div><p class="spw-footer-note">This site is built with Reflex and <a rel="noopener noreferrer" href="https://github.com/ecrespo/reflex-silverpoint-react" target="_blank">reflex-silverpoint-react</a> 0.9.1: every chart and every control on it is live silverpoint, drawn by @silverpoint/react 0.9.1.</p></footer></div></div><script>((storageKey, restoreKey) => {
+		if (!window.history.state || !window.history.state.key) {
+			let key = Math.random().toString(32).slice(2);
+			window.history.replaceState({ key }, "");
+		}
+		try {
+			let storedY = JSON.parse(sessionStorage.getItem(storageKey) || "{}")[restoreKey || window.history.state.key];
+			if (typeof storedY === "number") window.scrollTo(0, storedY);
+		} catch (error) {
+			console.error(error);
+			sessionStorage.removeItem(storageKey);
+		}
+	})("react-router-scroll-positions", null)</script><script>window.__reactRouterContext = {"basename":"/","future":{"unstable_enableNodeReadableStream":false,"unstable_optimizeDeps":true},"routeDiscovery":{"mode":"initial"},"ssr":false,"isSpaMode":false};window.__reactRouterContext.stream = new ReadableStream({start(controller){window.__reactRouterContext.streamController = controller;}}).pipeThrough(new TextEncoderStream());</script><script type="module" async="">import "/assets/manifest-9cf78edb.js";
+import * as route0 from "/assets/root-D9kmN4MZ.js";
+import * as route1 from "/assets/_docs_._decks_._index-DLaQ-J4l.js";
+  
+  window.__reactRouterRouteModules = {"root":route0,"routes/[docs].[decks]._index":route1};
+
+import("/assets/entry.client-D15NELOZ.js");</script><!--$?--><template id="B:0"></template><!--/$--><script id="_R_">requestAnimationFrame(function(){$RT=performance.now()});</script><div hidden id="S:0"><script>window.__reactRouterContext.streamController.enqueue("[{\"_1\":2,\"_3\":-5,\"_4\":-5},\"loaderData\",{},\"actionData\",\"errors\"]\n");</script><!--$?--><template id="B:1"></template><!--/$--></div><script>$RB=[];$RV=function(a){$RT=performance.now();for(var b=0;b<a.length;b+=2){var c=a[b],e=a[b+1];null!==e.parentNode&&e.parentNode.removeChild(e);var f=c.parentNode;if(f){var g=c.previousSibling,h=0;do{if(c&&8===c.nodeType){var d=c.data;if("/$"===d||"/&"===d)if(0===h)break;else h--;else"$"!==d&&"$?"!==d&&"$~"!==d&&"$!"!==d&&"&"!==d||h++}d=c.nextSibling;f.removeChild(c);c=d}while(c);for(;e.firstChild;)f.insertBefore(e.firstChild,c);g.data="$";g._reactRetry&&requestAnimationFrame(g._reactRetry)}}a.length=0};
+$RC=function(a,b){if(b=document.getElementById(b))(a=document.getElementById(a))?(a.previousSibling.data="$~",$RB.push(a,b),2===$RB.length&&("number"!==typeof $RT?requestAnimationFrame($RV.bind(null,$RB)):(a=performance.now(),setTimeout($RV.bind(null,$RB),2300>a&&2E3<a?2300-a:$RT+300-a)))):b.parentNode.removeChild(b)};$RC("B:0","S:0")</script><div hidden id="S:1"><script>window.__reactRouterContext.streamController.close();</script></div><script>$RC("B:1","S:1")</script></body></html>

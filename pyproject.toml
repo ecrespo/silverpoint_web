@@ -9,6 +9,7 @@ license = { text = "MIT" }
 dependencies = [
     "reflex>=0.10.1",
     "reflex-silverpoint-react[timeline]>=0.9.1",
+    "reflex-vercel-analytics>=0.1.0",
 ]
 
 [dependency-groups]

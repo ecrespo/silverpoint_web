@@ -1,0 +1,1 @@
+import{t as e}from"./chunk-XNPNCJ6Y-l_Zyrcka.js";import{C as t}from"./catalog-BfB4l_JJ.js";var n=e(t);export{n as t};

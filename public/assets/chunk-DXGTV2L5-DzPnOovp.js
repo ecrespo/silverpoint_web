@@ -1,0 +1,1 @@
+import{$ as e,i as t,n,r}from"./ui-djKjX-7N.js";function i({children:i,onClose:a,dashboardCell:o,...s}){let c=e(s,t(s,o),{text:r(i)});return n(c,{close:{onClick:a},slots:{content:i}})}export{i as t};

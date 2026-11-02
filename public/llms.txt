@@ -1,13 +1,13 @@
 # silverpoint
 
-> silverpoint 0.8.0 draws 60 charts and 38 UI components as metal point on prepared paper, for React, Vue, Angular and Reflex (Python, through reflex-silverpoint-react), from one framework-free engine, on the silverpoint and cyanotype grounds with 6 palette presets; accessible and server-renderable.
+> silverpoint 0.9.2 draws 60 charts and 38 UI components as metal point on prepared paper, for React, Vue, Angular and Reflex (Python, through reflex-silverpoint-react), from one framework-free engine, on the silverpoint and cyanotype grounds with 6 palette presets; accessible and server-renderable.
 
 Everything below describes that version. Agents write silverpoint best through its MCP server, which answers from the same catalog and checks and renders what they write.
 
 ## For agents
 
 - [Full reference](https://silverpointweb.vercel.app/llms-full.txt): every chart and component with its props per framework (React, Vue, Angular, Reflex), the grounds, the palettes and the diagnostics, as Markdown
-- [MCP server](https://silverpointweb.vercel.app/mcp): Streamable HTTP, read-only, no account; or locally `npx -y @silverpoint/mcp@0.8.0`
+- [MCP server](https://silverpointweb.vercel.app/mcp): Streamable HTTP, read-only, no account; or locally `npx -y @silverpoint/mcp@0.9.2`
 - [Use with AI](https://silverpointweb.vercel.app/docs/ai): client configurations, the Claude Code plugins and the tools
 - [Agent catalog](https://silverpointweb.vercel.app/agent-catalog.json): the same facts as JSON
 
@@ -33,6 +33,10 @@ Everything below describes that version. Agents write silverpoint best through i
 - [Server rendering](https://silverpointweb.vercel.app/docs/ssr)
 - [Accessibility](https://silverpointweb.vercel.app/docs/accessibility)
 - [Tailwind preset](https://silverpointweb.vercel.app/docs/tailwind)
+
+## New in 0.9
+
+- [Slide decks](https://silverpointweb.vercel.app/docs/decks)
 
 ## New in 0.8
 

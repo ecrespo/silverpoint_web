@@ -1,8 +1,8 @@
-# silverpoint 0.8.0: the agent catalog
+# silverpoint 0.9.2: the agent catalog
 
-> silverpoint 0.8.0 draws 60 charts and 38 UI components as metal point on prepared paper, for React, Vue, Angular and Reflex (Python, through reflex-silverpoint-react), from one framework-free engine, on the silverpoint and cyanotype grounds with 6 palette presets; accessible and server-renderable.
+> silverpoint 0.9.2 draws 60 charts and 38 UI components as metal point on prepared paper, for React, Vue, Angular and Reflex (Python, through reflex-silverpoint-react), from one framework-free engine, on the silverpoint and cyanotype grounds with 6 palette presets; accessible and server-renderable.
 
-Generated from https://silverpointweb.vercel.app/agent-catalog.json, the catalog `@silverpoint/mcp@0.8.0` ships (schema 1). Reflex: `reflex-silverpoint-react` 0.7.1, wrapping silverpoint 0.7.0. Its Reflex names are those of that release, which wraps silverpoint 0.7.0. React, Vue and Angular share each prop's name (Vue templates may write it in kebab-case); Reflex spells it in snake_case. The MCP server at https://silverpointweb.vercel.app/mcp answers from the same catalog.
+Generated from https://silverpointweb.vercel.app/agent-catalog.json, the catalog `@silverpoint/mcp@0.9.2` ships (schema 1). Reflex: `reflex-silverpoint-react` 0.9.1, wrapping silverpoint 0.9.1. React, Vue and Angular share each prop's name (Vue templates may write it in kebab-case); Reflex spells it in snake_case. The MCP server at https://silverpointweb.vercel.app/mcp answers from the same catalog.
 
 ## Stylesheets
 
@@ -2394,6 +2394,74 @@ Optional peer: `@knight-lab/timelinejs@^3.9.13`.
 | `card` | `card` | `boolean` | `true` | Frames the whole timeline as a card. Default `true`. |
 | `label` | `label` | `string` |  | The region's accessible name; the title's headline when omitted. |
 
+## Slide decks
+
+`SpDeck` renders Marp/Marpit Markdown in the silverpoint style. Optional peer: `@silverpoint/marp`. Stylesheets, in order: `@silverpoint/fonts/fonts.css`, `@silverpoint/grounds/styles.css`, `@silverpoint/grounds/ui.css`, `@silverpoint/marp/deck.css`.
+
+| Framework | Name | Import |
+|---|---|---|
+| React | `SpDeck` | `@silverpoint/react/deck` |
+| Vue | `SpDeck` | `@silverpoint/vue/deck` |
+| Angular | `sp-deck` | `@silverpoint/angular/deck` |
+| Reflex | `sp_deck` | `reflex_silverpoint_react` |
+
+| Prop (React, Vue, Angular) | Reflex | Type | Default | Description |
+|---|---|---|---|---|
+| `markdown` | `markdown` | `string` |  | The Marp Markdown: front matter, `---` between slides, `silverpoint` fences for charts. Required. |
+| `page` | `page` | `number` |  | Controlled current page (1-based); pair it with `onPageChange`. |
+| `defaultPage` | `default_page` | `number` | `1` | Uncontrolled initial page (1-based). Default `1`. |
+| `id` | — | `string` |  | The deck's id, which scopes its CSS and names its charts; the adapter's hydration-safe id by default. |
+| `label` | `label` | `string` |  | Accessible name of the deck region; the first heading of slide 1 by default. |
+| `theme` | `theme` | `string` | `'silverpoint'` | The Marpit theme. Default `'silverpoint'`. |
+| `ground` | `ground` | `string` | `'silverpoint'` | The deck's ground, which a `ground` directive overrides per slide. Default `'silverpoint'`. |
+| `substrate` | `substrate` | `string` |  | The deck's substrate; the ground's first by default. |
+| `mode` | `mode` | `DeckMode` | `'ink'` | `ink` or `precision`, which a `mode` directive overrides per slide. Default `'ink'`. |
+| `palette` | `palette` | `string` |  | A palette preset's name, for the fence charts (REQ-609). |
+| `size` | `size` | `DeckSize` | `'16:9'` | The slide size. Default `'16:9'`. |
+| `showNotes` | `show_notes` | `boolean` | `false` | Show the current slide's notes (Marpit comments). Default `false`. |
+| `showControls` | `show_controls` | `boolean` | `true` | Show the controls: previous, next, overview, notes, full screen. Default `true`. |
+| `keyboard` | `keyboard` | `boolean` | `true` | Handle the keys while focus is in the deck (API delta §7.3). Default `true`. |
+| `swipe` | `swipe` | `boolean` | `true` | A horizontal swipe moves the deck. Default `true`. |
+| `hash` | `hash` | `boolean` | `false` | Read and write a `#<n>` deep link (REQ-602). Default `false`. |
+| `interactive` | `interactive` | `boolean` | `true` | Hydrate the fence charts (REQ-594). Default `true`. |
+
+### Deck events
+
+| Event | Payload | Bindings | Description |
+|---|---|---|---|
+| `pageChange` | `{ readonly page: number; readonly total: number }` | React `onPageChange`; Vue `@page-change`; Angular `(pageChange)` | The current page changed, by the reader or by a re-render that clamped it. |
+| `fragmentChange` | `{ readonly page: number; readonly step: number; readonly steps: number }` | React `onFragmentChange`; Vue `@fragment-change`; Angular `(fragmentChange)` | A fragment of the current slide was revealed or hidden: `step` of `steps`. |
+| `ready` | `{ readonly total: number }` | React `onReady`; Vue `@ready`; Angular `(ready)` | The deck rendered with a new slide count. |
+
+### Deck directives
+
+| Directive | Values | Default |
+|---|---|---|
+| `ground` | `silverpoint`, `cyanotype` | `silverpoint` |
+| `substrate` | per-ground | `cream` |
+| `mode` | `ink`, `precision` | `ink` |
+
+Theme classes: `lead`, `invert`, `plate`, `hatched`.
+
+### The silverpoint fence
+
+A ```` ```silverpoint ```` block holds one chart as JSON, the input of the MCP `render_chart` tool; an invalid fence draws an error figure in its place and warns `SP026`.
+
+| Field | Type | Description |
+|---|---|---|
+| `chart` (required) | `string` | The chart's catalog slug, such as `bar-chart`. |
+| `data` |  | What the chart reads; its demo dataset when absent. |
+| `props` | `object` | The chart's own props and the common view props; not the fence's own fields. |
+| `width` | `number` | Width in canvas pixels; the slide's content width when absent. |
+| `height` | `number` | Height in canvas pixels. Default `360`. |
+| `id` | `string` | The chart's id; `<deck>-s<slide>-c<ordinal>` when absent. |
+| `ground` | `string` | The chart's ground; the slide's when absent. |
+| `substrate` | `string` | The chart's substrate; the slide's when absent. |
+| `mode` | `enum` | `ink` or `precision`; the slide's when absent. |
+| `palette` |  | A preset's name or a palette object. |
+
+Deck diagnostics: `SP018`, `SP026`, `SP027`, `SP028`, `SP029`.
+
 ## Grounds
 
 | Ground | Substrates | Description |
@@ -2457,6 +2525,10 @@ Optional peer: `@knight-lab/timelinejs@^3.9.13`.
 | `SP023` | warn | REQ-466 | a palette colour is below its contrast threshold against its substrate; it is drawn as given | Recompute the palette with checkPalette(); colours are not chosen by eye |
 | `SP024` | warn | REQ-467 | a palette field is unknown, or its value is not a CSS colour; the field is dropped | Use the fields of PALETTE_PROPERTIES with plain CSS colour values |
 | `SP025` | warn | REQ-515 | @knight-lab/timelinejs could not be loaded; the fallback is rendered | Install the optional peer @knight-lab/timelinejs and import its stylesheet |
+| `SP026` | warn | REQ-591 | a chart fence is invalid (its JSON, its chart, a prop, a size, or an error of the chart); the slide shows the error in its place | Fix the fence: a JSON object whose `chart` is a catalog slug, with props the chart declares |
+| `SP027` | warn | REQ-586 | a deck directive has an unknown value; the inherited value holds | Use a registered ground, one of its substrates, and `ink` or `precision` |
+| `SP028` | warn | REQ-599 | the page is outside the deck; it was clamped to the nearest slide | Keep `page` and `defaultPage` between 1 and the number of slides |
+| `SP029` | warn | REQ-576 | the Markdown exceeds a deck limit; it was rendered up to the limit | Keep a deck under 512 KB, 300 slides and 60 chart fences |
 
 ## Choosing a chart
 

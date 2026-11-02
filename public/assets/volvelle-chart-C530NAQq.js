@@ -1,1 +1,0 @@
-export{t as VolvelleChart}from"./chunk-D5SQFLO2-CqsJeGNu.js";

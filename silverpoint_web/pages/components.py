@@ -12,9 +12,11 @@ from reflex_silverpoint_react import (
     PropDoc,
     UiComponentInfo,
     sp_badge,
+    sp_deck,
 )
 
 from .. import composed_code as cc
+from .. import deck_examples as dx
 from .. import reflex_only as ro
 from .. import site_data as sd
 from .. import ui_examples as ux
@@ -459,7 +461,7 @@ def components_index() -> rx.Component:
         f"The {len(UI_COMPONENTS)} form and display components silverpoint has shipped since 0.3 in React, Vue and "
         "Angular (and in Reflex through reflex-silverpoint-react), drawn with the charts' language: an exact frame, "
         "tone by hatching or by line weight, keyboard and screen-reader semantics from the native element. The 21 "
-        "composed components and overlays of 0.7 are indexed at the end.",
+        "composed components and overlays of 0.7, and the slide deck of 0.9, are indexed at the end.",
         rx.el.div(
             *[
                 rx.el.a(
@@ -515,7 +517,7 @@ def components_index() -> rx.Component:
             "new-0-7",
             "Composed components and overlays (0.7)",
             rx.el.p(
-                f"silverpoint {sd.LATEST.version} adds {len(cc.REFERENCE)} more on the same subpaths, for "
+                f"silverpoint 0.7 adds {len(cc.REFERENCE)} more on the same subpaths, for "
                 f"{len(UI_COMPONENTS) + len(cc.REFERENCE)} in all: SpSurface and SpGlyph, the building blocks, the "
                 "composed components and the overlays. Each has a page with a live demo, its code in React, Vue, "
                 "Angular and Reflex, its events and its props; ",
@@ -538,10 +540,43 @@ def components_index() -> rx.Component:
                 ],
             ),
         ),
+        section(
+            "new-0-9",
+            "Slide decks (0.9)",
+            rx.el.p(
+                "silverpoint 0.9 adds SpDeck, a Marp/Marpit Markdown presentation drawn in silverpoint, on the ",
+                rx.el.code("deck"),
+                " subpath with ",
+                rx.el.code("@silverpoint/marp"),
+                " as its engine. This one is live (",
+                rx.el.code("sp_deck"),
+                "): click into it and use the arrows; list items are revealed a step at a time, and the chart is a "
+                "silverpoint fence. ",
+                rx.el.a("Slide decks", href="/docs/decks"),
+                " has the full showcase, its code, directives, props and events.",
+            ),
+            rx.el.div(
+                sp_deck(dx.HOME_DECK, default_page=1, label="SpDeck, live", id="components-deck"),
+                class_name="spw-deck-wrap spw-home-deck",
+            ),
+            table(
+                ["Component", "What it is", "React subpath", "Angular selector", "Reflex"],
+                [
+                    [
+                        rx.el.a("SpDeck", href="/docs/decks"),
+                        "A Marp/Marpit slide deck with fragments, notes and live charts.",
+                        rx.el.code("@silverpoint/react/deck"),
+                        rx.el.code("sp-deck"),
+                        rx.el.code("sp_deck"),
+                    ]
+                ],
+            ),
+        ),
         toc_entries=[
             *[(f"group-{g}", t) for g, t in UI_GROUPS],
             ("all-components", "All components"),
             ("new-0-7", "Composed & overlays (0.7)"),
+            ("new-0-9", "Slide decks (0.9)"),
         ],
         eyebrow="UI components",
     )

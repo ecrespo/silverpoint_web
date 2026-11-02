@@ -112,3 +112,10 @@ def test_llms_full_describes_the_deck():
     assert "## Slide decks" in text
     assert "`@silverpoint/react/deck`" in text
     assert "### The silverpoint fence" in text
+
+
+def test_components_index_and_reflex_guide_show_a_live_deck():
+    from silverpoint_web.pages import components, docs
+
+    assert 'id="components-deck"' in Path(components.__file__).read_text()
+    assert 'id="reflex-guide-deck"' in Path(docs.__file__).read_text()

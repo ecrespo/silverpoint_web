@@ -70,6 +70,57 @@ class Release:
 
 VERSIONS: tuple[Release, ...] = (
     Release(
+        version="0.9.2",
+        date="2026-11-01",
+        summary="A patch for the MCP server and the agent catalog: they now describe reflex-silverpoint-react 0.9.1, "
+        "sp_deck included.",
+        highlights=(
+            "@silverpoint/mcp: the agent catalog pins reflex-silverpoint-react 0.9.1's own reflex-catalog.json "
+            "(wrapping 0.9.1), so its Reflex names are no longer marked stale (silverpoint#10).",
+            "The deck gets its Reflex name and import (sp_deck, from reflex_silverpoint_react), and generate_code "
+            "writes a deck for Reflex too; the skill's deck guide says the same.",
+            "Every package moves to 0.9.2; no API changes and no change to any render.",
+        ),
+    ),
+    Release(
+        version="0.9.1",
+        date="2026-11-01",
+        summary="A patch for SpDeck in React: decks work under StrictMode and deliver their first onReady.",
+        highlights=(
+            "@silverpoint/react: SpDeck's cleanup no longer destroys the controller StrictMode's replayed mount "
+            "reuses, so a deck is no longer inert in development (silverpoint#7).",
+            "@silverpoint/react: onReady receives the first { total } even when React subscribes after the "
+            "controller's first microtask (silverpoint#8).",
+            "Every package moves to 0.9.1; no API changes and no change to any render.",
+        ),
+        reflex="0.9.1",
+    ),
+    Release(
+        version="0.9.0",
+        date="2026-11-01",
+        summary="Slide decks: @silverpoint/marp renders Marp/Marpit Markdown in the silverpoint style, and SpDeck "
+        "draws it in React, Vue and Angular, with live charts inside the slides.",
+        highlights=(
+            "A new framework-free package, @silverpoint/marp: the deck engine (createDeckEngine), the silverpoint "
+            "Marpit theme, a pure deck controller, the DOM client, an engine for Marp CLI and DECK_DEMO.",
+            "SpDeck on @silverpoint/react/deck, @silverpoint/vue/deck and @silverpoint/angular/deck: markdown, a "
+            "controlled page (or defaultPage), ground, substrate, mode, palette, size (16:9 or 4:3), notes, "
+            "controls, keyboard, swipe, a #<n> deep link; pageChange, fragmentChange and ready.",
+            "Directives on top of Marpit's own: ground, substrate and mode, for the whole deck or one slide; the "
+            "theme classes lead, invert, plate and hatched.",
+            'A silverpoint code fence holds one chart as JSON ({"chart": "bar-chart", "props": {…}}): '
+            "static SVG on the server, hydrated in the browser. A wrong fence draws an error figure (SP026).",
+            "Server-rendered in Next.js, @vue/server-renderer and @angular/ssr, and adopted without a mismatch; "
+            "print lays out every slide with every fragment shown.",
+            "@silverpoint/marp/deck.css after ui.css; @silverpoint/marp/theme.css for Marp CLI and VS Code.",
+            "@silverpoint/mcp: validate_deck and render_deck (13 tools), generate_code { deck } and the "
+            "silverpoint://deck resource; the agent catalog gains a deck section.",
+            "Diagnostics SP026 (fence), SP027 (directive), SP028 and SP029 (limits). No change to the "
+            "normalised output of any chart.",
+        ),
+        reflex="0.9.0",
+    ),
+    Release(
         version="0.8.0",
         date="2026-10-21",
         summary="Agent access: @silverpoint/mcp, an MCP server that tells agents what silverpoint holds, the agent "
@@ -233,6 +284,46 @@ class ReflexRelease:
 #: described here; the others follow the npm release they wrap (``Release.reflex``).
 REFLEX_VERSIONS: tuple[ReflexRelease, ...] = (
     ReflexRelease(
+        version="0.9.1",
+        date="2026-11-01",
+        wraps="0.9.1",
+        summary="Wraps @silverpoint/react 0.9.1: sp_deck works under React StrictMode and sends its first on_ready.",
+        highlights=(
+            "Every silverpoint npm dependency moves to 0.9.1, @silverpoint/marp included; the Python builders are "
+            "unchanged.",
+            "Upstream fixes silverpoint#7 (a deck inert under StrictMode in development) and #8 (the first on_ready "
+            "never delivered); the demo renders in StrictMode again and the known issue is gone.",
+        ),
+    ),
+    ReflexRelease(
+        version="0.9.0",
+        date="2026-11-01",
+        wraps="0.9.0",
+        summary="Wraps @silverpoint/react 0.9.0 and adds sp_deck: Marp/Marpit slide decks drawn in silverpoint, "
+        "from Python.",
+        highlights=(
+            "sp_deck (class SpDeck, alias SilverpointDeck) in the new deck module: markdown, page / default_page, "
+            "theme, ground, substrate, mode, palette (a preset's name), size, show_notes, show_controls, keyboard, "
+            "swipe, hash, interactive, label.",
+            "Events with int payloads: on_page_change(page, total), on_fragment_change(page, step, steps) and "
+            "on_ready(total).",
+            "@silverpoint/marp is a lib_dependencies entry of SpDeck only: an app installs it (and Marpit) only "
+            "when a page renders a deck. MARP_VERSION and DECK_STYLESHEETS.",
+            "The skill's references/deck.md and a deck entry in reflex-catalog.json; a Decks page in the demo.",
+            "CI runners pinned to ubuntu-24.04.",
+        ),
+    ),
+    ReflexRelease(
+        version="0.8.1",
+        date="2026-10-25",
+        wraps="0.8.0",
+        summary="Maintenance: setuptools>=78.1.1 for the build, a refreshed lock and CI on Node 24.",
+        highlights=(
+            "The build requires setuptools>=78.1.1 (CVE-2025-47273).",
+            "Still wraps @silverpoint/react 0.8.0; the Python builders are unchanged.",
+        ),
+    ),
+    ReflexRelease(
         version="0.8.0",
         date="2026-10-21",
         wraps="0.8.0",
@@ -321,21 +412,21 @@ PACKAGES: tuple[Package, ...] = (
     Package(
         "@silverpoint/react",
         "React adapter",
-        "React 18.2+ and 19 components: one subpath per chart (60), the 38 UI components on /ui, SpTimeline on /timeline, and server entry points for React Server Components.",
+        "React 18.2+ and 19 components: one subpath per chart (60), the 38 UI components on /ui, SpTimeline on /timeline, SpDeck on /deck, and server entry points for React Server Components.",
         "adapter",
         f"{REPO}/tree/main/packages/react",
     ),
     Package(
         "@silverpoint/vue",
         "Vue adapter",
-        "Vue 3.5 charts, the 38 UI components (v-model on every value, v-model:open on every overlay) and SpTimeline; typed props and emits, server rendering with @vue/server-renderer.",
+        "Vue 3.5 charts, the 38 UI components (v-model on every value, v-model:open on every overlay), SpTimeline and SpDeck (v-model:page); typed props and emits, server rendering with @vue/server-renderer.",
         "adapter",
         f"{REPO}/tree/main/packages/vue",
     ),
     Package(
         "@silverpoint/angular",
         "Angular adapter",
-        "Angular 21 and 22 standalone, signal-input, OnPush charts, the 38 UI components (ControlValueAccessors, [(open)] on overlays) and SpTimeline, in Angular Package Format.",
+        "Angular 21 and 22 standalone, signal-input, OnPush charts, the 38 UI components (ControlValueAccessors, [(open)] on overlays), SpTimeline and SpDeck, in Angular Package Format.",
         "adapter",
         f"{REPO}/tree/main/packages/angular",
     ),
@@ -354,6 +445,15 @@ PACKAGES: tuple[Package, ...] = (
         f"{REPO}/tree/main/packages/core",
     ),
     Package(
+        "@silverpoint/marp",
+        "Slide decks",
+        "Optional, for decks. Marp/Marpit Markdown in the silverpoint style: the deck engine, the silverpoint "
+        "theme, the ground/substrate/mode directives, silverpoint chart fences, the deck controller, deck.css, "
+        "theme.css for Marp CLI and VS Code, and an engine for Marp CLI. The optional peer behind SpDeck.",
+        "optional",
+        f"{REPO}/tree/main/packages/marp",
+    ),
+    Package(
         "@silverpoint/fonts",
         "Typeface",
         "Optional. Self-hosted EB Garamond (400, 500, 400 italic, latin subset) and its @font-face rules.",
@@ -364,8 +464,8 @@ PACKAGES: tuple[Package, ...] = (
         "@silverpoint/mcp",
         "MCP server",
         "Optional, for agents. A Model Context Protocol server that answers from the agent catalog: the charts and "
-        "components, a chart recommender, code for React, Vue, Angular and Reflex, prop validation and canonical SVG "
-        "renders. stdio (npx @silverpoint/mcp) or a stateless HTTP handler.",
+        "components, a chart recommender, code for React, Vue, Angular and Reflex, prop validation, canonical SVG "
+        "renders, and deck validation and rendering. stdio (npx @silverpoint/mcp) or a stateless HTTP handler.",
         "optional",
         f"{REPO}/tree/main/packages/mcp",
     ),
@@ -401,7 +501,7 @@ FRAMEWORKS: tuple[Framework, ...] = (
         label="React",
         package="@silverpoint/react",
         install="npm install @silverpoint/react @silverpoint/grounds @silverpoint/fonts",
-        peers="react and react-dom 18.2+ or 19; @knight-lab/timelinejs ^3.9.13 (optional, for SpTimeline)",
+        peers="react and react-dom 18.2+ or 19; @knight-lab/timelinejs ^3.9.13 (optional, for SpTimeline); @silverpoint/marp (optional, for SpDeck)",
         integration="Vite and Next.js (App Router, React Server Components) are validated.",
         create="npm create vite@latest my-charts -- --template react-ts",
         run="npm run dev",
@@ -413,7 +513,7 @@ FRAMEWORKS: tuple[Framework, ...] = (
         label="Vue",
         package="@silverpoint/vue",
         install="npm install @silverpoint/vue @silverpoint/grounds @silverpoint/fonts",
-        peers="vue ^3.5.0; @knight-lab/timelinejs ^3.9.13 (optional, for SpTimeline)",
+        peers="vue ^3.5.0; @knight-lab/timelinejs ^3.9.13 (optional, for SpTimeline); @silverpoint/marp (optional, for SpDeck)",
         integration="Vite is validated; SSR is verified with @vue/server-renderer. Nuxt works but is not a validated integration.",
         create="npm create vite@latest my-charts -- --template vue-ts",
         run="npm run dev",
@@ -425,7 +525,7 @@ FRAMEWORKS: tuple[Framework, ...] = (
         label="Angular",
         package="@silverpoint/angular",
         install="npm install @silverpoint/angular @silverpoint/grounds @silverpoint/fonts",
-        peers="@angular/core, @angular/common and @angular/forms >=21 <23; @knight-lab/timelinejs ^3.9.13 (optional)",
+        peers="@angular/core, @angular/common and @angular/forms >=21 <23; @knight-lab/timelinejs ^3.9.13 and @silverpoint/marp (optional)",
         integration="The Angular CLI (@angular/build, on Vite) is validated, including @angular/ssr.",
         create="npx @angular/cli@22 new my-charts --defaults --skip-git",
         run="npm start",
@@ -438,8 +538,8 @@ FRAMEWORKS: tuple[Framework, ...] = (
         package="reflex-silverpoint-react",
         install="pip install reflex-silverpoint-react",
         peers="reflex >= 0.10.0 (React 19), Python 3.11+",
-        integration="A Reflex custom component wrapping @silverpoint/react 0.8; Reflex installs the npm side for "
-        "you. Every chart, UI component, composed component, overlay and the timeline is the npm component, "
+        integration="A Reflex custom component wrapping @silverpoint/react 0.9; Reflex installs the npm side for "
+        "you. Every chart, UI component, composed component, overlay, the timeline and the deck is the npm component, "
         "with a snake_case Python API.",
         create="reflex init",
         run="reflex run",

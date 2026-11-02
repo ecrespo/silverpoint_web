@@ -217,7 +217,7 @@ def sections() -> list[rx.Component]:
                 id="composed-components",
             ),
             rx.el.p(
-                f"New in {sd.LATEST.version}: components built on silverpoint's own frames, tones and heightening, in "
+                "New in 0.7: components built on silverpoint's own frames, tones and heightening, in "
                 "React, Vue, Angular and Reflex. The composed ones are native markup; the overlays open from a "
                 "trigger you write. ",
                 rx.el.a("Their code in four frameworks →", href="/docs/composed"),
@@ -238,7 +238,7 @@ def sections() -> list[rx.Component]:
         rx.el.section(
             rx.el.h2("Timeline", id="timeline"),
             rx.el.p(
-                f"New in {sd.LATEST.version}: Knight Lab's TimelineJS drawn in silverpoint, on the gallery's ground, "
+                "New in 0.7: Knight Lab's TimelineJS drawn in silverpoint, on the gallery's ground, "
                 "mode and palette. ",
                 rx.el.a("SpTimeline →", href="/docs/timeline"),
                 class_name="spw-family-blurb",

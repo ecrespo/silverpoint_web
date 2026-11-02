@@ -1,6 +1,6 @@
 {
-  "version": "0.8.0",
-  "source": "https://unpkg.com/@silverpoint/mcp@0.8.0/README.md",
+  "version": "0.9.2",
+  "source": "https://unpkg.com/@silverpoint/mcp@0.9.2/README.md",
   "tools": [
     {
       "name": "get_version",
@@ -28,7 +28,7 @@
     },
     {
       "name": "generate_code",
-      "description": "The imports, stylesheets and code that draw one chart or one component in React, Vue, Angular or Reflex, using only names, paths and props the catalog holds. `fields` maps the chart’s data roles to your field names."
+      "description": "The imports, stylesheets and code that draw one chart or one component in React, Vue, Angular or Reflex, or a slide deck (`SpDeck`) in React, Vue or Angular, using only names, paths and props the catalog holds. `fields` maps the chart’s data roles to your field names."
     },
     {
       "name": "search_catalog",
@@ -45,6 +45,14 @@
     {
       "name": "check_palette",
       "description": "The contrast findings of the core’s checkPalette for a preset or a palette of fields, over a substrate given as a hex or by name."
+    },
+    {
+      "name": "validate_deck",
+      "description": "Renders a Marp Markdown deck with @silverpoint/marp and returns its slide count and every diagnostic it raises (SP026 fences, SP027 directives, SP029 limits, SP018), each with its slide, its fence slot, requirement and remedy."
+    },
+    {
+      "name": "render_deck",
+      "description": "A Marp Markdown deck as a standalone HTML document, as every adapter renders it on the server: every slide (or one, with `slide`), static charts, the theme, ground and deck stylesheets inlined, no controls. Deterministic."
     }
   ]
 }

@@ -1,7 +1,7 @@
 """The docs of what silverpoint 0.7 adds: palettes, composed and overlay components, the timeline.
 
-silverpoint ships them in React, Vue and Angular; reflex-silverpoint-react 0.8 wraps the same npm
-components (@silverpoint/react 0.8) with Python builders. The pages print the code in
+silverpoint ships them in React, Vue and Angular; reflex-silverpoint-react 0.9 wraps the same npm
+components (@silverpoint/react 0.9) with Python builders. The pages print the code in
 all four behind the page-wide framework switch, and draw the live examples with the Reflex versions,
 on client-side state (``ClientStateVar``): the site has no backend.
 """

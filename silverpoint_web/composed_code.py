@@ -932,6 +932,16 @@ def _trigger(react: str = "trigger={<button …/>}") -> tuple[str, str, str, str
     )
 
 
+#: What a later release changed in a component, shown under its props: slug -> (version, note).
+CHANGES: dict[str, tuple[str, str]] = {
+    "table": (
+        "0.10",
+        "Body cells align to the start unless their column says align: 'end' or 'center'. Before, they took "
+        "the right alignment of the charts' data table, whose sp-table class the component's root shares. "
+        "The empty row stays centred.",
+    ),
+}
+
 #: Events, value bindings and slots of each component, as (what, React, Vue, Angular, Reflex).
 EVENTS: dict[str, tuple[tuple[str, str, str, str, str], ...]] = {
     "surface": (("Content", "children", "default slot", "your element's content", "children"),),

@@ -8,7 +8,6 @@ and a progress bar, tabs swap the chart. Nothing reaches a server.
 from typing import Any
 
 import reflex as rx
-from reflex.experimental.client_state import ClientStateVar
 from reflex_silverpoint_react import (
     UI_COMMON_PROPS,
     UI_COMPONENTS,
@@ -40,19 +39,27 @@ from .. import ui_examples as ux
 from ..components.ui import c, callout, framework_tabs, props_table, table
 from .docs import live, page
 
-TRY_GROUND = ClientStateVar.create("ui_try_ground", "silverpoint")
-TRY_PRECISION = ClientStateVar.create("ui_try_precision", False)
-TRY_LOAD = ClientStateVar.create("ui_try_load", 64)
-TRY_VIEW = ClientStateVar.create("ui_try_view", "traffic")
-TRY_RATE = ClientStateVar.create("ui_try_rate", 4)
+TRY_GROUND = rx.client_state("silverpoint", name="ui_try_ground")
+TRY_PRECISION = rx.client_state(False, name="ui_try_precision")
+TRY_LOAD = rx.client_state(64, name="ui_try_load")
+TRY_VIEW = rx.client_state("traffic", name="ui_try_view")
+TRY_RATE = rx.client_state(4, name="ui_try_rate")
 
-STATIC_CODE = """from reflex.experimental.client_state import ClientStateVar
+#: The grounds the dividers and cards are shown on: (key, label, the props that pick the ground).
+GROUND_SAMPLES: tuple[tuple[str, str, dict[str, Any]], ...] = (
+    ("ink", "ink", {}),
+    ("precision", "precision", {"mode": "precision"}),
+    ("ochre", "ochre", {"substrate": "ochre"}),
+    ("cyanotype", "cyanotype", {"ground": "cyanotype", "substrate": "prussian"}),
+)
+
+STATIC_CODE = """import reflex as rx
 from reflex_silverpoint_react import gauge_arc, sp_slider
 
 # A site exported with enable_state=False has no backend: keep the value in the browser.
-LOAD = ClientStateVar.create("load", 64)
+LOAD = rx.client_state(64, name="load")
 
-sp_slider(label="Load", value=LOAD.value, on_change=LOAD.set_value, marks=[0, 25, 50, 75, 100])
+sp_slider(label="Load", value=LOAD.value, on_change=LOAD.set, marks=[0, 25, 50, 75, 100])
 gauge_arc(percent=LOAD.value, caption="Load", title="Capacity")"""
 
 
@@ -67,7 +74,7 @@ def try_it() -> rx.Component:
             label="Ground",
             name="ground",
             value=ground,
-            on_change=TRY_GROUND.set_value,
+            on_change=TRY_GROUND.set,
             id="try-ground",
             **shared,
         ),
@@ -75,7 +82,7 @@ def try_it() -> rx.Component:
             label="Precision",
             name="precision",
             checked=TRY_PRECISION.value,
-            on_change=TRY_PRECISION.set_value,
+            on_change=TRY_PRECISION.set,
             id="try-precision",
             **shared,
         ),
@@ -83,7 +90,7 @@ def try_it() -> rx.Component:
             label="Load",
             name="load",
             value=TRY_LOAD.value,
-            on_change=TRY_LOAD.set_value,
+            on_change=TRY_LOAD.set,
             marks=[0, 25, 50, 75, 100],
             id="try-load",
             **shared,
@@ -92,7 +99,7 @@ def try_it() -> rx.Component:
             label="How does it look?",
             name="rating",
             value=TRY_RATE.value,
-            on_change=TRY_RATE.set_value,
+            on_change=TRY_RATE.set,
             id="try-rate",
             **shared,
         ),
@@ -123,7 +130,7 @@ def try_it() -> rx.Component:
             ],
             label="Views",
             value=TRY_VIEW.value,
-            on_change=TRY_VIEW.set_value,
+            on_change=TRY_VIEW.set,
             id="try-views",
             **shared,
         ),
@@ -135,7 +142,7 @@ def try_it() -> rx.Component:
             class_name="spw-row",
         ),
         rx.cond(
-            TRY_LOAD.value > 85,
+            TRY_LOAD.value.to(int) > 85,
             sp_alert(
                 "Above 85: add capacity before the evening peak.", kind="warning", title="High load", **shared
             ),
@@ -338,12 +345,7 @@ def ui_docs():
                                 ground=props.get("ground", "silverpoint"),
                                 substrate=props.get("substrate", "cream"),
                             )
-                            for key, label, props in (
-                                ("ink", "ink", {}),
-                                ("precision", "precision", {"mode": "precision"}),
-                                ("ochre", "ochre", {"substrate": "ochre"}),
-                                ("cyanotype", "cyanotype", {"ground": "cyanotype", "substrate": "prussian"}),
-                            )
+                            for key, label, props in GROUND_SAMPLES
                         ],
                         class_name="spw-grid spw-grid-4",
                     ),

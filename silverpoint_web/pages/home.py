@@ -1,10 +1,13 @@
 """The landing page."""
 
+from typing import Any
+
 import reflex as rx
 from reflex_silverpoint_react import (
     CHARTS,
     FAMILIES,
     UI_COMPONENTS,
+    ChartInfo,
     area_chart,
     chart_by_slug,
     donut_chart,
@@ -99,21 +102,29 @@ NEW_FAMILIES = ("Distributions & comparisons", "Hierarchies & dimensions", "Fiel
 NEW_IN_0_6 = [c for c in CHARTS if c.family in NEW_FAMILIES]
 
 
+def chart(slug: str) -> ChartInfo:
+    """The catalog's chart with that slug; the home page only names charts that exist."""
+    info = chart_by_slug(slug)
+    if info is None:
+        raise KeyError(slug)
+    return info
+
+
 def hero_panel() -> rx.Component:
     return rx.el.div(
-        rx.el.div(kpi_card(**live_props(chart_by_slug("kpi-card")), height=110), class_name="spw-hero-a"),
+        rx.el.div(kpi_card(**live_props(chart("kpi-card")), height=110), class_name="spw-hero-a"),
         rx.el.div(
             gauge_arc(percent=72, caption="Capacity used", title="Capacity", height=110),
             class_name="spw-hero-b",
         ),
-        rx.el.div(line_chart(**live_props(chart_by_slug("line-chart")), height=150), class_name="spw-hero-c"),
+        rx.el.div(line_chart(**live_props(chart("line-chart")), height=150), class_name="spw-hero-c"),
         class_name="spw-hero-panel",
     )
 
 
 def ui_showcase(ground: str, substrate: str) -> rx.Component:
     """A small settings card made of the UI components, on one ground."""
-    props = {"ground": ground}
+    props: dict[str, Any] = {"ground": ground}
     key = ground[:2]
     return ux.panel(
         sp_card(
@@ -173,7 +184,7 @@ def framework_card(fw: sd.Framework) -> rx.Component:
 
 
 def teaser(slug: str, **extra) -> rx.Component:
-    info = chart_by_slug(slug)
+    info = chart(slug)
     props = live_props(info)
     props.update(extra)
     return rx.el.a(

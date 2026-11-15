@@ -244,7 +244,7 @@ def versions() -> rx.Component:
 
 
 BUG_TEMPLATE = """**Package and version:** @silverpoint/react@{version}
-**Framework and version:** (React 19.x / Vue 3.5.x / Angular 22.x / Reflex 0.10.x)
+**Framework and version:** (React 19.x / Vue 3.5.x / Angular 22.x / Reflex 0.11.x)
 **Integration:** (Vite / Next.js / Angular CLI / Reflex)
 **Chart or UI component:** (e.g. LineChart, SpTabs)
 **Ground / substrate / mode:** (silverpoint / cream / ink)

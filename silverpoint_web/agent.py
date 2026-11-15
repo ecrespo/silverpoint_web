@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Any
 
 #: The silverpoint version whose catalog the site publishes: the one it documents (site_data.LATEST).
-CATALOG_VERSION = "0.9.2"
+CATALOG_VERSION = "0.10.1"
 
 SITE_URL = "https://silverpointweb.vercel.app"
 #: The hosted MCP server, behind the site's own /mcp (vercel.json rewrites it to the MCP project).
@@ -59,6 +59,10 @@ PLUGINS: dict[str, str] = {
 LOCAL_SERVER = "claude mcp add silverpoint -- npx -y @silverpoint/mcp"
 
 FRAMEWORK_LABELS = {"react": "React", "vue": "Vue", "angular": "Angular", "reflex": "Reflex"}
+
+
+def _label(framework: str) -> str:
+    return FRAMEWORK_LABELS.get(framework, framework)
 
 
 def package_url(path: str) -> str:
@@ -133,7 +137,7 @@ def _names(catalog: dict[str, Any], entry: dict[str, Any]) -> list[str]:
     return _table(
         ["Framework", "Name", "Import"],
         [
-            [FRAMEWORK_LABELS.get(fw, fw), _code(entry["names"][fw]), _code(entry["imports"][fw])]
+            [_label(fw), _code(entry["names"][fw]), _code(entry["imports"][fw])]
             for fw in catalog["frameworks"]
         ],
     )
@@ -141,13 +145,12 @@ def _names(catalog: dict[str, Any], entry: dict[str, Any]) -> list[str]:
 
 def _per_framework(values: dict[str, list[str]]) -> str:
     return "; ".join(
-        f"{FRAMEWORK_LABELS.get(fw, fw)} " + (", ".join(_code(v) for v in names) or "none")
-        for fw, names in values.items()
+        f"{_label(fw)} " + (", ".join(_code(v) for v in names) or "none") for fw, names in values.items()
     )
 
 
 def _summary(catalog: dict[str, Any]) -> str:
-    frameworks = [FRAMEWORK_LABELS.get(fw, fw) for fw in catalog["frameworks"]]
+    frameworks = [_label(fw) for fw in catalog["frameworks"]]
     return (
         f"silverpoint {catalog['version']} draws {len(catalog['charts'])} charts and "
         f"{len(catalog['components'])} UI components as metal point on prepared paper, for "
@@ -211,7 +214,7 @@ def _deck(catalog: dict[str, Any]) -> list[str]:
             ["Framework", "Name", "Import"],
             [
                 [
-                    FRAMEWORK_LABELS.get(fw, fw),
+                    _label(fw),
                     _code(deck["names"].get(fw, "")) or "—",
                     _code(deck["imports"].get(fw, "")) or "—",
                 ]
@@ -227,10 +230,7 @@ def _deck(catalog: dict[str, Any]) -> list[str]:
                 [
                     _code(event["name"]),
                     _code(event["payload"]),
-                    "; ".join(
-                        f"{FRAMEWORK_LABELS.get(fw, fw)} {_code(binding)}"
-                        for fw, binding in event["bindings"].items()
-                    ),
+                    "; ".join(f"{_label(fw)} {_code(binding)}" for fw, binding in event["bindings"].items()),
                     _cell(event["doc"]),
                 ]
                 for event in deck["events"]
@@ -339,9 +339,7 @@ def llms_full_txt(catalog: dict[str, Any]) -> str:
     for component in catalog["components"]:
         bindings = [
             f"- Binds `{kind}`: "
-            + "; ".join(
-                f"{FRAMEWORK_LABELS.get(fw, fw)} {_code(spelling)}" for fw, spelling in spellings.items()
-            )
+            + "; ".join(f"{_label(fw)} {_code(spelling)}" for fw, spelling in spellings.items())
             for kind, spellings in component.get("binding", {}).items()
         ]
         out += [

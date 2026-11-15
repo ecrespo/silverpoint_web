@@ -4,7 +4,6 @@ from collections.abc import Callable
 from urllib.parse import quote
 
 import reflex as rx
-from reflex.experimental.client_state import ClientStateVar
 from reflex_silverpoint_react import CHARTS, COMMON_PROPS, FAMILIES, ChartInfo, download_svg, sp_button
 
 from .. import site_data as sd
@@ -52,8 +51,8 @@ def chart_page(info: ChartInfo) -> Callable[[], rx.Component]:
     imports = import_paths(info)
     drill: dict = {}
     if info.slug in DRILLABLE:
-        root = ClientStateVar.create(f"root_{info.factory_name}", None)
-        drill = {"root_id": root.value, "on_root_change": root.set_value}
+        root = rx.client_state(None, name=f"root_{info.factory_name}")
+        drill = {"root_id": root.value, "on_root_change": root.set}
 
     def render() -> rx.Component:
         return docs_page(

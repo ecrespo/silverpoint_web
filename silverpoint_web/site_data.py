@@ -70,6 +70,48 @@ class Release:
 
 VERSIONS: tuple[Release, ...] = (
     Release(
+        version="0.10.1",
+        date="2026-11-15",
+        summary="A patch for the MCP server and the agent catalog: they now describe reflex-silverpoint-react 0.10.0.",
+        highlights=(
+            "@silverpoint/mcp: the agent catalog pins reflex-silverpoint-react 0.10.0's own reflex-catalog.json "
+            "(wrapping 0.10.0), so no Reflex entry is served stale.",
+            "Every package moves to 0.10.1; no API changes and no change to any render.",
+        ),
+    ),
+    Release(
+        version="0.10.0",
+        date="2026-11-15",
+        summary="Fixes from the issues found while writing the tutorial series: a standalone SVG export, the "
+        "provider on a subpath of its own, and dashboards that follow their provider.",
+        highlights=(
+            "@silverpoint/grounds: standaloneSVG(svg, css) puts a stylesheet inside the SVG that toSVGString() "
+            "returns, in CDATA, so the file paints itself when opened outside the app; "
+            "@silverpoint/grounds/styles-text is styles.css as a string every bundler imports without loader "
+            "attributes (silverpoint#14, #19). toSVGString() itself is unchanged: it is the canonical markup.",
+            "@silverpoint/react/provider: SilverpointProvider on a subpath of its own, so a bundler that keeps "
+            "the 'use client' root barrel whole (Next.js with Turbopack) does not carry every chart into each "
+            "route (silverpoint#21).",
+            "A dashboard's own frame, title and grid follow the provider: Dashboard, SpDashboard and "
+            "sp-dashboard take the provider's ground, substrate and palette where they set none, as their "
+            "charts already did (silverpoint#17). Without a provider the markup is unchanged; "
+            "@silverpoint/react/server/dashboard still reads no provider. @silverpoint/core exports "
+            "dashboardSection.",
+            "SpTable: body cells align to the start unless their column says align: 'end' or 'center'; they no "
+            "longer take the right alignment of the charts' data table (silverpoint#12).",
+            "A chart whose container is hidden with display: none (React <Activity>, a kept-alive route, a "
+            "closed panel) keeps its last measured width and no longer warns SP003; a rendered container of "
+            "0 px still does (silverpoint#22).",
+            "@silverpoint/core/palettes: PaletteName is the union of the six preset names; PALETTES is keyed by "
+            "it and PALETTE_NAMES lists it. Code that indexed PALETTES with a plain string now needs the name "
+            "narrowed (silverpoint#20).",
+            'Angular: a literal title="…" on a chart, a dashboard or a UI component with a title input no '
+            "longer stays on the host element, where the browser showed its native tooltip (silverpoint#18).",
+            "No change to the normalised SVG of any chart.",
+        ),
+        reflex="0.10.0",
+    ),
+    Release(
         version="0.9.2",
         date="2026-11-01",
         summary="A patch for the MCP server and the agent catalog: they now describe reflex-silverpoint-react 0.9.1, "
@@ -283,6 +325,33 @@ class ReflexRelease:
 #: The Reflex component's releases, newest first. Only those that add something of their own are
 #: described here; the others follow the npm release they wrap (``Release.reflex``).
 REFLEX_VERSIONS: tuple[ReflexRelease, ...] = (
+    ReflexRelease(
+        version="0.10.0",
+        date="2026-11-15",
+        wraps="0.10.0",
+        summary="Wraps @silverpoint/react 0.10.0, and fixes controlled overlays with a text trigger and the SVG "
+        "that download_svg and get_svg deliver.",
+        highlights=(
+            "An overlay controlled from state (open=State.open) whose trigger is a string or sp_trigger(...) no "
+            "longer crashes the page with ReferenceError: SilverpointTrigger is not defined (#44, silverpoint#13). "
+            "sp_trigger is now a JS module of the package that every compiled module imports.",
+            "download_svg and get_svg deliver an SVG that paints itself: the page's silverpoint stylesheet goes "
+            "inside the markup, in CDATA. Before, the file rendered black outside the app (#45, silverpoint#14). "
+            "The typeface is not embedded.",
+            "A dashboard under silverpoint_provider draws its own frame, title and grid with the provider's "
+            "ground, substrate and palette where it sets none (silverpoint#17). To keep a cream dashboard under "
+            "a cyanotype provider, give the dashboard its own ground and substrate.",
+            "silverpoint_provider and silverpoint_palette import SilverpointProvider from "
+            "@silverpoint/react/provider, so a page with no chart does not reach the root entry.",
+            "Upstream: sp_table body cells align to the start unless their column says align (silverpoint#12), "
+            "and a chart hidden with display: none no longer warns SP003 (silverpoint#22).",
+            "Importing the package links assets/external/reflex_silverpoint_react/assets/trigger.jsx into the "
+            "app's directory, as Reflex does for every shared asset: ignore assets/external/ in version control. "
+            "overlays.TRIGGER_CODE is gone.",
+            "Every silverpoint npm dependency moves to 0.10.0, @silverpoint/marp included; the Python builders "
+            "and their props are unchanged.",
+        ),
+    ),
     ReflexRelease(
         version="0.9.1",
         date="2026-11-01",

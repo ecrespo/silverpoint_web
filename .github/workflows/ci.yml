@@ -34,6 +34,8 @@ jobs:
         run: uv run ruff check --output-format=github .
       - name: Ruff format
         run: uv run ruff format --check .
+      - name: Pyright
+        run: uv run pyright
       - name: Tests
         run: uv run pytest -q
 

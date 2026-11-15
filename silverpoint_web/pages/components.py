@@ -393,6 +393,10 @@ def composed_page(item: ro.Composed) -> Callable[[], rx.Component]:
                         else rx.el.p(f"{component} takes only the common props."),
                     )
                 ],
+                *[
+                    callout(rx.el.strong(f"Since {since}. "), note)
+                    for since, note in filter(None, [cc.CHANGES.get(item.slug)])
+                ],
                 rx.el.p(
                     "In Reflex the names are snake_case; ",
                     rx.el.a("the Reflex column of Composed components", href=f"/docs/composed#{item.slug}"),

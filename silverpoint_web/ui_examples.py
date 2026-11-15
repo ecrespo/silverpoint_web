@@ -221,7 +221,7 @@ GROUP_BLURBS: dict[str, str] = {
 
 
 def group_title(group: str) -> str:
-    return dict(UI_GROUPS)[group]
+    return next(title for key, title in UI_GROUPS if key == group)
 
 
 def components_in(group: str) -> list[UiComponentInfo]:

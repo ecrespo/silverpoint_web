@@ -1,7 +1,7 @@
 """The gallery: every chart, UI component and composed component, live, with the ground controls."""
 
 import reflex as rx
-from reflex.experimental.client_state import ClientStateVar
+from reflex.vars import ObjectVar
 from reflex_silverpoint_react import (
     CHARTS,
     FAMILIES,
@@ -19,15 +19,15 @@ from ..components.layout import shell_page
 from ..components.ui import choice
 from ..examples import live_props
 
-GROUND = ClientStateVar.create("gallery_ground", "silverpoint")
-SUBSTRATE = ClientStateVar.create("gallery_substrate", "cream")
-MODE = ClientStateVar.create("gallery_mode", "ink")
-HATCH = ClientStateVar.create("gallery_hatch", "tile")
-SIZE = ClientStateVar.create("gallery_size", "md")
-PALETTE = ClientStateVar.create("gallery_palette", "none")
+GROUND = rx.client_state("silverpoint", name="gallery_ground")
+SUBSTRATE = rx.client_state("cream", name="gallery_substrate")
+MODE = rx.client_state("ink", name="gallery_mode")
+HATCH = rx.client_state("tile", name="gallery_hatch")
+SIZE = rx.client_state("md", name="gallery_size")
+PALETTE = rx.client_state("none", name="gallery_palette")
 
 
-def palette() -> rx.Var:
+def palette() -> ObjectVar[dict[str, str]]:
     """The palette picked in the controls, as a dict var ("none" is an empty dict)."""
     return ro.palette_var(PALETTE.value)
 

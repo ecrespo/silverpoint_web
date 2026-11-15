@@ -2,17 +2,16 @@
 
 The site's own controls are silverpoint's UI components (reflex-silverpoint-react 0.7): the code
 tabs are an ``sp_tabs``, the callouts ``sp_alert``, the gallery's controls ``sp_segmented``, the
-pills ``sp_tag``. They are driven by client-side state (``ClientStateVar``), as the site has no backend.
+pills ``sp_tag``. They are driven by client-side state (``rx.client_state``), as the site has no backend.
 """
 
-from typing import Any
+from typing import Any, Literal
 
 import reflex as rx
-from reflex.experimental.client_state import ClientStateVar
 from reflex_silverpoint_react import PropDoc, sp_alert, sp_segmented, sp_tab_panel, sp_tabs, sp_tag, ui_item
 
 #: The framework the reader picked. One value for the whole page, so every code tab follows it.
-FRAMEWORK = ClientStateVar.create("sp_framework", "react")
+FRAMEWORK = rx.client_state("react", name="sp_framework")
 
 FRAMEWORK_TABS: tuple[tuple[str, str], ...] = (
     ("react", "React"),
@@ -90,7 +89,7 @@ def framework_tabs(codes: dict[str, str], installs: dict[str, str] | None = None
         items=[ui_item(key, label) for key, label in available],
         label="Framework",
         value=FRAMEWORK.value,
-        on_change=FRAMEWORK.set_value,
+        on_change=FRAMEWORK.set,
         size="sm",
         class_name="spw-tabs",
     )
@@ -98,7 +97,12 @@ def framework_tabs(codes: dict[str, str], installs: dict[str, str] | None = None
 
 #: The site's callout kinds as sp_alert kinds. Every callout is a ``status`` (info / success), not
 #: an ``alert``: they are part of the page, not news, so nothing is announced on load.
-CALLOUT_KINDS = {"note": "info", "tip": "success", "warn": "info", "bug": "info"}
+CALLOUT_KINDS: dict[str, Literal["error", "info", "success", "warning"]] = {
+    "note": "info",
+    "tip": "success",
+    "warn": "info",
+    "bug": "info",
+}
 CALLOUT_TITLES = {"note": "Note", "tip": "Tip", "warn": "Mind this", "bug": "Report it"}
 
 
@@ -167,7 +171,12 @@ def table(head: list[str], rows: list[list[Any]]) -> rx.Component:
 
 
 #: Tone of an ``sp_tag`` per pill kind: the darker the tone, the more it matters.
-PILL_TONES = {"spw-pill-latest": 4, "spw-pill-adapter": 3, "spw-pill-required": 2, "spw-pill-optional": 1}
+PILL_TONES: dict[str, Literal[1, 2, 3, 4]] = {
+    "spw-pill-latest": 4,
+    "spw-pill-adapter": 3,
+    "spw-pill-required": 2,
+    "spw-pill-optional": 1,
+}
 
 
 def pill(text: str, kind: str = "") -> rx.Component:
@@ -175,7 +184,7 @@ def pill(text: str, kind: str = "") -> rx.Component:
     return sp_tag(text, tone=PILL_TONES.get(kind, 1), size="sm", class_name=f"spw-pill {kind}".strip())
 
 
-def choice(label: str, var: ClientStateVar, options: tuple[str, ...] | list[str]) -> rx.Component:
+def choice(label: str, var: rx.ClientStateVar, options: tuple[str, ...] | list[str]) -> rx.Component:
     """A client-side choice between a few values, drawn as an ``sp_segmented``."""
     return rx.el.div(
         # SpSegmented names itself with a screen-reader legend; this caption is for the eye only.
@@ -185,7 +194,7 @@ def choice(label: str, var: ClientStateVar, options: tuple[str, ...] | list[str]
             label=label,
             name="ctl-" + label.lower().replace(" ", "-"),
             value=var.value,
-            on_change=var.set_value,
+            on_change=var.set,
             size="sm",
         ),
         class_name="spw-choice",
@@ -209,6 +218,6 @@ def p(*children: Any, **props: Any) -> rx.Component:
     return rx.el.p(*children, **props)
 
 
-def c(text: str) -> rx.Component:
+def c(text: str | rx.Var) -> rx.Component:
     """Inline code."""
     return rx.el.code(text)

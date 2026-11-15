@@ -2,7 +2,7 @@
 
 silverpoint ships them in React, Vue and Angular; the site draws them with reflex-silverpoint-react
 0.9, whose builders are the same npm components (@silverpoint/react 0.9). The demos are driven by
-client-side state (``ClientStateVar``), as the site has no backend; the Python printed beside them is
+client-side state (``rx.client_state``), as the site has no backend; the Python printed beside them is
 the usual ``rx.State`` version a Reflex app writes, and ``composed_code`` holds the React, Vue and
 Angular code of each.
 
@@ -15,7 +15,7 @@ from dataclasses import dataclass
 from typing import Any
 
 import reflex as rx
-from reflex.experimental.client_state import ClientStateVar
+from reflex.vars import ObjectVar
 from reflex_silverpoint_react import (
     PALETTES,
     sort_rows,
@@ -71,7 +71,7 @@ PALETTE_BLURBS: dict[str, str] = {
 _PALETTE_DICTS: dict[str, dict[str, str]] = {"none": {}, **{k: p.to_dict() for k, p in PALETTES.items()}}
 
 
-def palette_var(name: Any) -> rx.Var:
+def palette_var(name: Any) -> ObjectVar[dict[str, str]]:
     """The palette a client-side preset name stands for, as a var ``palette=`` accepts."""
     return rx.Var.create(_PALETTE_DICTS).to(dict)[name].to(dict)
 
@@ -136,21 +136,21 @@ BREADCRUMB: list[dict[str, Any]] = [
 
 # ── Client-side state of the demos ───────────────────────────────────────────────────────
 
-SORT_KEY = ClientStateVar.create("composed_sort_key", "load")
-SORT_ORDER = ClientStateVar.create("composed_sort_order", "desc")
-PAGE = ClientStateVar.create("composed_page", 3)
-REGION = ClientStateVar.create("composed_region", "North")
-COMMAND = ClientStateVar.create("composed_command", "")
-NOTE = ClientStateVar.create("composed_note", "Drawn in silverpoint.")
-COPIES = ClientStateVar.create("composed_copies", 3)
-MODAL_OPEN = ClientStateVar.create("composed_modal_open", False)
-TOAST_OPEN = ClientStateVar.create("composed_toast_open", False)
+SORT_KEY = rx.client_state("load", name="composed_sort_key")
+SORT_ORDER = rx.client_state("desc", name="composed_sort_order")
+PAGE = rx.client_state(3, name="composed_page")
+REGION = rx.client_state("North", name="composed_region")
+COMMAND = rx.client_state("", name="composed_command")
+NOTE = rx.client_state("Drawn in silverpoint.", name="composed_note")
+COPIES = rx.client_state(3, name="composed_copies")
+MODAL_OPEN = rx.client_state(False, name="composed_modal_open")
+TOAST_OPEN = rx.client_state(False, name="composed_toast_open")
 
 
 def _sort(key: str) -> list[Any]:
     """A header click: sort by that column, flipping the order when it is already the one sorted."""
     flipped = rx.cond((SORT_KEY.value == key) & (SORT_ORDER.value == "asc"), "desc", "asc")
-    return [SORT_ORDER.set_value(flipped), SORT_KEY.set_value(key)]
+    return [SORT_ORDER.set(flipped), SORT_KEY.set(key)]
 
 
 def _sorted_rows() -> rx.Var:
@@ -211,7 +211,7 @@ def _table(s: dict[str, Any]) -> rx.Component:
 
 def _pagination(s: dict[str, Any]) -> rx.Component:
     return rx.el.div(
-        sp_pagination(total=240, current=PAGE.value, on_change=PAGE.set_value, show_total=True, **s),
+        sp_pagination(total=240, current=PAGE.value, on_change=PAGE.set, show_total=True, **s),
         rx.el.p("Page ", rx.el.code(PAGE.value), class_name="spw-small"),
         class_name="spw-stack",
     )
@@ -283,7 +283,7 @@ def _textarea(s: dict[str, Any]) -> rx.Component:
     return sp_textarea(
         label="Note",
         value=NOTE.value,
-        on_change=NOTE.set_value,
+        on_change=NOTE.set,
         rows=3,
         max_length=120,
         show_count=True,
@@ -297,7 +297,7 @@ def _input_number(s: dict[str, Any]) -> rx.Component:
         sp_input_number(
             label="Copies",
             value=COPIES.value,
-            on_change=COPIES.set_value,
+            on_change=COPIES.set,
             min=1,
             max=10,
             id="composed-copies",
@@ -314,9 +314,9 @@ def _modal(s: dict[str, Any]) -> rx.Component:
         trigger=sp_trigger("Open the modal", **s),
         title="Apply changes",
         description="The geometry of the data does not move.",
-        footer=sp_trigger("Apply", variant="primary", on_click=MODAL_OPEN.set_value(False), **s),
+        footer=sp_trigger("Apply", variant="primary", on_click=MODAL_OPEN.set(False), **s),
         open=MODAL_OPEN.value,
-        on_open_change=MODAL_OPEN.set_value,
+        on_open_change=MODAL_OPEN.set,
         **s,
     )
 
@@ -348,7 +348,7 @@ def _tooltip(s: dict[str, Any]) -> rx.Component:
 
 def _select(s: dict[str, Any]) -> rx.Component:
     return rx.el.div(
-        sp_select(REGIONS, value=REGION.value, on_change=REGION.set_value, label="Region", **s),
+        sp_select(REGIONS, value=REGION.value, on_change=REGION.set, label="Region", **s),
         rx.el.p("Region ", rx.el.code(REGION.value), class_name="spw-small"),
         class_name="spw-stack",
     )
@@ -356,9 +356,7 @@ def _select(s: dict[str, Any]) -> rx.Component:
 
 def _dropdown_menu(s: dict[str, Any]) -> rx.Component:
     return rx.el.div(
-        sp_dropdown_menu(
-            sp_trigger("Actions", chevron=True, **s), MENU_ITEMS, on_select=COMMAND.set_value, **s
-        ),
+        sp_dropdown_menu(sp_trigger("Actions", chevron=True, **s), MENU_ITEMS, on_select=COMMAND.set, **s),
         rx.el.p(
             "Last command ", rx.el.code(rx.cond(COMMAND.value, COMMAND.value, "—")), class_name="spw-small"
         ),
@@ -378,14 +376,14 @@ def _trigger(s: dict[str, Any]) -> rx.Component:
 
 def _toast(s: dict[str, Any]) -> rx.Component:
     return rx.el.div(
-        sp_button("Show a toast", on_click=TOAST_OPEN.set_value(True), size="sm", id="composed-toast-show"),
+        sp_button("Show a toast", on_click=TOAST_OPEN.set(True), size="sm", id="composed-toast-show"),
         sp_toaster(
             sp_toast(
                 "Saved",
                 "The drawing was saved.",
                 kind="success",
                 open=TOAST_OPEN.value,
-                on_open_change=TOAST_OPEN.set_value,
+                on_open_change=TOAST_OPEN.set,
                 **s,
             )
         ),

@@ -2,7 +2,7 @@
 
 ``SpDeck`` (``@silverpoint/<react|vue|angular>/deck``, ``sp_deck`` in Reflex since
 reflex-silverpoint-react 0.9.0) renders Marp/Marpit Markdown in the silverpoint style; the engine is
-``@silverpoint/marp``. The tables follow the package's README and the agent catalog at 0.9.2.
+``@silverpoint/marp``. The tables follow the package's README and the agent catalog at 0.10.1.
 """
 
 FENCE = "`" * 3

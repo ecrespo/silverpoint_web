@@ -1,8 +1,8 @@
-# silverpoint 0.9.2: the agent catalog
+# silverpoint 0.10.1: the agent catalog
 
-> silverpoint 0.9.2 draws 60 charts and 38 UI components as metal point on prepared paper, for React, Vue, Angular and Reflex (Python, through reflex-silverpoint-react), from one framework-free engine, on the silverpoint and cyanotype grounds with 6 palette presets; accessible and server-renderable.
+> silverpoint 0.10.1 draws 60 charts and 38 UI components as metal point on prepared paper, for React, Vue, Angular and Reflex (Python, through reflex-silverpoint-react), from one framework-free engine, on the silverpoint and cyanotype grounds with 6 palette presets; accessible and server-renderable.
 
-Generated from https://silverpointweb.vercel.app/agent-catalog.json, the catalog `@silverpoint/mcp@0.9.2` ships (schema 1). Reflex: `reflex-silverpoint-react` 0.9.1, wrapping silverpoint 0.9.1. React, Vue and Angular share each prop's name (Vue templates may write it in kebab-case); Reflex spells it in snake_case. The MCP server at https://silverpointweb.vercel.app/mcp answers from the same catalog.
+Generated from https://silverpointweb.vercel.app/agent-catalog.json, the catalog `@silverpoint/mcp@0.10.1` ships (schema 1). Reflex: `reflex-silverpoint-react` 0.10.0, wrapping silverpoint 0.10.0. React, Vue and Angular share each prop's name (Vue templates may write it in kebab-case); Reflex spells it in snake_case. The MCP server at https://silverpointweb.vercel.app/mcp answers from the same catalog.
 
 ## Stylesheets
 

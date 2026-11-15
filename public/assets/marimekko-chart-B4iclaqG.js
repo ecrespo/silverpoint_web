@@ -1,1 +1,0 @@
-export{t as MarimekkoChart}from"./chunk-IO7JXYZI-CXM4vzVt.js";

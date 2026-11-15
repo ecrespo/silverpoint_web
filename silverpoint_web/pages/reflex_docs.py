@@ -3,13 +3,12 @@
 silverpoint ships them in React, Vue and Angular; reflex-silverpoint-react 0.9 wraps the same npm
 components (@silverpoint/react 0.9) with Python builders. The pages print the code in
 all four behind the page-wide framework switch, and draw the live examples with the Reflex versions,
-on client-side state (``ClientStateVar``): the site has no backend.
+on client-side state (``rx.client_state``): the site has no backend.
 """
 
 from collections.abc import Callable
 
 import reflex as rx
-from reflex.experimental.client_state import ClientStateVar
 from reflex_silverpoint_react import (
     PALETTE_PROPERTIES,
     PALETTES,
@@ -41,12 +40,12 @@ EYEBROW = "New in 0.7"
 
 # ── Palettes ─────────────────────────────────────────────────────────────────────────────
 
-SECTION_PALETTE = ClientStateVar.create("palettes_section", "sanguine")
+SECTION_PALETTE = rx.client_state("sanguine", name="palettes_section")
 
 #: The palette builder's colours, one client-side var per field (start: the sanguine preset).
 BUILDER_FIELDS = ("substrate", "ink", "ink_secondary", "text", "text_muted")
 BUILDER = {
-    key: ClientStateVar.create(f"palette_builder_{key}", PALETTES["sanguine"].to_dict()[key])
+    key: rx.client_state(PALETTES["sanguine"].to_dict()[key], name=f"palette_builder_{key}")
     for key in BUILDER_FIELDS
 }
 
@@ -63,7 +62,7 @@ silverpoint_palette(dashboard(...), sp_card(...), palette="indigo")  # a whole s
 
 PALETTE_CODES = {
     "react": """import { sanguine } from '@silverpoint/core/palettes'; // npm install @silverpoint/core
-import { SilverpointProvider } from '@silverpoint/react';
+import { SilverpointProvider } from '@silverpoint/react/provider';
 import { BarChart } from '@silverpoint/react/bar-chart';
 import { SpButton } from '@silverpoint/react/ui/button';
 
@@ -139,7 +138,8 @@ def swatches(name: str) -> rx.Component:
 
 def preset_card(name: str) -> rx.Component:
     palette = PALETTES[name]
-    ratio = contrast_ratio(palette.ink, palette.substrate)
+    colours = palette.to_dict()
+    ratio = contrast_ratio(colours["ink"], colours["substrate"])
     passes = not check_palette(palette)
     return paper_card(
         rx.el.div(
@@ -171,7 +171,7 @@ def builder() -> rx.Component:
             rx.el.input(
                 type="color",
                 value=BUILDER[key].value,
-                on_change=BUILDER[key].set_value,
+                on_change=BUILDER[key].set,
                 class_name="spw-color",
             ),
             rx.el.span(c(key), " ", rx.el.span(BUILDER[key].value, class_name="spw-muted")),
@@ -387,6 +387,20 @@ def palettes() -> Callable[[], rx.Component]:
                         " prop overrides it field by field. A value is accepted only if it is a CSS colour.",
                     ),
                     rx.el.li(
+                        "Since 0.10, ",
+                        c("PaletteName"),
+                        " is the union of the six preset names: ",
+                        c("PALETTES"),
+                        " is keyed by it and ",
+                        c("PALETTE_NAMES"),
+                        " lists it, so TypeScript that indexes ",
+                        c("PALETTES"),
+                        " with a plain ",
+                        c("string"),
+                        " has to narrow the name first. A dashboard under a provider also draws its own frame, "
+                        "title and grid with the provider's palette.",
+                    ),
+                    rx.el.li(
                         "Reflex: ",
                         c("silverpoint_provider"),
                         " takes a ",
@@ -433,10 +447,10 @@ def palettes() -> Callable[[], rx.Component]:
 
 # ── Composed components ──────────────────────────────────────────────────────────────────
 
-COMPOSED_GROUND = ClientStateVar.create("composed_ground", "silverpoint")
-COMPOSED_SUBSTRATE = ClientStateVar.create("composed_substrate", "cream")
-COMPOSED_MODE = ClientStateVar.create("composed_mode", "ink")
-COMPOSED_PALETTE = ClientStateVar.create("composed_palette", "none")
+COMPOSED_GROUND = rx.client_state("silverpoint", name="composed_ground")
+COMPOSED_SUBSTRATE = rx.client_state("cream", name="composed_substrate")
+COMPOSED_MODE = rx.client_state("ink", name="composed_mode")
+COMPOSED_PALETTE = rx.client_state("none", name="composed_palette")
 
 
 def composed_surface() -> dict:
@@ -632,12 +646,12 @@ def composed() -> Callable[[], rx.Component]:
 
 # ── Timeline ─────────────────────────────────────────────────────────────────────────────
 
-TIMELINE_GROUND = ClientStateVar.create("timeline_ground", "silverpoint")
-TIMELINE_SUBSTRATE = ClientStateVar.create("timeline_substrate", "cream")
-TIMELINE_MODE = ClientStateVar.create("timeline_mode", "ink")
-TIMELINE_PALETTE = ClientStateVar.create("timeline_palette", "none")
-TIMELINE_FRAMES = ClientStateVar.create("timeline_frames", "inked")
-TIMELINE_SLIDE = ClientStateVar.create("timeline_slide", "")
+TIMELINE_GROUND = rx.client_state("silverpoint", name="timeline_ground")
+TIMELINE_SUBSTRATE = rx.client_state("cream", name="timeline_substrate")
+TIMELINE_MODE = rx.client_state("ink", name="timeline_mode")
+TIMELINE_PALETTE = rx.client_state("none", name="timeline_palette")
+TIMELINE_FRAMES = rx.client_state("inked", name="timeline_frames")
+TIMELINE_SLIDE = rx.client_state("", name="timeline_slide")
 
 
 TIMELINE_INSTALL = {
@@ -720,7 +734,8 @@ def live_timeline(**props) -> rx.Component:
         substrate=TIMELINE_SUBSTRATE.value,
         mode=TIMELINE_MODE.value,
         palette=ro.palette_var(TIMELINE_PALETTE.value),
-        inked_frames=TIMELINE_FRAMES.value == "inked",
+        # sp_timeline types this argument as a bool, but forwards a Var to the component unchanged.
+        inked_frames=TIMELINE_FRAMES.value == "inked",  # pyright: ignore[reportArgumentType]
         **props,
     )
 
@@ -743,7 +758,7 @@ def timeline() -> Callable[[], rx.Component]:
                     choice("Frames", TIMELINE_FRAMES, ("inked", "skin only")),
                     class_name="spw-controls",
                 ),
-                rx.el.div(live_timeline(on_change=TIMELINE_SLIDE.set_value), class_name="spw-timeline-wrap"),
+                rx.el.div(live_timeline(on_change=TIMELINE_SLIDE.set), class_name="spw-timeline-wrap"),
                 rx.el.p(
                     "on_change: ",
                     c(rx.cond(TIMELINE_SLIDE.value, TIMELINE_SLIDE.value, "—")),

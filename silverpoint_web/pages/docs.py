@@ -4,7 +4,6 @@ from collections.abc import Callable
 from typing import Any
 
 import reflex as rx
-from reflex.experimental.client_state import ClientStateVar
 from reflex_silverpoint_react import (
     CHARTS,
     COMMON_PROPS,
@@ -195,7 +194,7 @@ CREATES = {
 }
 
 PROVIDER = {
-    "react": """import { SilverpointProvider } from '@silverpoint/react';
+    "react": """import { SilverpointProvider } from '@silverpoint/react/provider';
 import { BarChart } from '@silverpoint/react/bar-chart';
 import { DonutChart } from '@silverpoint/react/donut-chart';
 
@@ -357,12 +356,15 @@ line_chart(
 
 EXPORT = {
     "react": """import { useRef } from 'react';
+import { standaloneSVG } from '@silverpoint/grounds';
+import groundStyles from '@silverpoint/grounds/styles-text';
 import { LineChart, type ChartHandle } from '@silverpoint/react/line-chart';
 
 export function Exportable({ data }: { data: { hour: string; hits: number }[] }) {
   const chart = useRef<ChartHandle>(null);
   const download = () => {
-    const svg = chart.current?.toSVGString() ?? '';
+    const markup = chart.current?.toSVGString() ?? ''; // the canonical markup, painted by the page
+    const svg = standaloneSVG(markup, groundStyles);    // a file that paints itself
     window.open(URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' })));
   };
   return (
@@ -374,13 +376,15 @@ export function Exportable({ data }: { data: { hour: string; hits: number }[] })
 }""",
     "vue": """<script setup lang="ts">
 import { ref } from 'vue';
+import { standaloneSVG } from '@silverpoint/grounds';
+import groundStyles from '@silverpoint/grounds/styles-text';
 import { SpLineChart } from '@silverpoint/vue/line-chart';
 
 defineProps<{ data: { hour: string; hits: number }[] }>();
 const chart = ref<InstanceType<typeof SpLineChart>>();
 
 function download() {
-  const svg = chart.value?.toSVGString() ?? '';
+  const svg = standaloneSVG(chart.value?.toSVGString() ?? '', groundStyles);
   window.open(URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' })));
 }
 </script>
@@ -390,6 +394,8 @@ function download() {
   <button @click="download">Export SVG</button>
 </template>""",
     "angular": """import { Component, viewChild } from '@angular/core';
+import { standaloneSVG } from '@silverpoint/grounds';
+import groundStyles from '@silverpoint/grounds/styles-text';
 import { SpLineChart } from '@silverpoint/angular/line-chart';
 
 @Component({
@@ -408,7 +414,7 @@ export class Exportable {
   private readonly chart = viewChild.required<SpLineChart>('chart');
 
   protected download() {
-    const svg = this.chart().toSVGString();
+    const svg = standaloneSVG(this.chart().toSVGString(), groundStyles);
     window.open(URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' })));
   }
 }""",
@@ -416,6 +422,7 @@ export class Exportable {
 
 line_chart(id="hits", data=DATA, x_key="hour", value_key="hits")
 
+# Both deliver a standalone SVG: the page's silverpoint stylesheet is inside the markup.
 rx.button("Download SVG", on_click=download_svg("hits", "hits.svg"))           # in the browser
 rx.button("SVG to Python", on_click=get_svg("hits", State.receive_svg))         # handler gets a str
 rx.button("Geometry", on_click=get_geometry("hits", State.receive_geometry))    # handler gets a dict""",
@@ -448,8 +455,14 @@ export function render(): Promise<string> {
     "angular": """# Angular CLI with @angular/ssr: nothing silverpoint-specific to configure.
 ng add @angular/ssr
 # angular.json: "outputMode": "server"
-npm run build && node dist/my-charts/server/server.mjs""",
-    "reflex": """# Reflex compiles your pages to a React app; the charts render on the client.
+npm run build
+# Angular's SSR server validates the Host header and answers 400 to a host it was not told about.
+# To try the build on your machine, allow localhost (or set allowedHosts in AngularNodeAppEngine):
+NG_ALLOWED_HOSTS=localhost node dist/my-charts/server/server.mjs""",
+    "reflex": """# Reflex compiles your pages to a React app, and the export prerenders every page to HTML.
+# A chart with an id and a width is drawn in that HTML; without a width it is drawn in the browser.
+line_chart(id="hits", width=480, height=160, data=DATA, x_key="hour", value_key="hits", title="Hits per hour")
+
 reflex export --frontend-only     # a static build, as this site is deployed on Vercel""",
 }
 
@@ -620,7 +633,7 @@ rx.hstack(
 }
 
 #: The root both drill-down charts of /docs/drill-down draw, held in the browser (no backend).
-DRILL_ROOT = ClientStateVar.create("drill_root", None)
+DRILL_ROOT = rx.client_state(None, name="drill_root")
 
 HIERARCHY_KEYS = {"id_key": "id", "parent_key": "parent", "label_key": "name", "value_key": "amount"}
 
@@ -630,7 +643,7 @@ def live(*children: Any) -> rx.Component:
 
 
 def ops_dashboard() -> rx.Component:
-    keys = {"x_key": "hour"}
+    keys: dict[str, Any] = {"x_key": "hour"}
     return dashboard(
         dashboard_cell(
             kpi_card(data=ds.KPI_CARD, title="Revenue", metric="thousands", delta=6.4), cell="revenue"
@@ -665,7 +678,7 @@ def ops_dashboard() -> rx.Component:
             ],
             columns={"sm": 1, "md": 2, "lg": 4},
         ),
-        link="hour",
+        link={"key": "hour"},
         heading_level=3,
     )
 
@@ -1175,7 +1188,9 @@ def framework_guide(key: str) -> Callable[[], rx.Component]:
                     ),
                     rx.el.p(
                         f"reflex-silverpoint-react {sd.REFLEX_LATEST.version} requires Reflex 0.10.0 or later (React 19) "
-                        "and Python 3.11 or later.",
+                        "and Python 3.11 or later. Importing it links its trigger module into ",
+                        c("assets/external/"),
+                        ", as Reflex does for every shared asset: ignore that directory in version control.",
                     ),
                     rx.el.p(
                         "Props are the React props in snake_case: ",
@@ -1684,8 +1699,8 @@ def export() -> Callable[[], rx.Component]:
     return page(
         "/docs/export",
         "Export & imperative handle",
-        "Each chart exposes a handle with toSVGString() and getGeometry(). The exported SVG carries its own ground "
-        "colours, so it renders the same outside the app.",
+        "Each chart exposes a handle with toSVGString() and getGeometry(). Since 0.10, standaloneSVG() turns that "
+        "markup into a file that paints itself outside the app.",
         [
             (
                 "try",
@@ -1706,6 +1721,53 @@ def export() -> Callable[[], rx.Component]:
                             type="button",
                         ),
                     )
+                ],
+            ),
+            (
+                "standalone",
+                "A standalone file",
+                [
+                    rx.el.p(
+                        c("toSVGString()"),
+                        " returns the canonical markup of the chart. Its strokes and fills are painted by ",
+                        c("styles.css"),
+                        " through the ",
+                        c("--sp-*"),
+                        " properties, so the markup saved as it is has no colours when it is opened on its own: "
+                        "it renders black.",
+                    ),
+                    rx.el.ul(
+                        rx.el.li(
+                            "New in 0.10: ",
+                            c("standaloneSVG(svg, css)"),
+                            " from ",
+                            c("@silverpoint/grounds"),
+                            " puts a stylesheet inside the root ",
+                            c("<svg>"),
+                            ", in CDATA, and ",
+                            c("@silverpoint/grounds/styles-text"),
+                            " is ",
+                            c("styles.css"),
+                            " as a string that every bundler imports without loader attributes, ",
+                            c("?raw"),
+                            " or prebundle settings. ",
+                            c("toSVGString()"),
+                            " itself is unchanged.",
+                        ),
+                        rx.el.li(
+                            "Reflex: ",
+                            c("download_svg"),
+                            " and ",
+                            c("get_svg"),
+                            " deliver the standalone file since reflex-silverpoint-react 0.10.0. They embed the "
+                            "page's silverpoint rules, so the file also carries your own overrides of the ",
+                            c("--sp-*"),
+                            " properties.",
+                        ),
+                        rx.el.li(
+                            "The typeface is not embedded: a viewer without EB Garamond falls back to its own serif."
+                        ),
+                    ),
                 ],
             ),
             ("code", "In your code", [framework_tabs(EXPORT)]),
@@ -1734,7 +1796,8 @@ def dashboards() -> Callable[[], rx.Component]:
         [
             c("ground, substrate, mode, locale"),
             "",
-            "Passed to every chart inside, below the chart's own props.",
+            "Passed to every chart inside, below the chart's own props. Since 0.10 the dashboard's own frame, title "
+            "and grid take the provider's ground, substrate and palette where the dashboard sets none.",
         ],
     ]
     return page(
@@ -1783,7 +1846,7 @@ def drill_down() -> Callable[[], rx.Component]:
     shared = {
         **HIERARCHY_KEYS,
         "root_id": DRILL_ROOT.value,
-        "on_root_change": DRILL_ROOT.set_value,
+        "on_root_change": DRILL_ROOT.set,
         "height": 300,
     }
     return page(
@@ -1819,7 +1882,7 @@ def drill_down() -> Callable[[], rx.Component]:
                             ),
                             sp_button(
                                 "Back to the top",
-                                on_click=DRILL_ROOT.set_value(None),
+                                on_click=DRILL_ROOT.set(None),
                                 size="sm",
                                 id="drill-reset",
                             ),
@@ -1900,7 +1963,7 @@ def ssr() -> Callable[[], rx.Component]:
         "/docs/ssr",
         "Server rendering",
         "The three adapters render on the server without touching the DOM and hydrate without a mismatch: the drawing is "
-        "deterministic, so server and client draw the same strokes.",
+        "deterministic, so server and client draw the same strokes. A Reflex export prerenders its pages the same way.",
         [
             (
                 "frameworks",
@@ -1919,11 +1982,14 @@ def ssr() -> Callable[[], rx.Component]:
                             ],
                             [
                                 "Angular",
-                                "@angular/ssr with outputMode 'server'; the example app is server-rendered in CI.",
+                                "@angular/ssr with outputMode 'server'; the example app is server-rendered in CI. "
+                                "Locally the server needs NG_ALLOWED_HOSTS=localhost (or allowedHosts).",
                             ],
                             [
                                 "Reflex",
-                                "Charts render on the client; a static export (reflex export --frontend-only) works, as this site shows.",
+                                "reflex export --frontend-only prerenders every page: a chart with an id and a width is "
+                                "drawn in the exported HTML, with the strokes React's server entry draws; without a "
+                                "width it is exported empty and drawn in the browser. This site is such an export.",
                             ],
                         ],
                     )

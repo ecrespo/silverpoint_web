@@ -29,7 +29,7 @@ def fences(markdown: str) -> list[dict]:
 
 
 def test_site_documents_the_installed_releases():
-    assert sd.LATEST.version == agent.CATALOG_VERSION == "0.9.2"
+    assert sd.LATEST.version == agent.CATALOG_VERSION == "0.10.1"
     assert sd.REFLEX_LATEST.version == version("reflex-silverpoint-react")
     assert sd.REFLEX_LATEST.wraps == rsr.SILVERPOINT_VERSION
     wrapped = next(r for r in sd.VERSIONS if r.version == sd.REFLEX_LATEST.wraps)
@@ -103,7 +103,7 @@ def test_req_602_site_decks_never_take_the_url_hash():
     from silverpoint_web.pages import deck_docs, home
 
     for module in (deck_docs, home):
-        source = Path(module.__file__).read_text()
+        source = Path(module.__file__ or "").read_text()
         assert "hash=True" not in source
 
 

@@ -1,14 +1,13 @@
 """Slide decks (silverpoint 0.9, feature-006): ``SpDeck`` and ``@silverpoint/marp``.
 
-The live deck is ``sp_deck`` (reflex-silverpoint-react 0.9.1, wrapping @silverpoint/react 0.9.1)
-on client-side state (``ClientStateVar``): the site has no backend. ``hash`` stays off, so the deck
+The live deck is ``sp_deck`` (reflex-silverpoint-react 0.10.0, wrapping @silverpoint/react 0.10.0)
+on client-side state (``rx.client_state``): the site has no backend. ``hash`` stays off, so the deck
 never takes the URL's fragment from the page's own anchors.
 """
 
 from collections.abc import Callable
 
 import reflex as rx
-from reflex.experimental.client_state import ClientStateVar
 from reflex_silverpoint_react import sp_deck
 
 from .. import deck_examples as dx
@@ -18,17 +17,17 @@ from .docs import Section, page
 
 EYEBROW = "New in 0.9"
 
-DECK_GROUND = ClientStateVar.create("deck_ground", "silverpoint")
-DECK_MODE = ClientStateVar.create("deck_mode", "ink")
-DECK_PALETTE = ClientStateVar.create("deck_palette", "none")
-DECK_SIZE = ClientStateVar.create("deck_size", "16:9")
-DECK_NOTES = ClientStateVar.create("deck_notes", "hidden")
-DECK_PAGE = ClientStateVar.create("deck_page", 1)
-DECK_TOTAL = ClientStateVar.create("deck_total", 0)
-DECK_STEP = ClientStateVar.create("deck_step", "0 / 0")
+DECK_GROUND = rx.client_state("silverpoint", name="deck_ground")
+DECK_MODE = rx.client_state("ink", name="deck_mode")
+DECK_PALETTE = rx.client_state("none", name="deck_palette")
+DECK_SIZE = rx.client_state("16:9", name="deck_size")
+DECK_NOTES = rx.client_state("hidden", name="deck_notes")
+DECK_PAGE = rx.client_state(1, name="deck_page")
+DECK_TOTAL = rx.client_state(0, name="deck_total")
+DECK_STEP = rx.client_state("0 / 0", name="deck_step")
 
 
-def palette_name(var: ClientStateVar) -> rx.Var:
+def palette_name(var: rx.ClientStateVar) -> rx.Var:
     """The preset the deck's charts read, or nothing for the ground's own inks."""
     return rx.cond(var.value == "none", rx.Var("undefined"), var.value)
 
@@ -42,11 +41,11 @@ def live_deck() -> rx.Component:
         palette=palette_name(DECK_PALETTE),
         size=DECK_SIZE.value,
         show_notes=DECK_NOTES.value == "shown",
-        on_page_change=lambda page, total: [DECK_PAGE.set_value(page), DECK_TOTAL.set_value(total)],
-        on_fragment_change=lambda page, step, steps: DECK_STEP.set_value(
+        on_page_change=lambda page, total: [DECK_PAGE.set(page), DECK_TOTAL.set(total)],
+        on_fragment_change=lambda page, step, steps: DECK_STEP.set(
             step.to_string() + " / " + steps.to_string()
         ),
-        on_ready=lambda total: DECK_TOTAL.set_value(total),
+        on_ready=lambda total: DECK_TOTAL.set(total),
         label="silverpoint slide decks: a showcase",
         id="docs-deck",
     )

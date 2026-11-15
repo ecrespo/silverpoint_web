@@ -7,13 +7,14 @@ requires-python = ">=3.13"
 authors = [{ name = "Ernesto Crespo", email = "ecrespo@gmail.com" }]
 license = { text = "MIT" }
 dependencies = [
-    "reflex>=0.10.1",
-    "reflex-silverpoint-react[timeline]>=0.9.1",
+    "reflex>=0.11.0",
+    "reflex-silverpoint-react[timeline]>=0.10.0",
     "reflex-vercel-analytics>=0.1.0",
 ]
 
 [dependency-groups]
 dev = [
+    "pyright>=1.1.414",
     "pytest>=9.1.1",
     "ruff>=0.17.1",
 ]
@@ -26,6 +27,12 @@ extend-exclude = [".web", "public", "node_modules", "assets"]
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "UP", "B", "SIM"]
 ignore = ["E501"]
+
+[tool.pyright]
+include = ["silverpoint_web", "scripts", "tests", "rxconfig.py"]
+venvPath = "."
+venv = ".venv"
+pythonVersion = "3.13"
 
 [tool.pytest.ini_options]
 pythonpath = ["."]

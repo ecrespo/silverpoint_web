@@ -3,10 +3,10 @@
 The documentation site of **[silverpoint](https://github.com/ecrespo/silverpoint)**: charts and UI components
 for React, Vue and Angular whose visual language is historical drawing technique (Renaissance silverpoint and cyanotype).
 
-The site documents silverpoint **0.9.2** (60 charts, 38 UI components, palettes, the Knight Lab timeline and Marp slide decks). It is
+The site documents silverpoint **0.10.1** (60 charts, 38 UI components, palettes, the Knight Lab timeline and Marp slide decks). It is
 written in Python with [Reflex](https://reflex.dev) and draws every chart and component live with
-[reflex-silverpoint-react](https://github.com/ecrespo/reflex-silverpoint-react) 0.9.1 (on Reflex 0.10.1), the Reflex component of
-`@silverpoint/react` (it wraps 0.9.1: the palettes, composed components, overlays, timeline and `sp_deck` are the
+[reflex-silverpoint-react](https://github.com/ecrespo/reflex-silverpoint-react) 0.10.0 (on Reflex 0.11.0), the Reflex component of
+`@silverpoint/react` (it wraps 0.10.0: the palettes, composed components, overlays, timeline and `sp_deck` are the
 npm components behind Python builders). The site's own controls (code tabs, callouts, the gallery's controls, buttons, tags,
 the release timeline) are silverpoint's UI components, bound to client-side state. It is **frontend-only**: `rx.App(enable_state=False)` compiles it without a backend,
 and it is deployed as static files on Vercel.

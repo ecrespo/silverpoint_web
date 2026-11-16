@@ -32,7 +32,9 @@ Documentation site of silverpoint (Reflex, frontend-only, deployed statically on
   (0.10.0 since `@silverpoint/mcp@0.10.1`, not stale); `tests/test_decks.py` checks they match the installed wrapper. A
   silverpoint release with no new reflex-silverpoint-react (0.9.2, 0.10.1) gets `Release.reflex=""`.
 - Tutorials: `/tutorials` (`pages/tutorials.py`) lists the series on seraph.to by level, linked and not copied; add
-  an article in `tutorials.py` (number, title, summary, frameworks). Tests: `tests/test_tutorials.py`.
+  an article in `tutorials.py` (number, title, summary, frameworks, date). Its search box, framework filter and
+  date order are `rx.client_state` only: every card is prerendered and hidden by a condition, and the two orders
+  are the two branches of one `rx.cond`. Tests: `tests/test_tutorials.py`.
 - The site's controls are silverpoint UI components (`sp_tabs`, `sp_alert`, `sp_segmented`…) bound to
   `rx.client_state` (`on_change=VAR.set`). Put them on a ground panel (`ui_examples.panel`) for cyanotype.
 - Vercel Web Analytics: `reflex-vercel-analytics`, `rva.install(app)` in `silverpoint_web.py`, settings in

@@ -33,3 +33,39 @@ def test_the_page_shows_every_summary_and_link():
     for t in tt.TUTORIALS:
         assert t.url in text, t.number
         assert t.summary[:40] in text, t.number
+
+
+def test_tutorials_sort_by_date_then_by_number():
+    assert [t.number for t in tt.by_date(tt.TUTORIALS)] == list(range(1, 30))
+    assert [t.number for t in tt.by_date(tt.TUTORIALS, newest_first=True)] == list(range(29, 0, -1))
+    later = tt.Tutorial(30, "A later article", "x" * 90, date="2026-12-01")
+    earlier = tt.Tutorial(31, "An earlier article", "x" * 90, date="2026-10-01")
+    assert [t.number for t in tt.by_date((later, earlier))] == [31, 30]
+    assert later.date_label == "December 1, 2026"
+
+
+def test_the_framework_filter_keeps_the_articles_about_the_library_itself():
+    by_number = {t.number: t for t in tt.TUTORIALS}
+    assert by_number[1].covers == tt.ALL
+    assert by_number[6].covers == ("Reflex",)
+    reflex = [t.number for t in tt.TUTORIALS if "Reflex" in t.covers]
+    assert 6 in reflex and 26 in reflex and 3 not in reflex and 24 not in reflex
+
+
+def test_the_search_looks_in_number_title_and_summary():
+    by_number = {t.number: t for t in tt.TUTORIALS}
+    assert "sankey" in by_number[15].search_text
+    assert by_number[22].search_text.startswith("22 markdown presentations")
+
+
+def test_the_controls_are_client_side_state_only():
+    import reflex as rx
+
+    from silverpoint_web.pages import tutorials as page
+
+    text = str(page.tutorials())
+    for name in ("tutorials_framework", "tutorials_query", "tutorials_order"):
+        assert name in text
+    assert not rx.State.get_substates() or all(
+        "tutorials" not in state.get_full_name() for state in rx.State.get_substates()
+    )

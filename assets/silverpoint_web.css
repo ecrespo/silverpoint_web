@@ -254,7 +254,14 @@ body {
 .spw-tutorial p { margin: 0 0 8px; }
 .spw-tutorial-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin: 0 !important; font-size: 0.95rem; }
 .spw-tutorial-meta .spw-pill { margin-left: 0; }
-.spw-tutorial-es { color: var(--spw-muted) !important; }
+.spw-tutorial-es, .spw-tutorial-date { color: var(--spw-muted) !important; }
+.spw-tutorial[hidden], .spw-tutorial-none[hidden] { display: none; }
+.spw-tutorial-controls { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 14px 22px; padding-right: 6px; }
+.spw-tutorial-search { flex: 1 1 15rem; min-width: 0; max-width: 100%; padding-right: 8px; box-sizing: border-box; } /* the drawn frame bleeds past its box */
+.spw-tutorial-search > :not(.spw-choice-label), .spw-tutorial-search input { width: 100%; max-width: 100%; box-sizing: border-box; }
+.spw-article > .spw-ui-sample[role='search'] { margin-top: 18px; }
+.spw-tutorial-count { margin: 12px 0 0 !important; font-size: 0.95rem; color: var(--spw-muted); }
+.spw-tutorial-none { margin: 18px 0; }
 .spw-live { margin: 14px 0; background: var(--spw-substrate); }
 .spw-hero-chart { margin: 18px 0 12px; }
 

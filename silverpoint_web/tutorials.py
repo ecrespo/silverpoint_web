@@ -13,6 +13,25 @@ BLOG_ES = "https://www.seraph.to/es/blog"
 #: The frameworks an article gives code for, in the site's order.
 ALL = ("React", "Vue", "Angular", "Reflex")
 
+#: The day the series was published; an article added later carries its own date.
+SERIES_DATE = "2026-11-11"
+
+
+MONTHS = (
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+)
+
 
 @dataclass(frozen=True)
 class Tutorial:
@@ -20,6 +39,8 @@ class Tutorial:
     title: str
     summary: str
     frameworks: tuple[str, ...] = ALL
+    #: Publication date on the blog, ISO 8601.
+    date: str = SERIES_DATE
 
     @property
     def slug(self) -> str:
@@ -32,6 +53,21 @@ class Tutorial:
     @property
     def url_es(self) -> str:
         return f"{BLOG_ES}/{self.slug}"
+
+    @property
+    def date_label(self) -> str:
+        year, month, day = (int(part) for part in self.date.split("-"))
+        return f"{MONTHS[month - 1]} {day}, {year}"
+
+    @property
+    def covers(self) -> tuple[str, ...]:
+        """The frameworks the article is for: all four when it is about the library itself."""
+        return self.frameworks or ALL
+
+    @property
+    def search_text(self) -> str:
+        """What the page's search box looks in: the number, the title and the summary."""
+        return f"{self.number:02d} {self.title} {self.summary}".lower()
 
     @property
     def anchor(self) -> str:
@@ -275,3 +311,8 @@ LEVELS: tuple[Level, ...] = (
 )
 
 TUTORIALS: tuple[Tutorial, ...] = tuple(t for level in LEVELS for t in level.tutorials)
+
+
+def by_date(tutorials: tuple[Tutorial, ...], newest_first: bool = False) -> list[Tutorial]:
+    """Tutorials by publication date, the series number breaking a tie (the series came out in one day)."""
+    return sorted(tutorials, key=lambda t: (t.date, t.number), reverse=newest_first)

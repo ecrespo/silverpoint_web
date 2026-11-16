@@ -9,7 +9,19 @@ state.
 import reflex as rx
 import reflex_vercel_analytics as rva
 
-from .pages import ai_docs, charts, components, deck_docs, docs, gallery, home, project, reflex_docs, ui_docs
+from .pages import (
+    ai_docs,
+    charts,
+    components,
+    deck_docs,
+    docs,
+    gallery,
+    home,
+    project,
+    reflex_docs,
+    tutorials,
+    ui_docs,
+)
 
 app = rx.App(
     enable_state=False,
@@ -39,4 +51,5 @@ reflex_docs.register(app)
 ui_docs.register(app)
 ai_docs.register(app)
 deck_docs.register(app)
+tutorials.register(app)
 project.register(app)

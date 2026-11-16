@@ -11,6 +11,7 @@ from .ui import ext_link, github_icon
 
 NAV: tuple[tuple[str, str], ...] = (
     ("/docs", "Docs"),
+    ("/tutorials", "Tutorials"),
     ("/gallery", "Gallery"),
     ("/charts", "Charts"),
     ("/components", "Components"),
@@ -32,6 +33,7 @@ DOCS_NAV: tuple[tuple[str, tuple[tuple[str, str], ...]], ...] = (
             ("/docs/vue", "Vue"),
             ("/docs/angular", "Angular"),
             ("/docs/reflex", "Reflex (Python)"),
+            ("/tutorials", "Tutorials"),
         ),
     ),
     (

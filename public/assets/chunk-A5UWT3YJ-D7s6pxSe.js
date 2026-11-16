@@ -1,0 +1,1 @@
+import{p as e,r as t,t as n}from"./ui-CgVDSU23.js";function r({children:r,extra:i,footer:a,dashboardCell:o,...s}){let c=e(s,t(s,o),{extra:i!=null,footer:a!=null});return n(c,{slots:{content:r,extra:i,footer:a}})}export{r as t};

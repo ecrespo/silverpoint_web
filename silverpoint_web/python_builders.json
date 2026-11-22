@@ -1,0 +1,1034 @@
+[
+ {
+  "name": "activity_grid",
+  "chart": "activity-grid",
+  "title": "Activity grid",
+  "family": "points-grids",
+  "roles": [
+   {
+    "id": "date",
+    "required": true
+   },
+   {
+    "id": "count",
+    "required": false
+   },
+   {
+    "id": "level",
+    "required": false
+   }
+  ]
+ },
+ {
+  "name": "area_chart",
+  "chart": "area-chart",
+  "title": "Area chart",
+  "family": "areas",
+  "roles": [
+   {
+    "id": "x",
+    "required": true
+   },
+   {
+    "id": "value",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "bar_chart",
+  "chart": "bar-chart",
+  "title": "Bar chart",
+  "family": "bars",
+  "roles": [
+   {
+    "id": "x",
+    "required": true
+   },
+   {
+    "id": "value",
+    "required": true
+   },
+   {
+    "id": "secondary",
+    "required": false
+   }
+  ]
+ },
+ {
+  "name": "beeswarm_chart",
+  "chart": "beeswarm-chart",
+  "title": "Beeswarm chart",
+  "family": "distributions-comparisons",
+  "roles": [
+   {
+    "id": "value",
+    "required": true
+   },
+   {
+    "id": "group",
+    "required": false
+   },
+   {
+    "id": "label",
+    "required": false
+   }
+  ]
+ },
+ {
+  "name": "box_plot_chart",
+  "chart": "box-plot-chart",
+  "title": "Box plot chart",
+  "family": "distributions-comparisons",
+  "roles": [
+   {
+    "id": "value",
+    "required": true
+   },
+   {
+    "id": "group",
+    "required": false
+   }
+  ]
+ },
+ {
+  "name": "bubble_chart",
+  "chart": "bubble-chart",
+  "title": "Bubble chart",
+  "family": "points-grids",
+  "roles": [
+   {
+    "id": "x",
+    "required": true
+   },
+   {
+    "id": "y",
+    "required": true
+   },
+   {
+    "id": "size",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "bullet_chart",
+  "chart": "bullet-chart",
+  "title": "Bullet chart",
+  "family": "bars",
+  "roles": [
+   {
+    "id": "title",
+    "required": true
+   },
+   {
+    "id": "actual",
+    "required": true
+   },
+   {
+    "id": "target",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "bump_chart",
+  "chart": "bump-chart",
+  "title": "Bump chart",
+  "family": "distributions-comparisons",
+  "roles": [
+   {
+    "id": "x",
+    "required": true
+   },
+   {
+    "id": "series",
+    "required": true
+   },
+   {
+    "id": "value",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "candlestick_chart",
+  "chart": "candlestick-chart",
+  "title": "Candlestick chart",
+  "family": "bars",
+  "roles": [
+   {
+    "id": "time",
+    "required": true
+   },
+   {
+    "id": "open",
+    "required": true
+   },
+   {
+    "id": "high",
+    "required": true
+   },
+   {
+    "id": "low",
+    "required": true
+   },
+   {
+    "id": "close",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "chord_ring",
+  "chart": "chord-ring",
+  "title": "Chord ring",
+  "family": "flows",
+  "roles": [
+   {
+    "id": "source",
+    "required": true
+   },
+   {
+    "id": "target",
+    "required": true
+   },
+   {
+    "id": "value",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "composed_chart",
+  "chart": "composed-chart",
+  "title": "Composed chart",
+  "family": "bars",
+  "roles": [
+   {
+    "id": "x",
+    "required": true
+   },
+   {
+    "id": "bar",
+    "required": true
+   },
+   {
+    "id": "line",
+    "required": false
+   }
+  ]
+ },
+ {
+  "name": "connected_scatter_chart",
+  "chart": "connected-scatter-chart",
+  "title": "Connected scatter chart",
+  "family": "distributions-comparisons",
+  "roles": [
+   {
+    "id": "x",
+    "required": true
+   },
+   {
+    "id": "y",
+    "required": true
+   },
+   {
+    "id": "label",
+    "required": false
+   }
+  ]
+ },
+ {
+  "name": "contour_chart",
+  "chart": "contour-chart",
+  "title": "Contour chart",
+  "family": "fields-networks",
+  "roles": [
+   {
+    "id": "x",
+    "required": true
+   },
+   {
+    "id": "y",
+    "required": true
+   },
+   {
+    "id": "value",
+    "required": false
+   }
+  ]
+ },
+ {
+  "name": "coxcomb_chart",
+  "chart": "coxcomb-chart",
+  "title": "Coxcomb chart",
+  "family": "radial",
+  "roles": [
+   {
+    "id": "name",
+    "required": true
+   },
+   {
+    "id": "value",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "delaunay_chart",
+  "chart": "delaunay-chart",
+  "title": "Delaunay chart",
+  "family": "fields-networks",
+  "roles": [
+   {
+    "id": "x",
+    "required": true
+   },
+   {
+    "id": "y",
+    "required": true
+   },
+   {
+    "id": "label",
+    "required": false
+   }
+  ]
+ },
+ {
+  "name": "density_bin_chart",
+  "chart": "density-bin-chart",
+  "title": "Density bin chart",
+  "family": "fields-networks",
+  "roles": [
+   {
+    "id": "x",
+    "required": true
+   },
+   {
+    "id": "y",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "diverging_bar_chart",
+  "chart": "diverging-bar-chart",
+  "title": "Diverging bar chart",
+  "family": "distributions-comparisons",
+  "roles": [
+   {
+    "id": "label",
+    "required": true
+   },
+   {
+    "id": "levels",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "donut_chart",
+  "chart": "donut-chart",
+  "title": "Donut chart",
+  "family": "radial",
+  "roles": [
+   {
+    "id": "name",
+    "required": true
+   },
+   {
+    "id": "value",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "dumbbell_chart",
+  "chart": "dumbbell-chart",
+  "title": "Dumbbell chart",
+  "family": "distributions-comparisons",
+  "roles": [
+   {
+    "id": "label",
+    "required": true
+   },
+   {
+    "id": "start",
+    "required": true
+   },
+   {
+    "id": "end",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "ecdf_chart",
+  "chart": "ecdf-chart",
+  "title": "ECDF chart",
+  "family": "distributions-comparisons",
+  "roles": [
+   {
+    "id": "value",
+    "required": true
+   },
+   {
+    "id": "group",
+    "required": false
+   }
+  ]
+ },
+ {
+  "name": "error_bar_chart",
+  "chart": "error-bar-chart",
+  "title": "Error bar chart",
+  "family": "distributions-comparisons",
+  "roles": [
+   {
+    "id": "label",
+    "required": true
+   },
+   {
+    "id": "estimate",
+    "required": true
+   },
+   {
+    "id": "low",
+    "required": true
+   },
+   {
+    "id": "high",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "funnel_chart",
+  "chart": "funnel-chart",
+  "title": "Funnel chart",
+  "family": "bars",
+  "roles": [
+   {
+    "id": "stage",
+    "required": true
+   },
+   {
+    "id": "value",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "gauge_arc",
+  "chart": "gauge-arc",
+  "title": "Gauge arc",
+  "family": "radial",
+  "roles": [
+   {
+    "id": "percent",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "heatmap_chart",
+  "chart": "heatmap-chart",
+  "title": "Heatmap chart",
+  "family": "points-grids",
+  "roles": [
+   {
+    "id": "row",
+    "required": true
+   },
+   {
+    "id": "column",
+    "required": true
+   },
+   {
+    "id": "value",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "histogram_chart",
+  "chart": "histogram-chart",
+  "title": "Histogram chart",
+  "family": "distributions-comparisons",
+  "roles": [
+   {
+    "id": "value",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "interval_chart",
+  "chart": "interval-chart",
+  "title": "Interval chart",
+  "family": "distributions-comparisons",
+  "roles": [
+   {
+    "id": "lane",
+    "required": true
+   },
+   {
+    "id": "start",
+    "required": true
+   },
+   {
+    "id": "end",
+    "required": true
+   },
+   {
+    "id": "label",
+    "required": false
+   }
+  ]
+ },
+ {
+  "name": "kpi_card",
+  "chart": "kpi-card",
+  "title": "KPI card",
+  "family": "lines",
+  "roles": [
+   {
+    "id": "value",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "line_chart",
+  "chart": "line-chart",
+  "title": "Line chart",
+  "family": "lines",
+  "roles": [
+   {
+    "id": "x",
+    "required": true
+   },
+   {
+    "id": "value",
+    "required": true
+   },
+   {
+    "id": "secondary",
+    "required": false
+   }
+  ]
+ },
+ {
+  "name": "lollipop_chart",
+  "chart": "lollipop-chart",
+  "title": "Lollipop chart",
+  "family": "distributions-comparisons",
+  "roles": [
+   {
+    "id": "x",
+    "required": true
+   },
+   {
+    "id": "value",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "marimekko_chart",
+  "chart": "marimekko-chart",
+  "title": "Marimekko chart",
+  "family": "hierarchies-dimensions",
+  "roles": [
+   {
+    "id": "column",
+    "required": true
+   },
+   {
+    "id": "segment",
+    "required": true
+   },
+   {
+    "id": "value",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "meter_chart",
+  "chart": "meter-chart",
+  "title": "Meter chart",
+  "family": "radial",
+  "roles": [
+   {
+    "id": "percent",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "network_chart",
+  "chart": "network-chart",
+  "title": "Network chart",
+  "family": "fields-networks",
+  "roles": [
+   {
+    "id": "source",
+    "required": true
+   },
+   {
+    "id": "target",
+    "required": true
+   },
+   {
+    "id": "value",
+    "required": false
+   }
+  ]
+ },
+ {
+  "name": "parallel_coordinates_chart",
+  "chart": "parallel-coordinates-chart",
+  "title": "Parallel coordinates chart",
+  "family": "hierarchies-dimensions",
+  "roles": [
+   {
+    "id": "label",
+    "required": false
+   },
+   {
+    "id": "dimensions",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "polar_bar_chart",
+  "chart": "polar-bar-chart",
+  "title": "Polar bar chart",
+  "family": "radial",
+  "roles": [
+   {
+    "id": "name",
+    "required": true
+   },
+   {
+    "id": "value",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "polar_line_chart",
+  "chart": "polar-line-chart",
+  "title": "Polar line chart",
+  "family": "hierarchies-dimensions",
+  "roles": [
+   {
+    "id": "angle",
+    "required": true
+   },
+   {
+    "id": "value",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "polar_scatter_chart",
+  "chart": "polar-scatter-chart",
+  "title": "Polar scatter chart",
+  "family": "hierarchies-dimensions",
+  "roles": [
+   {
+    "id": "angle",
+    "required": true
+   },
+   {
+    "id": "radius",
+    "required": true
+   },
+   {
+    "id": "size",
+    "required": false
+   }
+  ]
+ },
+ {
+  "name": "pyramid_chart",
+  "chart": "pyramid-chart",
+  "title": "Pyramid chart",
+  "family": "bars",
+  "roles": [
+   {
+    "id": "label",
+    "required": true
+   },
+   {
+    "id": "width",
+    "required": true
+   },
+   {
+    "id": "tone",
+    "required": false
+   }
+  ]
+ },
+ {
+  "name": "radar_chart",
+  "chart": "radar-chart",
+  "title": "Radar chart",
+  "family": "radial",
+  "roles": [
+   {
+    "id": "subject",
+    "required": true
+   },
+   {
+    "id": "value",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "radial_arc_group",
+  "chart": "radial-arc-group",
+  "title": "Radial arc group",
+  "family": "radial",
+  "roles": [
+   {
+    "id": "name",
+    "required": true
+   },
+   {
+    "id": "value",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "radial_rings",
+  "chart": "radial-rings",
+  "title": "Radial rings",
+  "family": "radial",
+  "roles": [
+   {
+    "id": "name",
+    "required": true
+   },
+   {
+    "id": "value",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "range_band_chart",
+  "chart": "range-band-chart",
+  "title": "Range band chart",
+  "family": "areas",
+  "roles": [
+   {
+    "id": "x",
+    "required": true
+   },
+   {
+    "id": "low",
+    "required": true
+   },
+   {
+    "id": "high",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "ridgeline_chart",
+  "chart": "ridgeline-chart",
+  "title": "Ridgeline chart",
+  "family": "distributions-comparisons",
+  "roles": [
+   {
+    "id": "value",
+    "required": true
+   },
+   {
+    "id": "group",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "sankey_chart",
+  "chart": "sankey-chart",
+  "title": "Sankey chart",
+  "family": "flows",
+  "roles": [
+   {
+    "id": "source",
+    "required": true
+   },
+   {
+    "id": "target",
+    "required": true
+   },
+   {
+    "id": "value",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "scatter_chart",
+  "chart": "scatter-chart",
+  "title": "Scatter chart",
+  "family": "points-grids",
+  "roles": [
+   {
+    "id": "x",
+    "required": true
+   },
+   {
+    "id": "y",
+    "required": true
+   },
+   {
+    "id": "size",
+    "required": false
+   }
+  ]
+ },
+ {
+  "name": "slope_chart",
+  "chart": "slope-chart",
+  "title": "Slope chart",
+  "family": "distributions-comparisons",
+  "roles": [
+   {
+    "id": "label",
+    "required": true
+   },
+   {
+    "id": "start",
+    "required": true
+   },
+   {
+    "id": "end",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "squarified_treemap",
+  "chart": "squarified-treemap",
+  "title": "Squarified treemap",
+  "family": "hierarchies-dimensions",
+  "roles": [
+   {
+    "id": "id",
+    "required": true
+   },
+   {
+    "id": "parent",
+    "required": true
+   },
+   {
+    "id": "label",
+    "required": false
+   },
+   {
+    "id": "value",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "stacked_bar_chart",
+  "chart": "stacked-bar-chart",
+  "title": "Stacked bar chart",
+  "family": "bars",
+  "roles": [
+   {
+    "id": "x",
+    "required": true
+   },
+   {
+    "id": "values",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "step_chart",
+  "chart": "step-chart",
+  "title": "Step chart",
+  "family": "lines",
+  "roles": [
+   {
+    "id": "x",
+    "required": true
+   },
+   {
+    "id": "value",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "stream_chart",
+  "chart": "stream-chart",
+  "title": "Stream chart",
+  "family": "areas",
+  "roles": [
+   {
+    "id": "x",
+    "required": true
+   },
+   {
+    "id": "values",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "sunburst_chart",
+  "chart": "sunburst-chart",
+  "title": "Sunburst chart",
+  "family": "hierarchies-dimensions",
+  "roles": [
+   {
+    "id": "id",
+    "required": true
+   },
+   {
+    "id": "parent",
+    "required": true
+   },
+   {
+    "id": "label",
+    "required": false
+   },
+   {
+    "id": "value",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "tree_chart",
+  "chart": "tree-chart",
+  "title": "Tree chart",
+  "family": "hierarchies-dimensions",
+  "roles": [
+   {
+    "id": "id",
+    "required": true
+   },
+   {
+    "id": "parent",
+    "required": true
+   },
+   {
+    "id": "label",
+    "required": false
+   },
+   {
+    "id": "value",
+    "required": false
+   }
+  ]
+ },
+ {
+  "name": "vector_field_chart",
+  "chart": "vector-field-chart",
+  "title": "Vector field chart",
+  "family": "fields-networks",
+  "roles": [
+   {
+    "id": "x",
+    "required": true
+   },
+   {
+    "id": "y",
+    "required": true
+   },
+   {
+    "id": "u",
+    "required": true
+   },
+   {
+    "id": "v",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "violin_chart",
+  "chart": "violin-chart",
+  "title": "Violin chart",
+  "family": "distributions-comparisons",
+  "roles": [
+   {
+    "id": "value",
+    "required": true
+   },
+   {
+    "id": "group",
+    "required": false
+   }
+  ]
+ },
+ {
+  "name": "waffle_chart",
+  "chart": "waffle-chart",
+  "title": "Waffle chart",
+  "family": "hierarchies-dimensions",
+  "roles": [
+   {
+    "id": "name",
+    "required": true
+   },
+   {
+    "id": "value",
+    "required": true
+   }
+  ]
+ },
+ {
+  "name": "waterfall_chart",
+  "chart": "waterfall-chart",
+  "title": "Waterfall chart",
+  "family": "bars",
+  "roles": [
+   {
+    "id": "step",
+    "required": true
+   },
+   {
+    "id": "base",
+    "required": false
+   },
+   {
+    "id": "delta",
+    "required": false
+   }
+  ]
+ },
+ {
+  "name": "wind_rose",
+  "chart": "wind-rose",
+  "title": "Wind rose",
+  "family": "radial",
+  "roles": [
+   {
+    "id": "bearing",
+    "required": true
+   },
+   {
+    "id": "value",
+    "required": true
+   }
+  ]
+ }
+]

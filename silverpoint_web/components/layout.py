@@ -33,6 +33,7 @@ DOCS_NAV: tuple[tuple[str, tuple[tuple[str, str], ...]], ...] = (
             ("/docs/vue", "Vue"),
             ("/docs/angular", "Angular"),
             ("/docs/reflex", "Reflex (Python)"),
+            ("/docs/python", "Python: notebooks, Flask, Django"),
             ("/tutorials", "Tutorials"),
         ),
     ),
@@ -54,7 +55,10 @@ DOCS_NAV: tuple[tuple[str, tuple[tuple[str, str], ...]], ...] = (
     ),
     (
         "New in 0.11",
-        (("/docs/embed", "Embed in any page"),),
+        (
+            ("/docs/embed", "Embed in any page"),
+            ("/docs/python", "Python: notebooks, Flask, Django"),
+        ),
     ),
     (
         "New in 0.9",

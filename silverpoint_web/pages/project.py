@@ -6,6 +6,7 @@ import reflex as rx
 from reflex_silverpoint_react import CHARTS, UI_COMPONENTS, sp_steps, step_item
 
 from .. import composed_code as cc
+from .. import python_examples as px
 from .. import site_data as sd
 from ..components.layout import docs_page
 from ..components.ui import c, callout, code_block, ext_link, pill, section, table
@@ -29,7 +30,8 @@ def packages() -> rx.Component:
         rx.el.span(
             f"silverpoint is published on npm as {len(sd.PACKAGES)} packages under the ",
             ext_link("@silverpoint", sd.NPM_SEARCH),
-            " scope, all sharing one version, plus a Reflex custom component on PyPI.",
+            " scope, all sharing one version, plus two packages on PyPI: a Reflex custom component and "
+            "silverpoint for Python.",
         ),
         section(
             "npm",
@@ -100,6 +102,28 @@ def packages() -> rx.Component:
             ),
         ),
         section(
+            "pypi-python",
+            "On PyPI: silverpoint for Python",
+            rx.el.p(
+                ext_link(rx.el.code("silverpoint"), px.PYPI),
+                f" {px.PY_VERSION} draws the {len(px.load_builders())} charts a table can feed from Python, outside "
+                "Reflex: as a notebook cell's value (Jupyter, VS Code, Databricks), in Flask and Django templates "
+                "(the flask and django extras) and as self-contained HTML. It has no dependencies and vendors "
+                "@silverpoint/embed of the same version. Python 3.10+. ",
+                rx.el.a("Python guide", href="/docs/python"),
+                ". Source: ",
+                ext_link("ecrespo/silverpoint-python", px.REPO),
+                ".",
+            ),
+            rx.el.img(
+                src="https://img.shields.io/pypi/v/silverpoint?style=flat-square&color=5a5e65&labelColor=ede7da",
+                alt="silverpoint on PyPI",
+                height="20",
+                loading="lazy",
+            ),
+            code_block(px.INSTALL, "shell"),
+        ),
+        section(
             "versions",
             "One version for all",
             rx.el.p(
@@ -112,7 +136,8 @@ def packages() -> rx.Component:
         toc_entries=[
             ("npm", "On npm"),
             ("which", "Which ones do I install?"),
-            ("pypi", "On PyPI"),
+            ("pypi", "On PyPI: Reflex"),
+            ("pypi-python", "On PyPI: Python"),
             ("versions", "One version for all"),
         ],
         eyebrow="Project",

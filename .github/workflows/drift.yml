@@ -1,0 +1,28 @@
+name: Agent catalog drift
+
+# Fails when agent.CATALOG_VERSION is not the latest @silverpoint/mcp on npm, so /llms.txt,
+# /llms-full.txt and /agent-catalog.json cannot fall behind the published library unnoticed.
+# A network failure only warns (the script exits 0).
+on:
+  push:
+    branches: [develop, main]
+  pull_request:
+    branches: [develop, main]
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  drift:
+    name: Pinned catalog is the latest @silverpoint/mcp
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - name: Compare the pin with the registry's dist-tags.latest
+        run: python scripts/check_mcp_latest.py

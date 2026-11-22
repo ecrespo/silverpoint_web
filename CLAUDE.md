@@ -37,6 +37,11 @@ Documentation site of silverpoint (Reflex, frontend-only, deployed statically on
   `assets/embed/` with its `integrity.json`: on an embed release copy both from the npm tarball's `dist/` and bump
   `embed_examples.EMBED_VERSION` (`tests/test_release_0_11.py` checks the hash). The host table comes from
   `catalog["hosts"]`. A component's per-release notes are `composed_code.CHANGES` (slug -> tuple of (version, note)).
+- The llms files (REQ-564) stay generated from the catalog; the two hand-written parts are `silverpoint_web/llms_embed.md`
+  (what the catalog does not say about `@silverpoint/embed`) and `agent.NEW_IN` (llms.txt's "New in X.Y", one entry
+  per minor: a new minor on the pin needs one). `scripts/check_mcp_latest.py` (CI: `.github/workflows/drift.yml`,
+  on push and daily) fails when `agent.CATALOG_VERSION` is not npm's `dist-tags.latest` of `@silverpoint/mcp`;
+  a network failure only warns.
 - Tutorials: `/tutorials` (`pages/tutorials.py`) lists the series on seraph.to by level, linked and not copied; add
   an article in `tutorials.py` (number, title, summary, frameworks, date). Its search box, framework filter and
   date order are `rx.client_state` only: every card is prerendered and hidden by a condition, and the two orders

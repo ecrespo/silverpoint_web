@@ -211,7 +211,7 @@ def test_req_564_llms_full_names_the_versions_it_describes():
 
 def test_req_564_llms_files_are_generated_from_the_catalog_not_retyped():
     changed = copy.deepcopy(CATALOG)
-    changed["version"] = "9.9.9"
+    changed["version"] = "0.11.99"
     changed["charts"][0]["names"]["react"] = "RetypedChart"
     changed["charts"][0]["props"][0]["name"] = "retypedProp"
     changed["diagnostics"][0]["code"] = "SP999"
@@ -219,8 +219,8 @@ def test_req_564_llms_files_are_generated_from_the_catalog_not_retyped():
     full = agent.llms_full_txt(changed)
     assert f"{len(CATALOG['components']) - 1} UI components" in agent.llms_txt(changed, DOCS_NAV)
     assert "### RetypedChart" in full and "| `retypedProp` |" in full and "`SP999`" in full
-    assert "9.9.9" in agent.llms_txt(changed, DOCS_NAV)
-    assert "9.9.9" in full
+    assert "0.11.99" in agent.llms_txt(changed, DOCS_NAV)
+    assert "0.11.99" in full
 
 
 def test_req_564_markdown_tables_escape_pipes_in_types():

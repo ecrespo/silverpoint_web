@@ -595,7 +595,7 @@ sp_statistic("Churn", "2.1", suffix="%", trend="down", delta="−0.4 %")""",
         _modal,
         """sp_modal(
     rx.el.p("Apply the new ground to every chart on the page?"),
-    trigger="Open the modal",  # a string becomes sp_trigger(...)
+    trigger="Open the modal",  # a string becomes sp_button(...), which follows the provider (0.11)
     title="Apply changes",
     description="The geometry of the data does not move.",
     footer=sp_trigger("Apply", variant="primary", on_click=State.confirm),
@@ -687,8 +687,9 @@ sp_toaster(
         "trigger",
         "sp_trigger",
         "B",
-        "The drawn button of every overlay: SpButton's drawing on a native button that keeps the ARIA and the "
-        "toggle an overlay clones onto it (sp_button does not).",
+        "SpButton's drawing on a native button that keeps the ARIA and the toggle an overlay clones onto it. It "
+        "reads no provider: pass it the ground. Since 0.11 sp_button keeps them too and follows the provider, "
+        "and a string trigger is an sp_button.",
         _trigger,
         """sp_trigger("Default")
 sp_trigger("Primary", variant="primary")  # light hatching
@@ -704,7 +705,7 @@ LEVEL_BLURBS = {
     "own hand-inked frames, hatched tones and heightening.",
     "B": "Opened by a trigger you write, on the platform's <dialog> and Popover API, in React, Vue, Angular and "
     "Reflex alike. They render in place, in the top layer, so they read the provider's ground and palette; "
-    "sp_trigger does not, so give it those directly.",
+    "sp_trigger does not, so give it those directly, or use sp_button (a string trigger is one since 0.11).",
 }
 
 

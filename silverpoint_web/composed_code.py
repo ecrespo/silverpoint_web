@@ -928,18 +928,39 @@ def _trigger(react: str = "trigger={<button …/>}") -> tuple[str, str, str, str
         react,
         "#trigger slot",
         "a projected element with spTrigger",
-        "trigger= (a string or sp_trigger)",
+        "trigger= (a string, sp_button or sp_trigger)",
     )
 
 
-#: What a later release changed in a component, shown under its props: slug -> (version, note).
-CHANGES: dict[str, tuple[str, str]] = {
+#: A string trigger in Reflex (reflex-silverpoint-react 0.11.0, #50), noted under each overlay.
+_STRING_TRIGGER = (
+    "0.11",
+    "In Reflex a string in trigger= becomes an sp_button, which follows silverpoint_provider and, since "
+    "silverpoint 0.11, keeps the ARIA the overlay clones onto it (before, it was an sp_trigger, which reads no "
+    "provider). The overlay's own ground, substrate, mode, size and palette still reach it. In React and Vue, "
+    "SpButton works as a trigger too.",
+)
+
+#: What later releases changed in a component, shown under its props: slug -> ((version, note), ...).
+CHANGES: dict[str, tuple[tuple[str, str], ...]] = {
     "table": (
-        "0.10",
-        "Body cells align to the start unless their column says align: 'end' or 'center'. Before, they took "
-        "the right alignment of the charts' data table, whose sp-table class the component's root shares. "
-        "The empty row stays centred.",
+        (
+            "0.10",
+            "Body cells align to the start unless their column says align: 'end' or 'center'. Before, they took "
+            "the right alignment of the charts' data table, whose sp-table class the component's root shares. "
+            "The empty row stays centred.",
+        ),
+        (
+            "0.11",
+            "The component looks the same whatever the order of styles.css and ui.css: the charts' tabular rules "
+            "are scoped to table.sp-table, and what the table took from them (the display face, the 8 px top "
+            "margin, the italic caption) is in ui.css.",
+        ),
     ),
+    "modal": (_STRING_TRIGGER,),
+    "drawer": (_STRING_TRIGGER,),
+    "popover": (_STRING_TRIGGER,),
+    "tooltip": (_STRING_TRIGGER,),
 }
 
 #: Events, value bindings and slots of each component, as (what, React, Vue, Angular, Reflex).

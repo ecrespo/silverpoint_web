@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@silverpoint/embed demo</title>
+    <!-- The standalone file, served by this site (no CDN). EB Garamond is inlined in the full file. -->
+    <script src="/embed/silverpoint-embed.full.js"></script>
+    <style>
+      html { background: #f4efe4; }
+      body { margin: 0; padding: 16px; font-family: Georgia, serif; color: #2b2a28; }
+      .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+      silverpoint-chart { display: block; min-width: 0; }
+      p { margin: 12px 0 0; font-size: 14px; }
+      code { font-size: 13px; }
+    </style>
+  </head>
+  <body>
+    <div class="grid">
+      <silverpoint-chart>
+        <script type="application/json">
+          { "chart": "bar-chart",
+            "data": [{ "team": "North", "wins": 12 }, { "team": "South", "wins": 9 },
+                     { "team": "East", "wins": 15 }, { "team": "West", "wins": 7 }],
+            "props": { "xKey": "team", "valueKey": "wins", "title": "Wins per team" },
+            "width": 420 }
+        </script>
+      </silverpoint-chart>
+      <silverpoint-chart>
+        <script type="application/json">
+          { "chart": "donut-chart",
+            "data": [{ "name": "Rent", "value": 38 }, { "name": "Food", "value": 22 },
+                     { "name": "Travel", "value": 14 }, { "name": "Other", "value": 26 }],
+            "props": { "nameKey": "name", "valueKey": "value", "title": "Monthly budget", "centerLabel": "percent" },
+            "width": 420, "palette": "sepia" }
+        </script>
+      </silverpoint-chart>
+      <silverpoint-chart>
+        <script type="application/json">
+          { "chart": "line-chart",
+            "data": [{ "hour": "00", "hits": 18 }, { "hour": "04", "hits": 11 }, { "hour": "08", "hits": 42 },
+                     { "hour": "12", "hits": 64 }, { "hour": "16", "hits": 57 }, { "hour": "20", "hits": 30 }],
+            "props": { "xKey": "hour", "valueKey": "hits", "title": "Hits per hour" },
+            "width": 420, "ground": "cyanotype", "substrate": "prussian" }
+        </script>
+      </silverpoint-chart>
+    </div>
+    <p>sp-activechange: <code id="readout">hover or focus a chart</code></p>
+    <script src="/embed/demo.js"></script>
+  </body>
+</html>

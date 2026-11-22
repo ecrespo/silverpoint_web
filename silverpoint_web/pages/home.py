@@ -32,6 +32,7 @@ from reflex_silverpoint_react import (
 from .. import composed_code as cc
 from .. import datasets as ds
 from .. import deck_examples as dx
+from .. import embed_examples as ex
 from .. import reflex_only as ro
 from .. import site_data as sd
 from .. import ui_examples as ux
@@ -238,7 +239,8 @@ def index() -> rx.Component:
         rx.el.section(
             rx.el.h2("One chart, four frameworks"),
             rx.el.p(
-                "Seven packages share one version. The engine, @silverpoint/core, computes every scale and arc; the "
+                f"{len(sd.PACKAGES)} npm packages share one version. The engine, @silverpoint/core, computes every "
+                "scale and arc; the "
                 "adapters only translate its geometry into JSX, Vue nodes or Angular templates, so the three render the "
                 "same SVG, compared as trees in CI.",
                 class_name="spw-lede",
@@ -259,6 +261,30 @@ def index() -> rx.Component:
                 class_name="spw-grid",
             ),
             rx.el.a(f"See all {len(CHARTS)} charts →", href="/gallery", class_name="spw-more"),
+            class_name="spw-home-section",
+        ),
+        rx.el.section(
+            sp_tag("new in 0.11", tone=4, id="home-embed-new"),
+            rx.el.h2("Any chart, in any page"),
+            rx.el.p(
+                "@silverpoint/embed draws any of the 60 charts from one JSON spec, with no framework: a "
+                "<silverpoint-chart> element and one standalone file you serve yourself for a plain page, "
+                "renderToSVG and renderToHTML on a server or in a workflow, and the host catalog for BI tools, "
+                "notebooks and CMSs. The same engine, the same picture. The page below is plain HTML in a sandboxed "
+                "frame.",
+                class_name="spw-lede",
+            ),
+            rx.el.iframe(
+                src=ex.DEMO_URL,
+                title="Three silverpoint charts drawn by @silverpoint/embed in a plain page",
+                sandbox="allow-scripts",
+                loading="lazy",
+                class_name="spw-embed-frame",
+            ),
+            rx.el.div(
+                sp_button("Embed in any page", href="/docs/embed", size="sm", id="home-embed"),
+                class_name="spw-row",
+            ),
             class_name="spw-home-section",
         ),
         rx.el.section(

@@ -24,6 +24,7 @@ Everything below describes that version. Agents write silverpoint best through i
 - [Vue](https://silverpointweb.vercel.app/docs/vue)
 - [Angular](https://silverpointweb.vercel.app/docs/angular)
 - [Reflex (Python)](https://silverpointweb.vercel.app/docs/reflex)
+- [Python: notebooks, Flask, Django](https://silverpointweb.vercel.app/docs/python)
 - [Tutorials](https://silverpointweb.vercel.app/tutorials)
 
 ## Concepts
@@ -50,6 +51,7 @@ Everything below describes that version. Agents write silverpoint best through i
 ## Features
 
 - [Embed in any page](https://silverpointweb.vercel.app/docs/embed)
+- [Python: notebooks, Flask, Django](https://silverpointweb.vercel.app/docs/python)
 - [Slide decks](https://silverpointweb.vercel.app/docs/decks)
 - [Use with AI](https://silverpointweb.vercel.app/docs/ai)
 - [Palettes](https://silverpointweb.vercel.app/docs/palettes)

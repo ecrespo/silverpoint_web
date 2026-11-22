@@ -1,15 +1,20 @@
 # silverpoint
 
-> silverpoint 0.10.1 draws 60 charts and 38 UI components as metal point on prepared paper, for React, Vue, Angular and Reflex (Python, through reflex-silverpoint-react), from one framework-free engine, on the silverpoint and cyanotype grounds with 6 palette presets; accessible and server-renderable.
+> silverpoint 0.11.1 draws 60 charts and 38 UI components as metal point on prepared paper, for React, Vue, Angular and Reflex (Python, through reflex-silverpoint-react), from one framework-free engine, on the silverpoint and cyanotype grounds with 6 palette presets; accessible and server-renderable.
 
 Everything below describes that version. Agents write silverpoint best through its MCP server, which answers from the same catalog and checks and renders what they write.
 
 ## For agents
 
 - [Full reference](https://silverpointweb.vercel.app/llms-full.txt): every chart and component with its props per framework (React, Vue, Angular, Reflex), the grounds, the palettes and the diagnostics, as Markdown
-- [MCP server](https://silverpointweb.vercel.app/mcp): Streamable HTTP, read-only, no account; or locally `npx -y @silverpoint/mcp@0.10.1`
+- [MCP server](https://silverpointweb.vercel.app/mcp): Streamable HTTP, read-only, no account; or locally `npx -y @silverpoint/mcp@0.11.1`
 - [Use with AI](https://silverpointweb.vercel.app/docs/ai): client configurations, the Claude Code plugins and the tools
 - [Agent catalog](https://silverpointweb.vercel.app/agent-catalog.json): the same facts as JSON
+
+## New in 0.11
+
+- [Embed in any page](https://silverpointweb.vercel.app/docs/embed): embedding in HTML and BI hosts. @silverpoint/embed draws any chart from one JSON spec with no framework: a <silverpoint-chart> element and one standalone file for a plain HTML page, renderToSVG and renderToHTML on a server, and specFromTable for BI tools, workflows, notebooks and CMSs
+- [Hosts and embedding](https://silverpointweb.vercel.app/llms-full.txt): the 12 host integrations the catalog lists (12 planned): Power BI, Tableau, KNIME, n8n, Apache Superset, Plone Volto, Plone Classic UI, Python, Flask, Django, Jupyter, Databricks notebooks
 
 ## Getting started
 
@@ -35,26 +40,21 @@ Everything below describes that version. Agents write silverpoint best through i
 - [Accessibility](https://silverpointweb.vercel.app/docs/accessibility)
 - [Tailwind preset](https://silverpointweb.vercel.app/docs/tailwind)
 
-## New in 0.9
-
-- [Slide decks](https://silverpointweb.vercel.app/docs/decks)
-
-## New in 0.8
-
-- [Use with AI](https://silverpointweb.vercel.app/docs/ai)
-
-## New in 0.7
-
-- [Palettes](https://silverpointweb.vercel.app/docs/palettes)
-- [Composed components](https://silverpointweb.vercel.app/docs/composed)
-- [Timeline](https://silverpointweb.vercel.app/docs/timeline)
-
 ## Project
 
 - [Packages on npm & PyPI](https://silverpointweb.vercel.app/packages)
 - [Versions & changelog](https://silverpointweb.vercel.app/versions)
 - [Report a bug](https://silverpointweb.vercel.app/support)
 - [Author & license](https://silverpointweb.vercel.app/about)
+
+## Features
+
+- [Embed in any page](https://silverpointweb.vercel.app/docs/embed)
+- [Slide decks](https://silverpointweb.vercel.app/docs/decks)
+- [Use with AI](https://silverpointweb.vercel.app/docs/ai)
+- [Palettes](https://silverpointweb.vercel.app/docs/palettes)
+- [Composed components](https://silverpointweb.vercel.app/docs/composed)
+- [Timeline](https://silverpointweb.vercel.app/docs/timeline)
 
 ## Charts
 

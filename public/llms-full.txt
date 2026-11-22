@@ -1,8 +1,8 @@
-# silverpoint 0.10.1: the agent catalog
+# silverpoint 0.11.1: the agent catalog
 
-> silverpoint 0.10.1 draws 60 charts and 38 UI components as metal point on prepared paper, for React, Vue, Angular and Reflex (Python, through reflex-silverpoint-react), from one framework-free engine, on the silverpoint and cyanotype grounds with 6 palette presets; accessible and server-renderable.
+> silverpoint 0.11.1 draws 60 charts and 38 UI components as metal point on prepared paper, for React, Vue, Angular and Reflex (Python, through reflex-silverpoint-react), from one framework-free engine, on the silverpoint and cyanotype grounds with 6 palette presets; accessible and server-renderable.
 
-Generated from https://silverpointweb.vercel.app/agent-catalog.json, the catalog `@silverpoint/mcp@0.10.1` ships (schema 1). Reflex: `reflex-silverpoint-react` 0.10.0, wrapping silverpoint 0.10.0. React, Vue and Angular share each prop's name (Vue templates may write it in kebab-case); Reflex spells it in snake_case. The MCP server at https://silverpointweb.vercel.app/mcp answers from the same catalog.
+Generated from https://silverpointweb.vercel.app/agent-catalog.json, the catalog `@silverpoint/mcp@0.11.1` ships (schema 1). Reflex: `reflex-silverpoint-react` 0.11.0, wrapping silverpoint 0.11.0. React, Vue and Angular share each prop's name (Vue templates may write it in kebab-case); Reflex spells it in snake_case. The MCP server at https://silverpointweb.vercel.app/mcp answers from the same catalog.
 
 ## Stylesheets
 
@@ -1459,7 +1459,7 @@ Generated from https://silverpointweb.vercel.app/agent-catalog.json, the catalog
 | Angular | `button[spButton]` | `@silverpoint/angular/ui/button` |
 | Reflex | `sp_button` | `reflex_silverpoint_react` |
 
-- Events: React `onClick`; Vue `click`; Angular none
+- Events: React `onClick`, `onPointerDown`; Vue `click`; Angular none
 - Slots: React `children`; Vue `default`; Angular `content`
 - States: default, primary, danger, disabled
 
@@ -2462,6 +2462,31 @@ A ```` ```silverpoint ```` block holds one chart as JSON, the input of the MCP `
 
 Deck diagnostics: `SP018`, `SP026`, `SP027`, `SP028`, `SP029`.
 
+## Hosts and embedding
+
+Outside React, Vue, Angular and Reflex, `@silverpoint/embed@0.11.1` draws any chart from one JSON spec, `{ "chart": "<slug>", "data": [...], "props": {...} }`, with optional `width`, `height`, `ground`, `substrate`, `mode` and `palette`. `validateSpec` says why a spec cannot render; `renderToSVG` and `renderToHTML` run on a server with no DOM. In a plain HTML page, the standalone file `silverpoint-embed.js` (or `silverpoint-embed.full.js`, with EB Garamond inlined), served by the page itself and pinned with the package's `integrity.json`, defines a `<silverpoint-chart>` element that holds the spec in a `<script type="application/json">` child; `mount(target, spec, options)` drives a chart from code. `specFromTable` from `@silverpoint/embed/hosts` binds a table's columns to a chart's roles for BI tools. The MCP tool `generate_code` writes the page with `framework: "html"`. Guide: https://silverpointweb.vercel.app/docs/embed
+
+Its diagnostics: `SP030` (error): a spec exceeds 2 MB serialised, or its path data exceeds the path byte budget; it is refused; `SP031` (error): the embed client was given a spec that does not validate; the error figure is shown.
+
+The host integrations the catalog lists (12), each in a repository of its own where it has one. `via` says what draws the chart: `embed` (@silverpoint/embed), `react` (the React adapter) or `python` (the Python package).
+
+### Planned (not available yet)
+
+| Host | Kind | Via | Package | Status | Description |
+|---|---|---|---|---|---|
+| [Power BI](https://github.com/ecrespo/silverpoint-powerbi) | bi | `embed` | `silverpoint-powerbi` | planned | A custom visual: fields on roles, any of the tabular charts. |
+| [Tableau](https://github.com/ecrespo/silverpoint-tableau) | bi | `embed` | `silverpoint-tableau` | planned | Viz extensions, one manifest per chart, drawing on a worksheet. |
+| [KNIME](https://github.com/ecrespo/silverpoint-knime) | workflow | `python` | `silverpoint-knime` | planned | View nodes that draw a chart from a table, through the Python package. |
+| [n8n](https://github.com/ecrespo/n8n-nodes-silverpoint) | workflow | `embed` | `n8n-nodes-silverpoint` | planned | A community node that draws a chart from workflow items, as SVG or HTML. |
+| [Apache Superset](https://github.com/ecrespo/superset-plugin-chart-silverpoint) | bi | `react` | `superset-plugin-chart-silverpoint` | planned | Visualization plugins, one per chart, drawn by the React adapter. |
+| [Plone Volto](https://github.com/ecrespo/volto-silverpoint) | cms | `react` | `volto-silverpoint` | planned | A block that draws a chart from a table, server-rendered and hydrated. |
+| [Plone Classic UI](https://github.com/ecrespo/collective.silverpoint) | cms | `python` | `collective.silverpoint` | planned | A Chart content type and a view for templates, through the Python package. |
+| [Python](https://github.com/ecrespo/silverpoint-python) | language | `embed` | `silverpoint` | planned | A chart from a DataFrame as self-contained HTML; the standalone file vendored. |
+| Flask | web | `python` | `silverpoint[flask]` | planned | Jinja globals and a route for the script, inside the Python package. |
+| Django | web | `python` | `silverpoint[django]` | planned | An installable app with template tags, inside the Python package. |
+| Jupyter | notebook | `python` | `silverpoint` | planned | A chart as a cell output, in a sandboxed frame. |
+| Databricks notebooks | notebook | `python` | `silverpoint` | planned | A chart in a notebook cell with displayHTML; AI/BI dashboards are out (DD-072). |
+
 ## Grounds
 
 | Ground | Substrates | Description |
@@ -2529,6 +2554,8 @@ Deck diagnostics: `SP018`, `SP026`, `SP027`, `SP028`, `SP029`.
 | `SP027` | warn | REQ-586 | a deck directive has an unknown value; the inherited value holds | Use a registered ground, one of its substrates, and `ink` or `precision` |
 | `SP028` | warn | REQ-599 | the page is outside the deck; it was clamped to the nearest slide | Keep `page` and `defaultPage` between 1 and the number of slides |
 | `SP029` | warn | REQ-576 | the Markdown exceeds a deck limit; it was rendered up to the limit | Keep a deck under 512 KB, 300 slides and 60 chart fences |
+| `SP030` | error | REQ-635 | a spec exceeds 2 MB serialised, or its path data exceeds the path byte budget; it is refused | Send fewer rows, aggregate before charting, or use `hatchFill: 'tile'` |
+| `SP031` | error | REQ-668 | the embed client was given a spec that does not validate; the error figure is shown | Read the message: it names the field, the unknown chart with suggestions, or the undeclared props |
 
 ## Choosing a chart
 

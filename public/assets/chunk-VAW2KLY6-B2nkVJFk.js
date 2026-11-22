@@ -1,1 +1,0 @@
-import{a as e}from"./rolldown-runtime-BWaJ3C7D.js";import{f as t,n,r,t as i}from"./ui-CgVDSU23.js";import{G as a}from"./components-BRno7RdY.js";var o=(0,e(a(),1).forwardRef)(function({children:e,onClick:a,dashboardCell:o,...s},c){let l=t(s,r(s,o),{text:n(e)});return i(l,{root:{ref:c,onClick:a&&(e=>s.disabled?e.preventDefault():a(e))},slots:{content:e}})});export{o as t};

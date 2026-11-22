@@ -1,0 +1,409 @@
+var e=`/*
+ * @silverpoint/grounds — styles.css
+ *
+ * The only coupling between the SVG and its paint is the \`part\` attribute (API Spec §10.1).
+ * Colour enters through --sp-* custom properties, so overriding one re-themes every chart
+ * without re-rendering (REQ-041, REQ-042). No CSS framework is required (REQ-043).
+ *
+ * Import once per app:  import '@silverpoint/grounds/styles.css';
+ */
+
+/* ── Ground: silverpoint (Data Model §3) ─────────────────────────────────────────────── */
+
+/* Wrapped in :where() so they weigh nothing: any consumer rule — \`.sp-root { --sp-ink: … }\` —
+   re-themes without fighting specificity (REQ-042). They are declared once per chart: on the
+   root, or on the <svg> itself when it stands alone (toSVGString), never on both. */
+
+:where(.sp-ground-silverpoint:not(.sp-root .sp-chart)) {
+  --sp-font-display: 'EB Garamond', 'Iowan Old Style', Georgia, serif;
+  --sp-stroke-width: 0.9;
+  --sp-hatch-gap: 7;
+  --sp-radius: 2px;
+}
+
+:where(.sp-ground-silverpoint[data-substrate='cream']:not(.sp-root .sp-chart)) {
+  --sp-substrate: #EDE7DA;
+  --sp-ink: #5A5E65;
+  --sp-ink-secondary: #685C4D;
+  --sp-heighten: #FFFFFF;
+  --sp-rule: #737A82;
+  --sp-grid: #737A82;
+  --sp-text: #3F4348;
+  --sp-text-muted: #5A5E65;
+}
+
+:where(.sp-ground-silverpoint[data-substrate='green']:not(.sp-root .sp-chart)) {
+  --sp-substrate: #D8DCD0;
+  --sp-ink: #5A5E65;
+  --sp-ink-secondary: #685C4D;
+  --sp-heighten: #FFFFFF;
+  --sp-rule: #737A82;
+  --sp-grid: #737A82;
+  --sp-text: #3F4348;
+  --sp-text-muted: #5A5E65;
+}
+
+:where(.sp-ground-silverpoint[data-substrate='blue']:not(.sp-root .sp-chart)) {
+  --sp-substrate: #D2D8DF;
+  --sp-ink: #5A5E65;
+  --sp-ink-secondary: #685C4D;
+  --sp-heighten: #FFFFFF;
+  --sp-rule: #737A82;
+  --sp-grid: #737A82;
+  --sp-text: #3F4348;
+  --sp-text-muted: #5A5E65;
+}
+
+:where(.sp-ground-silverpoint[data-substrate='ochre']:not(.sp-root .sp-chart)) {
+  --sp-substrate: #E7DABC;
+  --sp-ink: #5A5E65;
+  --sp-ink-secondary: #685C4D;
+  --sp-heighten: #FFFFFF;
+  --sp-rule: #737A82;
+  --sp-grid: #737A82;
+  --sp-text: #3F4348;
+  --sp-text-muted: #5A5E65;
+}
+
+/* ── Ground: cyanotype (Data Model §3.7) ────────────────────────────────────────────────── */
+
+/* One substrate, so its colours sit on the ground-wide rule: a chart that names another substrate
+   (\`cream\` is the library default) is still printed on Prussian blue. The weights are its tonal
+   ramp: a toned shape's outline is --sp-stroke-width times --sp-weight-N (REQ-028, DD-019). */
+
+:where(.sp-ground-cyanotype:not(.sp-root .sp-chart)) {
+  --sp-font-display: 'EB Garamond', 'Iowan Old Style', Georgia, serif;
+  --sp-stroke-width: 0.9;
+  --sp-radius: 2px;
+  --sp-substrate: #1B3F6B;
+  --sp-ink: #E2EAF2;
+  --sp-ink-secondary: #DCCBA8;
+  --sp-heighten: #0C2240;
+  --sp-rule: #8AA8C7;
+  --sp-grid: #8AA8C7;
+  --sp-text: #F4F6F8;
+  --sp-text-muted: #B8CBDE;
+  --sp-weight-1: 1.5;
+  --sp-weight-2: 2.25;
+  --sp-weight-3: 3;
+  --sp-weight-4: 4;
+}
+
+/* ── Chart root ──────────────────────────────────────────────────────────────────────── */
+
+.sp-root {
+  position: relative;
+  display: block;
+  color: var(--sp-text);
+  font-family: var(--sp-font-display);
+}
+
+.sp-root:focus-visible {
+  outline: 1.5px solid var(--sp-ink);
+  outline-offset: 2px;
+}
+
+.sp-chart {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  overflow: visible;
+  background: var(--sp-substrate);
+  border-radius: var(--sp-radius);
+  animation: sp-enter 280ms ease-out;
+}
+
+@keyframes sp-enter {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sp-chart {
+    animation: none;
+  }
+}
+
+/* ── Paint by part (API Spec §10.1) ──────────────────────────────────────────────────── */
+
+/* A tile-painted shape keeps its \`fill="url(#…)"\` attribute: a CSS fill would override it (REQ-029).
+   :where() keeps this reset at (0,1,1), under every paint-by-part rule below. */
+.sp-chart path:where(:not([data-paint='tile'])) {
+  fill: none;
+}
+
+.sp-chart path {
+  stroke: none;
+  stroke-width: var(--sp-stroke-width);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.sp-chart [part='sp-ink'][data-paint='stroke'] {
+  stroke: var(--sp-ink);
+}
+
+.sp-chart [part='sp-ink'][data-paint='fill'] {
+  fill: var(--sp-ink);
+}
+
+.sp-chart [part='sp-ink-secondary'][data-paint='stroke'] {
+  stroke: var(--sp-ink-secondary);
+}
+
+.sp-chart [part='sp-ink-secondary'][data-paint='fill'] {
+  fill: var(--sp-ink-secondary);
+}
+
+.sp-chart [part='sp-heighten'] {
+  fill: var(--sp-heighten);
+}
+
+.sp-chart [part='sp-rule'] {
+  stroke: var(--sp-rule);
+}
+
+.sp-chart [part='sp-grid'] {
+  stroke: var(--sp-grid);
+  stroke-width: calc(var(--sp-stroke-width) * 0.6);
+}
+
+/* Hatching: finer than the outline (fillWeight 0.55 against strokeWidth 0.9). */
+.sp-chart [data-role='hatch'] {
+  stroke-width: calc(var(--sp-stroke-width) * 0.6);
+}
+
+/* A tile-painted shape: the pattern is its fill (REQ-029); the outline is its own stroke. */
+.sp-chart [data-paint='tile'] {
+  stroke: none;
+}
+
+/* Tone by line weight, under a \`weight\` ground (REQ-028): the level is data, the width is paint. */
+.sp-chart [data-weight='1'] {
+  stroke-width: calc(var(--sp-stroke-width) * var(--sp-weight-1));
+}
+
+.sp-chart [data-weight='2'] {
+  stroke-width: calc(var(--sp-stroke-width) * var(--sp-weight-2));
+}
+
+.sp-chart [data-weight='3'] {
+  stroke-width: calc(var(--sp-stroke-width) * var(--sp-weight-3));
+}
+
+.sp-chart [data-weight='4'] {
+  stroke-width: calc(var(--sp-stroke-width) * var(--sp-weight-4));
+}
+
+.sp-chart [data-dash='dotted'] {
+  stroke-dasharray: 0.5 3.5;
+}
+
+/* ── Type (Data Model §3.6) ─────────────────────────────────────────────────────────── */
+
+.sp-chart text {
+  font-family: var(--sp-font-display);
+  font-variant-numeric: tabular-nums;
+  font-size: calc(11px * var(--sp-type-scale, 1));
+  /* A halo of the substrate, painted under the fill: hatching and bands never cross a glyph. */
+  paint-order: stroke;
+  stroke: var(--sp-substrate);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
+
+.sp-chart [part='sp-text'] {
+  fill: var(--sp-text);
+}
+
+.sp-chart [part='sp-axis'] {
+  fill: var(--sp-text-muted);
+}
+
+.sp-chart [data-kind='title'] {
+  font-size: calc(13px * var(--sp-type-scale, 1));
+  font-weight: 500;
+}
+
+.sp-chart [data-kind='value'] {
+  font-size: calc(30px * var(--sp-type-scale, 1));
+}
+
+.sp-chart [data-kind='unit'] {
+  font-style: italic;
+}
+
+/* Small-caps lines: \`smcp\` is not in the distributed subset, so uppercase with tracking. */
+.sp-chart [data-kind='badge'],
+.sp-chart [data-kind='footer'] {
+  font-size: calc(9px * var(--sp-type-scale, 1));
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.sp-chart [data-kind='tick'] {
+  font-size: calc(9.5px * var(--sp-type-scale, 1));
+}
+
+.sp-chart [data-kind='empty'] {
+  font-style: italic;
+}
+
+/* ── Readout (REQ-141) ──────────────────────────────────────────────────────────────── */
+
+.sp-readout {
+  position: absolute;
+  transform: translate(-50%, calc(-100% - 10px));
+  padding: 4px 8px;
+  pointer-events: none;
+  white-space: nowrap;
+  background: var(--sp-substrate);
+  border: 0.9px solid var(--sp-rule);
+  border-radius: var(--sp-radius);
+  color: var(--sp-text);
+  font-family: var(--sp-font-display);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.sp-readout-heading {
+  display: block;
+  color: var(--sp-text-muted);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.sp-marker {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.sp-marker path {
+  fill: none;
+  stroke: var(--sp-ink);
+  stroke-width: var(--sp-stroke-width);
+}
+
+/* ── Tabular alternative (REQ-121) ───────────────────────────────────────────────────── */
+
+/*
+ * Scoped to the element: \`SpTable\`'s wrapper is also \`.sp-table\`, and these rules must not reach it
+ * whatever the order of styles.css and ui.css (REQ-670, #28).
+ */
+table.sp-table {
+  margin-top: 8px;
+  border-collapse: collapse;
+  font-family: var(--sp-font-display);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: var(--sp-text);
+}
+
+table.sp-table th,
+table.sp-table td {
+  padding: 2px 8px;
+  text-align: right;
+  border-bottom: 0.9px solid var(--sp-rule);
+}
+
+table.sp-table caption {
+  text-align: left;
+  font-style: italic;
+}
+
+/*
+ * Hidden for sight, present for assistive technology — never \`display: none\`. On the table's box,
+ * not the table: a table ignores \`width\` and \`overflow\`, and would widen a narrow page (WCAG 1.4.10).
+ */
+.sp-table-box[data-visibility='hidden'],
+.sp-live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── Dashboard (API Spec §7.1, §10; TD DD-014) ───────────────────────────────────────── */
+
+/* The wrapper is a container: its own width, never the viewport's, chooses the breakpoint. It
+   stands on the substrate so its title and description are the text-on-substrate pairs the
+   contrast gate proves (REQ-213). Every number comes from the resolved model as a variable. */
+.sp-dashboard {
+  container-type: inline-size;
+  container-name: sp-dashboard;
+  display: block;
+  padding: var(--sp-dashboard-gap, var(--sp-dashboard-layout-gap, 16px));
+  background: var(--sp-substrate);
+  color: var(--sp-text);
+  font-family: var(--sp-font-display);
+  border-radius: var(--sp-radius);
+}
+
+.sp-dashboard-title {
+  margin: 0 0 4px;
+  color: var(--sp-text);
+  font-size: calc(20px * var(--sp-type-scale, 1));
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.sp-dashboard-description {
+  margin: 0;
+  color: var(--sp-text-muted);
+  font-size: calc(13px * var(--sp-type-scale, 1));
+  font-style: italic;
+}
+
+/* Cells flow in DOM order, which is the reading order: no \`order\`, no dense packing, no line
+   placement (REQ-203). A wide cell that does not fit leaves a gap at the row end. */
+.sp-dashboard-grid {
+  display: grid;
+  grid-auto-flow: row;
+  grid-template-columns: repeat(var(--sp-dashboard-columns-sm, 1), minmax(0, 1fr));
+  grid-auto-rows: var(--sp-dashboard-row-height, 240px);
+  gap: var(--sp-dashboard-gap, var(--sp-dashboard-layout-gap, 16px));
+  margin-top: var(--sp-dashboard-gap, var(--sp-dashboard-layout-gap, 16px));
+}
+
+.sp-dashboard-cell {
+  grid-column: span var(--sp-cell-col-sm, 1);
+  grid-row: span var(--sp-cell-row-sm, 1);
+  min-width: 0;
+  margin: 0;
+}
+
+@container sp-dashboard (min-width: 640px) {
+  .sp-dashboard-grid {
+    grid-template-columns: repeat(var(--sp-dashboard-columns-md, 2), minmax(0, 1fr));
+  }
+  .sp-dashboard-cell {
+    grid-column: span var(--sp-cell-col-md, 1);
+    grid-row: span var(--sp-cell-row-md, 1);
+  }
+}
+
+@container sp-dashboard (min-width: 1024px) {
+  .sp-dashboard-grid {
+    grid-template-columns: repeat(var(--sp-dashboard-columns-lg, 4), minmax(0, 1fr));
+  }
+  .sp-dashboard-cell {
+    grid-column: span var(--sp-cell-col-lg, 1);
+    grid-row: span var(--sp-cell-row-lg, 1);
+  }
+}
+`;export{e as default};

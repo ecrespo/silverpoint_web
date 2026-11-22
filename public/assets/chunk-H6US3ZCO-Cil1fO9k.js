@@ -1,0 +1,1 @@
+import{F as e,r as t,t as n}from"./ui-DiFuRiyS.js";function r({dashboardCell:r,...i}){return n(e(i,t(i,r)),{})}export{r as t};

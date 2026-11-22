@@ -1,1 +1,0 @@
-import{W as e,r as t,t as n}from"./ui-CgVDSU23.js";function r({dashboardCell:r,...i}){return n(e(i,t(i,r)),{})}export{r as t};

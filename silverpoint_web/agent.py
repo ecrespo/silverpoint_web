@@ -60,6 +60,29 @@ LOCAL_SERVER = "claude mcp add silverpoint -- npx -y @silverpoint/mcp"
 
 FRAMEWORK_LABELS = {"react": "React", "vue": "Vue", "angular": "Angular", "reflex": "Reflex"}
 
+#: A host's status (Data Model §2.43) as a heading, most available first, so "planned" never reads as
+#: available. A status the site does not know yet is listed after these, under its own name.
+STATUS_TITLES = {"released": "Released", "preview": "Preview", "planned": "Planned (not available yet)"}
+
+#: The one hand-written part of the llms files: what the catalog does not carry about @silverpoint/embed.
+EMBED_TEMPLATE = Path(__file__).resolve().parent / "llms_embed.md"
+HAND_WRITTEN_MARK = "<!-- HAND-WRITTEN:"
+
+#: HAND-WRITTEN: what each minor adds, for /llms.txt's "New in" section. The catalog has no release
+#: notes, so a new minor on the pin needs an entry here (tests/test_llms_0_11.py checks it).
+NEW_IN: dict[str, dict[str, str]] = {
+    "0.11": {
+        "title": "Embed in any page",
+        "page": "/docs/embed",
+        "summary": "embedding in HTML and BI hosts. @silverpoint/embed draws any chart from one JSON spec "
+        "with no framework: a <silverpoint-chart> element and one standalone file for a plain HTML page, "
+        "renderToSVG and renderToHTML on a server, and specFromTable for BI tools, workflows, notebooks and CMSs",
+    },
+}
+
+#: Host embedding's requirements (PRD §6.16, feature-007): its diagnostics are the ones that cite them.
+EMBED_REQS = range(629, 669)
+
 
 def _label(framework: str) -> str:
     return FRAMEWORK_LABELS.get(framework, framework)
@@ -161,6 +184,31 @@ def _summary(catalog: dict[str, Any]) -> str:
     )
 
 
+def _new_in(
+    catalog: dict[str, Any], docs_nav: tuple[tuple[str, tuple[tuple[str, str], ...]], ...]
+) -> list[str]:
+    """``## New in X.Y`` for the catalog's minor, from the hand-written ``NEW_IN`` (KeyError if it lacks it)."""
+    minor = ".".join(catalog["version"].split(".")[:2])
+    entry = NEW_IN[minor]
+    pages = {href for _, entries in docs_nav for href, _ in entries}
+    if entry["page"] in pages:
+        url = f"{SITE_URL}{entry['page']}"
+    else:  # the site has no page for it yet: the GitHub release that introduced it
+        url = f"https://github.com/ecrespo/silverpoint/releases/tag/v{minor}.0"
+    hosts = catalog.get("hosts", [])
+    statuses = ", ".join(
+        f"{sum(h['status'] == s for h in hosts)} {s}" for s in dict.fromkeys(h["status"] for h in hosts)
+    )
+    return [
+        f"## New in {minor}",
+        "",
+        f"- [{entry['title']}]({url}): {entry['summary']}",
+        f"- [Hosts and embedding]({SITE_URL}/llms-full.txt): the {len(hosts)} host integrations the catalog lists "
+        f"({statuses}): {', '.join(h['name'] for h in hosts)}",
+        "",
+    ]
+
+
 def llms_txt(catalog: dict[str, Any], docs_nav: tuple[tuple[str, tuple[tuple[str, str], ...]], ...]) -> str:
     """The llms.txt index (llmstxt.org): what silverpoint is, then where agents read more."""
     lines = [
@@ -181,7 +229,15 @@ def llms_txt(catalog: dict[str, Any], docs_nav: tuple[tuple[str, tuple[tuple[str
         f"- [Agent catalog]({SITE_URL}/agent-catalog.json): the same facts as JSON",
         "",
     ]
-    for title, entries in docs_nav:
+    lines += _new_in(catalog, docs_nav)
+    # The sidebar's own "New in 0.x" groups become one "Features" list: only the catalog's minor is new.
+    features = [entry for title, entries in docs_nav if title.startswith("New in ") for entry in entries]
+    for title, entries in [
+        *((t, e) for t, e in docs_nav if not t.startswith("New in ")),
+        ("Features", features),
+    ]:
+        if not entries:
+            continue
         lines += [f"## {title}", ""]
         lines += [f"- [{label}]({SITE_URL}{href})" for href, label in entries]
         lines.append("")
@@ -274,31 +330,64 @@ def _deck(catalog: dict[str, Any]) -> list[str]:
     ]
 
 
-def _hosts(catalog: dict[str, Any]) -> list[str]:
-    """The host integrations (silverpoint 0.11, feature-007): where a chart is drawn outside an app."""
-    return [
-        "## Host integrations",
-        "",
-        "Outside React, Vue, Angular and Reflex, `@silverpoint/embed` draws any chart from one JSON spec "
-        "(`renderToSVG`, `renderToHTML`, the `<silverpoint-chart>` element); `generate_code` writes it with "
-        '`framework: "html"`. These hosts build on it, each in a repository of its own:',
-        "",
-        *_table(
-            ["Host", "Kind", "Through", "Package", "Registry", "Status", "Description"],
-            [
-                [
-                    f"[{host['name']}]({host['repository']})" if host.get("repository") else host["name"],
-                    host["kind"],
-                    _code(host["via"]),
-                    _code(host["package"]),
-                    host["registry"],
-                    host["status"],
-                    _cell(host["summary"]),
-                ]
-                for host in catalog["hosts"]
-            ],
-        ),
+def _embed_paragraph(catalog: dict[str, Any]) -> str:
+    """The hand-written template, without its marker line; only the version and site URL are filled in."""
+    lines = [
+        line for line in EMBED_TEMPLATE.read_text().splitlines() if not line.startswith(HAND_WRITTEN_MARK)
     ]
+    return "\n".join(lines).strip().replace("{version}", catalog["version"]).replace("{site}", SITE_URL)
+
+
+def _hosts(catalog: dict[str, Any]) -> list[str]:
+    """Hosts and embedding (silverpoint 0.11, feature-007): the catalog's hosts, grouped by status."""
+    hosts = catalog["hosts"]
+    statuses = [s for s in STATUS_TITLES if any(h["status"] == s for h in hosts)]
+    statuses += [s for s in dict.fromkeys(h["status"] for h in hosts) if s not in STATUS_TITLES]
+    embed_codes = [
+        d
+        for d in catalog["diagnostics"]
+        if (m := re.fullmatch(r"REQ-(\d+)", d["req"])) and int(m[1]) in EMBED_REQS
+    ]
+    out = [
+        "## Hosts and embedding",
+        "",
+        _embed_paragraph(catalog),
+        "",
+    ]
+    if embed_codes:
+        out += [
+            "Its diagnostics: "
+            + "; ".join(f"{_code(d['code'])} ({d['severity']}): {_cell(d['what'])}" for d in embed_codes)
+            + ".",
+            "",
+        ]
+    out += [
+        f"The host integrations the catalog lists ({len(hosts)}), each in a repository of its own where it has "
+        "one. `via` says what draws the chart: `embed` (@silverpoint/embed), `react` (the React adapter) or "
+        "`python` (the Python package).",
+        "",
+    ]
+    for status in statuses:
+        out += [
+            f"### {STATUS_TITLES.get(status, status.capitalize())}",
+            "",
+            *_table(
+                ["Host", "Kind", "Via", "Package", "Status", "Description"],
+                [
+                    [
+                        f"[{host['name']}]({host['repository']})" if host.get("repository") else host["name"],
+                        host["kind"],
+                        _code(host["via"]),
+                        _code(host.get("package") or ""),
+                        host["status"],
+                        _cell(host["summary"]),
+                    ]
+                    for host in hosts
+                    if host["status"] == status
+                ],
+            ),
+        ]
+    return out
 
 
 def llms_full_txt(catalog: dict[str, Any]) -> str:

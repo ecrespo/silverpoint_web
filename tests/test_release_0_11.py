@@ -71,6 +71,6 @@ def test_issue_50_string_trigger_is_noted_on_each_overlay():
 
 def test_llms_full_lists_the_hosts():
     text = agent.llms_full_txt(CATALOG)
-    assert "## Host integrations" in text
+    assert "## Hosts and embedding" in text
     for host in CATALOG["hosts"]:
         assert host["name"] in text

@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Any
 
 #: The silverpoint version whose catalog the site publishes: the one it documents (site_data.LATEST).
-CATALOG_VERSION = "0.10.1"
+CATALOG_VERSION = "0.11.1"
 
 SITE_URL = "https://silverpointweb.vercel.app"
 #: The hosted MCP server, behind the site's own /mcp (vercel.json rewrites it to the MCP project).
@@ -274,6 +274,33 @@ def _deck(catalog: dict[str, Any]) -> list[str]:
     ]
 
 
+def _hosts(catalog: dict[str, Any]) -> list[str]:
+    """The host integrations (silverpoint 0.11, feature-007): where a chart is drawn outside an app."""
+    return [
+        "## Host integrations",
+        "",
+        "Outside React, Vue, Angular and Reflex, `@silverpoint/embed` draws any chart from one JSON spec "
+        "(`renderToSVG`, `renderToHTML`, the `<silverpoint-chart>` element); `generate_code` writes it with "
+        '`framework: "html"`. These hosts build on it, each in a repository of its own:',
+        "",
+        *_table(
+            ["Host", "Kind", "Through", "Package", "Registry", "Status", "Description"],
+            [
+                [
+                    f"[{host['name']}]({host['repository']})" if host.get("repository") else host["name"],
+                    host["kind"],
+                    _code(host["via"]),
+                    _code(host["package"]),
+                    host["registry"],
+                    host["status"],
+                    _cell(host["summary"]),
+                ]
+                for host in catalog["hosts"]
+            ],
+        ),
+    ]
+
+
 def llms_full_txt(catalog: dict[str, Any]) -> str:
     """The whole catalog as Markdown."""
     reflex = catalog["reflex"]
@@ -369,6 +396,7 @@ def llms_full_txt(catalog: dict[str, Any]) -> str:
         *_names(catalog, timeline),
         *_props(timeline["props"]),
         *(_deck(catalog) if "deck" in catalog else []),
+        *(_hosts(catalog) if catalog.get("hosts") else []),
         "## Grounds",
         "",
         *_table(

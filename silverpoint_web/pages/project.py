@@ -48,7 +48,13 @@ def packages() -> rx.Component:
             "Which ones do I install?",
             table(
                 ["You use", "Install"],
-                [[fw.label, rx.el.code(fw.install)] for fw in sd.FRAMEWORKS],
+                [
+                    *([fw.label, rx.el.code(fw.install)] for fw in sd.FRAMEWORKS),
+                    [
+                        rx.el.a("A plain page, a server or a host (new in 0.11)", href="/docs/embed"),
+                        rx.el.code("npm install @silverpoint/embed"),
+                    ],
+                ],
             ),
             callout(
                 "Two optional extras since 0.7: name ",
@@ -97,8 +103,8 @@ def packages() -> rx.Component:
             "versions",
             "One version for all",
             rx.el.p(
-                "The seven npm packages form one Changesets fixed group: they always carry the same version. The current "
-                "one is ",
+                f"The {len(sd.PACKAGES)} npm packages form one Changesets fixed group: they always carry the same "
+                "version. The current one is ",
                 rx.el.a(f"{sd.LATEST.version}", href="/versions"),
                 ". The line stays on 0.x until the API specification is put in force at 1.0.0.",
             ),
@@ -154,7 +160,8 @@ def versions() -> rx.Component:
     return docs_page(
         "/versions",
         "Versions",
-        "Every release of silverpoint, newest first. The seven packages share one version, so one entry covers them all.",
+        f"Every release of silverpoint, newest first. The {len(sd.PACKAGES)} npm packages share one version, so one "
+        "entry covers them all.",
         rx.el.div(
             sp_steps(
                 items=[step_item(r.version, f"v{r.version}", r.date) for r in reversed(sd.VERSIONS)],
@@ -232,7 +239,18 @@ def versions() -> rx.Component:
                 "Full changelogs: ",
                 *[
                     item
-                    for pkg in ("core", "react", "vue", "angular", "grounds", "fonts", "tailwind")
+                    for pkg in (
+                        "core",
+                        "react",
+                        "vue",
+                        "angular",
+                        "grounds",
+                        "marp",
+                        "embed",
+                        "mcp",
+                        "fonts",
+                        "tailwind",
+                    )
                     for item in (ext_link(pkg, f"{sd.REPO}/blob/main/packages/{pkg}/CHANGELOG.md"), " ")
                 ],
             ),

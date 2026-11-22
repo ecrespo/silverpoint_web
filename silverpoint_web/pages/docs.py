@@ -356,15 +356,14 @@ line_chart(
 
 EXPORT = {
     "react": """import { useRef } from 'react';
-import { standaloneSVG } from '@silverpoint/grounds';
-import groundStyles from '@silverpoint/grounds/styles-text';
 import { LineChart, type ChartHandle } from '@silverpoint/react/line-chart';
 
 export function Exportable({ data }: { data: { hour: string; hits: number }[] }) {
   const chart = useRef<ChartHandle>(null);
-  const download = () => {
-    const markup = chart.current?.toSVGString() ?? ''; // the canonical markup, painted by the page
-    const svg = standaloneSVG(markup, groundStyles);    // a file that paints itself
+  const download = async () => {
+    // toSVGString() is the canonical markup, painted by the page; since 0.11 the handle also
+    // resolves to a file that paints itself (styles.css loads on the first call).
+    const svg = (await chart.current?.toStandaloneSVGString()) ?? '';
     window.open(URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' })));
   };
   return (
@@ -376,15 +375,13 @@ export function Exportable({ data }: { data: { hour: string; hits: number }[] })
 }""",
     "vue": """<script setup lang="ts">
 import { ref } from 'vue';
-import { standaloneSVG } from '@silverpoint/grounds';
-import groundStyles from '@silverpoint/grounds/styles-text';
 import { SpLineChart } from '@silverpoint/vue/line-chart';
 
 defineProps<{ data: { hour: string; hits: number }[] }>();
 const chart = ref<InstanceType<typeof SpLineChart>>();
 
-function download() {
-  const svg = standaloneSVG(chart.value?.toSVGString() ?? '', groundStyles);
+async function download() {
+  const svg = (await chart.value?.toStandaloneSVGString()) ?? ''; // styles.css embedded
   window.open(URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' })));
 }
 </script>
@@ -394,8 +391,6 @@ function download() {
   <button @click="download">Export SVG</button>
 </template>""",
     "angular": """import { Component, viewChild } from '@angular/core';
-import { standaloneSVG } from '@silverpoint/grounds';
-import groundStyles from '@silverpoint/grounds/styles-text';
 import { SpLineChart } from '@silverpoint/angular/line-chart';
 
 @Component({
@@ -413,8 +408,8 @@ export class Exportable {
   ];
   private readonly chart = viewChild.required<SpLineChart>('chart');
 
-  protected download() {
-    const svg = standaloneSVG(this.chart().toSVGString(), groundStyles);
+  protected async download() {
+    const svg = await this.chart().toStandaloneSVGString(); // styles.css embedded
     window.open(URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' })));
   }
 }""",
@@ -1699,8 +1694,8 @@ def export() -> Callable[[], rx.Component]:
     return page(
         "/docs/export",
         "Export & imperative handle",
-        "Each chart exposes a handle with toSVGString() and getGeometry(). Since 0.10, standaloneSVG() turns that "
-        "markup into a file that paints itself outside the app.",
+        "Each chart exposes a handle with toSVGString(), toStandaloneSVGString() and getGeometry(). Since 0.11 "
+        "the handle itself resolves to a file that paints itself outside the app.",
         [
             (
                 "try",
@@ -1738,7 +1733,22 @@ def export() -> Callable[[], rx.Component]:
                     ),
                     rx.el.ul(
                         rx.el.li(
-                            "New in 0.10: ",
+                            "New in 0.11: ",
+                            c("toStandaloneSVGString(extraCss?)"),
+                            " on every chart's handle, in React, Vue and Angular, resolves to ",
+                            c("toSVGString()"),
+                            " with ",
+                            c("styles.css"),
+                            " embedded, followed by ",
+                            c("extraCss"),
+                            " for your own ",
+                            c("--sp-*"),
+                            " overrides. It is a promise: the stylesheet (3.2 kB gzip) is loaded on the first call, "
+                            "so a chart's build does not carry it. The palette and the ground are already inside the "
+                            "markup, so both reach the file.",
+                        ),
+                        rx.el.li(
+                            "Since 0.10, by hand: ",
                             c("standaloneSVG(svg, css)"),
                             " from ",
                             c("@silverpoint/grounds"),
@@ -1750,7 +1760,7 @@ def export() -> Callable[[], rx.Component]:
                             c("styles.css"),
                             " as a string that every bundler imports without loader attributes, ",
                             c("?raw"),
-                            " or prebundle settings. ",
+                            " or prebundle settings. The handle's method is these two put together. ",
                             c("toSVGString()"),
                             " itself is unchanged.",
                         ),
@@ -1766,6 +1776,13 @@ def export() -> Callable[[], rx.Component]:
                         ),
                         rx.el.li(
                             "The typeface is not embedded: a viewer without EB Garamond falls back to its own serif."
+                        ),
+                        rx.el.li(
+                            "Since 0.11 the chart's accessible name is a ",
+                            c('<desc id="{id}-title">'),
+                            ", not an SVG ",
+                            c("<title>"),
+                            ", so no browser shows a native tooltip over the chart and the file keeps its name.",
                         ),
                     ),
                 ],
@@ -2018,7 +2035,13 @@ def accessibility() -> Callable[[], rx.Component]:
                             c("label"),
                             ", from ",
                             c("title"),
-                            " by default) and a generated description.",
+                            " by default) and a generated description. Since 0.11 the name is a ",
+                            c("<desc>"),
+                            " referenced by ",
+                            c("aria-labelledby"),
+                            ", not an SVG ",
+                            c("<title>"),
+                            ", so browsers no longer draw a native tooltip over the chart.",
                         ),
                         rx.el.li(
                             "A data table: hidden for assistive technology by default, or visible with ",

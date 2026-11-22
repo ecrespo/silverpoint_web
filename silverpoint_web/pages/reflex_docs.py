@@ -523,8 +523,10 @@ def composed() -> Callable[[], rx.Component]:
                 "and they read silverpoint_provider. Props are snake_case; a string ",
                 c("trigger"),
                 " becomes an ",
+                c("sp_button"),
+                " (since 0.11; it was an ",
                 c("sp_trigger"),
-                ", a native button that keeps the ARIA the overlay clones onto it.",
+                "), which follows the provider and keeps the ARIA the overlay clones onto it.",
             ),
             table(
                 ["Level", "Components"],

@@ -70,6 +70,48 @@ class Release:
 
 VERSIONS: tuple[Release, ...] = (
     Release(
+        version="0.11.1",
+        date="2026-11-21",
+        summary="A patch for the MCP server and the agent catalog: they now describe reflex-silverpoint-react 0.11.0.",
+        highlights=(
+            "@silverpoint/mcp: the agent catalog pins reflex-silverpoint-react 0.11.0's own reflex-catalog.json "
+            "(wrapping 0.11.0), so no Reflex entry is served stale.",
+            "Every package moves to 0.11.1; no API changes and no change to any render.",
+        ),
+    ),
+    Release(
+        version="0.11.0",
+        date="2026-11-21",
+        summary="Host embedding: @silverpoint/embed draws any chart from one JSON spec, outside React, Vue and "
+        "Angular. Every chart handle gains toStandaloneSVGString(), and a chart's name no longer shows a native "
+        "tooltip.",
+        highlights=(
+            "@silverpoint/embed, a tenth package (feature-007): any of the 60 charts from one JSON spec. "
+            "validateSpec, renderToSVG and renderToHTML run in Node with no DOM; a framework-free client "
+            "(mount, mountAll, the <silverpoint-chart> element, hostAppearance) draws it in a plain page; four "
+            "standalone files with integrity.json; the host catalog with specFromTable for BI tools, flows, "
+            "notebooks and CMSs; and a conformance kit. New diagnostics SP030 (a spec over its limits) and "
+            "SP031 (an invalid spec in the client).",
+            "Every chart's handle, in the three adapters, gains toStandaloneSVGString(extraCss?): a promise of "
+            "the chart's toSVGString() with styles.css (then extraCss) embedded, a file that paints itself. The "
+            "stylesheet is loaded on the first call, so a chart's build does not carry it (silverpoint#25).",
+            'A chart\'s accessible name is a <desc id="{id}-title"> instead of an SVG <title>, so browsers no '
+            "longer show a native tooltip over a chart; aria-labelledby is unchanged. Every normalised SVG "
+            "changes by that element name; no pixel changes (silverpoint#29).",
+            "React: a dashboard's charts follow a provider change made while the dashboard was hidden (Next.js "
+            "cacheComponents): the dashboard root provides the configuration it read to its charts "
+            "(silverpoint#27).",
+            "SpTable looks the same whatever the order of styles.css and ui.css: the charts' tabular rules are "
+            "scoped to table.sp-table (silverpoint#28).",
+            "React and Vue: SpButton works as an overlay's trigger; it forwards the ARIA attributes and the "
+            "pointerdown handler the overlay clones onto it (delta-014).",
+            "@silverpoint/mcp: render_chart renders through the embed with unchanged output; the agent catalog "
+            "lists the host integrations (hosts), search_catalog finds them, and generate_code takes "
+            'framework: "html" (a <silverpoint-chart> and the standalone script).',
+        ),
+        reflex="0.11.0",
+    ),
+    Release(
         version="0.10.1",
         date="2026-11-15",
         summary="A patch for the MCP server and the agent catalog: they now describe reflex-silverpoint-react 0.10.0.",
@@ -326,6 +368,23 @@ class ReflexRelease:
 #: described here; the others follow the npm release they wrap (``Release.reflex``).
 REFLEX_VERSIONS: tuple[ReflexRelease, ...] = (
     ReflexRelease(
+        version="0.11.0",
+        date="2026-11-21",
+        wraps="0.11.0",
+        summary="Wraps @silverpoint/react 0.11.0, and an overlay's string trigger follows silverpoint_provider.",
+        highlights=(
+            "A string in trigger= of sp_modal, sp_drawer, sp_popover and sp_tooltip is now an sp_button, which "
+            "follows silverpoint_provider: under a cyanotype provider it no longer keeps the silverpoint ground "
+            "(#50). The overlay's own ground, substrate, mode, size and palette still reach it; an explicit "
+            "sp_trigger(...) is unchanged and still reads no provider.",
+            "Upstream: a chart's accessible name is a <desc> instead of an SVG <title>, so no native tooltip "
+            "(silverpoint#29); a dashboard's charts follow a provider change made while it was hidden "
+            "(silverpoint#27); sp_button forwards the ARIA an overlay clones onto its trigger (delta-014).",
+            "The Python builders and their props are unchanged; reflex-catalog.json differs only in its two "
+            "versions. Every silverpoint npm dependency moves to 0.11.0.",
+        ),
+    ),
+    ReflexRelease(
         version="0.10.0",
         date="2026-11-15",
         wraps="0.10.0",
@@ -528,6 +587,15 @@ PACKAGES: tuple[Package, ...] = (
         "Optional. Self-hosted EB Garamond (400, 500, 400 italic, latin subset) and its @font-face rules.",
         "optional",
         f"{REPO}/tree/main/packages/fonts",
+    ),
+    Package(
+        "@silverpoint/embed",
+        "Host embedding",
+        "Optional, new in 0.11. Any of the 60 charts from one JSON spec, outside React, Vue and Angular: "
+        "renderToSVG and renderToHTML with no DOM, a framework-free client and the <silverpoint-chart> element, "
+        "four standalone files with integrity.json, the host catalog with specFromTable, and a conformance kit.",
+        "optional",
+        f"{REPO}/tree/main/packages/embed",
     ),
     Package(
         "@silverpoint/mcp",

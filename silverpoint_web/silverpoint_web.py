@@ -15,6 +15,7 @@ from .pages import (
     components,
     deck_docs,
     docs,
+    embed_docs,
     gallery,
     home,
     project,
@@ -51,5 +52,6 @@ reflex_docs.register(app)
 ui_docs.register(app)
 ai_docs.register(app)
 deck_docs.register(app)
+embed_docs.register(app)
 tutorials.register(app)
 project.register(app)

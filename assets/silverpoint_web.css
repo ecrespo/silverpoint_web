@@ -691,3 +691,6 @@ td > .spw-pill { margin-left: 0; }
 /* Inside a slide, code is the silverpoint theme's own (display face, ground inks): undo the site's code chip. */
 .spw-site .sp-deck section code { font-family: inherit; font-size: inherit; background: none; padding: 0 0.3em; overflow-wrap: normal; }
 .spw-home-deck { max-width: 880px; margin-inline: auto; }
+/* /docs/embed: the plain page drawn by @silverpoint/embed, in a sandboxed frame. */
+.spw-embed-frame { display: block; width: 100%; height: 760px; margin: 12px 0; border: 1px solid var(--spw-rule, #d8d0c0); border-radius: 6px; background: #f4efe4; }
+@media (min-width: 900px) { .spw-embed-frame { height: 420px; } }

@@ -224,7 +224,7 @@ def ai_page() -> Callable[[], rx.Component]:
                         [
                             rx.el.a(c("/llms-full.txt"), href="/llms-full.txt"),
                             "The whole catalog as Markdown: every chart and component with its props per framework, "
-                            "the slide deck, the grounds, the palettes and the diagnostics.",
+                            "the slide deck, the host integrations, the grounds, the palettes and the diagnostics.",
                         ],
                         [
                             rx.el.a(c("/agent-catalog.json"), href="/agent-catalog.json"),
@@ -248,7 +248,8 @@ def ai_page() -> Callable[[], rx.Component]:
         "/docs/ai",
         "Use with AI",
         "Connect your assistant to the silverpoint MCP server, or install the skills, and it writes silverpoint "
-        "from the facts of the version you use: React, Vue, Angular or Reflex.",
+        "from the facts of the version you use: React, Vue, Angular or Reflex, or a plain HTML page through "
+        "@silverpoint/embed (since 0.11).",
         sections,
         eyebrow="New in 0.8",
     )

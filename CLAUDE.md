@@ -14,7 +14,7 @@ Documentation site of silverpoint (Reflex, frontend-only, deployed statically on
 - silverpoint 0.7's palettes, composed components and timeline: Reflex demos in `reflex_only.py`, their
   React/Vue/Angular code, events and props (`ui_props_0_7.json`, from the npm 0.7.0 types) in `composed_code.py`,
   pages in `pages/reflex_docs.py` and `/components/<slug>` (`pages/components.py`, `composed_page`). Since reflex-silverpoint-react 0.7.1
-  they are the npm components behind Python builders (0.10.0 wraps @silverpoint/react 0.10.0); its own releases go
+  they are the npm components behind Python builders (0.11.0 wraps @silverpoint/react 0.11.0); its own releases go
   in `site_data.REFLEX_VERSIONS`.
 - silverpoint 0.9 (feature-006, slide decks): `SpDeck` / `sp_deck` on `@silverpoint/marp`. The page is `/docs/decks`
   (`pages/deck_docs.py`), its decks, code and tables in `deck_examples.py`; a deck also on the home page. Keep
@@ -29,8 +29,14 @@ Documentation site of silverpoint (Reflex, frontend-only, deployed statically on
   `public/` from that catalog only (REQ-537, REQ-564); `/docs/ai` is "Use with AI" (`pages/ai_docs.py`,
   REQ-565, tools read from the server's definitions, REQ-569). Tests: `uv run pytest` (`tests/`, REQ in each
   name). Since `@silverpoint/mcp@0.9.2` the catalog's Reflex names are reflex-silverpoint-react's own export
-  (0.10.0 since `@silverpoint/mcp@0.10.1`, not stale); `tests/test_decks.py` checks they match the installed wrapper. A
-  silverpoint release with no new reflex-silverpoint-react (0.9.2, 0.10.1) gets `Release.reflex=""`.
+  (0.11.0 since `@silverpoint/mcp@0.11.1`, not stale); `tests/test_decks.py` checks they match the installed wrapper. A
+  silverpoint release with no new reflex-silverpoint-react (0.9.2, 0.10.1, 0.11.1) gets `Release.reflex=""`.
+- silverpoint 0.11 (feature-007, host embedding): `/docs/embed` (`pages/embed_docs.py`, code in `embed_examples.py`)
+  documents `@silverpoint/embed`. Its demo is a plain page, `assets/embed/demo.html` + `demo.js`, in a
+  `sandbox="allow-scripts"` iframe (outside React, so no hydration risk), loading the standalone file vendored in
+  `assets/embed/` with its `integrity.json`: on an embed release copy both from the npm tarball's `dist/` and bump
+  `embed_examples.EMBED_VERSION` (`tests/test_release_0_11.py` checks the hash). The host table comes from
+  `catalog["hosts"]`. A component's per-release notes are `composed_code.CHANGES` (slug -> tuple of (version, note)).
 - Tutorials: `/tutorials` (`pages/tutorials.py`) lists the series on seraph.to by level, linked and not copied; add
   an article in `tutorials.py` (number, title, summary, frameworks, date). Its search box, framework filter and
   date order are `rx.client_state` only: every card is prerendered and hidden by a condition, and the two orders

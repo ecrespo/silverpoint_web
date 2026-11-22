@@ -17,11 +17,10 @@ def test_issue_16_angular_ssr_command_allows_localhost():
 
 
 def test_issue_14_export_code_writes_a_standalone_svg():
+    # Since 0.11 (silverpoint#25) the handle's toStandaloneSVGString() is standaloneSVG + styles-text.
     for framework in ("react", "vue", "angular"):
-        code = docs.EXPORT[framework]
-        assert "import { standaloneSVG } from '@silverpoint/grounds';" in code, framework
-        assert "import groundStyles from '@silverpoint/grounds/styles-text';" in code, framework
-        assert "standaloneSVG(" in code.split("styles-text")[1], framework
+        assert "await " in docs.EXPORT[framework], framework
+        assert "toStandaloneSVGString()" in docs.EXPORT[framework], framework
     assert "standalone SVG" in docs.EXPORT["reflex"]
 
 
@@ -33,5 +32,5 @@ def test_0_10_releases_are_documented():
     by_version = {release.version: release for release in sd.VERSIONS}
     assert by_version["0.10.0"].reflex == "0.10.0"
     assert by_version["0.10.1"].reflex == ""
-    assert sd.REFLEX_VERSIONS[0].wraps == "0.10.0"
+    assert {r.version: r.wraps for r in sd.REFLEX_VERSIONS}["0.10.0"] == "0.10.0"
     assert set(cc.CHANGES) <= {item.slug for item in cc.REFERENCE}

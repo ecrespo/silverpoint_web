@@ -1,6 +1,6 @@
 """Slide decks (silverpoint 0.9, feature-006): ``SpDeck`` and ``@silverpoint/marp``.
 
-The live deck is ``sp_deck`` (reflex-silverpoint-react 0.10.0, wrapping @silverpoint/react 0.10.0)
+The live deck is ``sp_deck`` (reflex-silverpoint-react 0.11.0, wrapping @silverpoint/react 0.11.0)
 on client-side state (``rx.client_state``): the site has no backend. ``hash`` stays off, so the deck
 never takes the URL's fragment from the page's own anchors.
 """

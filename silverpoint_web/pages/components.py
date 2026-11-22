@@ -395,7 +395,7 @@ def composed_page(item: ro.Composed) -> Callable[[], rx.Component]:
                 ],
                 *[
                     callout(rx.el.strong(f"Since {since}. "), note)
-                    for since, note in filter(None, [cc.CHANGES.get(item.slug)])
+                    for since, note in cc.CHANGES.get(item.slug, ())
                 ],
                 rx.el.p(
                     "In Reflex the names are snake_case; ",
@@ -409,7 +409,8 @@ def composed_page(item: ro.Composed) -> Callable[[], rx.Component]:
                 "Common props",
                 rx.el.p(
                     "Every UI component also takes these, falling back to the dashboard it sits in, then to the "
-                    "provider. In Reflex they read silverpoint_provider too; only sp_trigger does not: pass them to it."
+                    "provider. In Reflex they read silverpoint_provider too; only sp_trigger does not: pass them to it, or "
+                    "use sp_button (a string trigger is one since reflex-silverpoint-react 0.11)."
                 ),
                 props_table(COMMON_PROPS_0_7),
             ),

@@ -270,7 +270,8 @@ def index() -> rx.Component:
                 "@silverpoint/embed draws any of the 60 charts from one JSON spec, with no framework: a "
                 "<silverpoint-chart> element and one standalone file you serve yourself for a plain page, "
                 "renderToSVG and renderToHTML on a server or in a workflow, and the host catalog for BI tools, "
-                "notebooks and CMSs. The same engine, the same picture. The page below is plain HTML in a sandboxed "
+                "notebooks and CMSs; from Python, pip install silverpoint draws it in Jupyter, Databricks, Flask and "
+                "Django. The same engine, the same picture. The page below is plain HTML in a sandboxed "
                 "frame.",
                 class_name="spw-lede",
             ),
@@ -283,6 +284,7 @@ def index() -> rx.Component:
             ),
             rx.el.div(
                 sp_button("Embed in any page", href="/docs/embed", size="sm", id="home-embed"),
+                sp_button("From Python", href="/docs/python", size="sm", id="home-python"),
                 class_name="spw-row",
             ),
             class_name="spw-home-section",

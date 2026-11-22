@@ -37,6 +37,12 @@ Documentation site of silverpoint (Reflex, frontend-only, deployed statically on
   `assets/embed/` with its `integrity.json`: on an embed release copy both from the npm tarball's `dist/` and bump
   `embed_examples.EMBED_VERSION` (`tests/test_release_0_11.py` checks the hash). The host table comes from
   `catalog["hosts"]`. A component's per-release notes are `composed_code.CHANGES` (slug -> tuple of (version, note)).
+- silverpoint for Python (PyPI `silverpoint`, repo ecrespo/silverpoint-python, not the Reflex wrapper): `/docs/python`
+  (`pages/python_docs.py`, code in `python_examples.py`, pinned by `PY_VERSION`). `silverpoint`, pandas and flask are dev
+  dependencies: `tests/test_python_docs.py` runs the examples against them. `uv run python scripts/python_docs.py`
+  rewrites `assets/python/demo.html` (the `DEMO` code's `to_html` fragments, loading `/embed/`'s standalone file)
+  and `python_builders.json`; `--check` (and the test) fail when they are stale. On a release: bump the dev
+  dependency and `PY_VERSION`, rerun the script.
 - The llms files (REQ-564) stay generated from the catalog; the two hand-written parts are `silverpoint_web/llms_embed.md`
   (what the catalog does not say about `@silverpoint/embed`) and `agent.NEW_IN` (llms.txt's "New in X.Y", one entry
   per minor: a new minor on the pin needs one). `scripts/check_mcp_latest.py` (CI: `.github/workflows/drift.yml`,

@@ -61,6 +61,18 @@ DOCS_NAV: tuple[tuple[str, tuple[tuple[str, str], ...]], ...] = (
         ),
     ),
     (
+        "Hosts",
+        (
+            ("/docs/python", "Python, Jupyter, Databricks"),
+            ("/docs/hosts/knime", "KNIME"),
+            ("/docs/hosts/n8n", "n8n"),
+            ("/docs/hosts/superset", "Apache Superset"),
+            ("/docs/hosts/plone", "Plone (Volto and Classic)"),
+            ("/docs/hosts/power-bi", "Power BI"),
+            ("/docs/hosts/tableau", "Tableau"),
+        ),
+    ),
+    (
         "New in 0.9",
         (("/docs/decks", "Slide decks"),),
     ),
@@ -287,7 +299,7 @@ def sidebar(current: str) -> rx.Component:
         class_name="spw-side-group",
     )
     return rx.el.nav(
-        *groups[:3], charts, components, groups[3], class_name="spw-sidebar", aria_label="Documentation"
+        *groups[:-1], charts, components, groups[-1], class_name="spw-sidebar", aria_label="Documentation"
     )
 
 

@@ -18,6 +18,7 @@ from .pages import (
     embed_docs,
     gallery,
     home,
+    host_docs,
     project,
     python_docs,
     reflex_docs,
@@ -54,6 +55,7 @@ ui_docs.register(app)
 ai_docs.register(app)
 deck_docs.register(app)
 embed_docs.register(app)
+host_docs.register(app)
 python_docs.register(app)
 tutorials.register(app)
 project.register(app)

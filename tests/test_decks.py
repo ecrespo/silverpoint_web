@@ -29,7 +29,7 @@ def fences(markdown: str) -> list[dict]:
 
 
 def test_site_documents_the_installed_releases():
-    assert sd.LATEST.version == agent.CATALOG_VERSION == "0.11.1"
+    assert sd.LATEST.version == agent.CATALOG_VERSION == "0.11.2"
     assert sd.REFLEX_LATEST.version == version("reflex-silverpoint-react")
     assert sd.REFLEX_LATEST.wraps == rsr.SILVERPOINT_VERSION
     wrapped = next(r for r in sd.VERSIONS if r.version == sd.REFLEX_LATEST.wraps)

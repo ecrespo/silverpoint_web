@@ -70,6 +70,19 @@ class Release:
 
 VERSIONS: tuple[Release, ...] = (
     Release(
+        version="0.11.2",
+        date="2026-11-28",
+        summary="The twelve host integrations are released: the agent catalog lists every one as available.",
+        highlights=(
+            "@silverpoint/mcp: every host in the agent catalog moves from planned to released (REQ-661), each "
+            "checked on its registry: silverpoint 0.11.0.post1 (Python, Flask, Django, Jupyter, Databricks) and "
+            "collective.silverpoint 0.1.0 on PyPI; n8n-nodes-silverpoint, superset-plugin-chart-silverpoint and "
+            "volto-silverpoint on npm; the Power BI visual and the KNIME update site on GitHub Releases; the "
+            "Tableau viz extensions on GitHub Pages.",
+            "Every package moves to 0.11.2; no API changes and no change to any render.",
+        ),
+    ),
+    Release(
         version="0.11.1",
         date="2026-11-21",
         summary="A patch for the MCP server and the agent catalog: they now describe reflex-silverpoint-react 0.11.0.",

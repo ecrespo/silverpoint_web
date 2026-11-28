@@ -1,6 +1,6 @@
 {
-  "version": "0.11.1",
-  "source": "https://unpkg.com/@silverpoint/mcp@0.11.1/README.md",
+  "version": "0.11.2",
+  "source": "https://unpkg.com/@silverpoint/mcp@0.11.2/README.md",
   "tools": [
     {
       "name": "get_version",

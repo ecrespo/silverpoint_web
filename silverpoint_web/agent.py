@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Any
 
 #: The silverpoint version whose catalog the site publishes: the one it documents (site_data.LATEST).
-CATALOG_VERSION = "0.11.1"
+CATALOG_VERSION = "0.11.2"
 
 SITE_URL = "https://silverpointweb.vercel.app"
 #: The hosted MCP server, behind the site's own /mcp (vercel.json rewrites it to the MCP project).

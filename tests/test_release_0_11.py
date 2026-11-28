@@ -19,7 +19,7 @@ CATALOG = agent.load_catalog()
 def test_0_11_releases_are_documented():
     by_version = {release.version: release for release in sd.VERSIONS}
     assert by_version["0.11.0"].reflex == "0.11.0"
-    assert by_version["0.11.1"].reflex == ""
+    assert by_version["0.11.1"].reflex == by_version["0.11.2"].reflex == ""
     assert sd.REFLEX_VERSIONS[0].version == sd.REFLEX_VERSIONS[0].wraps == "0.11.0"
     assert not CATALOG["reflex"]["stale"]
 

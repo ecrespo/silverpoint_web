@@ -43,6 +43,11 @@ Documentation site of silverpoint (Reflex, frontend-only, deployed statically on
   rewrites `assets/python/demo.html` (the `DEMO` code's `to_html` fragments, loading `/embed/`'s standalone file)
   and `python_builders.json`; `--check` (and the test) fail when they are stale. On a release: bump the dev
   dependency and `PY_VERSION`, rerun the script.
+- Host guides (silverpoint 0.11.2, every catalog host released): `/docs/hosts/<slug>` (`pages/host_docs.py`), text
+  and code in `host_examples.py` from each host repository's README; catalog facts come from `catalog["hosts"]`.
+  Videos go in `assets/video/<name>.mp4` (H.264, `+faststart`, small: `public/` is committed too) with `.jpg`
+  poster and `.en.vtt` captions, played by `reflex_react_player.react_player` (a NoSSRComponent, so no
+  hydration risk) with `light=<poster>` so the MP4 loads on play; a `("video", Video)` block adds a transcript.
 - The llms files (REQ-564) stay generated from the catalog; the two hand-written parts are `silverpoint_web/llms_embed.md`
   (what the catalog does not say about `@silverpoint/embed`) and `agent.NEW_IN` (llms.txt's "New in X.Y", one entry
   per minor: a new minor on the pin needs one). `scripts/check_mcp_latest.py` (CI: `.github/workflows/drift.yml`,

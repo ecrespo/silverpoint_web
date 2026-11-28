@@ -1,6 +1,6 @@
 """Host embedding (silverpoint 0.11, feature-007): ``@silverpoint/embed``'s code for /docs/embed.
 
-The code follows the package's README at 0.11.1. The live demo is ``assets/embed/demo.html``, a plain
+The code follows the package's README at 0.11.2. The live demo is ``assets/embed/demo.html``, a plain
 page in a sandboxed frame that loads the standalone file this site serves from ``assets/embed/``
 (``EMBED_VERSION``, checked against ``integrity.json`` by ``tests/test_release_0_11.py``).
 """
@@ -9,7 +9,7 @@ import json
 from pathlib import Path
 
 #: The @silverpoint/embed release whose standalone file is in assets/embed/.
-EMBED_VERSION = "0.11.1"
+EMBED_VERSION = "0.11.2"
 STANDALONE_FILE = "silverpoint-embed.full.js"
 DEMO_URL = "/embed/demo.html"
 ASSETS = Path(__file__).resolve().parent.parent / "assets" / "embed"

@@ -851,6 +851,18 @@ wheels = [
 ]
 
 [[package]]
+name = "reflex-react-player"
+version = "0.2.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "reflex" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/08/5f/92bbf5e5f85c531fa44883839dffc99ffc14815bd5280dab578a268f1d95/reflex_react_player-0.2.0.tar.gz", hash = "sha256:7c1108b34eedd8318c4818320dec89ba6ffcb3fc8f7707d00deaf83865fae8fb", size = 18498, upload-time = "2026-10-25T14:50:02.999Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/9b/75/bbab97f47ed71ec319b2584f5955b225e89bc3f3984a366124116c608d00/reflex_react_player-0.2.0-py3-none-any.whl", hash = "sha256:bdafb54eaa461b946d6184b1bb86b0eb688c1c977d4b22a0ed7c2fa30b67d7f1", size = 14065, upload-time = "2026-10-25T14:50:01.679Z" },
+]
+
+[[package]]
 name = "reflex-silverpoint-react"
 version = "0.11.0"
 source = { registry = "https://pypi.org/simple" }
@@ -927,6 +939,7 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "reflex" },
+    { name = "reflex-react-player" },
     { name = "reflex-silverpoint-react" },
     { name = "reflex-vercel-analytics" },
 ]
@@ -944,6 +957,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "reflex", specifier = ">=0.11.0" },
+    { name = "reflex-react-player", specifier = ">=0.2.0" },
     { name = "reflex-silverpoint-react", extras = ["timeline"], specifier = ">=0.11.0" },
     { name = "reflex-vercel-analytics", specifier = ">=0.1.0" },
 ]

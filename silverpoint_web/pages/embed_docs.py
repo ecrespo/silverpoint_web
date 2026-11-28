@@ -11,6 +11,7 @@ import reflex as rx
 
 from .. import agent
 from .. import embed_examples as ex
+from .. import host_examples as hx
 from .. import site_data as sd
 from ..components.ui import c, callout, code_block, ext_link, table
 from .docs import Section, page
@@ -19,10 +20,19 @@ EYEBROW = "New in 0.11"
 CATALOG = agent.load_catalog()
 
 
+def host_name(host: dict) -> rx.Component | str:
+    """The host's guide on this site when it has one, else its repository."""
+    guide = hx.page_for(host["id"])
+    if guide:
+        return rx.el.a(host["name"], href=guide)
+    return ext_link(host["name"], host["repository"]) if host.get("repository") else host["name"]
+
+
 def host_rows() -> list[list]:
     return [
         [
-            ext_link(host["name"], host["repository"]) if host.get("repository") else host["name"],
+            host_name(host),
+            ext_link("repository", host["repository"]) if host.get("repository") else "in silverpoint",
             host["kind"],
             c(host["via"]),
             c(host["package"]),
@@ -194,9 +204,22 @@ def embed() -> Callable[[], rx.Component]:
                 code_block(ex.HOSTS, "ts"),
                 rx.el.p(
                     f"The host integrations the agent catalog {CATALOG['version']} lists, each in a repository of "
-                    "its own:"
+                    "its own (Flask, Django, Jupyter and Databricks are inside the Python package):"
                 ),
-                table(["Host", "Kind", "Through", "Package", "Status", ""], host_rows()),
+                table(["Host", "Code", "Kind", "Through", "Package", "Status", ""], host_rows()),
+                callout(
+                    "Since silverpoint 0.11.2 every integration is released. Each has a guide here, with its "
+                    "install and examples: ",
+                    *[
+                        item
+                        for i, h in enumerate(hx.HOSTS)
+                        for item in ([", "] if i else []) + [rx.el.a(h.label, href=hx.route(h))]
+                    ],
+                    ", and ",
+                    rx.el.a("Python, Flask, Django, Jupyter and Databricks", href="/docs/python"),
+                    ".",
+                    kind="note",
+                ),
             ],
         ),
         (

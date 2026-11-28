@@ -9,6 +9,7 @@ from collections.abc import Callable
 from typing import Any
 
 import reflex as rx
+from reflex_react_player import react_player
 
 from .. import agent
 from .. import host_examples as hx
@@ -66,7 +67,48 @@ def block(b: hx.Block) -> rx.Component:
         return table(b[1], [[cell(v) for v in row] for row in b[2]])
     if kind == "note":
         return callout(*inline(b[1]), kind="note")
+    if kind == "video":
+        return video(b[1])
     raise ValueError(f"unknown block kind {kind!r}")
+
+
+def video(v: hx.Video) -> rx.Component:
+    """The player (react-player, client-only) with its poster, captions and a prerendered transcript.
+
+    ``light`` shows the poster until the reader presses play, so the MP4 is fetched only then.
+    """
+    return rx.el.figure(
+        rx.el.div(
+            react_player(
+                rx.el.track(
+                    kind="captions", src=v.url(".en.vtt"), src_lang="en", label="English", default=True
+                ),
+                src=v.url(".mp4"),
+                light=v.url(".jpg"),
+                playing=True,
+                controls=True,
+                plays_inline=True,
+                preload="metadata",
+                width="100%",
+                height="100%",
+                preview_aria_label=f"Play the video: {v.title}",
+            ),
+            class_name="spw-video",
+        ),
+        rx.el.figcaption(
+            v.caption,
+            " ",
+            rx.el.a("Download the MP4", href=v.url(".mp4"), download=""),
+            ". ",
+            rx.el.span(v.credit, class_name="spw-video-credit"),
+        ),
+        rx.el.details(
+            rx.el.summary("Transcript"),
+            *[rx.el.p(rx.el.span(at, class_name="spw-video-at"), text) for at, text in v.transcript()],
+            class_name="spw-video-transcript",
+        ),
+        class_name="spw-video-figure",
+    )
 
 
 def glance_rows(host: hx.Host) -> list[list]:

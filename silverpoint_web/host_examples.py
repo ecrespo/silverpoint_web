@@ -6,13 +6,40 @@ registry, status, repository) is read from ``catalog["hosts"]`` by ``pages/host_
 here. Python, Flask, Django, Jupyter and Databricks are the ``silverpoint`` package: /docs/python.
 
 A block is a tuple: ``("p", text)``, ``("code", code, label)``, ``("ol", items)``, ``("ul", items)``,
-``("table", head, rows)`` or ``("note", text)``. In text, `backticks` are code and [label](url) a link.
+``("table", head, rows)``, ``("note", text)`` or ``("video", Video)``. In text, `backticks` are code and [label](url) a link.
 """
 
+import re
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Any
 
+ASSETS = Path(__file__).resolve().parent.parent / "assets"
+
 Block = tuple[Any, ...]
+
+
+@dataclass(frozen=True)
+class Video:
+    """A video served from ``assets/video/``: the MP4, its poster and its English captions (WebVTT)."""
+
+    name: str  # the files: assets/video/<name>.mp4, .jpg and .en.vtt
+    title: str
+    caption: str
+    credit: str
+
+    def url(self, suffix: str) -> str:
+        return f"/video/{self.name}{suffix}"
+
+    def path(self, suffix: str) -> Path:
+        return ASSETS / "video" / f"{self.name}{suffix}"
+
+    def transcript(self) -> list[tuple[str, str]]:
+        """(start as m:ss, text) per cue of the captions, for the transcript under the player."""
+        cues = re.findall(
+            r"^(\d\d):(\d\d):(\d\d)\.\d{3} --> .*\n(.+)$", self.path(".en.vtt").read_text(), re.M
+        )
+        return [(f"{int(h) * 60 + int(m)}:{sec}", text) for h, m, sec, text in cues]
 
 
 @dataclass(frozen=True)
@@ -173,6 +200,15 @@ N8N_FIELD = """{
   }
 }"""
 
+N8N_VIDEO = Video(
+    name="n8n-nodes-silverpoint-demo",
+    title="silverpoint for n8n, built live",
+    caption="A workflow built from an empty canvas in n8n 2.31: the community node installed, six months of "
+    "sales drawn as an SVG bar chart, options from the catalog, an area chart as HTML on cyanotype, a donut from "
+    "a field, an error explained, and a webhook serving the interactive chart. 1 min 42 s, captioned.",
+    credit="Narration: AI-generated voice (Kokoro, run locally).",
+)
+
 N8N = Host(
     slug="n8n",
     label="n8n",
@@ -187,6 +223,7 @@ N8N = Host(
         ("Credentials", "none"),
     ),
     sections=(
+        HostSection("demo", "Watch it built", (("video", N8N_VIDEO),)),
         HostSection(
             "install",
             "Install",

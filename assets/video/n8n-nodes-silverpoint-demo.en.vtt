@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.300 --> 00:00:05.932
+This chart is served by an n8n workflow. Let's build it, starting from an empty canvas.
+
+2
+00:00:06.630 --> 00:00:13.563
+First, install the community node. In Settings, Community nodes, type n8n-nodes-silverpoint, and install.
+
+3
+00:00:14.560 --> 00:00:18.997
+Our data: six months of sales. One item per month, with revenue and cost.
+
+4
+00:00:19.700 --> 00:00:24.884
+Add the Silverpoint node. Its Chart list holds fifty-six charts, grouped by family.
+
+5
+00:00:25.590 --> 00:00:32.694
+Pick Bar Chart. Each chart asks for its roles: month on X, revenue as the value, and cost as a second series.
+
+6
+00:00:33.390 --> 00:00:39.363
+Execute, and the chart arrives as an SVG file: a binary, ready to email or save.
+
+7
+00:00:40.060 --> 00:00:45.820
+Options come from the same catalog: a title, a unit, a sepia palette, an exact width.
+
+8
+00:00:46.520 --> 00:00:52.451
+A second node draws an area chart on cyanotype paper, as a complete HTML document.
+
+9
+00:00:53.150 --> 00:00:58.761
+Rows can also come from a field. Aggregate the items into one list, and draw a donut from it.
+
+10
+00:00:59.770 --> 00:01:05.615
+Mistakes are explained. Ask for a field that isn't there, and the message names the parameter to fix.
+
+11
+00:01:06.310 --> 00:01:11.985
+With On Error set to continue, that message becomes the item's error, and the workflow keeps going.
+
+12
+00:01:12.980 --> 00:01:20.447
+Last, a webhook branch: the same rows, drawn as interactive HTML, and sent back by Respond to Webhook.
+
+13
+00:01:21.450 --> 00:01:25.290
+Open the URL. The chart follows the pointer, and the keyboard.
+
+14
+00:01:26.890 --> 00:01:34.911
+Silverpoint turns the rows in any workflow into a finished chart. No service, no credential, and agents can call it as a tool.
+
+15
+00:01:35.910 --> 00:01:39.750
+n8n-nodes-silverpoint. On npm, and on GitHub.

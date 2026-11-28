@@ -64,3 +64,28 @@ def test_every_docs_nav_group_is_in_the_sidebar():
     rendered = str(sidebar("/docs"))
     for title, _ in DOCS_NAV:
         assert title in rendered, title
+
+
+def test_n8n_demo_video_is_web_ready_and_captioned():
+    video = hx.N8N_VIDEO
+    assert any(b == ("video", video) for s in hx.N8N.sections for b in s.blocks)
+    mp4 = video.path(".mp4").read_bytes()
+    assert len(mp4) < 8 * 1024 * 1024  # public/ is committed too: keep it small
+    assert mp4.find(b"moov") < mp4.find(b"mdat")  # faststart: plays before it is fully downloaded
+    assert video.path(".jpg").stat().st_size > 0
+    vtt = video.path(".en.vtt").read_text()
+    assert vtt.startswith("WEBVTT")
+    cues = video.transcript()
+    assert len(cues) == 15
+    assert cues[0] == (
+        "0:00",
+        "This chart is served by an n8n workflow. Let's build it, starting from an empty canvas.",
+    )
+    assert "n8n-nodes-silverpoint" in vtt
+
+
+def test_video_player_is_client_only_so_it_cannot_break_hydration():
+    from reflex.components.component import NoSSRComponent
+    from reflex_react_player.react_player import ReactPlayer
+
+    assert issubclass(ReactPlayer, NoSSRComponent)
